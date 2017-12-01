@@ -1,0 +1,22 @@
+.gb-header{background: url(../images/header-bg.jpg) center;background-size:cover;height: 130px;padding: 22px 2% 0px;position: absolute;width: 100%;right: 0px;top:0px;}
+.gb-packUp-leftNav{color: #fff;line-height: 24px;cursor: pointer;}
+.gb-packUp-leftNav i{font-size: 19px;margin-right: 10px;}
+
+.gb-header-operation{position: absolute;right: 2%;top: 22px;color: #fff;line-height: 22px;}
+.gb-header-operation .layui-btn{padding:0px 20px;}
+.gb-header-operation .name{margin-left: 25px}
+.gb-header-operation .succession{margin-left: 25px}
+.gb-header-operation .exit{margin-left: 25px}
+.gb-header-operation .iconfont{margin-right: 5px;}
+
+
+
+
+
+
+
+
+
+
+
+

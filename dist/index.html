@@ -10,20 +10,116 @@
 	<meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1,maximum-scale=2,minimum-scale=1">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="./src/css/main.min.css">
+	<link rel="stylesheet" type="text/css" href="./layui/css/layui.css">
 	<!-- 图标本地链接 -->
 	<!-- <link rel="stylesheet" href="./iconfont/iconfont.css"> -->
 	<!-- 图标在线链接 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_484596_j3zytiwv38k0rudi.css">
 </head>
 <body>
 <div class="gb-wrap">
 	<!-- 左边导航，由load加载进来，html可在nav-left.html看 -->
 	<div class="gb-left-nav"></div>
+	<!-- 右边主体 -->
+	<div class="gb-right-main">
+		<div class="content">
+			<!-- 右边头部 -->
+			<div class="gb-header">
+				<em class="gb-packUp-leftNav">
+					<i class="iconfont icon-packUp-left i"></i>
+					<span class="i">收起导航栏</span>
+				</em>
+				<div class="gb-header-operation">
+					<button class="layui-btn layui-btn-mini layui-btn-primary i">上 班</button>
+					<span class="name i">橙子，欢迎您！</span>
+					<a href="##" class="succession i">
+						<i class="iconfont icon-icondate01 i"></i>
+						<em class="i">交接班记录</em>
+					</a>
+					<a href="##" class="exit i">
+						<i class="iconfont icon-tuichu-copy i"></i>
+						<em class="i">退出</em>
+					</a>
+				</div>
+			</div>
+			<div class="gb-main-content">
+				<div class="item">
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+					1<br>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script src="./src/js/main.min.js"></script>
+<script src="./layui/layui.js"></script>
 <script src="load.js"></script>
 <script>
-
+// 收起、展开导航栏
+$(".gb-packUp-leftNav").click(function(){
+	var $this=$(this);
+	$(".gb-wrap").toggleClass("gb-packUp");
+	if($this.find("i").hasClass('icon-packUp-left')){
+		$this.find("i").removeClass("icon-packUp-left").addClass("icon-packUp-right");
+		$this.find('span').html("展开导航栏");
+	}else{
+		$this.find("i").removeClass("icon-packUp-right").addClass("icon-packUp-left");
+		$this.find('span').html("收起导航栏");
+	}
+})
 </script>
 </body>
 </html>
