@@ -1,0 +1,156 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Move Things Around Other Things</title>
+
+
+
+<style type="text/css">
+
+.codrops-demos{height:60px;text-align:center;}
+
+.codrops-demos a{display:inline-block;margin:10px;color:#333;font-weight:700;line-height:30px;border-bottom:4px solid transparent;text-decoration:none;}
+
+.codrops-demos a:hover{color:#883d59;border-color:#883d59;}
+
+.codrops-demos a.current-demo,.codrops-demos a.current-demo:hover{color:#aaa;border-color:#aaa;}
+
+
+
+ul{list-style:none;padding:0;margin:0 auto;width:36em;height:26em;}
+
+li{height:8em;width:10em;background-color:#fff;text-align:center;cursor:pointer;border:2px solid #bbb;-webkit-border-radius:1em;-moz-border-radius:1em;-ms-border-radius:1em;-o-border-radius:1em;border-radius:1em;}
+
+li.roundabout-in-focus{cursor:default;}
+
+li a{display:block;padding-top:3.5em;}
+
+.monolith{background-color:#222;color:#fff;text-align:center;width:300px;height:400px;position:absolute;z-index:260;left:135px;border-color:#222;opacity:0.92}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+
+<!--无视之-->
+
+<div class="codrops-demos">
+
+	<a href="index.html">Demo 1</a>
+
+	<a href="demo2.html">Demo 2</a>
+
+	<a href="demo3.html">Demo 2</a>
+
+	<a href="demo4.html">Demo 2</a>
+
+	<a href="demo5.html">Demo 2</a>
+
+	<a class="current-demo" href="demo6.html">Demo 2</a>
+
+</div>
+<ul class="demo">
+	<!-- <li class="monolith"><span>Other Things</span></li> -->
+	<li class="mover"><a href="http://www.baidu.com">Thing</a></li>
+	<li class="mover"><a href="http://www.baidu.com">Thing</a></li>
+	<li class="mover"><a href="http://www.baidu.com">Thing</a></li>
+	<li class="mover"><a href="http://www.baidu.com">Thing</a></li>
+	<li class="mover"><a href="http://www.baidu.com">Thing</a></li>
+	<li class="mover"><a href="http://www.baidu.com">Thing</a></li>
+	<li class="mover"><a href="http://www.baidu.com">Thing</a></li>
+	<li class="mover"><a href="http://www.baidu.com">Thing</a></li>
+	<!--<li class="mover"><span>Thing</span></li>
+	<li class="mover"><span>Thing</span></li>
+	<li class="mover"><span>Thing</span></li>
+	<li class="mover"><span>Thing</span></li>
+	<li class="mover"><span>Thing</span></li>
+	<li class="mover"><span>Thing</span></li>
+	<li class="mover"><span>Thing</span></li> -->
+
+</ul>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.roundabout2.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.demo').roundabout({
+		minZ: 100,
+		maxZ: 300,
+		minOpacity: 1,
+		minScale: 0.8,
+		childSelector: '.mover',
+		clickToFocus: false,
+		tilt: -4,
+		autoplay: true,
+		autoplayDuration: 1600,
+		autoplayPauseOnHover: true,
+		dropDuration: 100,
+		dropEasing: "swing",
+		dropAnimateTo: "nearest",
+	});
+	/*defaults = {
+		bearing: 0.0,
+		tilt: 0.0,
+		minZ: 100,
+		maxZ: 280,
+		minOpacity: 0.4,
+		maxOpacity: 1.0,
+		minScale: 0.4,
+		maxScale: 1.0,
+		duration: 600,
+		btnNext: null,
+		btnNextCallback: function() {},
+		btnPrev: null,
+		btnPrevCallback: function() {},
+		btnToggleAutoplay: null,
+		btnStartAutoplay: null,
+		btnStopAutoplay: null,
+		easing: "swing",
+		clickToFocus: true,
+		clickToFocusCallback: function() {},
+		focusBearing: 0.0,
+		shape: "lazySusan",
+		debug: false,
+		childSelector: "li",
+		startingChild: null,
+		reflect: false,
+		floatComparisonThreshold: 0.001,
+		autoplay: false,
+		autoplayDuration: 1000,
+		autoplayPauseOnHover: false,
+		autoplayCallback: function() {},
+		enableDrag: false,
+		dropDuration: 600,
+		dropEasing: "swing",
+		dropAnimateTo: "nearest",
+		dropCallback: function() {},
+		dragAxis: "x",
+		dragFactor: 4,
+		triggerFocusEvents: true,
+		triggerBlurEvents: true,
+		responsive: false
+	};
+
+	internalData = {
+		autoplayInterval: null,
+		autoplayIsRunning: false,
+		animating: false,
+		childInFocus: -1,
+		touchMoveStartPosition: null,
+		stopAnimation: false,
+		lastAnimationStep: false
+	};*/
+});
+</script>
+</body>
+</html>
