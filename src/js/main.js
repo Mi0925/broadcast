@@ -1,5 +1,18 @@
 // JavaScript Document
 $(document).ready(function(){
+	// 收起、展开导航栏
+	$(".gb-packUp-leftNav").click(function(){
+		var $this=$(this);
+		$(".gb-wrap").toggleClass("gb-packUp");
+		if($this.find("i").hasClass('icon-packUp-left')){
+			$this.find("i").removeClass("icon-packUp-left").addClass("icon-packUp-right");
+			$this.find('span').html("展开导航栏");
+		}else{
+			$this.find("i").removeClass("icon-packUp-right").addClass("icon-packUp-left");
+			$this.find('span').html("收起导航栏");
+		}
+	})
+
 	// 左边一级导航
 	$(".gb-left-nav").on("click",".nav-tit",function(){
 		var $this=$(this).parents("li");

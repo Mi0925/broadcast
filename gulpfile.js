@@ -67,7 +67,7 @@ gulp.task('minifycss', function() {
 
 //压缩js  
 gulp.task("script",function(){  
-    gulp.src(['./src/js/plugins/jquery-1.11.3.min.js','./src/js/plugins/*.js','./src/js/*.js'])   
+    gulp.src(['./src/js/plugins/jquery.js','./src/js/plugins/idangerous.swiper.min.js','./src/js/*.js'])   
         .pipe(plumber())
         .pipe(concat('main.js'))  
         .pipe(rename({suffix: '.min'}))   //rename压缩后的文件名
@@ -75,6 +75,12 @@ gulp.task("script",function(){
            console.log(e)
          }))  
         .pipe(gulp.dest('dist/src/js'))  
+        .pipe(browserSync.reload({stream:true}));  
+});  
+gulp.task("scriptPlugins",function(){  
+    gulp.src(['src/plugins/*.*'])   
+        .pipe(plumber())
+        .pipe(gulp.dest('dist/src/plugins'))  
         .pipe(browserSync.reload({stream:true}));  
 });  
   
@@ -157,7 +163,7 @@ gulp.task('font', function(cb) {
   
 //启动热更新  
 gulp.task('serve', ['delete'], function() {  
-    gulp.start('script','minifycss','images','font');  
+    gulp.start('script','scriptPlugins','minifycss','images','font');  
     // browserSync.init({  
     //     port: 8000,  
     //     server: {  

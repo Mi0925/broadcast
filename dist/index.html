@@ -15,6 +15,10 @@
 	<!-- <link rel="stylesheet" href="./iconfont/iconfont.css"> -->
 	<!-- 图标在线链接 -->
 	<link rel="stylesheet" href="http://at.alicdn.com/t/font_484596_j3zytiwv38k0rudi.css">
+	<!--IE8只能支持jQuery1.9-->
+	<!--[if lte IE 8]>
+	<script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+	<![endif]-->
 </head>
 <body>
 <div class="gb-wrap">
@@ -32,7 +36,7 @@
 				<div class="gb-header-operation">
 					<button class="layui-btn layui-btn-mini layui-btn-primary i">上 班</button>
 					<span class="name i">橙子，欢迎您！</span>
-					<a href="##" class="succession i">
+					<a href="javascript:;" class="succession i">
 						<i class="iconfont icon-icondate01 i"></i>
 						<em class="i">交接班记录</em>
 					</a>
@@ -57,84 +61,18 @@
 				</div>
 			</div>
 			<div class="gb-main-content">
-				<div class="item">
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-					1<br>
-				</div>
+				
 			</div>
 		</div>
 	</div>
 </div>
 
+<script src="src/plugins/jquery.js"></script>
+<script src="src/plugins/jquery.roundabout2.js"></script>
 <script src="./src/js/main.min.js"></script>
 <script src="./layui/layui.js"></script>
 <script src="load.js"></script>
 <script>
-// 收起、展开导航栏
-$(".gb-packUp-leftNav").click(function(){
-	var $this=$(this);
-	$(".gb-wrap").toggleClass("gb-packUp");
-	if($this.find("i").hasClass('icon-packUp-left')){
-		$this.find("i").removeClass("icon-packUp-left").addClass("icon-packUp-right");
-		$this.find('span').html("展开导航栏");
-	}else{
-		$this.find("i").removeClass("icon-packUp-right").addClass("icon-packUp-left");
-		$this.find('span').html("收起导航栏");
-	}
-})
-
 window.onload = function() {
 	$(".gb-tab .swiper-slide").eq(0).addClass('cur')
 	var tabSwiper = new Swiper('.gb-tab .swiper-container',{
@@ -142,13 +80,14 @@ window.onload = function() {
 	    calculateHeight : true,
 		onSlideClick: function() {
 			$(".gb-tab .swiper-slide").eq(tabSwiper.clickedSlideIndex).addClass('cur').siblings(".swiper-slide").removeClass('cur');
-		},
+		}
 	});
 	$(".gb-tab .swiper-slide .close-tab").click(function(e){
-		e.stopPropagation()
-		console.log($(this).parents(".swiper-slide").index())
+		e.stopPropagation();
+		console.log($(this).parents(".swiper-slide").index());
 		tabSwiper.slides[$(this).parents(".swiper-slide").index()].remove();
 	})
+
 }
 </script>
 </body>
