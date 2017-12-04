@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Move Things Around Other Things</title>
+<title></title>
 <style type="text/css">
 body{padding:0px;margin:0px;}
 ul{list-style:none;padding:0;}
@@ -20,7 +20,7 @@ body,html{width:100%;height:100%;overflow: hidden;}
 .roundlist li.roundabout-in-focus{cursor:default;}
 .roundlist li a{display:block;width:100%;}
 .roundlist li img{width:100%;display: block;}
-.botword{font-size:14px;color:#9da1a5;text-align: center;/* position:absolute;left:0px;bottom:30px */}
+.botword{font-size:14px;color:#9da1a5;text-align: center;}
 @media screen and (max-width:1365px){
 	.rodtit{width:300px;}
 }
@@ -31,7 +31,7 @@ body,html{width:100%;height:100%;overflow: hidden;}
 	<div class="menu">
 	
 	</div>
-	<div class="roundout">
+	<div class="item roundout">
 		<div class="rotop"></div>
 		<div class="rodbot">
 			<span class="rodtit"><img src="images/lartit.png" alt="" /></span>
@@ -74,63 +74,11 @@ $(document).ready(function() {
 		minScale: 0.85,
 		childSelector: '.mover',
 		clickToFocus: false,
-		tilt: -6.5,
+		tilt: -6.3,
 		autoplay: true,
-		autoplayDuration: 2000,
+		autoplayDuration: 2200,
 		autoplayPauseOnHover: true,
 	});
-	/*defaults = {
-		bearing: 0.0,
-		tilt: 0.0,
-		minZ: 100,
-		maxZ: 280,
-		minOpacity: 0.4,
-		maxOpacity: 1.0,
-		minScale: 0.4,
-		maxScale: 1.0,
-		duration: 600,
-		btnNext: null,
-		btnNextCallback: function() {},
-		btnPrev: null,
-		btnPrevCallback: function() {},
-		btnToggleAutoplay: null,
-		btnStartAutoplay: null,
-		btnStopAutoplay: null,
-		easing: "swing",
-		clickToFocus: true,
-		clickToFocusCallback: function() {},
-		focusBearing: 0.0,
-		shape: "lazySusan",
-		debug: false,
-		childSelector: "li",
-		startingChild: null,
-		reflect: false,
-		floatComparisonThreshold: 0.001,
-		autoplay: false,
-		autoplayDuration: 1000,
-		autoplayPauseOnHover: false,
-		autoplayCallback: function() {},
-		enableDrag: false,
-		dropDuration: 600,
-		dropEasing: "swing",
-		dropAnimateTo: "nearest",
-		dropCallback: function() {},
-		dragAxis: "x",
-		dragFactor: 4,
-		triggerFocusEvents: true,
-		triggerBlurEvents: true,
-		responsive: false
-	};
-
-	internalData = {
-		autoplayInterval: null,
-		autoplayIsRunning: false,
-		animating: false,
-		childInFocus: -1,
-		touchMoveStartPosition: null,
-		stopAnimation: false,
-		lastAnimationStep: false
-	};*/
 });
 </script>
 </body>
