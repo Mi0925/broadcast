@@ -15,10 +15,6 @@
 	<!-- <link rel="stylesheet" href="./iconfont/iconfont.css"> -->
 	<!-- 图标在线链接 -->
 	<link rel="stylesheet" href="http://at.alicdn.com/t/font_484596_j3zytiwv38k0rudi.css">
-	<!--IE8只能支持jQuery1.9-->
-	<!--[if lte IE 8]>
-	<script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
-	<![endif]-->
 </head>
 <body>
 <div class="gb-wrap">
@@ -46,16 +42,27 @@
 					</a>
 				</div>
 				<div class="gb-tab">
-					<div class="swiper-container">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<a href="javascript:;">首页</a>
+					<div class="swiper i">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<a href="javascript:;">首页</a>
+								</div>
 							</div>
-							<div class="swiper-slide">
-								<a href="javascript:;">
-									新建任务消息<i class="iconfont icon-guanbi close-tab"></i>
-								</a>
-							</div>
+						</div>
+					</div>
+					<div class="gb-tab-btn i">
+						<div class="gb-tab-paging i">
+							<i class="iconfont icon-arrow-left swiper-left"></i>
+							<i class="iconfont icon-arrow-right swiper-right"></i>
+						</div>
+						<div class="gb-tab-operate i">
+							<span>操作<i class="iconfont icon-arrow-bottom i"></i></span>
+							<ul>
+								<li class="J_tabShowActive"><em>定位当前选项卡</em></li>
+								<li class="J_tabCloseAll"><em>关闭全部选项卡</em></li>
+								<li class="J_tabCloseOther"><em>关闭其他选项卡</em></li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -68,25 +75,98 @@
 </div>
 
 <script src="src/plugins/jquery.js"></script>
+<script src="load.js"></script>
 <script src="src/plugins/jquery.roundabout2.js"></script>
 <script src="./src/js/main.min.js"></script>
 <script src="./layui/layui.js"></script>
-<script src="load.js"></script>
 <script>
+// tab标签
+$(".gb-tab .swiper-slide").eq(0).addClass('cur');
+var tabSwiper = new Swiper('.gb-tab .swiper-container',{
+	slidesPerView: 'auto',
+    calculateHeight : true,
+	// centeredSlides : true,
+	onSlideClick: function() {
+		tabSwiper.swipeTo(tabSwiper.clickedSlideIndex);
+		$(".gb-tab .swiper-slide").eq(tabSwiper.clickedSlideIndex).addClass('cur').siblings(".swiper-slide").removeClass('cur');
+	}
+});
+$(".gb-tab").on("click",".swiper-slide .close-tab",function(e){
+	e.stopPropagation();
+	tabSwiper.slides[$(this).parents(".swiper-slide").index()].remove();
+});
+$(".gb-tab-btn .swiper-left").click(function(){
+	tabSwiper.swipePrev();
+});
+$(".gb-tab-btn .swiper-right").click(function(){
+	tabSwiper.swipeNext();
+});
+// 定位当前选项卡
+$(".J_tabShowActive").click(function(){
+	var num=$(".gb-tab .swiper-slide.cur").index();
+	tabSwiper.swipeTo(num);
+});
+// 关闭全部选项卡
+$(".J_tabCloseAll").click(function(){
+	var indexSlide = tabSwiper.slides[0];
+	tabSwiper.removeAllSlides();
+	indexSlide.clone().append();
+	$(".gb-tab .swiper-slide").eq(0).addClass('cur');
+	tabSwiper.swipeTo($(".gb-tab .swiper-slide.cur").index());
+});
+// 关闭其他选项卡
+$(".J_tabCloseOther").click(function(){
+	var num=$(".gb-tab .swiper-slide.cur").index();
+	var indexSlide = tabSwiper.slides[0];
+	var newSlide = tabSwiper.slides[num];
+	tabSwiper.removeAllSlides();
+	indexSlide.clone().append();
+	if($(".gb-tab .swiper-slide").length>1){
+		newSlide.clone().append();
+	}else{
+		$(".gb-tab .swiper-slide").eq(0).addClass('cur');
+	}
+	num=$(".gb-tab .swiper-slide.cur").index();
+	tabSwiper.swipeTo(num);
+});
+
+
+// 头部操作下拉
+$(".gb-tab-operate span").click(function(){
+	var $this=$(this).find('i');
+	$(".gb-tab-operate ul").slideToggle();
+	if($this.hasClass('icon-arrow-bottom')){
+		$this.removeClass("icon-arrow-bottom").addClass("icon-arrow-top")
+	}else{
+		$this.removeClass("icon-arrow-top").addClass("icon-arrow-bottom")
+	}
+});
+$(".gb-tab-operate ul li").click(function(){
+	var $this=$(".gb-tab-operate span i");
+	$(".gb-tab-operate ul").slideUp();
+	if($this.hasClass('icon-arrow-bottom')){
+		$this.removeClass("icon-arrow-bottom").addClass("icon-arrow-top")
+	}else{
+		$this.removeClass("icon-arrow-top").addClass("icon-arrow-bottom")
+	}
+});
+
+
+// 点击导航加载对应页面
+$(".gb-left-nav").on("click",".nav-tit",function(){
+	gbMainContent($(this).attr("url"))
+})
+
+
+
+
+
+
+
+
+
+
 window.onload = function() {
-	$(".gb-tab .swiper-slide").eq(0).addClass('cur')
-	var tabSwiper = new Swiper('.gb-tab .swiper-container',{
-		slidesPerView: 'auto',
-	    calculateHeight : true,
-		onSlideClick: function() {
-			$(".gb-tab .swiper-slide").eq(tabSwiper.clickedSlideIndex).addClass('cur').siblings(".swiper-slide").removeClass('cur');
-		}
-	});
-	$(".gb-tab .swiper-slide .close-tab").click(function(e){
-		e.stopPropagation();
-		console.log($(this).parents(".swiper-slide").index());
-		tabSwiper.slides[$(this).parents(".swiper-slide").index()].remove();
-	})
 
 }
 </script>
