@@ -1,0 +1,85 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<style type="text/css">
+body{padding:0px;margin:0px;}
+ul{list-style:none;padding:0;}
+body,html{width:100%;height:100%;overflow: hidden;}
+.indout{width:100%;height:100%;}
+.menu{width:250px;height:100%;float:left;background:#252d3a;}
+.rotop{width:100%;height:130px;background:#4579d8;}
+.roundout{float:right;height:100%;}
+.rodbot{position:relative;width:100%;padding:4% 0px;background:url(images/menubg.jpg) center center no-repeat;background-size:auto 100%;}
+.rodtit{display: block;margin:0 auto;width:440px;}
+.rodtit img{width:100%;display: block;}
+.roundlist{width:68%;height:58%;margin:5% auto; }
+.roundlist li{width:30%;cursor:pointer;}
+.roundlist li.roundabout-in-focus{cursor:default;}
+.roundlist li a{display:block;width:100%;}
+.roundlist li img{width:100%;display: block;}
+.botword{font-size:14px;color:#9da1a5;text-align: center;}
+@media screen and (max-width:1365px){
+	.rodtit{width:300px;}
+}
+</style>
+</head>
+<body>
+<div class="indout">
+	<div class="menu">
+	
+	</div>
+	<div class="item roundout">
+		<div class="rotop"></div>
+		<div class="rodbot">
+			<span class="rodtit"><img src="images/lartit.png" alt="" /></span>
+			<ul class="roundlist">
+				<!-- <li class="monolith"><span>Other Things</span></li> -->
+				<li class="mover"><a href="http://www.baidu.com"><img src="images/menu-realtime.png" alt="" /></a></li>
+				<li class="mover"><a href="http://www.baidu.com"><img src="images/menu-dispatch.png" alt="" /></a></li>
+				<li class="mover"><a href="http://www.baidu.com"><img src="images/menu-resource.png" alt="" /></a></li>
+				<li class="mover"><a href="http://www.baidu.com"><img src="images/menu-log.png" alt="" /></a></li>
+				<li class="mover"><a href="http://www.baidu.com"><img src="images/menu-system.png" alt="" /></a></li>
+				<li class="mover"><a href="http://www.baidu.com"><img src="images/menu-safety.png" alt="" /></a></li>
+				<li class="mover"><a href="http://www.baidu.com"><img src="images/menu-message.png" alt="" /></a></li>
+				<li class="mover"><a href="http://www.baidu.com"><img src="images/menu-emergency.png" alt="" /></a></li>
+			</ul>
+			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
+		</div>
+		
+	</div>
+</div>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.roundabout2.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var boW = parseInt($('.indout').css('width'));
+	var rouH = parseInt($('.roundout').css('height')) - 130;
+	$('.roundout').css('width',boW - 250);
+	$('.rodbot').css('height',rouH);
+	$(window).resize(function(){
+		var boW = parseInt($('.indout').css('width'));
+		var rouH = parseInt($('.roundout').css('height')) - 130;
+		$('.roundout').css('width',boW - 250);
+		$('.rodbot').css('height',rouH);
+	})
+
+	$('.roundlist').roundabout({
+		minZ: 100,
+		maxZ: 300,
+		minOpacity: 1,
+		minScale: 0.85,
+		childSelector: '.mover',
+		clickToFocus: false,
+		tilt: -6.3,
+		autoplay: true,
+		autoplayDuration: 2200,
+		autoplayPauseOnHover: true,
+	});
+});
+</script>
+</body>
+</html>
