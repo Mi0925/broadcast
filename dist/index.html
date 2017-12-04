@@ -41,6 +41,20 @@
 						<em class="i">退出</em>
 					</a>
 				</div>
+				<div class="gb-tab">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<a href="javascript:;">首页</a>
+							</div>
+							<div class="swiper-slide">
+								<a href="javascript:;">
+									新建任务消息<i class="iconfont icon-guanbi close-tab"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="gb-main-content">
 				<div class="item">
@@ -120,6 +134,22 @@ $(".gb-packUp-leftNav").click(function(){
 		$this.find('span').html("收起导航栏");
 	}
 })
+
+window.onload = function() {
+	$(".gb-tab .swiper-slide").eq(0).addClass('cur')
+	var tabSwiper = new Swiper('.gb-tab .swiper-container',{
+		slidesPerView: 'auto',
+	    calculateHeight : true,
+		onSlideClick: function() {
+			$(".gb-tab .swiper-slide").eq(tabSwiper.clickedSlideIndex).addClass('cur').siblings(".swiper-slide").removeClass('cur');
+		},
+	});
+	$(".gb-tab .swiper-slide .close-tab").click(function(e){
+		e.stopPropagation()
+		console.log($(this).parents(".swiper-slide").index())
+		tabSwiper.slides[$(this).parents(".swiper-slide").index()].remove();
+	})
+}
 </script>
 </body>
 </html>

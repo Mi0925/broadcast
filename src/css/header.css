@@ -9,12 +9,14 @@
 .gb-header-operation .exit{margin-left: 25px}
 .gb-header-operation .iconfont{margin-right: 5px;}
 
-
-
-
-
-
-
+/*tab*/
+.gb-tab{position: absolute;bottom: 0px;left: 0px;width: 100%;padding: 0px 2%;}
+.gb-tab .swiper-slide{padding:15px 0px;color: #fff;cursor: pointer;}
+.gb-tab .swiper-slide.cur{background: #fff;color: #4579d8;border-radius: 5px 5px 0px 0px;}
+.gb-tab .swiper-slide a{position: relative;display: block;border-right: 2px solid #7da1e4;padding:0px 40px;}
+/*.gb-tab .swiper-slide:last-child a{border-right:none;}*/
+.gb-tab .swiper-slide.cur a{border-right: none;}
+.gb-tab .swiper-slide a .iconfont{position: absolute;right: 20px;top: -7px;}
 
 
 
