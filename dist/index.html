@@ -18,8 +18,124 @@
 </head>
 <body>
 <div class="gb-wrap">
-	<!-- 左边导航，由load加载进来，html可在nav-left.html看 -->
-	<div class="gb-left-nav"></div>
+	<div class="gb-left-nav">
+		<div class="left-nav-main">
+			<a href="index.html" class="gb-logo"><img src="src/images/logo.png"></a>
+			<ul class="gb-left-nav-ul">
+				<li class="cur">
+					<a href="javascript:;" class="nav-tit nav-router" url="components/index.html" name="首页">
+						<span class="text">
+							<em>
+								<i class="iconfont icon-zhuye"></i>
+								<strong>首页</strong>
+							</em>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" class="nav-tit nav-router" url="components/round2.html">
+						<span class="text">
+							<em>
+								<i class="iconfont icon-monitor-copy-copy"></i>
+								<strong>实时监控</strong>
+							</em>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" class="nav-tit">
+						<span class="text"> 
+							<em>
+								<i class="iconfont icon-yingjiguanicon"></i>
+								<strong>应急演练</strong>
+							</em>
+							<i class="iconfont icon-arrow-right arrow"></i>
+						</span>
+					</a>
+					<div class="left-sub-nav">
+						<a href="javascript:;" class="nav-router" url="components/round3.html"><em><strong>演练效果</strong></em></a>
+						<a href="javascript:;" class="nav-router" url="components/round3.html"><em><strong>演练计划</strong></em></a>
+					</div>
+				</li>
+				<li>
+					<a href="javascript:;" class="nav-tit">
+						<span class="text"> 
+							<em>
+								<i class="iconfont icon-paichediaodu"></i>
+								<strong>调度指挥</strong>
+								<span class="layui-badge">9</span>
+							</em>
+							<i class="iconfont icon-arrow-right arrow"></i>
+						</span>
+					</a>
+					<div class="left-sub-nav">
+						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>调度方案</strong><span class="layui-badge">11</span></em></a>
+						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>任务消息</strong></em></a>
+						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>报表导出</strong></em></a>
+						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>应急音频</strong></em></a>
+					</div>
+				</li>
+				<li>
+					<a href="javascript:;" class="nav-tit nav-router" url="components/round2.html">
+						<span class="text">
+							<em>
+								<i class="iconfont icon-jieshouyoujian"></i>
+								<strong>消息接入</strong>
+								<span class="layui-badge">111</span>
+							</em>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" class="nav-tit">
+						<span class="text"> 
+							<em>
+								<i class="iconfont icon-ziyuanguanli"></i>
+								<strong>资源管理</strong>
+							</em>
+							<i class="iconfont icon-arrow-right arrow"></i>
+						</span>
+					</a>
+					<div class="left-sub-nav">
+						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>资源列表</strong></em></a>
+						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>节目资源</strong></em></a>
+					</div>
+				</li>
+				<li>
+					<a href="javascript:;" class="nav-tit nav-router" url="components/round2.html">
+						<span class="text">
+							<em>
+								<i class="iconfont icon-anquan"></i><strong>安全管理</strong>
+							</em>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" class="nav-tit nav-router" url="components/round2.html">
+						<span class="text">
+							<em>
+								<i class="iconfont icon-rizhi"></i><strong>日志管理</strong>
+							</em>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" class="nav-tit">
+						<span class="text"> 
+							<em>
+								<i class="iconfont icon-settings"></i><strong>系统管理</strong>
+							</em>
+							<i class="iconfont icon-arrow-right arrow"></i>
+						</span>
+					</a>
+					<div class="left-sub-nav">
+						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>值班管理</strong></em></a>
+						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>值班日志</strong></em></a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<!-- 右边主体 -->
 	<div class="gb-right-main">
 		<div class="content">
@@ -46,7 +162,7 @@
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
 								<div class="swiper-slide">
-									<a href="javascript:;" url="round.html"><span>首页</span></a>
+									<a href="javascript:;" url="components/index.html" name="首页"><span>首页</span></a>
 								</div>
 							</div>
 						</div>
@@ -68,7 +184,7 @@
 				</div>
 			</div>
 			<div class="gb-main-content">
-				<!-- 主要内容 -->
+				<!-- 主要内容，由load加载进来，html可在components文件夹里查找和修改 -->
 			</div>
 		</div>
 	</div>
@@ -76,148 +192,144 @@
 
 <script src="src/plugins/jquery.js"></script>
 <script src="src/plugins/jquery.roundabout2.js"></script>
-<script src="./layui/layui.js"></script>
+<script src="layui/layui.js"></script>
 <script src="load.js"></script>
-<script src="./src/js/main.min.js"></script>
+<script src="src/js/main.min.js"></script>
 <script>
-var tabActive=0;//当前活动tab
-// tab标签
-$(".gb-tab .swiper-slide").eq(0).addClass('cur');
-var tabSwiper = new Swiper('.gb-tab .swiper-container',{
-	slidesPerView: 'auto',
-    calculateHeight : true,
-	// centeredSlides : true,
-	onSlideClick: function() {
-		tabSwiper.swipeTo(tabSwiper.clickedSlideIndex);
-		// $(".gb-tab .swiper-slide").eq(tabSwiper.clickedSlideIndex).addClass('cur').siblings(".swiper-slide").removeClass('cur');
-	}
-});
-$(".gb-tab").on("click",".swiper-slide",function(e){
-	tabActive=$(this).index();
-	$(this).addClass('cur').siblings(".swiper-slide").removeClass('cur');
-	var nav_text=$(this).find('span').text();
-	$(".gb-left-nav strong").each(function(){
-		if($(this).text()==nav_text){
-			if($(this).parents("li").find(".left-sub-nav").length==0){
-				$(this).parents("li").addClass("cur").siblings("li").removeClass('cur').find('.left-sub-nav').slideUp();
-				$(this).parents("li").siblings('li').find('a').removeClass('cur');
-			}else{
-				$(this).parents("li").find(".left-sub-nav").slideDown();
-				$(this).parents("a").addClass("cur").siblings("a").removeClass('cur').parents("li").addClass("cur").siblings("li").removeClass('cur').find('.left-sub-nav').slideUp();
-				$(this).parents("li").siblings('li').find('a').removeClass('cur');
-			}
-			return;
-		}
-	})
-});
-$(".gb-tab").on("click",".swiper-slide .close-tab",function(e){
-	e.stopPropagation();
-	var num=$(this).parents(".swiper-slide").index();
-	tabSwiper.slides[num].remove();
-	if($(this).parents(".swiper-slide").hasClass("cur") && num==$(".gb-tab .swiper-slide").length){
-		$(".gb-tab .swiper-slide:last-child").addClass("cur");
-		tabActive=num-1;
-	}
-	if($(this).parents(".swiper-slide").hasClass("cur")){
-		$(".gb-tab .swiper-slide").eq(num).addClass("cur");
-	}
-});
-$(".gb-tab-btn .swiper-left").click(function(){
-	tabSwiper.swipePrev();
-});
-$(".gb-tab-btn .swiper-right").click(function(){
-	tabSwiper.swipeNext();
-});
-// 定位当前选项卡
-$(".J_tabShowActive").click(function(){
-	var num=$(".gb-tab .swiper-slide.cur").index();
-	tabActive=num;
-	tabSwiper.swipeTo(num);
-});
-// 关闭全部选项卡
-$(".J_tabCloseAll").click(function(){
-	var indexSlide = tabSwiper.slides[0];
-	tabSwiper.removeAllSlides();
-	indexSlide.clone().append();
+	var tabActive=0;//当前活动tab
+	// tab标签
 	$(".gb-tab .swiper-slide").eq(0).addClass('cur');
-	tabSwiper.swipeTo($(".gb-tab .swiper-slide.cur").index());
-	tabActive=0;
-});
-// 关闭其他选项卡
-$(".J_tabCloseOther").click(function(){
-	var num=$(".gb-tab .swiper-slide.cur").index();
-	var indexSlide = tabSwiper.slides[0];
-	var newSlide = tabSwiper.slides[num];
-	var length=$(".gb-tab .swiper-slide").length;
-	tabSwiper.removeAllSlides();
-	indexSlide.clone().append();
-	if(length>1){
-		newSlide.clone().append();
-	}else{
+	var tabSwiper = new Swiper('.gb-tab .swiper-container',{
+		slidesPerView: 'auto',
+	    calculateHeight : true,
+		// centeredSlides : true,
+		onSlideClick: function() {
+			tabSwiper.swipeTo(tabSwiper.clickedSlideIndex);
+			// $(".gb-tab .swiper-slide").eq(tabSwiper.clickedSlideIndex).addClass('cur').siblings(".swiper-slide").removeClass('cur');
+		}
+	});
+	$(".gb-tab").on("click",".swiper-slide",function(e){
+		tabActive=$(this).index();
+		$(this).addClass('cur').siblings(".swiper-slide").removeClass('cur');
+		var nav_text=$(this).find('span').text();
+		$(".gb-left-nav strong").each(function(){
+			var this_li=$(this).parents("li");
+			if($(this).text()==nav_text){
+				if(this_li.find(".left-sub-nav").length==0){
+					this_li.addClass("cur").siblings("li").removeClass('cur').find('.left-sub-nav').slideUp();
+					this_li.siblings('li').find('a').removeClass('cur');
+				}else{
+					this_li.find(".left-sub-nav").slideDown();
+					$(this).parents("a").addClass("cur").siblings("a").removeClass('cur').parents("li").addClass("cur").siblings("li").removeClass('cur').find('.left-sub-nav').slideUp();
+					this_li.siblings('li').find('a').removeClass('cur');
+				}
+				this_li.find(".arrow").removeClass("icon-arrow-right").addClass("icon-arrow-bottom");
+				this_li.siblings("li").find(".arrow").removeClass("icon-arrow-bottom").addClass("icon-arrow-right");
+				return;
+			}
+		})
+	});
+	$(".gb-tab").on("click",".swiper-slide .close-tab",function(e){
+		e.stopPropagation();
+		var num=$(this).parents(".swiper-slide").index();
+		tabSwiper.slides[num].remove();
+		if($(this).parents(".swiper-slide").hasClass("cur") && num==$(".gb-tab .swiper-slide").length){
+			$(".gb-tab .swiper-slide:last-child").addClass("cur");
+			tabActive=num-1;
+		}
+		if($(this).parents(".swiper-slide").hasClass("cur")){
+			$(".gb-tab .swiper-slide").eq(num).addClass("cur");
+		}
+	});
+	$(".gb-tab-btn .swiper-left").click(function(){
+		tabSwiper.swipePrev();
+	});
+	$(".gb-tab-btn .swiper-right").click(function(){
+		tabSwiper.swipeNext();
+	});
+	// 定位当前选项卡
+	$(".J_tabShowActive").click(function(){
+		var num=$(".gb-tab .swiper-slide.cur").index();
+		tabActive=num;
+		tabSwiper.swipeTo(num);
+	});
+	// 关闭全部选项卡
+	$(".J_tabCloseAll").click(function(){
+		var indexSlide = tabSwiper.slides[0];
+		tabSwiper.removeAllSlides();
+		indexSlide.clone().append();
 		$(".gb-tab .swiper-slide").eq(0).addClass('cur');
-	}
-	num=$(".gb-tab .swiper-slide.cur").index();
-	tabSwiper.swipeTo(num);
-	tabActive=1;
-});
+		tabSwiper.swipeTo($(".gb-tab .swiper-slide.cur").index());
+		tabActive=0;
+	});
+	// 关闭其他选项卡
+	$(".J_tabCloseOther").click(function(){
+		var num=$(".gb-tab .swiper-slide.cur").index();
+		var indexSlide = tabSwiper.slides[0];
+		var newSlide = tabSwiper.slides[num];
+		var length=$(".gb-tab .swiper-slide").length;
+		tabSwiper.removeAllSlides();
+		indexSlide.clone().append();
+		if(length>1 && $(".gb-tab .swiper-slide.cur a").attr("name")!="首页"){
+			newSlide.clone().append();
+		}else{
+			$(".gb-tab .swiper-slide").eq(0).addClass('cur');
+		}
+		num=$(".gb-tab .swiper-slide.cur").index();
+		tabSwiper.swipeTo(num);
+		tabActive=1;
+	});
 
 
-// 头部操作下拉
-$(".gb-tab-operate span").click(function(){
-	var $this=$(this).find('i');
-	$(".gb-tab-operate ul").slideToggle();
-	if($this.hasClass('icon-arrow-bottom')){
-		$this.removeClass("icon-arrow-bottom").addClass("icon-arrow-top")
-	}else{
-		$this.removeClass("icon-arrow-top").addClass("icon-arrow-bottom")
-	}
-});
-$(".gb-tab-operate ul li").click(function(){
-	var $this=$(".gb-tab-operate span i");
-	$(".gb-tab-operate ul").slideUp();
-	if($this.hasClass('icon-arrow-bottom')){
-		$this.removeClass("icon-arrow-bottom").addClass("icon-arrow-top")
-	}else{
-		$this.removeClass("icon-arrow-top").addClass("icon-arrow-bottom")
-	}
-});
+	// 头部操作下拉
+	$(".gb-tab-operate span").click(function(){
+		var $this=$(this).find('i');
+		$(".gb-tab-operate ul").slideToggle();
+		if($this.hasClass('icon-arrow-bottom')){
+			$this.removeClass("icon-arrow-bottom").addClass("icon-arrow-top")
+		}else{
+			$this.removeClass("icon-arrow-top").addClass("icon-arrow-bottom")
+		}
+	});
+	$(".gb-tab-operate ul li").click(function(){
+		var $this=$(".gb-tab-operate span i");
+		$(".gb-tab-operate ul").slideUp();
+		if($this.hasClass('icon-arrow-bottom')){
+			$this.removeClass("icon-arrow-bottom").addClass("icon-arrow-top")
+		}else{
+			$this.removeClass("icon-arrow-top").addClass("icon-arrow-bottom")
+		}
+	});
 
 
-// 点击导航加载对应页面
-$(".gb-left-nav").on("click",".nav-router",function(){
-	var blo=false;
-	gbMainContent($(this).attr("url"));
-	$(".gb-tab .swiper-slide").removeClass('cur');
-	var nav_text=$(this).find("strong").text()
-	$(".gb-tab .swiper-slide").each(function(){
-		if($(this).find("span").text()==nav_text){
-			$(".gb-tab .swiper-slide").eq($(this).index()).addClass("cur");
-			tabSwiper.swipeTo($(this).index());
-			blo=true;
+	// 点击导航加载对应页面
+	$(".gb-left-nav").on("click",".nav-router",function(){
+		var blo=false;
+		gbMainContent($(this).attr("url"));
+		$(".gb-tab .swiper-slide").removeClass('cur');
+		var nav_text=$(this).find("strong").text()
+		$(".gb-tab .swiper-slide").each(function(){
+			if($(this).find("span").text()==nav_text){
+				$(".gb-tab .swiper-slide").eq($(this).index()).addClass("cur");
+				tabSwiper.swipeTo($(this).index());
+				blo=true;
+				return;
+			}
+		})
+		if(blo==true){
 			return;
 		}
+		var tabSlideHtml='<a href="javascript:;" url="'+$(this).attr("url")+'"><span>'+$(this).find("strong").text()+
+							'</span><i class="iconfont icon-guanbi close-tab"></i>' +
+						 '</a>';
+		tabSwiper.appendSlide(tabSlideHtml);
+		tabActive=$(".gb-tab .swiper-slide").length-1;
+		tabSwiper.swipeTo(tabActive);
+		$(".gb-tab .swiper-slide:last-child").addClass("cur");
 	})
-	if(blo==true){
-		return;
-	}
-	var tabSlideHtml='<a href="javascript:;" url="'+$(this).attr("url")+'"><span>'+$(this).find("strong").text()+
-						'</span><i class="iconfont icon-guanbi close-tab"></i>' +
-					 '</a>';
-	tabSwiper.appendSlide(tabSlideHtml);
-	tabActive=$(".gb-tab .swiper-slide").length-1;
-	tabSwiper.swipeTo(tabActive);
-	$(".gb-tab .swiper-slide:last-child").addClass("cur");
-})
-$(".gb-tab").on("click",".swiper-slide",function(e){
-	gbMainContent($(this).find("a").attr("url"));
-})
-
-
-
-
-
-
-
+	$(".gb-tab").on("click",".swiper-slide",function(e){
+		gbMainContent($(this).find("a").attr("url"));
+	})
 
 
 
