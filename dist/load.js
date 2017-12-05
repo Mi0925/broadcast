@@ -6,6 +6,7 @@ function gbMainContent(url) {
 	$(".gb-main-content").load(url,function(){
 		clearInterval(RoundaboutSet);//清除首页轮播定时器
 	});
+
 }
 
 
