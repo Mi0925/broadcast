@@ -1,6 +1,7 @@
 .gb-left-nav{width:230px;background: #252d3a;height: 100%;float: left;transition: .5s all;position: absolute;left: 0px;top: 0px;bottom: 0px;overflow-y: auto;overflow-x: hidden;}
 .gb-logo{display: block;}
 .gb-left-nav-ul li{color: #8c939e;text-align: center;}
+.gb-left-nav-ul li.cur{background: #1b212b;}
 .gb-left-nav-ul li.cur .text{border-left-color: #4579d8;}
 .gb-left-nav-ul li.cur .nav-tit{color: #fff;}
 .gb-left-nav-ul a{display: block;}

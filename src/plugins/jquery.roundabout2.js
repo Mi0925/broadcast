@@ -38,6 +38,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ var RoundaboutSet=null;
 (function($) {
 	"use strict";
 	
@@ -931,7 +932,7 @@
 					callback = callback || data.autoplayCallback || function() {};
 
 					clearInterval(data.autoplayInterval);
-					data.autoplayInterval = setInterval(function() {
+					RoundaboutSet=data.autoplayInterval = setInterval(function() {
 						methods.animateToNextChild.apply(self, [callback]);
 					}, data.autoplayDuration);
 					data.autoplayIsRunning = true;
