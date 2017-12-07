@@ -20,7 +20,7 @@
 .gb-left-nav.gb-packUp .gb-left-nav-ul strong{display: none;}
 .gb-left-nav.gb-packUp .gb-left-nav-ul em{width: 100%;text-align: center;}
 .gb-left-nav.gb-packUp .gb-left-nav-ul .nav-tit .text em i{position: static;}*/
-.gb-packUp .gb-left-nav{left: -230px;}
+.gb-packUp .gb-left-nav{/*left: -230px;*/}
 .gb-packUp .gb-right-main{padding-left:0px;}
 
 
