@@ -197,14 +197,15 @@
 <script src="src/plugins/jquery.js"></script>
 <script src="src/plugins/jquery.roundabout2.js"></script>
 <script src="layui/layui.js"></script>
-<!-- <script src="load.js"></script> -->
 <script src="src/js/main.min.js"></script>
 <script>
  	var RoundaboutSet=null;//首页轮播定时器
 	var tabActive=0;//当前活动tab
-	// 刷新页面清除url参数#，开发为了方便已注释
+	// 刷新页面清除url参数
 	// var shortURL=top.location.href.substring(0,top.location.href.indexOf('#'));
 	// history.replaceState(null,null,shortURL)
+
+
 	// tab标签
 	$(".gb-tab .swiper-slide").eq(0).addClass('cur');
 	var tabSwiper = new Swiper('.gb-tab .swiper-container',{
@@ -341,13 +342,6 @@
 	})
 
 
-
-
-
-
-window.onload = function() {
-
-}
 </script>
 </body>
 </html>

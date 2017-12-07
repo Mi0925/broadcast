@@ -13,8 +13,11 @@ Router.prototype.refresh = function() {
   }
 };
 Router.prototype.init = function() {
-  window.addEventListener('load', this.refresh.bind(this), false);
-  window.addEventListener('hashchange', this.refresh.bind(this), false);
+  // window.addEventListener('load', this.refresh.bind(this), false);
+  // window.addEventListener('hashchange', this.refresh.bind(this), false);
+  
+  $(window).bind('load', this.refresh.bind(this));
+  $(window).bind('hashchange', this.refresh.bind(this));
 }
 window.Router = new Router();
 window.Router.init();
