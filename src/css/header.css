@@ -12,12 +12,13 @@
 /*tab*/
 .gb-tab{position: absolute;bottom: 0px;left: 0px;width: 100%;padding: 0px 2%;}
 .gb-tab .swiper{width: 79%;}
-.gb-tab .swiper-slide{padding:15px 0px;color: #fff;cursor: pointer;}
+.gb-tab .swiper-slide{color: #fff;cursor: pointer;}
 .gb-tab .swiper-slide.cur{background: #fff;color: #4579d8;border-radius: 5px 5px 0px 0px;}
-.gb-tab .swiper-slide a{position: relative;display: block;border-right: 2px solid #7da1e4;padding:0px 40px;}
+.gb-tab .swiper-slide a{position: relative;display: block;padding:15px 0px;}
+.gb-tab .swiper-slide a span{display: block;padding: 0px 40px;border-right: 2px solid #7da1e4;}
 /*.gb-tab .swiper-slide:last-child a{border-right:none;}*/
-.gb-tab .swiper-slide.cur a{border-right: none;}
-.gb-tab .swiper-slide a .iconfont{position: absolute;right: 20px;top: -7px;display: none;}
+.gb-tab .swiper-slide.cur a span{border-right: none;}
+.gb-tab .swiper-slide a .iconfont{position: absolute;right: 20px;top: 10px;display: none;}
 .gb-tab .swiper-slide:hover a .iconfont{display: block;}
 .gb-tab-btn{width: 20%;text-align: right;}
 .gb-tab-paging{max-width: 48%;text-align: center;}

@@ -23,7 +23,7 @@
 			<a href="index.html" class="gb-logo"><img src="src/images/logo.png"></a>
 			<ul class="gb-left-nav-ul">
 				<li class="cur">
-					<a href="javascript:;" class="nav-tit nav-router" url="components/index.html" name="首页">
+					<a href="#/index" class="nav-tit nav-router" url="components/index.html" name="首页">
 						<span class="text">
 							<em>
 								<i class="iconfont icon-zhuye"></i>
@@ -33,7 +33,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="javascript:;" class="nav-tit nav-router" url="components/round2.html">
+					<a href="#/round2" class="nav-tit nav-router" url="components/round2.html">
 						<span class="text">
 							<em>
 								<i class="iconfont icon-monitor-copy-copy"></i>
@@ -53,13 +53,13 @@
 						</span>
 					</a>
 					<div class="left-sub-nav">
-						<a href="javascript:;" class="nav-router" url="components/round3.html"><em><strong>演练效果</strong></em></a>
-						<a href="javascript:;" class="nav-router" url="components/round3.html"><em><strong>演练计划</strong></em></a>
+						<a href="#/round3" class="nav-router" url="components/round3.html"><em><strong>演练效果</strong></em></a>
+						<a href="#/round3" class="nav-router" url="components/round3.html"><em><strong>演练计划</strong></em></a>
 					</div>
 				</li>
 				<li>
 					<a href="javascript:;" class="nav-tit">
-						<span class="text"> 
+						<span class="text">
 							<em>
 								<i class="iconfont icon-paichediaodu"></i>
 								<strong>调度指挥</strong>
@@ -69,14 +69,14 @@
 						</span>
 					</a>
 					<div class="left-sub-nav">
-						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>调度方案</strong><span class="layui-badge">11</span></em></a>
-						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>任务消息</strong></em></a>
-						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>报表导出</strong></em></a>
-						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>应急音频</strong></em></a>
+						<a href="#/round2" class="nav-router" url="components/round2.html"><em><strong>调度方案</strong><span class="layui-badge">11</span></em></a>
+						<a href="#/round2" class="nav-router" url="components/round2.html"><em><strong>任务消息</strong></em></a>
+						<a href="#/round2" class="nav-router" url="components/round2.html"><em><strong>报表导出</strong></em></a>
+						<a href="#/round2" class="nav-router" url="components/round2.html"><em><strong>应急音频</strong></em></a>
 					</div>
 				</li>
 				<li>
-					<a href="javascript:;" class="nav-tit nav-router" url="components/round2.html">
+					<a href="#/round2" class="nav-tit nav-router" url="components/round2.html">
 						<span class="text">
 							<em>
 								<i class="iconfont icon-jieshouyoujian"></i>
@@ -97,12 +97,12 @@
 						</span>
 					</a>
 					<div class="left-sub-nav">
-						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>资源列表</strong></em></a>
-						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>节目资源</strong></em></a>
+						<a href="#/round2" class="nav-router" url="components/round2.html"><em><strong>资源列表</strong></em></a>
+						<a href="#/round2" class="nav-router" url="components/round2.html"><em><strong>节目资源</strong></em></a>
 					</div>
 				</li>
 				<li>
-					<a href="javascript:;" class="nav-tit nav-router" url="components/round2.html">
+					<a href="#/round2" class="nav-tit nav-router" url="components/round2.html">
 						<span class="text">
 							<em>
 								<i class="iconfont icon-anquan"></i><strong>安全管理</strong>
@@ -111,7 +111,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="javascript:;" class="nav-tit nav-router" url="components/round2.html">
+					<a href="#/index" class="nav-tit nav-router" url="components/round2.html">
 						<span class="text">
 							<em>
 								<i class="iconfont icon-rizhi"></i><strong>日志管理</strong>
@@ -129,8 +129,8 @@
 						</span>
 					</a>
 					<div class="left-sub-nav">
-						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>值班管理</strong></em></a>
-						<a href="javascript:;" class="nav-router" url="components/round2.html"><em><strong>值班日志</strong></em></a>
+						<a href="#/round2" class="nav-router" url="components/round2.html"><em><strong>值班管理</strong></em></a>
+						<a href="#/round2" class="nav-router" url="components/round2.html"><em><strong>值班日志</strong></em></a>
 					</div>
 				</li>
 			</ul>
@@ -166,7 +166,7 @@
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
 								<div class="swiper-slide">
-									<a href="javascript:;" url="components/index.html" name="首页"><span>首页</span></a>
+									<a href="#/index" url="components/index.html" name="首页"><span>首页</span></a>
 								</div>
 							</div>
 						</div>
@@ -197,10 +197,14 @@
 <script src="src/plugins/jquery.js"></script>
 <script src="src/plugins/jquery.roundabout2.js"></script>
 <script src="layui/layui.js"></script>
-<script src="load.js"></script>
+<!-- <script src="load.js"></script> -->
 <script src="src/js/main.min.js"></script>
 <script>
+ 	var RoundaboutSet=null;//首页轮播定时器
 	var tabActive=0;//当前活动tab
+	// 刷新页面清除url参数#，开发为了方便已注释
+	// var shortURL=top.location.href.substring(0,top.location.href.indexOf('#'));
+	// history.replaceState(null,null,shortURL)
 	// tab标签
 	$(".gb-tab .swiper-slide").eq(0).addClass('cur');
 	var tabSwiper = new Swiper('.gb-tab .swiper-container',{
@@ -309,7 +313,7 @@
 	// 点击导航加载对应页面
 	$(".gb-left-nav").on("click",".nav-router",function(){
 		var blo=false;
-		gbMainContent($(this).attr("url"),RoundaboutSet);
+		// gbMainContent($(this).attr("url"),RoundaboutSet);
 		$(".gb-tab .swiper-slide").removeClass('cur');
 		var nav_text=$(this).find("strong").text()
 		$(".gb-tab .swiper-slide").each(function(){
@@ -323,17 +327,21 @@
 		if(blo==true){
 			return;
 		}
-		var tabSlideHtml='<a href="javascript:;" url="'+$(this).attr("url")+'"><span>'+$(this).find("strong").text()+
+		var url=$(this).attr("url")
+		var tabSlideHtml='<a href="#'+url.slice(10,-5)+'" url="'+url+'"><span>'+$(this).find("strong").text()+
 							'</span><i class="iconfont icon-guanbi close-tab"></i>' +
-						 '</a>';
+						'</a>';
 		tabSwiper.appendSlide(tabSlideHtml);
 		tabActive=$(".gb-tab .swiper-slide").length-1;
 		tabSwiper.swipeTo(tabActive);
 		$(".gb-tab .swiper-slide:last-child").addClass("cur");
 	})
 	$(".gb-tab").on("click",".swiper-slide",function(e){
-		gbMainContent($(this).find("a").attr("url"),RoundaboutSet);
+		// gbMainContent($(this).find("a").attr("url"),RoundaboutSet);
 	})
+
+
+
 
 
 
