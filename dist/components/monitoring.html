@@ -1,0 +1,112 @@
+<div class="item gb-monitoring">
+	<!-- 消息滚动 -->
+	<div class="gb-marquee">
+		<marquee behavior="" direction="" align="absmiddle" onmouseover=stop() onmouseout=start()>
+			<a href="##">
+				<i class="iconfont icon-guangbo i"></i>
+				<em class="i">国家应急平台消息国家应急平台消息国家应急平台消息</em>
+			</a>
+			<a href="##">
+				<i class="iconfont icon-guangbo i"></i>
+				<em class="i">国家应急平台消息国家应急平台消息国家应急平台消息</em>
+			</a>
+		</marquee>
+	</div>
+	<div class="gb-main">
+		<!-- 事件总数 -->
+		<div class="gb-chart-incident">
+			<div class="gb-pie gb-incident-distribute" id="gb-pie"></div>
+			<div class="gb-pie gb-incident-distribute" id="gb-pie1"></div>
+			<div class="gb-pie gb-incident-distribute" id="gb-pie2"></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    var pieChart = echarts.init(document.getElementById('gb-pie'));
+    var pieChart1 = echarts.init(document.getElementById('gb-pie1'));
+    var pieChart2 = echarts.init(document.getElementById('gb-pie2'));
+	option = {
+	    title: {
+	        text: '事件发布',
+	        bottom: '0',
+	        left:'center',
+	        textStyle: {
+	            color: '#585c65'
+	        }
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    visualMap: {
+	        show: false,
+	        min: 80,
+	        max: 600,
+	        inRange: {
+	            colorLightness: [0, 1]
+	        }
+	    },
+	    legend: {
+	        orient: 'vertical',
+	        right: '10%',
+	        bottom: '10%',
+	        itemWidth:'10',
+	        itemHeight:'10',
+	        data:['气象局','水利','国家应急广播平台','应急办'],
+	        align:"right"
+	    },
+	    series : [
+	        {
+	            name:'访问来源',
+	            type:'pie',
+	            radius : '55%',
+	            color: ['#6e6ee6','#9ca6ff', '#1ca5dc', '#41cefb'],
+	            center: ['50%', '50%'],
+	            data:[
+	                {value:25, name:'气象局'},
+	                {value:30, name:'水利'},
+	                {value:15, name:'国家应急广播平台'},
+	                {value:20, name:'应急办'}
+	            ].sort(function (a, b) { return a.value - b.value; }),
+	            roseType: 'radius',
+	            label: {
+	                normal: {
+	                    textStyle: {
+	                        color: '#7c8491'
+	                    }
+	                }
+	            },
+	            labelLine: {
+	                normal: {
+	                    lineStyle: {
+	                        color: '#d8d8d8'
+	                    },
+	                    smooth: 0.2,
+	                    length: 10,
+	                    length2: 20
+	                }
+	            },
+	            itemStyle: {
+		             normal: {
+		                 shadowBlur: 15,
+		                 shadowColor: 'rgba(0, 0, 0, 0.4)'
+		             }
+		         },
+
+	            animationType: 'scale',
+	            animationEasing: 'elasticOut',
+	            animationDelay: function (idx) {
+	                return Math.random() * 200;
+	            }
+	        }
+	    ]
+	};
+	pieChart.setOption(option);
+	pieChart1.setOption(option);
+	pieChart2.setOption(option);
+	window.onresize=function(){
+		pieChart.resize();
+		pieChart1.resize();
+		pieChart2.resize();
+	}
+</script>

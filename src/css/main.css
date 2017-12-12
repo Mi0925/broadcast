@@ -16,12 +16,27 @@ a, button { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-tap-highlight
 /* 公共类 */
 .gb-wrap{width: 100%;min-width: 1024px;margin: auto;position: relative;height: 100%;overflow: hidden;}
 .gb-wrap:after{ display:block; clear:both; height:0; visibilit:hidden; content:'';}
+.gb-main{padding: 0px 2%;}
 /* 字体 */
 /*@font-face{
 	font-family: HelveticaPro;
 	src: url('../font/HelveticaNeueLTPro-UltLt_0.otf')
 }*/
 
+
+
+/*无缝滚动*/
+.gb-marquee{color: #fff;background: #7c8491;margin: 20px 0;}
+.gb-marquee a{display: inline-block;line-height: 40px;width: 40%;text-align: center;}
+
+
+
+/*事件总数*/
+.gb-chart-incident{border: 1px solid #d8d8d8;border-radius: 3px;background: #fff;font-style: 0;height: 550px;}
+.gb-incident-distribute{width: 33%;height: 460px;display: inline-block;}
+
+
+/*饼图*/
 
 
 

@@ -67,7 +67,7 @@ gulp.task('minifycss', function() {
 
 //压缩js  
 gulp.task("script",function(){  
-    gulp.src(['./src/js/plugins/jquery.js','./src/js/plugins/idangerous.swiper.min.js','./src/js/*.js'])   
+    gulp.src(['./src/js/plugins/*.*','./src/js/*.js'])   
         .pipe(plumber())
         .pipe(concat('main.js'))  
         .pipe(rename({suffix: '.min'}))   //rename压缩后的文件名

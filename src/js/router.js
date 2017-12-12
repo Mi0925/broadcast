@@ -24,6 +24,9 @@ window.Router.init();
 Router.route("/index", function() {
   gbMainContent('components/index.html', RoundaboutSet);
 });
+Router.route('/monitoring', function() {
+  gbMainContent('components/monitoring.html', RoundaboutSet);
+});
 Router.route('/round2', function() {
   gbMainContent('components/round2.html', RoundaboutSet);
 });
