@@ -28,22 +28,18 @@
 			<img src="src/images/log-tit.png" class="logtit">
 			<div class="logframe">
 				<div class="fratop">
-					<span class="fratit">登录</span>
+					<span class="fratit">忘记密码</span>
 				</div>
 				<div class="fracent">
 					<div class="fraone">
 						<span class="icone"></span>
 						<input type="text" value="用户名" onfocus="if(this.value==defaultValue){this.value = '';this.style.borderColor='#999';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}this.style.borderColor='#d8d8d8';"/>
-						<span class="itok"></span>
-						<span class="itwarn"></span>
 					</div>
 					<div class="fratwo">
 						<span class="ictwo"></span>
 						<!-- <input type="text" value="密码" onfocus="if(this.value==defaultValue){this.value = '';this.type='password';this.style.color='#333';this.style.borderColor='#999';}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';this.type='text';}this.style.borderColor='#d8d8d8';"/> -->
 						<input type="password" id="pwd" />
 						<input type="text" value="密码" id="tx"/>
-						<span class="itok"></span>
-						<span class="itwarn"></span>
 					</div>
 					<div class="frathr">
 						<div class="fracode">
@@ -66,7 +62,23 @@
 <script src="layui/layui.js"></script>
 <script src="src/js/main.min.js"></script>
 <script>
-
+ 	var tx = document.getElementById("tx"), pwd = document.getElementById("pwd");
+	tx.onfocus = function(){
+		if(this.value != "密码") return;
+		this.style.display = "none";
+		pwd.style.display = "";
+		pwd.value = "";
+		pwd.focus();
+	}
+	pwd.onblur = function(){
+		if(this.value != "") {
+			pwd.style.borderColor='#d8d8d8'; 
+		}else{
+			this.style.display = "none";
+			tx.style.display = "";
+			tx.value = "密码";
+		}
+	}
 </script>
 </body>
 </html>
