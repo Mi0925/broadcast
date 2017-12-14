@@ -13,30 +13,54 @@
 		</marquee>
 	</div>
 	<div class="gb-main">
+		<!-- 事件按钮组 -->
+		<div class="gb-incident-btn">
+			<button class="layui-btn layui-btn-normal">发布效果（全事件）</button>
+			<button class="layui-btn layui-btn-primary">执行效果（单一事件）</button>
+			<button class="layui-btn layui-btn-normal gb-projection-btn">投屏全事件</button>
+		</div>
 		<!-- 事件总数 -->
-		<div class="gb-chart-incident">
-			<div class="gb-pie gb-incident-distribute" id="gb-pie"></div>
-			<div class="gb-pie gb-incident-distribute" id="gb-pie1"></div>
-			<div class="gb-pie gb-incident-distribute" id="gb-pie2"></div>
+		<div class="gb-incident-box">
+			<!-- 发布效果全事件 -->
+			<div class="item">
+				<div class="gb-chart-box">
+					<div class="gb-incident-count">
+						<button class="layui-btn layui-btn-danger">事件总数：<em>6</em></button>
+						<button class="layui-btn layui-btn-warm">发布总数：<em>6</em></button>
+					</div>
+					<div class="gb-chart-incident-pie">
+						<div class="gb-chart-item">
+							<div class="gb-chart gb-pie" id="pie-incident"></div>
+						</div>
+						<div class="gb-chart-item">
+							<div class="gb-chart gb-pie" id="pie-incident-rank"></div>
+						</div>
+						<div class="gb-chart-item">
+							<div class="gb-chart gb-bar" id="bar-task-num"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
-    var pieChart = echarts.init(document.getElementById('gb-pie'));
-    var pieChart1 = echarts.init(document.getElementById('gb-pie1'));
-    var pieChart2 = echarts.init(document.getElementById('gb-pie2'));
-	option = {
+    var incidentChart = echarts.init(document.getElementById('pie-incident'));
+    var incidentRankChart = echarts.init(document.getElementById('pie-incident-rank'));
+    var taskNumChart = echarts.init(document.getElementById('bar-task-num'));
+
+    // 事件发布
+	incidentOption = {
 	    title: {
 	        text: '事件发布',
 	        bottom: '0',
 	        left:'center',
-	        textStyle: {
+	        textStyle: { 
 	            color: '#585c65'
 	        }
 	    },
 	    tooltip : {
-	        trigger: 'item',
-	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	        formatter: "{b} : {c} ({d}%)"
 	    },
 	    visualMap: {
 	        show: false,
@@ -47,8 +71,8 @@
 	        }
 	    },
 	    legend: {
-	        orient: 'vertical',
-	        right: '10%',
+	        // orient: 'vertical',
+	        x: 'center',
 	        bottom: '10%',
 	        itemWidth:'10',
 	        itemHeight:'10',
@@ -57,16 +81,158 @@
 	    },
 	    series : [
 	        {
-	            name:'访问来源',
 	            type:'pie',
-	            radius : '55%',
-	            color: ['#6e6ee6','#9ca6ff', '#1ca5dc', '#41cefb'],
-	            center: ['50%', '50%'],
+	            radius : '60%',
+	            center: ['50%', '43%'],
 	            data:[
-	                {value:25, name:'气象局'},
-	                {value:30, name:'水利'},
-	                {value:15, name:'国家应急广播平台'},
-	                {value:20, name:'应急办'}
+		            {
+	                	value:25, 
+	                	name:'气象局',
+	                	itemStyle: {
+							normal: {
+								color: "#6e6fe6"
+							}
+				         },
+	                },{
+	                	value:30, 
+	                	name:'水利',
+	                	itemStyle: {
+							normal: {
+								color: "#9ca6ff"
+							}
+				         },
+	                },{
+	                	value:15, 
+	                	name:'国家应急广播平台',
+	                	itemStyle: {
+							normal: {
+								color: "#1ba5dd"
+							}
+				         },
+	                },{
+	                	value:25, 
+	                	name:'应急办',
+	                	itemStyle: {
+							normal: {
+								color: "#41cefb"
+							}
+				         },
+	                }
+	            ].sort(function (a, b) { return a.value - b.value; }),
+	            roseType: 'radius',
+	            label: {
+	                normal: {
+	                    textStyle: {
+	                        color: '#7c8491'
+	                    }
+	                }
+	            },
+	            labelLine: {
+	                normal: {
+	                    lineStyle: {
+	                        color: '#d8d8d8'
+	                    },
+	                    smooth: 0.2,
+	                    length: 0,
+	                    length2: 20
+	                }
+	            },
+	            itemStyle: {
+		             normal: {
+		                shadowBlur: 15,
+		                shadowColor: 'rgba(0, 0, 0, 0.4)',
+		                label:{
+		                	formatter:'{d}%',
+				        },
+		             }
+		         },
+
+	            animationType: 'scale',
+	            animationEasing: 'elasticOut',
+	            animationDelay: function (idx) {
+	                return Math.random() * 200;
+	            }
+	        }
+	    ]
+	};
+	incidentChart.setOption(incidentOption);
+
+	// 事件级别发布
+	incidentRankOption = {
+	    title: {
+	        text: '事件级别发布',
+	        bottom: '0',
+	        left:'center',
+	        textStyle: { 
+	            color: '#585c65'
+	        }
+	    },
+	    tooltip : {
+	    },
+	    visualMap: {
+	        show: false,
+	        min: 80,
+	        max: 600,
+	        inRange: {
+	            colorLightness: [0, 1]
+	        }
+	    },
+	    legend: {
+	        // orient: 'vertical',
+	        x: 'center',
+	        bottom: '10%',
+	        itemWidth:'10',
+	        itemHeight:'10',
+	        data:['红色事件','橙色事件','黄色事件','蓝色事件','绿色事件'],
+	        align:"right"
+	    },
+	    series : [
+	        {
+	            type:'pie',
+	            radius : '60%',
+	            center: ['50%', '43%'],
+	            data:[
+	                {
+	                	value:20, 
+	                	name:'红色事件',
+	                	itemStyle: {
+							normal: {
+								color: "#f75c53"
+							}
+				         },
+	                },{
+	                	value:25, 
+	                	name:'橙色事件',
+	                	itemStyle: {
+							normal: {
+								color: "#fea41e"
+							}
+				         },
+	                },{
+	                	value:27, 
+	                	name:'黄色事件',
+	                	itemStyle: {
+							normal: {
+								color: "#fada00"
+							}
+				         },
+	                },{
+	                	value:30, 
+	                	name:'蓝色事件',
+	                	itemStyle: {
+							normal: {
+								color: "#4579d8"
+							}
+				         },
+	                },{
+	                	value:33, 
+	                	name:'绿色事件',
+	                	itemStyle: {
+							normal: {
+								color: "#14ae8f"
+							}
+				         },
+	                },
 	            ].sort(function (a, b) { return a.value - b.value; }),
 	            roseType: 'radius',
 	            label: {
@@ -88,11 +254,16 @@
 	            },
 	            itemStyle: {
 		             normal: {
-		                 shadowBlur: 15,
-		                 shadowColor: 'rgba(0, 0, 0, 0.4)'
+		                shadowBlur: 15,
+		                shadowColor: 'rgba(0, 0, 0, 0.4)',
+		                label:{
+		                	formatter:'{d}%',
+				        },
 		             }
 		         },
-
+		        markLine:{
+		        	symbolSize:1000
+		        },
 	            animationType: 'scale',
 	            animationEasing: 'elasticOut',
 	            animationDelay: function (idx) {
@@ -101,12 +272,163 @@
 	        }
 	    ]
 	};
-	pieChart.setOption(option);
-	pieChart1.setOption(option);
-	pieChart2.setOption(option);
+	incidentRankChart.setOption(incidentRankOption);
+
+	// 任务数量
+	var taskNumData = [
+		{
+    		value:20, 
+        	name:'等待审核',
+        	itemStyle: {
+				normal: {
+					color: "#41cefb"
+				}
+	        },
+    	},
+    	{
+    		value:50, 
+        	name:'等待发布',
+        	itemStyle: {
+				normal: {
+					color: "#00aaff"
+				}
+	        },
+    	},
+    	{
+    		value:40, 
+        	name:'正在发布',
+        	itemStyle: {
+				normal: {
+					color: "#1ba5dd"
+				}
+	        },
+    	},
+    	{
+    		value:150, 
+        	name:'发布完成',
+        	itemStyle: {
+				normal: {
+					color: "#4579d8"
+				}
+	        },
+    	}
+	];
+	var yMax = 180;
+	var dataShadow = [];
+	for (var i = 0; i < taskNumData.length; i++) {
+	    dataShadow.push(yMax);
+	}
+	taskNumOption = {
+	    title: {
+	        text: '任务数量',
+	        bottom: '0',
+	        left:'center',
+	        textStyle: { 
+	            color: '#585c65'
+	        }
+	    },
+	    tooltip : {
+	    },
+	    grid: {
+	        left: '8%',
+	        containLabel: true
+	    },
+	    xAxis: {
+	        data: ['等待审核', '等待发布', '正在发布', '发布完成'],
+	        //刻度横线
+	        axisTick: {
+	            show: false
+	        },
+	        //刻度字样式
+	        axisLabel: {
+	            textStyle: {
+	                color: '#7c8491',
+	                fontSize:'14',
+	                align: 'center'
+	            },
+	            interval:0,
+         		// margin: 30,
+				// rotate:-20,
+	        },
+	        //刻度线
+	        axisLine: {
+	            lineStyle: {
+	                color:"#e5e5e5"
+	            }
+	        },
+	        z: 10
+	    },
+	    yAxis: [{
+	        //坐标轴名称
+        	name: '单位：个',
+	        nameGap: 40,
+	        // nameRotate:0,
+	        nameLocation: "middle",
+	        nameTextStyle:{
+	        	color:"#7c8491",
+	        },
+	        //刻度横线
+	        axisTick: {
+	            show: false
+	        },
+	        //刻度字样式
+	        axisLabel: {
+	            textStyle: {
+	                color: '#7c8491',
+	                fontSize:'14'
+	            }
+	        },
+	        //刻度线
+	        axisLine: {
+	            lineStyle: {
+	                color:"#e5e5e5"//刻度线颜色
+	            }
+	        },
+	        //网格线
+	        splitLine:{
+				lineStyle:{
+					color: '#e5e5e5'//网格线颜色
+				}
+			},
+	    },{
+            'type': 'value',
+            'max': 200,
+	        axisLine: {
+	            lineStyle: {
+	                color:"#e5e5e5"
+	            }
+	        }
+        }],
+	    dataZoom: [
+	        {
+	            type: 'inside'
+	        }
+	    ],
+	    series: [
+	        { // For shadow
+	            type: 'bar',
+	            itemStyle: {
+	                normal: {color: '#f7f8fa'}
+	            },
+        		silent: true,
+	            barGap:'-100%',
+	            barCategoryGap:'40%',
+	            data: dataShadow,
+	            animation: false
+	        },
+	        {
+	            type: 'bar',
+	            data: taskNumData
+	        }
+	    ]
+	};
+	taskNumChart.setOption(taskNumOption);
+
+
+
 	window.onresize=function(){
-		pieChart.resize();
-		pieChart1.resize();
-		pieChart2.resize();
+		incidentChart.resize();
+		incidentRankChart.resize();
+		taskNumChart.resize();
 	}
 </script>
