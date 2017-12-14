@@ -31,7 +31,7 @@ a, button { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-tap-highlight
 .gb-marquee a{display: inline-block;line-height: 40px;width: 40%;text-align: center;}
 
 /*图表box*/
-.gb-chart-box{border: 1px solid #d8d8d8;border-radius: 3px;background: #fff;font-size: 0;}
+.gb-chart-box{border: 1px solid #d8d8d8;border-radius: 3px;background: #fff;font-size: 0;padding-bottom: 50px;}
 
 /*gb-incident-count*/
 .gb-incident-count{text-align: center;margin: 30px 0;}
@@ -40,8 +40,10 @@ a, button { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-tap-highlight
 
 /*事件总数*/
 .gb-chart-incident-pie{text-align: center;}
-.gb-chart-item{width: 33.333%;height: 370px;display: inline-block;min-width: 355px;}
+.gb-chart-incident-pie .gb-chart-item{text-align: center;width: 33.333%;}
+.gb-chart-item{height: 370px;display: inline-block;min-width: 355px;width: 100%;}
 .gb-chart-item .gb-chart{width: 100%;height: 100%;}
+.gb-chart-incident-bar{}
 
 /*事件按钮*/
 .gb-incident-btn{margin-bottom: 20px;}
@@ -51,12 +53,11 @@ a, button { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-tap-highlight
 .gb-projection-btn{float: right;}
 .gb-projection-btn:after{content:"";position: absolute;left:10%; bottom: 5px;width: 80%;box-shadow:0px 10px 23px #4579d8;height: 10px;}
 
-/*饼图*/
 
 
 
 
-
-
-
+.gb-bar-formatter{color: red;display: block;font-size: 12px;color: #7c8491;padding: 5px 10px;margin-bottom: 10px;position: relative;/*background: url(../images/taskNumformatter-bg.png);background-size: 100% 100%;*/background: #fff;border: 1px solid #d8d8d8;border-radius: 5px;text-align: center;}
+.gb-bar-formatter em{color: #585d66;font-size: 18px;font-weight: bold;}
+.gb-bar-formatter:after{content: "";position: absolute;width:17px;height: 17px;background: url(../images/icon-taskNumformatter.png);background-size: 100% 100%;bottom: -25px;left: 50%;margin-left: -8.5px;}
 

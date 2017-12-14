@@ -39,15 +39,44 @@
 							<div class="gb-chart gb-bar" id="bar-task-num"></div>
 						</div>
 					</div>
+					<div class="gb-chart-incident-bar">
+						<div class="gb-chart-item">
+							<div class="gb-chart gb-bar" id="bar-incident-type"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<table class="layui-hide" id="test"></table>
 </div>
 <script type="text/javascript">
+layui.use('table', function(){
+  var table = layui.table;
+  
+  table.render({
+    elem: '#test'
+    ,url:'http://www.layui.com/demo/table/user'
+    ,cols: [[
+      {type:'checkbox'}
+      ,{field:'id', width:80, title: 'ID', sort: true}
+      ,{field:'username', width:80, title: '用户名'}
+      ,{field:'sex', width:80, title: '性别', sort: true}
+      ,{field:'city', width:80, title: '城市'}
+      ,{field:'sign', title: '签名', minWidth: 100}
+      ,{field:'experience', width:80, title: '积分', sort: true}
+      ,{field:'score', width:80, title: '评分', sort: true}
+      ,{field:'classify', width:80, title: '职业'}
+      ,{field:'wealth', width:135, title: '财富', sort: true}
+    ]]
+    ,page: true
+  });
+});
     var incidentChart = echarts.init(document.getElementById('pie-incident'));
     var incidentRankChart = echarts.init(document.getElementById('pie-incident-rank'));
     var taskNumChart = echarts.init(document.getElementById('bar-task-num'));
+    var incidentTypeChart = echarts.init(document.getElementById('bar-incident-type'));
 
     // 事件发布
 	incidentOption = {
@@ -76,7 +105,7 @@
 	        bottom: '10%',
 	        itemWidth:'10',
 	        itemHeight:'10',
-	        data:['气象局','水利','国家应急广播平台','应急办'],
+	        // data:['气象局','水利','国家应急广播平台','应急办'],
 	        align:"right"
 	    },
 	    series : [
@@ -168,6 +197,7 @@
 	        }
 	    },
 	    tooltip : {
+	        formatter: "{b} : {c} ({d}%)"
 	    },
 	    visualMap: {
 	        show: false,
@@ -277,42 +307,21 @@
 	// 任务数量
 	var taskNumData = [
 		{
-    		value:20, 
-        	name:'等待审核',
-        	itemStyle: {
-				normal: {
-					color: "#41cefb"
-				}
-	        },
+    		value:20,
+        	itemStyle: {normal: {color: "#41cefb"}},
+    	},{
+    		value:50,
+        	itemStyle: {normal: {color: "#00aaff"}},
     	},
     	{
-    		value:50, 
-        	name:'等待发布',
-        	itemStyle: {
-				normal: {
-					color: "#00aaff"
-				}
-	        },
+    		value:40,
+        	itemStyle: {normal: {color: "#1ba5dd"}},
     	},
     	{
-    		value:40, 
-        	name:'正在发布',
-        	itemStyle: {
-				normal: {
-					color: "#1ba5dd"
-				}
-	        },
-    	},
-    	{
-    		value:150, 
-        	name:'发布完成',
-        	itemStyle: {
-				normal: {
-					color: "#4579d8"
-				}
-	        },
+    		value:150,
+        	itemStyle: {normal: {color: "#4579d8"}},
     	}
-	];
+    ];
 	var yMax = 180;
 	var dataShadow = [];
 	for (var i = 0; i < taskNumData.length; i++) {
@@ -328,6 +337,18 @@
 	        }
 	    },
 	    tooltip : {
+	    	// formatter:"{b}<br />{c}个",
+	    	formatter: '<div class="gb-bar-formatter">{b}<br /><em>{c}</em></div>',
+	    	position: function (point, params, dom, rect, size) {
+			    // 固定在顶部
+			    return {left: rect.x-($(dom).width()-rect.width)/1.5, top: rect.y-$(dom).height()-10};
+			},
+	        backgroundColor: 'rgba(255,255,255,0)',
+	        // borderColor:"#d8d8d8",
+	        // borderWidth:1,
+	        // textStyle:{
+	        // 	color:"#000"
+	        // },
 	    },
 	    grid: {
 	        left: '8%',
@@ -424,11 +445,214 @@
 	};
 	taskNumChart.setOption(taskNumOption);
 
+	// 事件类型统计
+	var incidentTypeData = [
+		{
+    		value:20,
+        	itemStyle: {normal: {color: "#949eff"}},
+    	},{
+    		value:230,
+        	itemStyle: {normal: {color: "#9b7fe2"}},
+    	},{
+    		value:90,
+        	itemStyle: {normal: {color: "#6b65df"}},
+    	},{
+    		value:20,
+        	itemStyle: {normal: {color: "#949eff"}},
+    	},{
+    		value:45,
+        	itemStyle: {normal: {color: "#9b7fe2"}},
+    	},{
+    		value:70,
+        	itemStyle: {normal: {color: "#6b65df"}},
+    	},{
+    		value:80,
+        	itemStyle: {normal: {color: "#949eff"}},
+    	},{
+    		value:90,
+        	itemStyle: {normal: {color: "#9b7fe2"}},
+    	},{
+    		value:90,
+        	itemStyle: {normal: {color: "#6b65df"}},
+    	},{
+    		value:80,
+        	itemStyle: {normal: {color: "#949eff"}},
+    	},{
+    		value:90,
+        	itemStyle: {normal: {color: "#9b7fe2"}},
+    	},{
+    		value:90,
+        	itemStyle: {normal: {color: "#6b65df"}},
+    	},{
+    		value:80,
+        	itemStyle: {normal: {color: "#949eff"}},
+    	},{
+    		value:90,
+        	itemStyle: {normal: {color: "#9b7fe2"}},
+    	},{
+    		value:90,
+        	itemStyle: {normal: {color: "#6b65df"}},
+    	},{
+    		value:80,
+        	itemStyle: {normal: {color: "#949eff"}},
+    	},{
+    		value:90,
+        	itemStyle: {normal: {color: "#9b7fe2"}},
+    	},{
+    		value:90,
+        	itemStyle: {normal: {color: "#6b65df"}},
+    	}
+    ];
+	var yMaxTwo = 300;
+	var dataShadowTwo = [];
+	for (var i = 0; i < incidentTypeData.length; i++) {
+	    dataShadowTwo.push(yMaxTwo);
+	}
+	incidentTypeOption = {
+	    title: {
+	        text: '任务数量',
+	        bottom: '0',
+	        left:'center',
+	        textStyle: { 
+	            color: '#585c65'
+	        }
+	    },
+	    // 区域缩放
+	    dataZoom: [
+	        {
+	            start: 30,
+	            end: 70,
+	            backgroundColor:"#d0daeb",
+	            fillerColor:"#6e6fe6",
+	            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+        		handleSize: '60%',
+        		handleStyle: {
+		            color: '#fff',
+		        }
+	        },
+	        {
+	            type: 'inside',
+	        }
+	    ],
+	    tooltip : {
+	    	// formatter:"{b}<br />{c}个",
+	    	formatter: '<div class="gb-bar-formatter">{b}<br /><em>{c}</em></div>',
+	    	position: function (point, params, dom, rect, size) {
+			    // 固定在顶部
+			    return {left: rect.x-($(dom).width()-rect.width)/1.5, top: rect.y-$(dom).height()-10};
+			},
+	        backgroundColor: 'rgba(255,255,255,0)',
+	        // borderColor:"#d8d8d8",
+	        // borderWidth:1,
+	        // textStyle:{
+	        // 	color:"#000"
+	        // },
+	    },
+	    grid: {
+	        containLabel: true,
+	        left:'5%',
+	        right:'3%'
+	    },
+	    xAxis: {
+	        data: ['金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿', '金属与非金属矿', '金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿',],
+	        //刻度横线
+	        axisTick: {
+	            show: false
+	        },
+	        //刻度字样式
+	        axisLabel: {
+	            textStyle: {
+	                color: '#7c8491',
+	                fontSize:'14',
+	                align: 'center'
+	            },
+	            // interval:0,//x轴是否自动调整显示数量
+	            formatter:function(val){
+	            	var strs = val.split(''); //字符串数组
+                    var str = ''
+                    for (var i = 0, s; s = strs[i++];) { //遍历字符串数组
+                        str += s;
+                        if (!(i % 4)) str += '\n';
+                    }
+                    return str
+	            }
+         		// margin: 30,
+				// rotate:-20,
+	        },
+	        //刻度线
+	        axisLine: {
+	            lineStyle: {
+	                color:"#e5e5e5"
+	            }
+	        },
+	        z: 10
+	    },
+	    yAxis: [{
+	        //坐标轴名称
+        	name: '单位：个',
+	        nameGap: 40,
+	        // nameRotate:0,
+	        nameLocation: "middle",
+	        nameTextStyle:{
+	        	color:"#7c8491",
+	        },
+	        //刻度横线
+	        axisTick: {
+	            show: false
+	        },
+	        //刻度字样式
+	        axisLabel: {
+	            textStyle: {
+	                color: '#7c8491',
+	                fontSize:'14'
+	            }
+	        },
+	        //刻度线
+	        axisLine: {
+	            lineStyle: {
+	                color:"#e5e5e5"//刻度线颜色
+	            }
+	        },
+	        //网格线
+	        splitLine:{
+				lineStyle:{
+					color: '#e5e5e5'//网格线颜色
+				}
+			},
+	    },{
+            'type': 'value',
+            'max': 200,
+	        axisLine: {
+	            lineStyle: {
+	                color:"#e5e5e5"
+	            }
+	        }
+        }],
+	    series: [
+	        { // For shadow
+	            type: 'bar',
+	            itemStyle: {
+	                normal: {color: '#f7f8fa'}
+	            },
+        		silent: true,
+	            barGap:'-100%',
+	            barCategoryGap:'40%',
+	            data: dataShadowTwo,
+	            animation: false
+	        },
+	        {
+	            type: 'bar',
+	            data: incidentTypeData
+	        }
+	    ]
+	};
+	incidentTypeChart.setOption(incidentTypeOption);
 
 
 	window.onresize=function(){
 		incidentChart.resize();
 		incidentRankChart.resize();
 		taskNumChart.resize();
+		incidentTypeChart.resize();
 	}
 </script>
