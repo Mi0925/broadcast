@@ -1,19 +1,22 @@
 $(document).ready(function(){
-	var tx = document.getElementById("tx"), pwd = document.getElementById("pwd");
-	tx.onfocus = function(){
-		if(this.value != "密码") return;
-		this.style.display = "none";
-		pwd.style.display = "";
-		pwd.value = "";
-		pwd.focus();
-	}
-	pwd.onblur = function(){
-		if(this.value != "") {
-			pwd.style.borderColor='#d8d8d8'; 
-		}else{
+	if($('.gb-sign').length != 0){
+		
+		var tx = document.getElementById("tx"), pwd = document.getElementById("pwd");
+		tx.onfocus = function(){
+			if(this.value != "密码") return;
 			this.style.display = "none";
-			tx.style.display = "";
-			tx.value = "密码";
+			pwd.style.display = "";
+			pwd.value = "";
+			pwd.focus();
+		}
+		pwd.onblur = function(){
+			if(this.value != "") {
+				pwd.style.borderColor='#d8d8d8'; 
+			}else{
+				this.style.display = "none";
+				tx.style.display = "";
+				tx.value = "密码";
+			}
 		}
 	}
 

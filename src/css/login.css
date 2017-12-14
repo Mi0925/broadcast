@@ -9,14 +9,13 @@
 .fratit{display:inline-block;width:160px;height:53px;font-size:24px;color:#585d66;text-align: center;line-height:60px;letter-spacing:6px;padding-left:6px;background:#fff;border-top-left-radius:6px;border-top-right-radius:6px;position:absolute;left:50%;bottom:0;margin-left:-80px;}
 .fracent{width:100%;height:468px;padding:70px 104px 60px 104px;position:relative;}
 .fraone,.fratwo{width:100%;height:44px;position:relative;margin-bottom:24px;}
-.icone,.ictwo,.icthr{display:inline-block;width:58px;height:100%;float:left;background:url(../images/icon-user.png) center center no-repeat;position:relative;z-index: 1}
-.ictwo{background:url(../images/icon-password.png) center center no-repeat;}
-.icthr{background:url(../images/icon-code.png) center center no-repeat;}
+.icone,.ictwo,.icthr{display:inline-block;width:58px;height:100%;float:left;position:relative;z-index: 1}
+.icone i,.ictwo i,.icthr i{font-size:22px;position:absolute;top:50%;left:50%;margin-top:-11px;margin-left:-12px;color:#4579d8;}
 .icone:after,.ictwo:after,.icthr:after{content:'';width:1px;height:10px;background:#d9e0e3;position:absolute;top:50%;right:0;margin-top:-5px;}
 .fraone input,.fratwo input,.fracode input{color:#ccc;position:absolute;width:100%;height:100%;top:0;left:0;padding-left:78px;font-size:14px;line-height:42px;border:1px solid #d8d8d8;border-radius:6px;}
 #pwd{/* display: none; */color:#333;border:1px solid #999;}
-.itok,.itwarn{display:inline-block;width:14px;height:14px;background:url(../images/icon-true.png) no-repeat;position:absolute;right:-24px;top:50%;margin-top:-7px;}
-.itwarn{background:url(../images/icon-warn.png) no-repeat;}
+.iconfont.itok,.iconfont.itwarn{display:inline-block;font-size:16px;color:#14ae8f;position:absolute;right:-24px;top:50%;margin-top:-8px;}
+.iconfont.itwarn{color:#ff5b57;font-size:15px;}
 .fraone .itwarn,.fratwo .itok{display: none}
 .frathr{width:100%;zoom:1;}
 .frathr:after{content:'';display: block;height:0;clear:both;visibility: hidden;}
@@ -25,7 +24,8 @@
 .codeimg img{display: block;height:72%;width: 80%;position:absolute;top:14%;left:10%;}
 .loginbtn{width:100%;height:44px;line-height:44px;text-align:center;color:#fff;cursor:pointer;background:#3d6abe;border-radius:6px;margin-top:30px;border:0;font-size:16px;letter-spacing: 10px;padding-left:10px;}
 .loginbtn:hover{background:#325aa5;}
-.forget{color:#878e9a;padding-left:20px;width:76px;background:url(../images/icon-forget.png) left center no-repeat;position:absolute;bottom:60px;left:50%;margin-left:-38px;}
+.forget{color:#878e9a;width:80px;font-size:14px;position:absolute;bottom:60px;left:50%;margin-left:-38px;padding-left:20px;}
+.forget i{position:absolute;top:2px;left:0;}
 .forget:hover{color:#444;}
 .copyright{color:#797c7f;width:100%;text-align: center;line-height:56px;position:absolute;left:0;bottom:0;z-index: 1}
 /* @media screen and (max-width:1400px){

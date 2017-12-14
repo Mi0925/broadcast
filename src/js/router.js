@@ -21,11 +21,17 @@ Router.prototype.init = function() {
 }
 window.Router = new Router();
 window.Router.init();
+/*首页*/
 Router.route("/index", function() {
   gbMainContent('components/index.html', RoundaboutSet);
 });
+/*实时监控*/
 Router.route('/monitoring', function() {
   gbMainContent('components/monitoring.html', RoundaboutSet);
+});
+/*任务消息*/
+Router.route('/taskMsg', function() {
+  gbMainContent('components/taskMsg.html', RoundaboutSet);
 });
 Router.route('/round2', function() {
   gbMainContent('components/round2.html', RoundaboutSet);

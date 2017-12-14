@@ -1,1 +1,33 @@
-.gb-table{}
+.gb-table .taskmsg{width:100%;height:100%;padding:40px 40px 0px 40px;}
+.gb-table .tkrange{width:100%;zoom:1;}
+.gb-table .tkrange:after,.gb-table .tksearch:after,.gb-table .msgtype:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
+.gb-table .tklay{float:left;}
+.gb-table .talay-word{color:#585d66;margin-right:16px;float:left;line-height:40px;}
+.gb-table .talay-word i{font-size:13px;margin-right:8px;}
+.gb-table .tklay .layui-input-inline{position:relative;margin-right:20px;float:left;}
+.gb-table .tklay .layui-input{width:402px;height:40px;border-radius:5px;border:1px solid #d8d8d8;padding-left:20px;font-size:14px;color:#333;line-height:38px;box-shadow:0px -10px 10px #f4f4f4 inset;}
+.gb-table .tklay .layui-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color:#ccc;}
+.gb-table .tklay .layui-input:-moz-placeholder, textarea:-moz-placeholder{color:#ccc;}
+.gb-table .tklay .layui-input::-moz-placeholder, textarea::-moz-placeholder{color:#ccc;}
+.gb-table .tklay .layui-input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#ccc;}
+#layui-laydate1{margin-top:0;border-radius:5px;}
+#layui-laydate1 .layui-this{background-color: #4579d8!important;}
+#layui-laydate1 .layui-laydate-content td.laydate-selected{background-color:#93b6f5}
+#layui-laydate1 .laydate-selected:hover{background-color:#93b6f5!important}
+#layui-laydate1 .laydate-selected.laydate-day-next,#layui-laydate1  .laydate-selected.laydate-day-prev{background-color: #f8f8f8!important}
+#layui-laydate1 .layui-laydate-content .laydate-day-next,#layui-laydate1 .layui-laydate-content .laydate-day-prev{color: #d2d2d2!important;}
+#layui-laydate1 .laydate-footer-btns span{color:#7c8491;width:50px;border-radius:3px;text-align: center;margin-left:6px;}
+#layui-laydate1 .laydate-disabled,#layui-laydate1 .laydate-disabled:hover{background:#4579d8!important;border-color:#4579d8;color:#fff!important;}
+#layui-laydate1 .laydate-btns-confirm{background:#3c6dc7;color:#fff!important;border-color:#3c6dc7;}
+.gb-table .tocho{text-align:center;width:24px;height:24px;display: inline-block;border:1px solid #d8d8d8;border-radius:3px;position:absolute;top:50%;margin-top:-12px;right:20px;cursor: pointer;box-shadow:0px -10px 10px #f4f4f4 inset;font-size:14px;color:#585d66;line-height:24px;}
+.gb-table .newtk-btn{width:160px;height:40px;line-height:40px;color:#fff;font-size:14px;background:#4579d8;border-radius:5px;border:0;cursor: pointer;}
+.gb-table .newtk-btn:hover{background:#3c6dc7;}
+.gb-table .tksearch{float:right;zoom:1;border:1px solid #d8d8d8;border-radius:5px;overflow: hidden;}
+.gb-table .tksearch input{float:left;width:390px;height:40px;line-height:40px;padding-left:20px;font-size:14px;color:#ccc;border:0;}
+.gb-table .tksrh-btn{float:left;width:60px;height:40px;border-left:1px solid #d8d8d8;background:#fff;box-shadow:0px -20px 10px #f4f4f4 inset;padding:9px 20px;cursor: pointer;}
+.gb-table .tksrh-btn i{font-size:18px;color:#585d66;}
+.gb-table .tksrh-btn:hover i{color:#000;}
+.gb-table .msgtype{width:100%;margin:24px 0px 10px 0px;zoom:1;float:left;}
+.gb-table .msgtype li{float:left;width:62px;height:28px;border:1px solid #d8d8d8;border-radius:5px;text-align: center;line-height:26px;color:#585d66;cursor: pointer;margin-right:6px;font-size:12px;}
+.gb-table .msgtype .msgact{border-color:#4579d8;color:#fff;background:#4579d8;}
+.gb-table .layui-table-view{margin:0;}
