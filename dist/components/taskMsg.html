@@ -19,12 +19,125 @@
 				<li>新编辑</li>
 			</ul>
 		</div>
-		<table class="layui-hide" id="tsktab"></table>
+		<div class="thetab">
+			<ul class="scrlist"><li class="scract">发布部门</li><li>国家应急广播中心</li><li>杭州市西湖区应急广播中心</li><li>浙江省气象局</li><li>浙江省应急办</li><li>浙江省地震局</li></ul>
+			<table class="layui-hide" id="tsktab" lay-filter="demo"></table>
+			<div class="theche">
+				<div class="tocheck">
+					<input type="checkbox" name="checkall" id="checkall" />
+					<label for="checkall">全选</label>
+				</div>
+				<span class="chedel"><i class="iconfont icon-shanchu"></i>删除</span>
+			</div>
+		</div>
+		
+		
+		<!-- <script type="text/html" id="checkone">
+			<div class="checkone">
+				<input type="checkbox" name="checkone" id="oneche" />
+				<label for="checkone"></label>
+			</div>
+		</script> -->
+		<script type="text/html" id="rank">
+			<span class='rankimg'><img src='../src/images/rank-red.png'/></span>
+			<!-- <span class='rankimg'><img src='../src/images/rank-orange.png'/></span>
+			<span class='rankimg'><img src='../src/images/rank-yellow.png'/></span>
+			<span class='rankimg'><img src='../src/images/rank-green.png'/></span>
+			<span class='rankimg'><img src='../src/images/rank-blue.png'/></span> -->
+		</script>
+		<script type="text/html" id="opera">
+			<span class='operbtn' lay-event="operate"><i class='iconfont icon-yulan'></i>预览</span>
+		</script>
+		<script type="text/html" id="edit">
+			<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>
+		</script>
+		<script type="text/html" id="issue">
+			<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>
+			<!-- <a href='javascript:void(0);' class='issue isstop'><i class='iconfont icon-zanting'></i>停发</a> -->
+			<!-- <a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a> -->
+		</script>
+		<script type="text/html" id="check">
+			<span class='check chretry'><i class='iconfont icon-zhongbo'></i>重发</span>
+			<!-- <span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span> -->
+			<!-- <span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span> -->
+		</script>
+		<script type="text/html" id="del">
+			<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>
+			<!-- <span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span> -->
+		</script>
+	</div><!-- ,{field:'edit', width:80, title: ''}
+					,{field:'issue', width:120, title: ''}
+					,{field:'check', width:110, title: ''}
+					,{field:'del', width:100, title: ''} -->
+</div>
+<div class="popwindow"></div>
+<div class="preview">
+	<p class="poptit">预览</p>
+	<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+	<div class="prevcont">
+		<ul class="prevlist">
+			<li>
+				<p class="prevword">文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息...</p>
+				<input type="button" value="预览" class="tosee" />
+			</li>
+			<li>
+				<p class="prevideo">视频.mp4</p>
+				<input type="button" value="预览" class="tosee" />
+			</li>
+			<li>
+				<p class="prevideo">文本.txt</p>
+				<input type="button" value="预览" class="tosee" />
+			</li>
+		</ul>
+		<input type="button" value="全部预览" class="seeall" />
 	</div>
 </div>
+<div class="review">
+	<p class="poptit">是否通过审核？</p>
+	<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+	<div class="revcont">
+		<p class="revword">通过的任务消息将进入发布队列，您没有权限进行停止等操作。</p>
+		<div class="revbtn">
+			<input type="button" value="否" class="revno"/>
+			<input type="button" value="是" class="revyes"/>
+		</div>
+	</div>
+</div>
+<div class="fillin">
+	<p class="poptit">请填写未通过原因！</p>
+	<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+	<div class="fillcnt">
+		<script type="text/plain" id="myEditor" style="width:100%;height:164px;"></script>
+		<div class="revbtn">
+			<input type="button" value="取消" class="rev-cancel"/>
+			<input type="button" value="确定" class="revyes"/>
+		</div>
+	</div>
+</div>
+<div class="unreason">
+	<p class="poptit">未通过原因</p>
+	<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+	<div class="uncont">
+		<p class="unword">未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因</p>
+		<input type="button" value="确定" class="un-confirm" />
+	</div>
+</div>
+<div class="choose">
+	<p class="choword">确定删除此任务消息吗？</p>
+	<div class="chobtn">
+		<input type="button" value="删除" class="cho-delete" />
+		<input type="button" value="取消" class="cho-cancel" />
+	</div>
+	<span class="triangle"><em></em></span>
+</div>
+
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		 var ue = UE.getEditor('myEditor');
+
+
 		layui.use('laydate', function(){
 			var laydate = layui.laydate;
 			laydate.render({
@@ -39,30 +152,6 @@
 			$('.msgtype li').removeClass('msgact');
 			$(this).addClass('msgact');
 		})
-
-		layui.use('table', function(){
-			var table = layui.table;
-
-			table.render({
-				elem: '#tsktab'
-				,url:'./data/table.json'
-				,height: 'full-318'
-				,cols: [[
-					{type:'numbers'}
-      				,{type: 'checkbox'}
-					,{field:'id', width:80, title: 'ID', sort: true}
-					,{field:'username', width:80, title: '用户名'}
-					,{field:'sex', width:80, title: '性别', sort: true}
-					,{field:'city', width:80, title: '城市'}
-					,{field:'sign', title: '签名', minWidth: 100}
-					,{field:'experience', width:80, title: '积分', sort: true}
-					,{field:'score', width:80, title: '评分', sort: true}
-					,{field:'classify', width:80, title: '职业'}
-					,{field:'wealth', width:135, title: '财富', sort: true}
-					]]
-				,page: true
-			});
-		});
 
 		if($(window).width() > 1500){
 			$('.tklay').css('width','auto');
@@ -82,6 +171,182 @@
 				$('.tklay').css('width','100%');
 				$('.tksearch').css({'margin':'13px 0px'});
 				$('.msgtype').css({'width':'auto','margin':'19px 0px 19px 0px'});
+			}
+		})
+
+		layui.use('table', function(){
+			var table = layui.table;
+
+			table.render({
+				elem: '#tsktab'
+				,url:'http://www.layui.com/demo/table/user/'
+				,height: 'full-318'
+				,cols: [[
+					//{type:'numbers'},
+      				{type: 'checkbox'}
+					,{field:'id', width:80, title: '序号', sort: true, align:'center'}
+					,{field:'username', width:120, title: '状态监测', sort: true}
+					,{field:'sex', width:100, title: '消息等级', sort: true, align:'center',toolbar: '#rank'}
+					,{field:'city',minWidth:250, title: '任务消息名称'}
+					,{field:'sign', title: '发布部门<i class="iconfont icon-arrow-bottom"></i>', width: 186}
+					,{field:'experience', width:100, title: '负责人', sort: true}
+					,{field:'score', minWidth:180, title: '发布时间', sort: true}
+					,{field:'classify', width:100, title: '操作',toolbar: '#opera'}
+					,{field:'edit', width:80, title: '',toolbar: '#edit'}
+					,{field:'issue', width:120, title: '',toolbar: '#issue'}
+					,{field:'check', width:110, title: '',toolbar: '#check'}
+					,{field:'del', width:100, title: '',toolbar: '#del'}
+					//,{field:'wealth', width:135, title: '财富', sort: true}
+					/*,{field:'sernumb', width:80, title: '序号', sort: true, align:'center'}
+					,{field:'condmon', width:120, title: '状态监测', sort: true}
+					,{field:'rank', width:100, title: '消息等级', sort: true, align:'center'}
+					,{field:'msgname', minWidth:250, title: '任务消息名称'}
+					,{field:'pubdep', title: '发布部门<i class="iconfont icon-arrow-bottom"></i>', width: 186}
+					,{field:'principal', width:100, title: '负责人', sort: true}
+					,{field:'reletime', minWidth:180, title: '发布时间', sort: true}
+					,{field:'operate', width:100, title: '操作',toolbar: '#opera'}
+					,{field:'edit', width:80, title: ''}
+					,{field:'issue', width:120, title: ''}
+					,{field:'check', width:110, title: ''}
+					,{field:'del', width:100, title: ''}*/
+					]]
+
+				,page: true
+			});
+
+			$('.issue').removeClass('iscont').addClass('isstop');
+
+			table.on('checkbox(demo)', function(obj){
+			    console.log(obj)
+			});
+			table.on('tool(demo)', function(obj){
+			    var data = obj.data;
+			    if(obj.event === 'operate'){
+			      //layer.msg('ID：'+ data.id + ' 的查看操作');
+			      $('.popwindow').show();
+			      $('.preview').show();
+			    } else if(obj.event === 'audit'){
+			      /*layer.confirm('真的删除行么', function(index){
+			        obj.del();
+			        layer.close(index);
+			      });*/
+			      $('.popwindow').show();
+			      $('.review').show();
+			    } else if(obj.event === 'nopass'){
+			      /*layer.confirm('真的删除行么', function(index){
+			        obj.del();
+			        layer.close(index);
+			      });*/
+			      $('.popwindow').show();
+			      $('.unreason').css('z-index','1');
+			    } else if(obj.event === 'issue'){
+			    	console.log(1);
+			      $(this).removeClass('iscont').addClass('isstop');
+			    }/* else if(obj.event === 'edit'){
+			      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+			    }*/
+			});
+
+			$('th .laytable-cell-1-pubdep').click(function(){
+				if($('.scrlist').is(':hidden')){
+					$('.scrlist').show();
+					//console.log($('.scrlist').position().left);
+					//console.log(parseInt($('.scrlist').css('left')));
+					var taW = parseInt($('.thetab').css('width'));
+					var scrW = parseInt($('.scrlist').css('width'));
+					var scrP = parseInt($('.scrlist').position().left);
+					var scLeft = parseInt($('.scrlist').css('left'));
+					if(scLeft < 0){
+						$('.scrlist').css('left',0)
+					}
+					$('th .laytable-cell-1-pubdep').find('i').removeClass('icon-arrow-bottom').addClass('icon-arrow-top');
+				}else{
+					$('.scrlist').hide();
+					$('th .laytable-cell-1-pubdep').find('i').removeClass('icon-arrow-top').addClass('icon-arrow-bottom');
+				}
+			})
+
+			$('.scrlist li').click(function(){
+				$('.scrlist li').removeClass('scract');
+				$(this).addClass('scract');
+				$('.scrlist').hide();
+				$('th .laytable-cell-1-pubdep').find('i').removeClass('icon-arrow-top').addClass('icon-arrow-bottom');
+			})
+			
+			$('.gb-table .layui-table-body').on('scroll',function(){
+				//console.log($(this).scrollLeft())
+				//console.log(parseInt($('.thetab').css('width')));
+				var taW = parseInt($('.thetab').css('width'));
+				var scrW = parseInt($('.scrlist').css('width'));
+				var scrP = parseInt($('.scrlist').position().left);
+				var scLeft = parseInt($('.scrlist').css('left'));
+				
+				if(taW < scrW+scLeft){
+					$('.scrlist').css('left',taW - scrW);
+					console.log(1);
+				}else if(taW >= scrW+scLeft){
+					$('.scrlist').css('left',610 - $('.gb-table .layui-table-body').scrollLeft());
+				}
+			})
+			
+		});
+
+		var uncH = parseInt($('.uncont').css('height'));
+		$('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});
+
+		$('.popwindow').click(function(){
+			$(this).hide();
+			$('.preview').hide();
+			$('.review').hide();
+			$('.fillin').hide();
+			$('.unreason').hide();
+		})
+		$('.popclose').click(function(){
+			$('.popwindow').hide();
+			
+			$(this).parent().hide();
+			$('.unreason').css({'z-index':'-1','display':'block'});
+		})
+		$('.revno').click(function(){
+			$('.review').hide();
+			$('.fillin').show();
+		})
+		$('.rev-cancel').click(function(){
+			$('.popwindow').hide();
+			$(this).parents('.fillin').hide();
+		})
+		$('.revyes').click(function(){
+			$('.popwindow').hide();
+			$(this).parents('.review').hide();
+			$(this).parents('.fillin').hide();
+		})
+		$('.un-confirm').click(function(){
+			$('.popwindow').hide();
+			$(this).parents('.unreason').hide();
+		})
+
+		
+		var taW = parseInt($('.thetab').css('width'));
+		var scrW = parseInt($('.scrlist').css('width'));
+		var scrP = parseInt($('.scrlist').position().left);
+		var scLeft = parseInt($('.scrlist').css('left'));
+	
+		if(taW < scrW+scLeft){
+			$('.scrlist').css('left',taW - scrW);
+		}else if(taW >= scrW+scLeft){
+			$('.scrlist').css('left',610 - $('.gb-table .layui-table-body').scrollLeft());
+		}
+
+		$(window).resize(function(){
+			var taW = parseInt($('.thetab').css('width'));
+			var scrW = parseInt($('.scrlist').css('width'));
+			var scrP = parseInt($('.scrlist').position().left);
+			var scLeft = parseInt($('.scrlist').css('left'));
+			
+			if(taW < scrW+scLeft){
+				$('.scrlist').css('left',taW - scrW);
+			}else if(taW >= scrW+scLeft){
+				$('.scrlist').css('left',610 - $('.gb-table .layui-table-body').scrollLeft());
 			}
 		})
 	})
