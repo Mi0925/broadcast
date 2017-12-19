@@ -48,31 +48,8 @@
 			</div>
 		</div>
 	</div>
-
-	<table class="layui-hide" id="test"></table>
 </div>
 <script type="text/javascript">
-layui.use('table', function(){
-  var table = layui.table;
-  
-  table.render({
-    elem: '#test'
-    ,url:'http://www.layui.com/demo/table/user'
-    ,cols: [[
-      {type:'checkbox'}
-      ,{field:'id', width:80, title: 'ID', sort: true}
-      ,{field:'username', width:80, title: '用户名'}
-      ,{field:'sex', width:80, title: '性别', sort: true}
-      ,{field:'city', width:80, title: '城市'}
-      ,{field:'sign', title: '签名', minWidth: 100}
-      ,{field:'experience', width:80, title: '积分', sort: true}
-      ,{field:'score', width:80, title: '评分', sort: true}
-      ,{field:'classify', width:80, title: '职业'}
-      ,{field:'wealth', width:135, title: '财富', sort: true}
-    ]]
-    ,page: true
-  });
-});
     var incidentChart = echarts.init(document.getElementById('pie-incident'));
     var incidentRankChart = echarts.init(document.getElementById('pie-incident-rank'));
     var taskNumChart = echarts.init(document.getElementById('bar-task-num'));
@@ -446,6 +423,7 @@ layui.use('table', function(){
 	taskNumChart.setOption(taskNumOption);
 
 	// 事件类型统计
+	// 事件类型统计数据
 	var incidentTypeData = [
 		{
     		value:20,
@@ -503,11 +481,28 @@ layui.use('table', function(){
         	itemStyle: {normal: {color: "#6b65df"}},
     	}
     ];
+    // x轴数据
+    var incidentTypexAxis=[
+    	"金属与非金属矿金属与非金属矿1","金属与非金属矿金属与非金属矿2","金属与非金属矿金属与非金属矿3","金属与非金属矿金属与非金属矿4","金属与非金属矿金属与非金属矿5","金属与非金属矿金属与非金属矿6","金属与非金属矿金属与非金属矿7","金属与非金属矿金属与非金属矿8","金属与非金属矿金属与非金属矿9","金属与非金属矿金属与非金属矿10","金属与非金属矿金属与非金属矿11","金属与非金属矿金属与非金属矿12","金属与非金属矿金属与非金属矿13","金属与非金属矿金属与非金属矿14"
+    ];
+    // 对x轴数据换行处理，4个字换行
+	var incidentTypexAxisData=[]
+    for (var i = 0; i < incidentTypexAxis.length; i++) {
+    	var strs = incidentTypexAxis[i].split(''); //字符串数组
+        var str = ''
+        for (var j = 0, s; s = strs[j++];) { //遍历字符串数组
+            str += s;
+            if (!(j % 4)) str += '\n';
+        }
+        incidentTypexAxisData.push(str)
+    }
+
 	var yMaxTwo = 300;
 	var dataShadowTwo = [];
 	for (var i = 0; i < incidentTypeData.length; i++) {
 	    dataShadowTwo.push(yMaxTwo);
 	}
+
 	incidentTypeOption = {
 	    title: {
 	        text: '任务数量',
@@ -522,24 +517,25 @@ layui.use('table', function(){
 	        {
 	            start: 30,
 	            end: 70,
+	        	bottom: '8%',
 	            backgroundColor:"#d0daeb",
 	            fillerColor:"#6e6fe6",
 	            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
         		handleSize: '60%',
         		handleStyle: {
 		            color: '#fff',
-		        }
+		        },
+				showDataShadow:false,
 	        },
 	        {
 	            type: 'inside',
 	        }
 	    ],
 	    tooltip : {
-	    	// formatter:"{b}<br />{c}个",
 	    	formatter: '<div class="gb-bar-formatter">{b}<br /><em>{c}</em></div>',
 	    	position: function (point, params, dom, rect, size) {
 			    // 固定在顶部
-			    return {left: rect.x-($(dom).width()-rect.width)/1.5, top: rect.y-$(dom).height()-10};
+			    return {left: rect.x-($(dom).width()/2)+(rect.width/2.2), top: rect.y-$(dom).height()-10};
 			},
 	        backgroundColor: 'rgba(255,255,255,0)',
 	        // borderColor:"#d8d8d8",
@@ -551,10 +547,12 @@ layui.use('table', function(){
 	    grid: {
 	        containLabel: true,
 	        left:'5%',
-	        right:'3%'
+	        right:'3%',
+	        bottom: '18%',
 	    },
 	    xAxis: {
-	        data: ['金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿', '金属与非金属矿', '金属与非金属矿', '金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿','金属与非金属矿金属与非金属矿', '金属与非金属矿金属与非金属矿',],
+	        // data: ['金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿'],
+	        data:incidentTypexAxisData,
 	        //刻度横线
 	        axisTick: {
 	            show: false
@@ -567,15 +565,15 @@ layui.use('table', function(){
 	                align: 'center'
 	            },
 	            // interval:0,//x轴是否自动调整显示数量
-	            formatter:function(val){
-	            	var strs = val.split(''); //字符串数组
-                    var str = ''
-                    for (var i = 0, s; s = strs[i++];) { //遍历字符串数组
-                        str += s;
-                        if (!(i % 4)) str += '\n';
-                    }
-                    return str
-	            }
+	            // formatter:function(val){
+	            // 	var strs = val.split(''); //字符串数组
+             //        var str = ''
+             //        for (var i = 0, s; s = strs[i++];) { //遍历字符串数组
+             //            str += s;
+             //            if (!(i % 4)) str += '\n';
+             //        }
+             //        return str
+	            // }
          		// margin: 30,
 				// rotate:-20,
 	        },
