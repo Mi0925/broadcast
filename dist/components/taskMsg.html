@@ -1,0 +1,524 @@
+<div class="gb-table">
+	<div class="taskmsg">
+		<div class="tkrange">
+			<div class="tklay">
+				<span class="talay-word"><i class="iconfont icon-rili"></i>发布时间</span>
+				<div class="layui-input-inline">
+			        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
+			        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
+		    	</div>
+		    	<input type="button" class="newtk-btn" value="新建任务消息" />
+			</div>
+			<div class="tksearch">
+				<input type="text" value="请输入任务消息名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
+				<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
+			</div>
+			<ul class="msgtype">
+				<li class="msgact">已查阅</li>
+				<li>未查阅</li>
+				<li>新编辑</li>
+			</ul>
+		</div>
+		<div class="thetab">
+			<div class="tablecont">
+			    <table id="table-main" class="display" cellspacing="0" width="100%">
+			        <thead>
+				        <tr>
+				        	<th></th>
+				            <th style="width:100px">序号</th>
+				            <th>状态监测</th>
+				            <th>消息等级</th>
+				            <th>任务消息名称</th>
+				            <th>发布部门</th>
+				            <th>负责人</th>
+				            <th>发布时间</th>
+				            <th>操作</th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				        </tr>
+			        </thead>
+			        <tfoot>
+				        <tr>
+							<th></th>
+				            <th style="width:100px"></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				        </tr>
+			        </tfoot>
+			        
+			    </table>
+			    <div class="showslider">
+			        <button class="closediv">关闭</button>
+			    </div>
+			</div>
+			<div class="theche">
+				<div class="tocheck">
+					<input type="checkbox" name="checkall" id="checkAll" />
+					<label for="checkAll">全选</label>
+				</div>
+				<span class="chedel"><i class="iconfont icon-shanchu"></i>删除</span>
+			</div>
+		</div>
+		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
+	</div>
+	
+
+	<div class="popwindow"></div>
+	<div class="preview">
+		<p class="poptit">预览</p>
+		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="prevcont">
+			<ul class="prevlist">
+				<li>
+					<p class="prevword">文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息...</p>
+					<input type="button" value="预览" class="tosee" />
+				</li>
+				<li>
+					<p class="prevideo">视频.mp4</p>
+					<input type="button" value="预览" class="tosee" />
+				</li>
+				<li>
+					<p class="prevideo">文本.txt</p>
+					<input type="button" value="预览" class="tosee" />
+				</li>
+			</ul>
+			<input type="button" value="全部预览" class="seeall" />
+		</div>
+	</div>
+	<div class="review">
+		<p class="poptit">是否通过审核？</p>
+		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="revcont">
+			<p class="revword">通过的任务消息将进入发布队列，您没有权限进行停止等操作。</p>
+			<div class="revbtn">
+				<input type="button" value="否" class="revno"/>
+				<input type="button" value="是" class="revyes"/>
+			</div>
+		</div>
+	</div>
+	<div class="fillin">
+		<p class="poptit">请填写未通过原因！</p>
+		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="fillcnt">
+			<script type="text/plain" id="myEditor" style="width:100%;height:164px;"></script>
+			<div class="revbtn">
+				<input type="button" value="取消" class="rev-cancel"/>
+				<input type="button" value="确定" class="revyes"/>
+			</div>
+		</div>
+	</div>
+	<div class="unreason">
+		<p class="poptit">未通过原因</p>
+		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="uncont">
+			<p class="unword">未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因</p>
+			<input type="button" value="确定" class="un-confirm" />
+		</div>
+	</div>
+	<div class="choose">
+		<p class="choword">确定删除此任务消息吗？</p>
+		<div class="chobtn">
+			<input type="button" value="删除" class="chopri cho-delete" />
+			<input type="button" value="取消" class="cho-cancel" />
+		</div>
+		<span class="triangle"><em></em></span>
+	</div>
+</div>
+	
+
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var ue = UE.getEditor('myEditor');//富文本框
+
+		/*calendar*/
+		layui.use('laydate', function(){
+			var laydate = layui.laydate;
+			laydate.render({
+			    elem: '#daterg',
+			    eventElem: '#tochobtn',
+			    trigger: 'click',
+			    range: true
+			});
+		})
+
+		/*type*/
+		$('.msgtype li').click(function(){
+			$('.msgtype li').removeClass('msgact');
+			$(this).addClass('msgact');
+		})
+		/*date & search & type . self-adaption*/
+		if($(window).width() > 1500){
+			$('.tklay').css('width','auto');
+			$('.tksearch').css({'margin':'0px'});
+			$('.msgtype').css({'width':'100%','margin':'26px 0px 13px 0px'});
+		}else{
+			$('.tklay').css('width','100%');
+			$('.tksearch').css({'margin':'13px 0px'});
+			$('.msgtype').css({'width':'auto','margin':'19px 0px 19px 0px'});
+		}
+		$(window).resize(function(){
+			if($(window).width() > 1500){
+				$('.tklay').css('width','auto');
+				$('.tksearch').css({'margin':'0px'});
+				$('.msgtype').css({'width':'100%','margin':'26px 0px 13px 0px'});
+			}else{
+				$('.tklay').css('width','100%');
+				$('.tksearch').css({'margin':'13px 0px'});
+				$('.msgtype').css({'width':'auto','margin':'19px 0px 19px 0px'});
+			}
+		})
+
+		/*jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+		    "html-percent-pre": function (a) {
+		    	//console.log($(a).attr('vel'));
+		        var x = $(a).attr('vel');
+		        return parseFloat(x);
+		    },
+
+		    "html-percent-asc": function (a, b) {                //正序排序引用方法
+		        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+		    },
+
+		    "html-percent-desc": function (a, b) {                //倒序排序引用方法
+		        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+		    }
+		});*/
+
+		/*table*/
+		$(function () {
+
+           var table = $('#table-main').DataTable({
+               "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+               "dom": 'tiprl',//自定义显示项
+               //"dom":'<"domab"f>',
+              // "scrollY": "94%",//dt高度
+               // "scrollX": true
+               "lengthMenu":[10, 20, 30, 40, 50, "All"],//每页显示条数设置
+               "lengthChange": true,//是否允许用户自定义显示数量
+               "bPaginate": true, //翻页功能
+               "bFilter": true, //列筛序功能
+               "searching": true,//本地搜索
+               "ordering": true, //排序功能
+               "order": [ 1, "asc" ],//desc降序
+               "Info": true,//页脚信息
+               //"autoWidth": true,//自动宽度
+               //"responsive": true,
+               /*"aoColumnDefs": [
+                    { "sType": "html-percent", "aTargets": [3] },    //指定列号使用自定义排序
+                ],*/
+               "pagingType":   "full_numbers",
+               "processing": true,
+		       "ajax": "data/table.json",
+		       "columns": [
+		            { "data": "checkbox" },
+		            { "data": "sernumb" },
+		            { "data": "condmon" },
+		            { "data": "rank" },
+		            { "data": "msgname" },
+		            { "data": "pubdep" },
+		            { "data": "principal" },
+		            { "data": "reletime" },
+		            { "data": "operate" },
+		            { "data": "edit" },
+		            { "data": "issue" },
+		            { "data": "check" },
+		            { "data": "del" }
+		       ],
+               "oLanguage": {//国际语言转化
+                   "oAria": {
+                       "sSortAscending": " - click/return to sort ascending",
+                       "sSortDescending": " - click/return to sort descending"
+                   },
+                   "sLengthMenu": " _MENU_ 条",
+                   "sZeroRecords": "对不起，查询不到任何相关数据",
+                   "sEmptyTable": "未有相关数据",
+                   "sLoadingRecords": "正在加载数据-请等待...",
+                   "sInfo": "共 _TOTAL_ 条 ",//当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。
+                   "sInfoEmpty": "当前显示0到0条，共0条记录",
+                   "sInfoFiltered": "（数据库中共为 _MAX_ 条记录）",
+                   "sProcessing": "正在加载数据...",
+                   "sSearch": "模糊查询：",
+                   "sUrl": "",
+                   //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
+                   "oPaginate": {
+                       "sFirst": "首页",
+                       "sPrevious": " < ",
+                       "sNext": " > ",
+                       "sLast": " 尾页 "
+                   }
+               },
+               "columnDefs": [
+               		{
+	                   orderable: false,
+
+	                   targets: 0 },
+                    {
+	                   orderable: false,
+
+	                   targets: 5 },
+                   {
+	                   orderable: false,
+
+	                   targets: 8 },
+                	{
+	                   orderable: false,
+
+	                   targets: 9 },
+                	{
+	                   orderable: false,
+
+	                   targets: 10 },
+                	{
+	                   orderable: false,
+
+	                   targets: 11 },
+                	{
+	                   orderable: false,
+
+	                   targets: 12 }
+               ],//第一列与第二列禁止排序
+               initComplete: function () {//列筛选
+                   var api = this.api();
+                   api.columns().indexes().flatten().each(function (i) {
+                       if (i == 5) {//删除第一列与第二列的筛选框
+                           var column = api.column(i);
+                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
+                           var select = $('<select><option value="">发布部门</option></select>')
+                                   .appendTo($(column.header()))
+                                   .on('click', function (evt) {
+                                       evt.stopPropagation();
+                                       var val = $.fn.dataTable.util.escapeRegex(
+                                               $(this).val()
+                                       );
+                                       column
+                                               .search(val ? '^' + val + '$' : '', true, false)
+                                               .draw();
+                                   });
+                           column.data().unique().sort().each(function (d, j) {
+                               function delHtmlTag(str) {
+                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
+                               }
+ 
+                               d = delHtmlTag(d)
+                               select.append('<option value="' + d + '">' + d + '</option>')
+                               $span.append(select)
+                           });
+ 
+                       }
+                   });
+ 
+               }
+			})
+			
+			
+			
+			
+			$(window).resize(function(){
+				$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
+			})
+			$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
+			
+ 			
+			
+			
+			
+			
+			//自定义显示数量
+			var tabot = $('<div class="botdiv"></div>');	
+			$('.tablecont').append(tabot);
+			$('.dataTables_info').appendTo($('.botdiv'));
+			$('.dataTables_length').appendTo($('.botdiv'));
+			$('.dataTables_paginate').appendTo($('.botdiv'));
+ 
+           //自定义搜索
+           $('.dsearch').on('keyup click', function () {
+               var tsval = $(".dsearch").val()
+               table.search(tsval, false, false).draw();
+           });
+ 
+ 			//checkbox全选
+           $("#checkAll").on("click", function () {
+               if ($(this).prop("checked") === true) {
+                   $("input[name='checkone']").prop("checked", $(this).prop("checked"));
+                   $('#table-main tbody tr').addClass('selected');
+               } else {
+                   $("input[name='checkone']").prop("checked", false);
+                   $('#table-main tbody tr').removeClass('selected');
+               }
+           });
+ 
+ 
+           //删除选中行
+           $('#table-main tbody').on('click', 'tr input[name="checkone"]', function () {
+               var $tr = $(this).parents('tr');
+               $tr.toggleClass('selected');
+               var $tmp = $('[name=checkone]:checkbox');
+               $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
+ 
+           });
+ 
+           $('.chedel').click(function () {
+               table.rows('tr.selected').remove().draw(false);
+               $('#checkAll').attr('checked',false);
+           });
+           $('.cho-delete').click(function(){
+				table.row('.trdel').remove().draw(false);
+				$(this).parents('.choose').hide();
+		   })
+ 			
+		
+			$('.dataTables_scrollBody').on('scroll',function(){
+				$(myDiv).hide();
+			})
+		
+       })
+ 
+
+		
+			
+		/*popwindow*/
+		var uncH = parseInt($('.uncont').css('height'));
+		$('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});
+
+		$(document).on('click','.operbtn',function(){
+			$('.popwindow').show();
+			$('.preview').show();
+		})
+
+		$(document).on('click','.audit',function(){
+			$('.popwindow').show();
+			$('.review').show();
+		})
+		$(document).on('click','.notpass',function(){
+			$('.popwindow').show();
+			$('.unreason').css({'z-index':'1','opacity':1,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"});
+		})
+
+		$('.popwindow').click(function(){
+			$(this).hide();
+			$('.preview').hide();
+			$('.review').hide();
+			$('.fillin').hide();
+			$('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+		})
+		$('.popclose').click(function(){
+			$('.popwindow').hide();
+			
+			$(this).parent().hide();
+			$('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+		})
+		$('.revno').click(function(){
+			$('.review').hide();
+			$('.fillin').show();
+		})
+		$('.rev-cancel').click(function(){
+			$('.popwindow').hide();
+			$(this).parents('.fillin').hide();
+		})
+		$('.revyes').click(function(){
+			$('.popwindow').hide();
+			$(this).parents('.review').hide();
+			$(this).parents('.fillin').hide();
+		})
+		$('.un-confirm').click(function(){
+			$('.popwindow').hide();
+			$(this).parents('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+		})
+
+
+		
+		//停发、续发、重发、删除
+		var myDiv = $(".choose");
+		$(function() {
+			$(document).on('click','.isstop',function(event) {
+		        showDiv();
+				$('.choword').html('确定停发此任务消息吗？');
+				$('.chopri').val('停发');
+				$('.chopri').removeClass('cho-delete').removeClass('cho-again').removeClass('cho-continue').addClass('cho-stop');
+				$(this).parents('tr').addClass('trstop');
+		        $(document).one("click",
+		        function() { 
+		            $(myDiv).hide();
+		        });
+		        event.stopPropagation(); 
+		    });
+			$(document).on('click','.iscont',function(event) {
+		        showDiv();
+			    $('.choword').html('确定续发此任务消息吗？');
+				$('.chopri').val('续发');
+				$('.chopri').removeClass('cho-delete').removeClass('cho-again').removeClass('cho-stop').addClass('cho-continue');
+				$(this).parents('tr').addClass('trcont');
+		        $(document).one("click",
+		        function() { 
+		            $(myDiv).hide();
+		        });
+		        event.stopPropagation();
+		    });
+			$(document).on('click','.chretry',function(event) {
+		        showDiv();
+		        $('.choword').html('确定重发此任务消息吗？');
+				$('.chopri').val('重发');
+				$('.chopri').removeClass('cho-delete').removeClass('cho-continue').removeClass('cho-stop').addClass('cho-again');
+				$(this).parents('tr').addClass('traga');
+		        $(document).one("click",
+		        function() { 
+		            $(myDiv).hide();
+		        });
+		        event.stopPropagation();
+		    });
+		    $(document).on('click','.delete',function(event) {
+		        showDiv();
+		        $('.choword').html('确定删除此任务消息吗？');
+				$('.chopri').val('删除');
+				$('.chopri').removeClass('cho-again').removeClass('cho-continue').removeClass('cho-stop').addClass('cho-delete');
+				$(this).parents('tr').addClass('trdel');
+		        //$(myDiv).toggle();
+		        $(document).one("click",
+		        function() { 
+		            $(myDiv).hide();
+		        });
+		        event.stopPropagation();
+		    });
+		    $(myDiv).click(function(event) {
+		        event.stopPropagation(); 
+		    });
+		});
+		function showDiv() {
+			var x = event.clientX - event.offsetX;
+			var y = event.clientY - event.offsetY;
+			$(myDiv).css({'display':'block','top':y-80,'left':x-110});
+		}
+
+		$('.cho-stop').click(function(){
+			$(this).parents('.choose').hide();
+		})
+		
+		$('.cho-continue').click(function(){
+			$(this).parents('.choose').hide();
+		})
+		
+		$('.cho-again').click(function(){
+			$(this).parents('.choose').hide();
+		})
+		$('.cho-cancel').click(function(){
+			console.log('chocancel');
+			$(this).parents('.choose').hide();
+			$('tr').removeClass('trstop').removeClass('trcont').removeClass('traga').removeClass('trdel');
+		})/**/
+		
+		/*popwindow*/
+	})
+</script>
