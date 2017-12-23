@@ -7,7 +7,6 @@
 .roundlist li.roundabout-in-focus{cursor:default;}
 .roundlist li a{display:block;width:100%;}
 .roundlist li img{width:100%;display: block;}
-.botword{width:100%;font-size:14px;color:#9da1a5;text-align: center;position:absolute;left:0px;bottom:30px;}
 @media screen and (max-width:1365px){
 	.rodtit{width:300px;}
 }
