@@ -7,7 +7,7 @@
 			        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
 			        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
 		    	</div>
-		    	<input type="button" class="newtk-btn" value="新建任务消息" />
+		    	<a href="#/newTaskMsg" class="newtk-btn" url="components/newTaskMsg.html"><!-- <a href="components/newTaskMsg.html" class="newtk-btn"> -->新建任务消息</a>
 			</div>
 			<div class="tksearch">
 				<input type="text" value="请输入任务消息名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
@@ -181,7 +181,7 @@
 			}
 		})
 
-		/*jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+		jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 		    "html-percent-pre": function (a) {
 		    	//console.log($(a).attr('vel'));
 		        var x = $(a).attr('vel');
@@ -195,7 +195,7 @@
 		    "html-percent-desc": function (a, b) {                //倒序排序引用方法
 		        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
 		    }
-		});*/
+		});
 
 		/*table*/
 		$(function () {
@@ -216,9 +216,9 @@
                "Info": true,//页脚信息
                //"autoWidth": true,//自动宽度
                //"responsive": true,
-               /*"aoColumnDefs": [
+               "aoColumnDefs": [
                     { "sType": "html-percent", "aTargets": [3] },    //指定列号使用自定义排序
-                ],*/
+                ],
                "pagingType":   "full_numbers",
                "processing": true,
 		       "ajax": "data/table.json",

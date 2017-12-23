@@ -29,7 +29,7 @@
 /* daterange end */
 
 .gb-table .tocho{text-align:center;width:24px;height:24px;display: inline-block;border:1px solid #d8d8d8;border-radius:3px;position:absolute;top:50%;margin-top:-12px;right:20px;cursor: pointer;box-shadow:0px -10px 10px #f4f4f4 inset;font-size:14px;color:#585d66;line-height:24px;}
-.gb-table .newtk-btn{width:160px;height:40px;line-height:40px;color:#fff;font-size:14px;background:#4579d8;border-radius:5px;border:0;cursor: pointer;}
+.gb-table .newtk-btn{text-align:center;width:160px;height:40px;line-height:40px;color:#fff;font-size:14px;background:#4579d8;border-radius:5px;border:0;cursor: pointer;display: inline-block;}
 .gb-table .newtk-btn:hover{background:#3c6dc7;}
 .gb-table .tksearch{float:right;zoom:1;border:1px solid #d8d8d8;border-radius:5px;overflow: hidden;}
 .gb-table .tksearch input{float:left;width:390px;height:40px;line-height:40px;padding-left:20px;font-size:14px;color:#ccc;border:0;}
@@ -114,6 +114,7 @@
 .gb-table .chedel:hover{color:#4579d8;} 
 .gb-table .warnword{width:100%;text-align: center;line-height:40px;font-size:14px;color:#7c8491;display: none}
 .gb-table table.dataTable.display tbody tr td:nth-child(4){text-align: center}
+.gb-table table.dataTable tbody td.dataTables_empty{width:100%;text-align: center}
 /* table end */
 
 
