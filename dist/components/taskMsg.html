@@ -211,14 +211,12 @@
                "bPaginate": true, //翻页功能
                "bFilter": true, //列筛序功能
                "searching": true,//本地搜索
-               "ordering": true, //排序功能
+               //"ordering": true, //排序功能
                "order": [ 1, "asc" ],//desc降序
                "Info": true,//页脚信息
                //"autoWidth": true,//自动宽度
                //"responsive": true,
-               "aoColumnDefs": [
-                    { "sType": "html-percent", "aTargets": [3] },    //指定列号使用自定义排序
-                ],
+               
                "pagingType":   "full_numbers",
                "processing": true,
 		       "ajax": "data/table.json",
@@ -289,7 +287,10 @@
 	                   orderable: false,
 
 	                   targets: 12 }
+                    ,{ "sType": "html-percent", 
+                       "aTargets": [3] }   //指定列号使用自定义排序
                ],//第一列与第二列禁止排序
+              
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
@@ -322,8 +323,6 @@
  
                }
 			})
-			
-			
 			
 			
 			$(window).resize(function(){
