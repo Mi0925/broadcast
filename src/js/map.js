@@ -26,7 +26,6 @@ function addDistrict(districtName,bmap,covering) {
 }
 
 drawBoundary=function(bmap) {
-	console.log(bmap)
     //包含所有区域的点数组
     var pointArray = [];
 
@@ -114,13 +113,25 @@ function mouseout(evt) {
 
 // 地图省市县切换
 $(".gb-main-item").on("click",".j-zoom-province",function(){
-	bmap.setZoom(8)
+	if($(".gb-all-incident").hasClass('cur')){
+		allbmap.setZoom(8)
+	}else{
+		unitybmap.setZoom(8)
+	}
 })
 $(".gb-main-item").on("click",".j-zoom-city",function(){
-	bmap.setZoom(10)
+	if($(".gb-all-incident").hasClass('cur')){
+		allbmap.setZoom(10)
+	}else{
+		unitybmap.setZoom(10)
+	}
 })
 $(".gb-main-item").on("click",".j-zoom-county",function(){
-	bmap.setZoom(12)
+	if($(".gb-all-incident").hasClass('cur')){
+		allbmap.setZoom(12)
+	}else{
+		unitybmap.setZoom(12)
+	}
 })
 $(".gb-main-item").on("click",".gb-map-zoom span",function(){
 	$(this).addClass("cur").siblings("span").removeClass("cur")
@@ -131,11 +142,9 @@ $(".gb-main-item").on("click",".j-legend-succeed",function(){
 	legendCover("已覆盖",$(this))
 })
 $(".gb-main-item").on("click",".j-legend-process",function(){
-	var overlays=bmap.getOverlays();
 	legendCover("未完全覆盖",$(this))
 })
 $(".gb-main-item").on("click",".j-legend-failure",function(){
-	var overlays=bmap.getOverlays();
 	legendCover("未覆盖",$(this))
 })
 $(".gb-main-item").on("click",".gb-map-legend span",function(){
@@ -153,7 +162,7 @@ function legendCover(cover,$this) {
 				}else if(cover=="未覆盖"){
 					legendFailure.push(overlays[i])
 				}
-				unitybmap(overlays[i]);
+				unitybmap.removeOverlay(overlays[i]);
 			}
 		}
 	}else{

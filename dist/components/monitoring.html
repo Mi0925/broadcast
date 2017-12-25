@@ -15,9 +15,9 @@
 	<div class="gb-main">
 		<!-- 事件按钮组 -->
 		<div class="gb-incident-btn">
-			<button class="layui-btn layui-btn-normal gb-all-incident">发布效果（全事件）</button>
-			<button class="layui-btn layui-btn-primary gb-unity-incident">执行效果（单一事件）</button>
-			<button class="layui-btn layui-btn-normal gb-projection-btn">投屏全事件</button>
+			<button class="layui-btn layui-btn-normal gb-all-incident cur">发布效果（全事件）</button>
+			<button class="layui-btn layui-btn-normal gb-unity-incident">执行效果（单一事件）</button>
+			<button class="layui-btn layui-btn-normal gb-projection-btn cur">投屏全事件</button>
 		</div>
 		<!-- 事件总数 -->
 		<div class="gb-incident-box">
@@ -103,13 +103,22 @@
 	<p class="gb-copyright">© 2017-2018 浙江省应急广播平台</p>
 </div>
 <script type="text/javascript">
+var boolunity=true;//控制全事件和单一事件只执行一次
+var boolall=true;//控制全事件和单一事件只执行一次
+var incidentChart=null;//全事件-事件发布图表
+var incidentRankChart=null;//全事件-事件级别发布图表
+var taskNumChart=null;//全事件-任务数量图表
+var incidentTypeChart=null;//全事件-事件类型统计数据图表
+var allMapChart=null;//全事件-地图覆盖图表-迁徙图
+
+var populationChart=null;//单一事件-覆盖人口图表
+var districtChart=null;//单一事件-覆盖区域图表
+
 /************************** 执行效果（单一事件） *******************************************/
-var boolunity=true;
-var boolall=true;
 function unityIncident() {
 	if(boolunity){
 		// 覆盖人口
-	    var populationChart = echarts.init(document.getElementById('line-population'));
+	    populationChart = echarts.init(document.getElementById('line-population'));
 		populationOption = {
 		    title: {
 		        text: '时间',
@@ -267,7 +276,7 @@ function unityIncident() {
 		populationChart.setOption(populationOption);
 
 		// 覆盖区域
-		var districtChart = echarts.init(document.getElementById('line-district'));
+		districtChart = echarts.init(document.getElementById('line-district'));
 		districtOption = {
 		    title: {
 		        text: '时间',
@@ -450,10 +459,10 @@ function unityIncident() {
 /************************** 发布效果（全事件） *******************************************/
 function addIncident() {
 	if(boolall){
-	    var incidentChart = echarts.init(document.getElementById('pie-incident'));
-	    var incidentRankChart = echarts.init(document.getElementById('pie-incident-rank'));
-	    var taskNumChart = echarts.init(document.getElementById('bar-task-num'));
-	    var incidentTypeChart = echarts.init(document.getElementById('bar-incident-type'));
+	    incidentChart = echarts.init(document.getElementById('pie-incident'));
+	    incidentRankChart = echarts.init(document.getElementById('pie-incident-rank'));
+	    taskNumChart = echarts.init(document.getElementById('bar-task-num'));
+	    incidentTypeChart = echarts.init(document.getElementById('bar-incident-type'));
 
 	    // 事件发布
 		incidentOption = {
@@ -887,7 +896,7 @@ function addIncident() {
 		}
 		incidentTypeOption = {
 		    title: {
-		        text: '任务数量',
+		        text: '事件类型统计数据',
 		        bottom: '0',
 		        left:'center',
 		        textStyle: { 
@@ -1031,7 +1040,7 @@ function addIncident() {
 
 		// 地图
 		// bmap.clearOverlays();
-		var mapChart = echarts.init(document.getElementById('all-map'));
+		allMapChart = echarts.init(document.getElementById('all-map'));
 		var geoCoordMap = {
 			'杭州': [120.166085,30.279006],
 		    '宁波': [121.558386,29.884993],
@@ -1469,14 +1478,14 @@ function addIncident() {
 		    },
 		    series: mapSeries
 		};
-		mapChart.setOption(mapOption);
+		allMapChart.setOption(mapOption);
 	    // 获取百度地图对象
-	    allbmap = mapChart.getModel().getComponent('bmap').getBMap();
+	    allbmap = allMapChart.getModel().getComponent('bmap').getBMap();
 		allbmap.centerAndZoom(new BMap.Point(120.166085,30.279006), 8);
 	    blist = [];
 	    districtLoading = 0;
 		setTimeout(function () {
-		// 地图划分区域地点
+			// 地图划分区域地点
 		    addDistrict("杭州",allbmap);
 		    addDistrict("宁波",allbmap);
 		    addDistrict("嘉兴",allbmap);
@@ -1491,26 +1500,41 @@ addIncident()
 
 
 
-
+// 全事件和单一事件切换
 $(".gb-main-item").on("click",".gb-unity-incident",function(){
-	
+	$(this).addClass("cur").siblings(".gb-all-incident").removeClass("cur");
 	$(".gb-all-incident-item").hide()
 	$(".gb-unity-incident-item").show()
 	unityIncident();
 })
 $(".gb-main-item").on("click",".gb-all-incident",function(){
-	$(".gb-all-incident-item").show()
-	$(".gb-unity-incident-item").hide()
-})
-// 图表随屏幕大小自适应
-$(".gb-packUp-leftNav").click(function(){
+	$(this).addClass("cur").siblings(".gb-unity-incident").removeClass("cur");
+	$(".gb-all-incident-item").show();
+	$(".gb-unity-incident-item").hide();
 	setTimeout(function(){
-		populationChart.resize();
-		districtChart.resize();
+		// 全事件
 		incidentChart.resize();
 		incidentRankChart.resize();
 		taskNumChart.resize();
 		incidentTypeChart.resize();
+		allMapChart.resize()
+	},400)
+})
+// 图表随屏幕大小自适应
+$(".gb-packUp-leftNav").click(function(){
+	setTimeout(function(){
+		if($(".gb-all-incident").hasClass('cur')){
+			// 全事件
+			incidentChart.resize();
+			incidentRankChart.resize();
+			taskNumChart.resize();
+			incidentTypeChart.resize();
+			allMapChart.resize()
+		}else{
+			// 单一事件
+			populationChart.resize();
+			districtChart.resize();
+		}
 	},400)
 })
 	
