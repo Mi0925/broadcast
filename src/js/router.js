@@ -33,6 +33,10 @@ Router.route('/monitoring', function() {
 Router.route('/taskMsg', function() {
   gbMainContent('components/taskMsg.html', RoundaboutSet);
 });
+/*新建任务消息*/
+Router.route('/newTaskMsg', function() {
+  gbMainContent('components/newTaskMsg.html', RoundaboutSet);
+});
 Router.route('/round2', function() {
   gbMainContent('components/round2.html', RoundaboutSet);
 });
