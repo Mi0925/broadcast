@@ -112,42 +112,42 @@ function mouseout(evt) {
 
 
 // 地图省市县切换
-$(".gb-main-item").on("click",".j-zoom-province",function(){
+$("body").on("click",".j-zoom-province",function(){
 	if($(".gb-all-incident").hasClass('cur')){
 		allbmap.setZoom(8)
 	}else{
 		unitybmap.setZoom(8)
 	}
 })
-$(".gb-main-item").on("click",".j-zoom-city",function(){
+$("body").on("click",".j-zoom-city",function(){
 	if($(".gb-all-incident").hasClass('cur')){
 		allbmap.setZoom(10)
 	}else{
 		unitybmap.setZoom(10)
 	}
 })
-$(".gb-main-item").on("click",".j-zoom-county",function(){
+$("body").on("click",".j-zoom-county",function(){
 	if($(".gb-all-incident").hasClass('cur')){
 		allbmap.setZoom(12)
 	}else{
 		unitybmap.setZoom(12)
 	}
 })
-$(".gb-main-item").on("click",".gb-map-zoom span",function(){
+$("body").on("click",".gb-map-zoom span",function(){
 	$(this).addClass("cur").siblings("span").removeClass("cur")
 })
 
 // 单一事件地图覆盖情况图列
-$(".gb-main-item").on("click",".j-legend-succeed",function(){
+$("body").on("click",".j-legend-succeed",function(){
 	legendCover("已覆盖",$(this))
 })
-$(".gb-main-item").on("click",".j-legend-process",function(){
+$("body").on("click",".j-legend-process",function(){
 	legendCover("未完全覆盖",$(this))
 })
-$(".gb-main-item").on("click",".j-legend-failure",function(){
+$("body").on("click",".j-legend-failure",function(){
 	legendCover("未覆盖",$(this))
 })
-$(".gb-main-item").on("click",".gb-map-legend span",function(){
+$("body").on("click",".gb-map-legend span",function(){
 	$(this).toggleClass("cur")
 })
 function legendCover(cover,$this) {
