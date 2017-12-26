@@ -12,8 +12,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='javascript:void(0);' class='issue isstop'><i class='iconfont icon-zanting'></i>停发</a>",
 		"check": "",
-		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>",
-		"score": 57
+		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_2' /><label for='check_2'></label></div>",
 		"sernumb": "<span class='tabnumb'>2</span>",
@@ -27,8 +26,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>",
 		"check": "<span class='check chretry'><i class='iconfont icon-zhongbo'></i>重发</span>",
-		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>",
-		"score": 27
+		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_3' /><label for='check_3'></label></div>",
 		"sernumb": "<span class='tabnumb'>3</span>",
@@ -42,8 +40,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "",
-		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>",
-		"score": 31
+		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_4' /><label for='check_4'></label></div>",
 		"sernumb": "<span class='tabnumb'>4</span>",
@@ -57,8 +54,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "",
 		"check": "",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 68
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_5' /><label for='check_5'></label></div>",
 		"sernumb": "<span class='tabnumb'>5</span>",
@@ -72,8 +68,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "",
 		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 6
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_6' /><label for='check_6'></label></div>",
 		"sernumb": "<span class='tabnumb'>6</span>",
@@ -87,8 +82,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 87
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_7' /><label for='check_7'></label></div>",
 		"sernumb": "<span class='tabnumb'>7</span>",
@@ -102,8 +96,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>",
 		"check": "<span class='check chretry'><i class='iconfont icon-zhongbo'></i>重发</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 34
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_8' /><label for='check_8'></label></div>",
 		"sernumb": "<span class='tabnumb'>8</span>",
@@ -117,8 +110,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 28
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_9' /><label for='check_9'></label></div>",
 		"sernumb": "<span class='tabnumb'>9</span>",
@@ -132,8 +124,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "",
 		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 14
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_10' /><label for='check_10'></label></div>",
 		"sernumb": "<span class='tabnumb'>10</span>",
@@ -147,8 +138,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "",
 		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 75
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_11' /><label for='check_11'></label></div>",
 		"sernumb": "<span class='tabnumb'>11</span>",
@@ -162,8 +152,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='javascript:void(0);' class='issue isstop'><i class='iconfont icon-zanting'></i>停发</a>",
 		"check": "",
-		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>",
-		"score": 57
+		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_12' /><label for='check_12'></label></div>",
 		"sernumb": "<span class='tabnumb'>12</span>",
@@ -177,8 +166,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>",
 		"check": "<span class='check chretry'><i class='iconfont icon-zhongbo'></i>重发</span>",
-		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>",
-		"score": 27
+		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_13' /><label for='check_13'></label></div>",
 		"sernumb": "<span class='tabnumb'>13</span>",
@@ -192,8 +180,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "",
-		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>",
-		"score": 31
+		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_14' /><label for='check_14'></label></div>",
 		"sernumb": "<span class='tabnumb'>14</span>",
@@ -207,8 +194,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "",
 		"check": "",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 68
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_15' /><label for='check_15'></label></div>",
 		"sernumb": "<span class='tabnumb'>15</span>",
@@ -222,8 +208,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "",
 		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 6
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_16' /><label for='check_16'></label></div>",
 		"sernumb": "<span class='tabnumb'>16</span>",
@@ -237,8 +222,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 87
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_17' /><label for='check_17'></label></div>",
 		"sernumb": "<span class='tabnumb'>17</span>",
@@ -252,8 +236,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>",
 		"check": "<span class='check chretry'><i class='iconfont icon-zhongbo'></i>重发</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 34
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_18' /><label for='check_18'></label></div>",
 		"sernumb": "<span class='tabnumb'>18</span>",
@@ -267,8 +250,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 28
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_19' /><label for='check_19'></label></div>",
 		"sernumb": "<span class='tabnumb'>19</span>",
@@ -282,8 +264,7 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "",
 		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 14
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
 		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_20' /><label for='check_20'></label></div>",
 		"sernumb": "<span class='tabnumb'>20</span>",
@@ -297,7 +278,6 @@
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
 		"issue": "",
 		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>",
-		"score": 75
+		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}]
 }

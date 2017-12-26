@@ -58,9 +58,6 @@
 			        </tfoot>
 			        
 			    </table>
-			    <div class="showslider">
-			        <button class="closediv">关闭</button>
-			    </div>
 			</div>
 			<div class="theche">
 				<div class="tocheck">
@@ -159,28 +156,7 @@
 			$('.msgtype li').removeClass('msgact');
 			$(this).addClass('msgact');
 		})
-		/*date & search & type . self-adaption*/
-		if($(window).width() > 1500){
-			$('.tklay').css('width','auto');
-			$('.tksearch').css({'margin':'0px'});
-			$('.msgtype').css({'width':'100%','margin':'26px 0px 13px 0px'});
-		}else{
-			$('.tklay').css('width','100%');
-			$('.tksearch').css({'margin':'13px 0px'});
-			$('.msgtype').css({'width':'auto','margin':'19px 0px 19px 0px'});
-		}
-		$(window).resize(function(){
-			if($(window).width() > 1500){
-				$('.tklay').css('width','auto');
-				$('.tksearch').css({'margin':'0px'});
-				$('.msgtype').css({'width':'100%','margin':'26px 0px 13px 0px'});
-			}else{
-				$('.tklay').css('width','100%');
-				$('.tksearch').css({'margin':'13px 0px'});
-				$('.msgtype').css({'width':'auto','margin':'19px 0px 19px 0px'});
-			}
-		})
-
+		
 		jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 		    "html-percent-pre": function (a) {
 		    	//console.log($(a).attr('vel'));
@@ -261,6 +237,10 @@
 	                   orderable: false,
 
 	                   targets: 0 },
+                   {
+	                   orderable: false,
+
+	                   targets: 4 },
                     {
 	                   orderable: false,
 
@@ -373,8 +353,11 @@
 		   })
  			
 		
-			$('.dataTables_scrollBody').on('scroll',function(){
-				$(myDiv).hide();
+			$('#table-main_wrapper').on('scroll',function(){
+				if($('.choose').is(':visible')){
+					$(myDiv).hide();
+					$('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
+				}
 			})
 		
        })
@@ -439,11 +422,12 @@
 		        showDiv();
 				$('.choword').html('确定停发此任务消息吗？');
 				$('.chopri').val('停发');
-				$('.chopri').removeClass('cho-delete').removeClass('cho-again').removeClass('cho-continue').addClass('cho-stop');
+				$('.chopri').removeClass('cho-delete cho-again cho-continue').addClass('cho-stop');
 				$(this).parents('tr').addClass('trstop');
 		        $(document).one("click",
 		        function() { 
 		            $(myDiv).hide();
+		            $('table.dataTable tbody tr').removeClass('trstop');
 		        });
 		        event.stopPropagation(); 
 		    });
@@ -451,11 +435,12 @@
 		        showDiv();
 			    $('.choword').html('确定续发此任务消息吗？');
 				$('.chopri').val('续发');
-				$('.chopri').removeClass('cho-delete').removeClass('cho-again').removeClass('cho-stop').addClass('cho-continue');
+				$('.chopri').removeClass('cho-delete cho-again cho-stop').addClass('cho-continue');
 				$(this).parents('tr').addClass('trcont');
 		        $(document).one("click",
 		        function() { 
 		            $(myDiv).hide();
+		            $('table.dataTable tbody tr').removeClass('trcont');
 		        });
 		        event.stopPropagation();
 		    });
@@ -463,11 +448,12 @@
 		        showDiv();
 		        $('.choword').html('确定重发此任务消息吗？');
 				$('.chopri').val('重发');
-				$('.chopri').removeClass('cho-delete').removeClass('cho-continue').removeClass('cho-stop').addClass('cho-again');
+				$('.chopri').removeClass('cho-delete cho-continue cho-stop').addClass('cho-again');
 				$(this).parents('tr').addClass('traga');
 		        $(document).one("click",
 		        function() { 
 		            $(myDiv).hide();
+		            $('table.dataTable tbody tr').removeClass('traga');
 		        });
 		        event.stopPropagation();
 		    });
@@ -475,12 +461,13 @@
 		        showDiv();
 		        $('.choword').html('确定删除此任务消息吗？');
 				$('.chopri').val('删除');
-				$('.chopri').removeClass('cho-again').removeClass('cho-continue').removeClass('cho-stop').addClass('cho-delete');
+				$('.chopri').removeClass('cho-again cho-continue cho-stop').addClass('cho-delete');
 				$(this).parents('tr').addClass('trdel');
 		        //$(myDiv).toggle();
 		        $(document).one("click",
 		        function() { 
 		            $(myDiv).hide();
+		            $('table.dataTable tbody tr').removeClass('trdel');
 		        });
 		        event.stopPropagation();
 		    });
@@ -506,9 +493,9 @@
 			$(this).parents('.choose').hide();
 		})
 		$('.cho-cancel').click(function(){
-			console.log('chocancel');
+			//console.log('chocancel');
 			$(this).parents('.choose').hide();
-			$('tr').removeClass('trstop').removeClass('trcont').removeClass('traga').removeClass('trdel');
+			$('tr').removeClass('trstop trcont traga trdel');
 		})
 		
 		/*popwindow*/

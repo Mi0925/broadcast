@@ -1,136 +1,105 @@
 <div class="gb-form">
 	<div class="newform">
 		<p class="newform-tit"><i class="iconfont icon-iconfontxinjianwenjian"></i>新建任务消息</p>
-		<div class="form-oneitem">
-			<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
+		<form class="layui-form" action=""><div class="form-oneitem">
+			<div class="fortit">
+				<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
+			</div>
 			<div class="oneitem-cont">
 				<p class="oneitem-tit"><small>*</small>任务消息</p>
 				<div class="oneimp">
-					<input type="text"  id="impcontent" class="imptxt" onchange="this.value=this.value.substring(0, 20)" onkeydown="this.value=this.value.substring(0, 20)" onkeyup="this.value=this.value.substring(0, 20)"/>
+					<input type="text"  id="impcontent" class="imptxt" maxlength="20"/>
 					<span class="oneimp-count"><span class="countnew">0</span>/20</span>
 				</div>
 			</div>
 		</div>
 		<div class="form-oneitem">
-			<p class="oneitem-tit"><span class="onenumb">02</span><small>*</small>调度方案</p>
+			<div class="fortit">
+				<p class="oneitem-tit"><span class="onenumb">02</span><small>*</small>调度方案</p>
+			</div>
 			<div class="oneitem-cont">
 				<p class="oneitem-tit">选择调度方案</p>
-				<form class="layui-form" action="">
-					<div class="layui-inline">
-				      <label class="layui-form-label">搜索选择框</label>
-				      <div class="layui-input-inline">
-				        <select name="modules" lay-verify="required" lay-search="">
-				          <option value="">请选择调度方案</option>
-				          <option value="1">Scheme one</option>
-				          <option value="2">Scheme two</option>
-				          <option value="3">Scheme three</option>
-				          <option value="4">Scheme four</option>
-				          <option value="5">Scheme five</option>
-				          <option value="6">Scheme six</option>
-				          <!-- <option value="7">laydate</option>
-				          <option value="8">laypage</option>
-				          <option value="9">flow</option>
-				          <option value="10">util</option>
-				          <option value="11">code</option>
-				          <option value="12">tree</option>
-				          <option value="13">layedit</option>
-				          <option value="14">nav</option>
-				          <option value="15">tab</option>
-				          <option value="16">table</option>
-				          <option value="17">select</option>
-				          <option value="18">checkbox</option>
-				          <option value="19">switch</option>
-				          <option value="20">radio</option> -->
-				        </select>
-				      </div>
-			      </div>
-		      </form>
-		      <p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>选择调度方案后，后面的信息将自动匹配为预设的事件信息并且不能修改</p>
+				
+					<div class="layui-input-inline">
+						<select name="dispatch"> <!-- lay-verify="required" lay-search="" -->
+							<option value="">请选择调度方案</option>
+							<option value="1">Scheme one</option>
+							<option value="2">Scheme two</option>
+							<option value="3">Scheme three</option>
+							<option value="4">Scheme four</option>
+							<option value="5">Scheme five</option>
+							<option value="6">Scheme six</option>
+						</select>
+					</div>
+		    	<!-- </form> -->
+		    	<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>选择调度方案后，后面的信息将自动匹配为预设的事件信息并且不能修改</p>
 			</div>
 		</div>
 		<div class="form-oneitem">
-			<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>事件类型</p>
+			<div class="fortit">
+				<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>事件类型</p>
+			</div>
 			<div class="oneitem-cont">
 				<p class="oneitem-tit"><small>*</small>事件类型</p>
-				<form class="layui-form" action="">
-					<div class="layui-inline">
-				      <label class="layui-form-label">搜索选择框</label>
-				      <div class="layui-input-inline">
-				        <select name="modules" lay-verify="required" lay-search="">
-				          <option value="">请选择事件类型</option>
-				          <option value="1">Event type one</option>
-				          <option value="2">Event type two</option>
-				          <option value="3">Event type three</option>
-				          <option value="4">Event type four</option>
-				          <option value="5">Event type five</option>
-				          <option value="6">Event type six</option>
-				          <option value="7">Event type seven</option>
-				          <!-- <option value="8">laypage</option>
-				          <option value="9">flow</option>
-				          <option value="10">util</option>
-				          <option value="11">code</option>
-				          <option value="12">tree</option>
-				          <option value="13">layedit</option>
-				          <option value="14">nav</option>
-				          <option value="15">tab</option>
-				          <option value="16">table</option>
-				          <option value="17">select</option>
-				          <option value="18">checkbox</option>
-				          <option value="19">switch</option>
-				          <option value="20">radio</option> -->
+				<!-- <form class="layui-form" action=""> -->
+					<div class="layui-input-inline">
+				        <select name="type"><!--  lay-verify="required" lay-search="" -->
+							<option value="">请选择事件类型</option>
+							<option value="1">Event type one</option>
+							<option value="2">Event type two</option>
+							<option value="3">Event type three</option>
+							<option value="4">Event type four</option>
+							<option value="5">Event type five</option>
+							<option value="6">Event type six</option>
+							<option value="7">Event type seven</option>
 				        </select>
-				      </div>
-			      </div>
-		      </form>
+				    </div>
+		    	
 			</div>
 		</div>
 		<div class="form-oneitem">
-			<p class="oneitem-tit"><span class="onenumb">04</span><small>*</small>消息级别</p>
+			<div class="fortit">
+				<p class="oneitem-tit"><span class="onenumb">04</span><small>*</small>消息级别</p>
+			</div>
 			<div class="oneitem-cont">
 				<p class="oneitem-tit"><small>*</small>消息级别</p>
 				<ul class="msgrank">
 					<li>
-						<div class="tochoose">
-							<input type="radio" name="checkone" />
-							<label for="checkone"><img src="../src/images/rank-red.png">红色</label>
-						</div>
+						<input type="radio" name="checkone" id="radone" />
+						<label for="radone"><img src="../src/images/rank-red.png">红色</label>
 					</li>
 					<li>
-						<div class="tochoose">
-							<input type="radio" name="checkone" />
-							<label for="checkone"><img src="../src/images/rank-orange.png">橙色</label>
-						</div>
+						<input type="radio" name="checkone" id="radtwo" />
+						<label for="radtwo"><img src="../src/images/rank-orange.png">橙色</label>
 					</li>
 					<li>
-						<div class="tochoose">
-							<input type="radio" name="checkone" />
-							<label for="checkone"><img src="../src/images/rank-yellow.png">黄色</label>
-						</div>
+						<input type="radio" name="checkone" id="radthr" />
+						<label for="radthr"><img src="../src/images/rank-yellow.png">黄色</label>
 					</li>
 					<li>
-						<div class="tochoose">
-							<input type="radio" name="checkone" />
-							<label for="checkone"><img src="../src/images/rank-blue.png">蓝色</label>
-						</div>
+						<input type="radio" name="checkone" id="radfou" />
+						<label for="radfou"><img src="../src/images/rank-blue.png">蓝色</label>
 					</li>
 					<li>
-						<div class="tochoose">
-							<input type="radio" name="checkone" />
-							<label for="checkone"><img src="../src/images/rank-green.png">绿色</label>
-						</div>
+						<input type="radio" name="checkone" id="radfiv" />
+						<label for="radfiv"><img src="../src/images/rank-green.png">绿色</label>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<div class="form-oneitem">
-			<p class="oneitem-tit"><span class="onenumb">05</span><small>*</small>消息内容</p>
+			<div class="fortit">
+				<p class="oneitem-tit"><span class="onenumb">05</span><small>*</small>消息内容</p>
+			</div>
 			<div class="oneitem-cont">
+				<p class="oneitem-tit"><small>*</small>消息内容</p>
 				<div class="msgcont">
-					<p class="oneitem-tit"><small>*</small>消息内容</p>
-					<div class="oneimp">
-						<textarea id="imparea" class="imparea" onchange="this.value=this.value.substring(0, 20)" onkeydown="this.value=this.value.substring(0, 20)" onkeyup="this.value=this.value.substring(0, 20)" onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#828a91'}">请输入消息文本</textarea>
-						<span class="area-count"><span class="countnew">0</span>/20</span>
+					<div class="txtimp">
+						<textarea id="imparea" class="imparea" maxlength="200" onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#828a91'}">请输入消息文本</textarea>
+						<span class="area-count"><span class="countnew">0</span>/200</span>
 					</div>
+					<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>文本内容可以直接转换成音频</p>
+					<input type="button" value="转成音频" class="toswitch" />
 				</div>
 				<div class="filecont">
 					<div class="filetit">
@@ -139,81 +108,199 @@
 					</div>
 					<ul class="filelist">
 						<li>
-							span.
+							<div class="filename"><i class="iconfont icon-1"></i><span class="thename">视频.mp4</span></div>
+							<div class="filebtn">
+								<input type="button" value="删除" class="filedel-btn"/>
+								<input type="button" value="预览" class="filepre-btn"/>
+								<input type="button" value="转换" class="fileconv-btn"/>
+							</div>
 						</li>
-						<li></li>
+						<li>
+							<div class="filename"><i class="iconfont icon-1"></i><span class="thename">文本.txt</span></div>
+							<div class="filebtn">
+								<input type="button" value="删除" class="filedel-btn"/>
+								<input type="button" value="预览" class="filepre-btn"/>
+								<input type="button" value="转换" class="fileconv-btn"/>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="form-oneitem">
-			<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
+			<div class="fortit">
+				<p class="oneitem-tit"><span class="onenumb">06</span><small>*</small>覆盖范围</p>
+			</div>
 			<div class="oneitem-cont">
-				<p class="oneitem-tit"><small>*</small>任务消息</p>
-				<div class="oneimp">
-					<input type="text"  id="impcontent" class="imptxt" onchange="this.value=this.value.substring(0, 20)" onkeydown="this.value=this.value.substring(0, 20)" onkeyup="this.value=this.value.substring(0, 20)"/>
-					<span class="oneimp-count"><span class="countnew">0</span>/20</span>
+				<p class="oneitem-tit"><small>*</small>覆盖范围</p>
+				<div class="covarea-sel">
+					<span class="systit"><i class="iconfont icon-xuanze"></i>已选择地区</span>
+				</div>
+				<div class="covarea-all">
+					<span class="systit"><i class="iconfont icon-quanbu"></i>全部地区</span>
 				</div>
 			</div>
 		</div>
 		<div class="form-oneitem">
-			<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
+			<div class="fortit">
+				<p class="oneitem-tit"><span class="onenumb">07</span><small>*</small>调用系统资源</p>
+			</div>
 			<div class="oneitem-cont">
-				<p class="oneitem-tit"><small>*</small>任务消息</p>
-				<div class="oneimp">
-					<input type="text"  id="impcontent" class="imptxt" onchange="this.value=this.value.substring(0, 20)" onkeydown="this.value=this.value.substring(0, 20)" onkeyup="this.value=this.value.substring(0, 20)"/>
-					<span class="oneimp-count"><span class="countnew">0</span>/20</span>
+				<p class="oneitem-tit"><small>*</small>调用系统资源</p>
+				<div class="sysreso-sel">
+					<span class="systit"><i class="iconfont icon-xuanze"></i>已选择资源</span>
+				</div>
+				<div class="sysreso-all">
+					<span class="systit"><i class="iconfont icon-quanbu"></i>全部资源</span>
 				</div>
 			</div>
 		</div>
 		<div class="form-oneitem">
-			<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
+			<div class="fortit">
+				<p class="oneitem-tit"><span class="onenumb">08</span>预覆盖人数/预覆盖面积</p>
+			</div>
 			<div class="oneitem-cont">
-				<p class="oneitem-tit"><small>*</small>任务消息</p>
-				<div class="oneimp">
-					<input type="text"  id="impcontent" class="imptxt" onchange="this.value=this.value.substring(0, 20)" onkeydown="this.value=this.value.substring(0, 20)" onkeyup="this.value=this.value.substring(0, 20)"/>
-					<span class="oneimp-count"><span class="countnew">0</span>/20</span>
+				<div class="predictone">
+					<p class="oneitem-tit">预覆盖人数</p>
+					<p class="precount">1000万人</p>
+				</div>
+				<div class="predictwo">
+					<p class="oneitem-tit">预覆盖面积</p>
+					<p class="precount">120万平方公里</p>
 				</div>
 			</div>
 		</div>
 		<div class="form-oneitem">
-			<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
+			<div class="fortit">
+				<p class="oneitem-tit"><span class="onenumb">09</span>发布部门/负责人</p>
+			</div>
 			<div class="oneitem-cont">
-				<p class="oneitem-tit"><small>*</small>任务消息</p>
-				<div class="oneimp">
-					<input type="text"  id="impcontent" class="imptxt" onchange="this.value=this.value.substring(0, 20)" onkeydown="this.value=this.value.substring(0, 20)" onkeyup="this.value=this.value.substring(0, 20)"/>
-					<span class="oneimp-count"><span class="countnew">0</span>/20</span>
+				<div class="predictone">
+					<p class="oneitem-tit">发布部门</p>
+					<p class="precount">杭州市广播中心</p>
+				</div>
+				<div class="predictwo">
+					<p class="oneitem-tit">负责人</p>
+					<p class="precount">橙子</p>
 				</div>
 			</div>
+		</div></form>
+		<div class="tocreat">
+			<input type="button" value="确认创建" class="tocreatbtn" />
+			<p class="warnword"><i class="iconfont icon-iconfontjinggao"></i>选择调度方案后，后面的信息将自动匹配为预设的事件信息并且不能修改</p>
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 	</div>
+	<div class="popwindow"></div>
+	<div class="unreason">
+		<p class="poptit">预览</p>
+		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="uncont">
+			<p class="unword">视频.mp4</p>
+			<input type="button" value="预览" class="un-confirm" />
+		</div>
+	</div>
+	<div class="choose">
+		<p class="choword">确定删除此任务消息吗？</p>
+		<div class="chobtn">
+			<input type="button" value="删除" class="chopri cho-delete" />
+			<input type="button" value="取消" class="cho-cancel" />
+		</div>
+		<span class="triangle"><em></em></span>
+	</div>
+	<div class="toshift">
+		
+	</div>
 </div>
+
 	
 
 
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#impcontent').bind('input propertychange', function() {  
-		    $('.oneimp-count').html($('#impcontent').val().length);  
+		/*$('#impcontent').bind('input propertychange', function() { 
+		    $('.oneimp-count .countnew').html($('#impcontent').val().length);  
 		});
 		$('#imparea').bind('input propertychange', function() {  
-		    $('.area-count').html($('#imparea').val().length);  
+		    $('.area-count .countnew').html($('#imparea').val().length);  
+		});*/
+		$('#impcontent').on('keyup', function() { 
+		    $('.oneimp-count .countnew').html($('#impcontent').val().length);  
+		});
+		$('#imparea').on('keyup', function() {  
+		    $('.area-count .countnew').html($('#imparea').val().length);  
 		});
 
-		layui.use(['form', 'layedit', 'laydate'], function(){
-		  var form = layui.form;
-		  
-		  //监听提交
-		  form.on('submit(demo1)', function(data){
-		    layer.alert(JSON.stringify(data.field), {
-		      title: '最终的提交信息'
-		    })
-		    return false;
-		  });
-		  
-		  
+		layui.use('form', function(){
+			var form = layui.form;
+
+
+			var itbtn = $('<span class="itbtn"></span>');
+			$('.layui-select-title').append(itbtn);
+			$('.gb-form .layui-form-radio').remove();
 		});
+		
+		$(function() {
+			$(document).on('click','.filedel-btn',function(event) {
+		        showDiv();
+		        $(this).parents('li').addClass('todel');
+		        //$(myDiv).toggle();
+		        $(document).one("click",
+		        function() { 
+		            $('.choose').hide();
+		            $('.filelist li').removeClass('todel');
+		        });
+		        event.stopPropagation(); 
+		    });
+		    
+		    $('.choose').click(function(event) {
+		        event.stopPropagation(); 
+		    });
+		});
+		function showDiv() {
+			var x = event.clientX - event.offsetX;
+			var y = event.clientY - event.offsetY;
+			$('.choose').css({'display':'block','top':y-90,'left':x-130});
+		}
+
+		$('.cho-delete').click(function(){
+			$('.choose').hide();
+			$('.filelist li.todel').remove();
+		})
+		$('.cho-cancel').click(function(){
+			$('.choose').hide();
+			$('.filelist li').removeClass('todel');
+		})
+
+		$('.gb-main-item').scroll(function(){
+			if($('.choose').is(':visible')){
+				$('.choose').hide();
+				$('.filelist li').removeClass('todel');
+			}
+		})
+
+		var uncH = parseInt($('.uncont').css('height'));
+		$('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});
+
+		$(document).on('click','.filepre-btn',function(){
+			$('.popwindow').show();
+			$('.unword').html($(this).parents('li').find('.thename').html());
+			$('.unreason').css({'z-index':'1','opacity':1,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"});
+		})
+
+
+		$('.popwindow').click(function(){
+			$(this).hide();
+			$('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+		})
+		$('.popclose').click(function(){
+			$('.popwindow').hide();
+			$('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+		})
+		$('.un-confirm').click(function(){
+			$('.popwindow').hide();
+			$(this).parents('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+		})
 	})
 </script>
