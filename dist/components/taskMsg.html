@@ -215,8 +215,6 @@
                "order": [ 1, "asc" ],//desc降序
                "Info": true,//页脚信息
                //"autoWidth": true,//自动宽度
-               //"responsive": true,
-               
                "pagingType":   "full_numbers",
                "processing": true,
 		       "ajax": "data/table.json",
@@ -330,10 +328,6 @@
 			})
 			$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
 			
- 			
-			
-			
-			
 			
 			//自定义显示数量
 			var tabot = $('<div class="botdiv"></div>');	
@@ -384,7 +378,6 @@
 			})
 		
        })
- 
 
 		
 			
@@ -516,7 +509,7 @@
 			console.log('chocancel');
 			$(this).parents('.choose').hide();
 			$('tr').removeClass('trstop').removeClass('trcont').removeClass('traga').removeClass('trdel');
-		})/**/
+		})
 		
 		/*popwindow*/
 	})
