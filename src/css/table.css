@@ -117,6 +117,9 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 .gb-table .warnword{width:100%;text-align: center;line-height:40px;font-size:14px;color:#7c8491;display: none}
 .gb-table table.dataTable.display tbody tr td:nth-child(4){text-align: center}
 .gb-table table.dataTable tbody td.dataTables_empty{width:100%;text-align: center}
+.ellipsis{margin-left:6px;}
+.jump-page{display: inline-block;vertical-align: middle;font-size: 12px;margin-left: 15px;}
+.jump-page input{width: 28px;height: 28px;line-height: 28px;text-align: center;}
 /* table end */
 
 
