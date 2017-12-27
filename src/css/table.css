@@ -47,6 +47,8 @@
  div.dataTables_wrapper,.gb-table .dataTables_scroll {width: 100%;height:100%;}
 #table-main thead tr{box-shadow: 0 -20px 10px #f4f4f4 inset;}
 #table-main thead th{border-bottom:1px solid #d8d8d8;}
+.table-main thead tr{box-shadow: 0 -20px 10px #f4f4f4 inset;}
+.table-main thead th{border-bottom:1px solid #d8d8d8;}
 table.dataTable,table.dataTable th,table.dataTable td{box-sizing:border-box;}
 .gb-table table.dataTable.row-border tbody th,.gb-table  table.dataTable.row-border tbody td,.gb-table table.dataTable.display tbody th,.gb-table table.dataTable.display tbody td{border-bottom:1px solid #d8d8d8;border-top:0;}
 .gb-table table.dataTable tbody tr td:nth-child(2){/* width:100px; */text-align: center}
@@ -115,6 +117,8 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 .gb-table .warnword{width:100%;text-align: center;line-height:40px;font-size:14px;color:#7c8491;display: none}
 .gb-table table.dataTable.display tbody tr td:nth-child(4){text-align: center}
 .gb-table table.dataTable tbody td.dataTables_empty{width:100%;text-align: center}
+.jump-page{display: inline-block;vertical-align: middle;font-size: 12px;margin-left: 15px;}
+.jump-page input{width: 28px;height: 28px;line-height: 28px;text-align: center;}
 /* table end */
 
 
