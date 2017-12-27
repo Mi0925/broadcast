@@ -15,14 +15,14 @@
 	<div class="gb-main">
 		<!-- 事件按钮组 -->
 		<div class="gb-incident-btn">
-			<button class="layui-btn layui-btn-normal gb-all-incident cur">发布效果（全事件）</button>
-			<button class="layui-btn layui-btn-normal gb-unity-incident">执行效果（单一事件）</button>
-			<button class="layui-btn layui-btn-normal gb-projection-btn cur">投屏全事件</button>
+			<button class="layui-btn layui-btn-normal gb-all-incident cur incident-btn">发布效果（全事件）</button>
+			<button class="layui-btn layui-btn-normal gb-unity-incident incident-btn">执行效果（单一事件）</button>
 		</div>
 		<!-- 事件总数 -->
 		<div class="gb-incident-box">
 			<!-- 发布效果（全事件） -->
-			<div class="item gb-all-incident-item">
+			<div class="item gb-all-incident-item" style="display: none;">
+				<a href="all-screen.html" class="layui-btn layui-btn-normal gb-projection-btn cur incident-btn">投屏全事件</a>
 				<div class="gb-chart-box">
 					<div class="gb-incident-count">
 						<button class="layui-btn layui-btn-danger">事件总数：<em>6</em></button>
@@ -56,9 +56,10 @@
 				</div>
 			</div>
 			<!-- 执行效果（单一事件） -->
-			<div class="item gb-unity-incident-item" style="display: none;">
+			<div class="item gb-unity-incident-item">
+				<a href="unity-screen.html" class="layui-btn layui-btn-normal gb-projection-btn cur incident-btn">投屏单一事件</a>
 				<div class="gb-chart-box">
-					<div class="gb-ctab">
+					<div class="gb-ctab" id="table-main1">
 						<div class="tklay">
 							<span class="talay-word"><i class="iconfont icon-rili"></i>发布时间</span>
 							<div class="layui-input-inline">
@@ -71,7 +72,7 @@
 							<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
 						</div>
 						<div class="tablecont">
-						    <table id="table-main" class="display" cellspacing="0" width="100%">
+						    <table class="table-main display" cellspacing="0" width="100%">
 						        <thead>
 							        <tr>
 							            <th>消息等级</th>
@@ -151,14 +152,84 @@
 						 	<button class="layui-btn layui-btn-danger">杭州西湖区雷暴红色警报消息播发统计</button>
 						 	<span><i class="iconfont icon-liebiao"></i>列表</span>
 					 	</h4>
-					 	<div class="gb-chart-incident-line">
-							<div class="gb-chart-item">
-								<div class="gb-chart gb-line" id="line-population"></div>
+					 	<div class="">
+					 		<div class="gb-ctab" id="table-main2">
+								<div class="tablecont">
+								    <table class="table-main display" cellspacing="0" width="100%">
+								        <thead>
+									        <tr>
+									            <th>区域名</th>
+									            <th>传输覆盖平台资源名</th>
+									            <th>接受回执</th>
+									            <th>播发反馈</th>
+									            <th>接受回执时间</th>
+									            <th>播发反馈时间</th>
+									        </tr>
+								        </thead>
+								        <tfoot>
+									        <tr>
+									            <th></th>
+									            <th></th>
+									            <th></th>
+									            <th></th>
+									            <th></th>
+									            <th></th>
+									        </tr>
+								        </tfoot>
+								        <tbody>
+								        	<tr>
+								        		<td>区域名区域名1</td>
+								        		<td>传输覆盖平台资源名1</td>
+								        		<td>接受回执接受回执1</td>
+								        		<td>播发反馈播发反馈1</td>
+								        		<td>2017-09-08  18:10:20</td>
+								        		<td>2017-09-08  18:10:20</td>
+								        	</tr>
+								        	<tr>
+								        		<td>区域名区域名2</td>
+								        		<td>传输覆盖平台资源名2</td>
+								        		<td>接受回执接受回执2</td>
+								        		<td>播发反馈播发反馈2</td>
+								        		<td>2017-09-08  18:10:20</td>
+								        		<td>2017-09-08  18:10:20</td>
+								        	</tr>
+								        	<tr>
+								        		<td>区域名区域名3</td>
+								        		<td>传输覆盖平台资源名3</td>
+								        		<td>接受回执接受回执3</td>
+								        		<td>播发反馈播发反馈3</td>
+								        		<td>2017-09-08  18:10:20</td>
+								        		<td>2017-09-08  18:10:20</td>
+								        	</tr>
+								        	<tr>
+								        		<td>区域名区域名4</td>
+								        		<td>传输覆盖平台资源名4</td>
+								        		<td>接受回执接受回执4</td>
+								        		<td>播发反馈播发反馈4</td>
+								        		<td>2017-09-08  18:10:20</td>
+								        		<td>2017-09-08  18:10:20</td>
+								        	</tr>
+								        	<tr>
+								        		<td>区域名区域名5</td>
+								        		<td>传输覆盖平台资源名5</td>
+								        		<td>接受回执接受回执5</td>
+								        		<td>播发反馈播发反馈5</td>
+								        		<td>2017-09-08  18:10:20</td>
+								        		<td>2017-09-08  18:10:20</td>
+								        	</tr>
+								        </tbody>
+								    </table>
+								</div>
 							</div>
-							<div class="gb-chart-item">
-								<div class="gb-chart gb-line" id="line-district"></div>
+						 	<div class="gb-chart-incident-line">
+								<div class="gb-chart-item">
+									<div class="gb-chart gb-line" id="line-population"></div>
+								</div>
+								<div class="gb-chart-item">
+									<div class="gb-chart gb-line" id="line-district"></div>
+								</div>
 							</div>
-						</div>
+					 	</div>
 					 </div>
 				</div>
 				<!-- 地图 -->
@@ -225,7 +296,7 @@ function unityIncident() {
 				},
 		    	position: function (point, params, dom, rect, size) {
 				    // 固定在顶部
-				    return {left:point[0]-$(dom).width()/2, top:point[1]-$(dom).height()};
+				    return {left:point[0]-$(dom).width()/2, top:point[1]-$(dom).height()-10};
 				},
 		        backgroundColor: 'rgba(255,255,255,0)',
 		        axisPointer: {
@@ -383,7 +454,7 @@ function unityIncident() {
 				},
 		    	position: function (point, params, dom, rect, size) {
 				    // 固定在顶部
-				    return {left:point[0]-$(dom).width()/2, top:point[1]-$(dom).height()};
+				    return {left:point[0]-$(dom).width()/2, top:point[1]-$(dom).height()-10};
 				},
 		        backgroundColor: 'rgba(255,255,255,0)',
 		        axisPointer: {
@@ -1655,106 +1726,229 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 /*table*/
 $(function () {
 
-   var table = $('#table-main').DataTable({
-       "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
-       "dom": 'tiprl',//自定义显示项
-       //"dom":'<"domab"f>',
-      // "scrollY": "94%",//dt高度
-       // "scrollX": true
-       "lengthMenu":[2, 6, 10, 16, 24],//每页显示条数设置
-       "lengthChange": true,//是否允许用户自定义显示数量
-       "bPaginate": true, //翻页功能
-       "bFilter": true, //列筛序功能
-       "searching": true,//本地搜索
-       //"ordering": true, //排序功能
-       "order": [ 0, "asc" ],//desc降序
-       "Info": true,//页脚信息
-       "pagingType":   "full_numbers",
-       "oLanguage": {//国际语言转化
-           "oAria": {
-               "sSortAscending": " - click/return to sort ascending",
-               "sSortDescending": " - click/return to sort descending"
-           },
-           "sLengthMenu": " _MENU_ 条",
-           "sZeroRecords": "对不起，查询不到任何相关数据",
-           "sEmptyTable": "未有相关数据",
-           "sLoadingRecords": "正在加载数据-请等待...",
-           "sInfo": "共 _TOTAL_ 条 ",//当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。
-           "sInfoEmpty": "当前显示0到0条，共0条记录",
-           "sInfoFiltered": "（数据库中共为 _MAX_ 条记录）",
-           "sProcessing": "正在加载数据...",
-           "sSearch": "模糊查询：",
-           "sUrl": "",
-           //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
-           "oPaginate": {
-               "sFirst": "首页",
-               "sPrevious": " < ",
-               "sNext": " > ",
-               "sLast": " 尾页 "
-           }
-       },
-       "columnDefs": [
-       		{
-               orderable: false,
+    var table1 = $('#table-main1 table').DataTable({
+		"dom": '<"top"f >rt<"bottom"ilp><"clear">', //dom定位
+		"dom": 'tiprl', //自定义显示项
+		//"dom":'<"domab"f>',
+		// "scrollY": "94%",//dt高度
+		// "scrollX": true
+		"lengthMenu": [2, 6, 10, 16, 24], //每页显示条数设置
+		"lengthChange": true, //是否允许用户自定义显示数量
+		"bPaginate": true, //翻页功能
+		"bFilter": true, //列筛序功能
+		"searching": true, //本地搜索
+		//"ordering": true, //排序功能
+		"order": [0, "asc"], //desc降序
+		"Info": true, //页脚信息
+		"pagingType": "full_numbers",
+		"oLanguage": { //国际语言转化
+			"oAria": {
+				"sSortAscending": " - click/return to sort ascending",
+				"sSortDescending": " - click/return to sort descending"
+			},
+			"sLengthMenu": " _MENU_ 条",
+			"sZeroRecords": "对不起，查询不到任何相关数据",
+			"sEmptyTable": "未有相关数据",
+			"sLoadingRecords": "正在加载数据-请等待...",
+			"sInfo": "共 _TOTAL_ 条 ", //当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。
+			"sInfoEmpty": "当前显示0到0条，共0条记录",
+			"sInfoFiltered": "（数据库中共为 _MAX_ 条记录）",
+			"sProcessing": "正在加载数据...",
+			"sSearch": "模糊查询：",
+			"sUrl": "",
+			//多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
+			"oPaginate": {
+				"sFirst": "首页",
+				"sPrevious": " < ",
+				"sNext": " > ",
+				"sLast": " 尾页 "
+			}
+		},
+		"columnDefs": [{
+				orderable: false,
 
-               targets: 1 },
-            {
-               orderable: false,
+				targets: 1
+			}, {
+				orderable: false,
 
-               targets: 2 },
-            {
-               orderable: false,
+				targets: 2
+			}, {
+				orderable: false,
 
-               targets: 5 }    
-            ,{ "sType": "html-percent", 
-               "aTargets": [0] }   //指定列号使用自定义排序
-       ],//第一列与第二列禁止排序
-      
-       initComplete: function () {//列筛选
-           var api = this.api();
-           api.columns().indexes().flatten().each(function (i) {
-               if (i == 2) {//删除第一列与第二列的筛选框
-                   var column = api.column(i);
-                   var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                   var select = $('<select><option value="">发布部门</option></select>')
-                           .appendTo($(column.header()))
-                           .on('click', function (evt) {
-                               evt.stopPropagation();
-                               var val = $.fn.dataTable.util.escapeRegex(
-                                       $(this).val()
-                               );
-                               column
-                                       .search(val ? '^' + val + '$' : '', true, false)
-                                       .draw();
-                           });
-                   column.data().unique().sort().each(function (d, j) {
-                       function delHtmlTag(str) {
-                           return str.replace(/<[^>]+>/g, "");//去掉html标签
-                       }
+				targets: 5
+			}, {
+				"sType": "html-percent",
+				"aTargets": [0]
+			} //指定列号使用自定义排序
+		], //第一列与第二列禁止排序
 
-                       d = delHtmlTag(d)
-                       select.append('<option value="' + d + '">' + d + '</option>')
-                       $span.append(select)
-                   });
+		initComplete: function() { //列筛选
+			var api = this.api();
+			api.columns().indexes().flatten().each(function(i) {
+				if (i == 2) { //删除第一列与第二列的筛选框
+					var column = api.column(i);
+					var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
+					var select = $('<select><option value="">全部</option></select>')
+						.appendTo($(column.header()))
+						.on('change', function(evt) {
+							evt.stopPropagation();
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+							);
+							column
+								.search(val ? '^' + val + '$' : '', true, false)
+								.draw();
+						});
+					column.data().unique().sort().each(function(d, j) {
+						function delHtmlTag(str) {
+							return str.replace(/<[^>]+>/g, ""); //去掉html标签
+						}
 
-               }
-           });
+						d = delHtmlTag(d)
+						select.append('<option value="' + d + '">' + d + '</option>')
+						$span.append(select)
+					});
 
-       }
+				}
+			});
+
+		},
+		fnDrawCallback: function(table) {  
+            $("#table-main1 .dataTables_paginate").append("<div class='jump-page'>前往第 <input class='changePage' type='text'> 页  <a class='dataTable-btn' href='javascript:void(0);'>确认</a></div>");  
+            var oTable = $("#table-main1 table").dataTable();  
+            $('#table-main1 .dataTable-btn').click(function(e) { 
+                if($("#table-main1 .changePage").val() && $("#table-main1 .changePage").val() > 0) {  
+                    var redirectpage = $("#table-main1 .changePage").val() - 1;
+                } else {  
+                    var redirectpage = 0;
+                }
+                oTable.fnPageChange(redirectpage);  
+            });  
+        },
 	})
+
+	var table2 = $('#table-main2 table').DataTable({
+		"dom": '<"top"f >rt<"bottom"ilp><"clear">', //dom定位
+		"dom": 'tiprl', //自定义显示项
+		//"dom":'<"domab"f>',
+		// "scrollY": "94%",//dt高度
+		// "scrollX": true
+		"lengthMenu": [1,20,30,40,50], //每页显示条数设置
+		"lengthChange": true, //是否允许用户自定义显示数量
+		"bPaginate": true, //翻页功能
+		"bFilter": true, //列筛序功能
+		"searching": true, //本地搜索
+		//"ordering": true, //排序功能
+		"order": [4, "asc"], //desc降序
+		"Info": true, //页脚信息
+		"pagingType": "full_numbers",
+		"oLanguage": { //国际语言转化
+			"oAria": {
+				"sSortAscending": " - click/return to sort ascending",
+				"sSortDescending": " - click/return to sort descending"
+			},
+			"sLengthMenu": " _MENU_ 条",
+			"sZeroRecords": "对不起，查询不到任何相关数据",
+			"sEmptyTable": "未有相关数据",
+			"sLoadingRecords": "正在加载数据-请等待...",
+			"sInfo": "共 _TOTAL_ 条 ", //当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。
+			"sInfoEmpty": "当前显示0到0条，共0条记录",
+			"sInfoFiltered": "（数据库中共为 _MAX_ 条记录）",
+			"sProcessing": "正在加载数据...",
+			"sSearch": "模糊查询：",
+			"sUrl": "",
+			//多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
+			"oPaginate": {
+				"sFirst": "首页",
+				"sPrevious": " < ",
+				"sNext": " > ",
+				"sLast": " 尾页 "
+			}
+		},
+		"columnDefs": [{
+				orderable: false,
+
+				targets: 0
+			},{
+				orderable: false,
+
+				targets: 1
+			}, {
+				orderable: false,
+
+				targets: 2
+			}, {
+				orderable: false,
+
+				targets: 3
+			}
+		], //设置某列禁止排序
+
+		initComplete: function() { //列筛选
+			var api = this.api();
+			api.columns().indexes().flatten().each(function(i) {
+				if (i == 3) { //删除第一列与第二列的筛选框
+					var column = api.column(i);
+					var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
+					var select = $('<select><option value="">全部</option></select>')
+						.appendTo($(column.header()))
+						.on('change', function(evt) {
+							evt.stopPropagation();
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+							);
+							column
+								.search(val ? '^' + val + '$' : '', true, false)
+								.draw();
+						});
+					column.data().unique().sort().each(function(d, j) {
+						function delHtmlTag(str) {
+							return str.replace(/<[^>]+>/g, ""); //去掉html标签
+						}
+
+						d = delHtmlTag(d)
+						select.append('<option value="' + d + '">' + d + '</option>')
+						$span.append(select)
+					});
+
+				}
+			});
+		},
+		fnDrawCallback: function(table) {  
+            $("#table-main2 .dataTables_paginate").append("<div class='jump-page'>前往第 <input class='changePage' type='text'> 页  <a class='dataTable-btn' href='javascript:void(0);'>确认</a></div>");  
+            var oTable = $("#table-main2 table").dataTable();  
+            $('#table-main2 .dataTable-btn').click(function(e) { 
+                if($("#table-main2 .changePage").val() && $("#table-main2 .changePage").val() > 0) {  
+                    var redirectpage = $("#table-main2 .changePage").val() - 1;
+                } else {  
+                    var redirectpage = 0;
+                }
+                oTable.fnPageChange(redirectpage);  
+            }); 
+        },
+	})
+
+   // $('.table-main').each()
+
 	
 	
 	//自定义显示数量
-	var tabot = $('<div class="botdiv"></div>');	
-	$('.tablecont').append(tabot);
-	$('.dataTables_info').appendTo($('.botdiv'));
-	$('.dataTables_length').appendTo($('.botdiv'));
-	$('.dataTables_paginate').appendTo($('.botdiv'));
+	var tabot1 = $('<div class="botdiv1 botdiv"></div>');	
+	$('#table-main1 .tablecont').append(tabot1);
+	$('#table-main1 .dataTables_info').appendTo($('.botdiv1'));
+	$('#table-main1 .dataTables_length').appendTo($('.botdiv1'));
+	$('#table-main1 .dataTables_paginate').appendTo($('.botdiv1'));
+
+	var tabot2 = $('<div class="botdiv2 botdiv"></div>');	
+	$('#table-main2 .tablecont').append(tabot2);
+	$('#table-main2 .dataTables_info').appendTo($('.botdiv2'));
+	$('#table-main2 .dataTables_length').appendTo($('.botdiv2'));
+	$('#table-main2 .dataTables_paginate').appendTo($('.botdiv2'));
 
    //自定义搜索
    $('.dsearch').on('keyup click', function () {
        var tsval = $(".dsearch").val()
-       table.search(tsval, false, false).draw();
+       table1.search(tsval, false, false).draw();
    });
   /* $('.tksrh-btn').click(function(){
    		if($('.tksearch input').val() != '请输入任务消息名称，发布部门，负责人' && $('.tksearch input').val() != ''){

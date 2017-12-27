@@ -57,12 +57,12 @@ a:hover{color: inherit;}
 
 /*事件按钮*/
 .gb-incident-btn{margin-bottom: 20px;}
-.gb-incident-btn .layui-btn{min-width: 180px;}
-.gb-incident-btn .layui-btn-normal.cur{background: #4579d8;position: relative;color: #fff;}
-.gb-incident-btn .layui-btn-normal{border-color: #d8d8d8;color: #a4b0c3;background: linear-gradient(#fff,#efefef);}
-.gb-projection-btn{float: right;}
+.incident-btn.layui-btn{min-width: 180px;}
+.incident-btn.layui-btn-normal.cur{background: #4579d8;color: #fff;}
+.incident-btn.layui-btn-normal{border-color: #d8d8d8;color: #a4b0c3;background: linear-gradient(#fff,#efefef);}
 .gb-projection-btn:after{content:"";position: absolute;left:10%; bottom: 5px;width: 80%;box-shadow:0px 10px 23px #4579d8;height: 10px;}
-
+.gb-incident-box .item{position: relative;}
+.gb-incident-box .incident-btn{position: absolute;top: -58px;right: 0px;}
 
 
 
