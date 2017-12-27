@@ -191,7 +191,7 @@
                "order": [ 1, "asc" ],//desc降序
                "Info": true,//页脚信息
                //"autoWidth": true,//自动宽度
-               "pagingType":   "full_numbers",
+               //"pagingType":   "full_numbers",
                "processing": true,
 		       "ajax": "data/table.json",
 		       "columns": [
@@ -226,10 +226,10 @@
                    "sUrl": "",
                    //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
                    "oPaginate": {
-                       "sFirst": "首页",
+                       //"sFirst": "首页",
                        "sPrevious": " < ",
-                       "sNext": " > ",
-                       "sLast": " 尾页 "
+                       "sNext": " > "
+                       //,"sLast": " 尾页 "
                    }
                },
                "columnDefs": [
@@ -268,7 +268,18 @@
                     ,{ "sType": "html-percent", 
                        "aTargets": [3] }   //指定列号使用自定义排序
                ],//第一列与第二列禁止排序
-              
+               fnDrawCallback: function(table) {  
+               		$(".dataTables_paginate").append("<div class='jump-page'>前往第 <input class='changePage' type='text'> 页  <a class='dataTable-btn' href='javascript:void(0);'>确认</a></div>");  
+		            var oTable = $("#table-main table").dataTable();  
+		            $('#table-main .dataTable-btn').click(function(e) { 
+		                if($("#table-main .changePage").val() && $("#table-main .changePage").val() > 0) {  
+		                    var redirectpage = $("#table-main .changePage").val() - 1;
+		                } else {  
+		                    var redirectpage = 0;
+		                }
+		                oTable.fnPageChange(redirectpage);  
+		            });
+	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {

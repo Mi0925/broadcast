@@ -209,7 +209,71 @@
 		<span class="triangle"><em></em></span>
 	</div>
 	<div class="toshift">
-		
+		<p class="poptit">格式转换</p>
+		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="uncont">
+			<div class="format">
+				<span class="matit">当前格式：</span>
+				<span class="themat">mp3</span>
+			</div>
+			<div class="format">
+				<span class="matit">目标格式：</span>
+				<div class="matchoose">
+					<ul class="matlist">
+						<li>
+							<span class="matype">格式一</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matone" checked="checked" />
+								<label for="matone"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式二</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matwo" />
+								<label for="matwo"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式三</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="mathr" />
+								<label for="mathr"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式四</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matfou" />
+								<label for="matfou"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式五</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matfiv" />
+								<label for="matfiv"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式六</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matsix" />
+								<label for="matsix"></label>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="tomat">
+				<div class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="demo"><!--  -->
+				  <div class="layui-progress-bar" lay-percent="30%"></div><!--   layui-bg-red -->
+				</div>
+				<p class="forword">转换中...</p>
+			</div>
+			<p class="succmat"><i class="iconfont icon-11"></i>转换成功！</p>
+			<input type="button" value="转换" class="switchbtn" />
+		</div>
 	</div>
 </div>
 
@@ -302,5 +366,40 @@
 			$('.popwindow').hide();
 			$(this).parents('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
 		})
+
+		layui.use('element', function(){
+		  var $ = layui.jquery
+		  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+		  
+		  //触发事件
+		  var active = {
+		    setPercent: function(){
+		      //设置50%进度
+		      element.progress('demo', '50%')
+		    }
+		    ,loading: function(othis){
+		      var DISABLED = 'layui-btn-disabled';
+		      if(othis.hasClass(DISABLED)) return;
+		    
+		      //模拟loading
+		      var n = 0, timer = setInterval(function(){
+		        n = n + Math.random()*10|0;  
+		        if(n>100){
+		          n = 100;
+		          clearInterval(timer);
+		          othis.removeClass(DISABLED);
+		        }
+		        element.progress('demo', n+'%');
+		      }, 300+Math.random()*1000);
+		      
+		      othis.addClass(DISABLED);
+		    }
+		  };
+		  
+		  $('.site-demo-active').on('click', function(){
+		    var othis = $(this), type = $(this).data('type');
+		    active[type] ? active[type].call(this, othis) : '';
+		  });
+		});
 	})
 </script>
