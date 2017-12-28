@@ -30,3 +30,18 @@
 .gb-screen-chart .gb-chart-incident-bar .gb-chart-item{height:100%;}
 
 .gb-incident-list.screen-incident-list{background: #202836;border-color: #364255;}
+
+
+.gb-screen-chart #table-main thead tr,.gb-screen-chart .table-main thead tr{box-shadow: 0 -20px 10px #272f3c inset;background: #303b4c;}
+.gb-screen-chart #table-main thead th,.gb-screen-chart .table-main thead th{border-color: #354052;}
+.gb-screen-chart .table-main{color: #7c8491;}
+.gb-screen-chart .table-main tbody tr{background: none!important;}
+.gb-screen-chart .table-main tbody tr:hover{color: #fff;background-color: #364154!important;}
+.gb-screen-chart .table-main tr td{border-bottom: 1px solid #354052;}
+.gb-screen-chart .gb-ctab .tablecont{background: #252d3a;border-color: #354052;height: 780px;}
+.gb-screen-chart .dataTables_length select{background: #252d3a;border:1px solid #354052;}
+.gb-screen-chart .dataTables_paginate .paginate_button{background: #252d3a;border-color:#354052!important;}
+.gb-screen-chart .jump-page input{background: #252d3a;border:1px solid #354052;color: #fff;}
+.gb-screen-chart div.dataTables_wrapper{height: 90%;overflow-x: auto;}
+.gb-screen-chart div.dataTables_wrapper::-webkit-scrollbar{width: 6px;background: #f0f0f0;border-radius: 50px;}
+.gb-screen-chart div.dataTables_wrapper::-webkit-scrollbar-thumb{width: 100%;background: #7c8491;border-radius: 50px;}

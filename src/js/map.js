@@ -181,3 +181,15 @@ function legendCover(cover,$this) {
 		}
 	}
 }
+
+
+// 单一事件-列表图表切换
+$("body").on("click",".j-table-chart-tab",function(event) {
+    if($(".j-table-chart-tab").text()=="折线"){
+        $(".j-table-chart-tab").html('<i class="iconfont icon-liebiao"></i>列表')
+        $(".gb-chart-incident-line").show().siblings("div").hide()
+    }else{
+        $(".j-table-chart-tab").html('<i class="iconfont icon-zhexian"></i>折线')
+        $(".gb-table-chart-tab .gb-ctab").show().siblings("div").hide()
+    }
+});

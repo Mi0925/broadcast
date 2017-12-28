@@ -129,8 +129,8 @@ a:hover{color: inherit;}
 .gb-unity-incident-item .gb-chart-box{padding: 35px 35px 0;}
 .gb-charts-table{text-align: center;}
 .gb-charts-table h4{overflow: hidden;position: relative;margin:47px 0 40px;}
-.gb-charts-table h4 span{font-size: 14px;position: absolute;right: 0px;bottom: 0px;}
-
+.gb-charts-table h4 span{font-size: 14px;position: absolute;right: 0px;bottom: 0px;cursor: pointer;}
+.gb-table-chart-tab .gb-ctab{margin-bottom:50px; }
 
 
 
