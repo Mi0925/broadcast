@@ -7,7 +7,7 @@
 			        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
 			        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
 		    	</div>
-		    	<a href="#/newTaskMsg" class="newtk-btn" url="components/newTaskMsg.html"><!-- <a href="components/newTaskMsg.html" class="newtk-btn"> -->新建任务消息</a>
+		    	<a href="#/newTaskMsg" class="newtk-btn" url="components/newTaskMsg.html">新建任务消息</a>
 			</div>
 			<div class="tksearch">
 				<input type="text" value="请输入任务消息名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
@@ -191,7 +191,7 @@
                "order": [ 1, "asc" ],//desc降序
                "Info": true,//页脚信息
                //"autoWidth": true,//自动宽度
-               //"pagingType":   "full_numbers",
+               "pagingType":   "full_numbers",
                "processing": true,
 		       "ajax": "data/table.json",
 		       "columns": [
@@ -226,10 +226,10 @@
                    "sUrl": "",
                    //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
                    "oPaginate": {
-                       //"sFirst": "首页",
-                       "sPrevious": " < ",
-                       "sNext": " > "
-                       //,"sLast": " 尾页 "
+                       "sFirst": "首页",
+                       "sPrevious": " <i class='iconfont icon-zuo'></i> ",
+                       "sNext": " <i class='iconfont icon-you-copy'></i> ",
+                       "sLast": " 尾页 "
                    }
                },
                "columnDefs": [
@@ -270,10 +270,10 @@
                ],//第一列与第二列禁止排序
                fnDrawCallback: function(table) {  
                		$(".dataTables_paginate").append("<div class='jump-page'>前往第 <input class='changePage' type='text'> 页  <a class='dataTable-btn' href='javascript:void(0);'>确认</a></div>");  
-		            var oTable = $("#table-main table").dataTable();  
-		            $('#table-main .dataTable-btn').click(function(e) { 
-		                if($("#table-main .changePage").val() && $("#table-main .changePage").val() > 0) {  
-		                    var redirectpage = $("#table-main .changePage").val() - 1;
+		            var oTable = $("#table-main").dataTable();  
+		            $(' .dataTable-btn').click(function(e) { 
+		                if($(".changePage").val() && $(".changePage").val() > 0) {  
+		                    var redirectpage = $(".changePage").val() - 1;
 		                } else {  
 		                    var redirectpage = 0;
 		                }

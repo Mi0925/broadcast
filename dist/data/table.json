@@ -38,7 +38,7 @@
 		"reletime": "2016-09-08  18:10:20",
 		"operate": "<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>",
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
-		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
+		"issue": "<a href='#/releasePolicy' class='issue isstr' url='components/releasePolicy.html'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "",
 		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>"
 	}, {
@@ -80,7 +80,7 @@
 		"reletime": "2016-09-08  18:10:20",
 		"operate": "<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>",
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
-		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
+		"issue": "<a href='#/releasePolicy' class='issue isstr' url='components/releasePolicy.html'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>",
 		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
@@ -108,7 +108,7 @@
 		"reletime": "2016-09-08  18:10:20",
 		"operate": "<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>",
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
-		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
+		"issue": "<a href='#/releasePolicy' class='issue isstr' url='components/releasePolicy.html'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
 		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
@@ -178,7 +178,7 @@
 		"reletime": "2016-09-08  18:10:20",
 		"operate": "<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>",
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
-		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
+		"issue": "<a href='#/releasePolicy' class='issue isstr' url='components/releasePolicy.html'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "",
 		"del": "<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>"
 	}, {
@@ -220,7 +220,7 @@
 		"reletime": "2016-09-08  18:10:20",
 		"operate": "<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>",
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
-		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
+		"issue": "<a href='#/releasePolicy' class='issue isstr' url='components/releasePolicy.html'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>",
 		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
@@ -248,7 +248,7 @@
 		"reletime": "2016-09-08  18:10:20",
 		"operate": "<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>",
 		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
-		"issue": "<a href='' class='issue isstr'><i class='iconfont icon-fabu'></i>发布策略</a>",
+		"issue": "<a href='#/releasePolicy' class='issue isstr' url='components/releasePolicy.html'><i class='iconfont icon-fabu'></i>发布策略</a>",
 		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
 		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
 	}, {
@@ -256,20 +256,6 @@
 		"sernumb": "<span class='tabnumb'>19</span>",
 		"condmon": "审核中",
 		"rank": "<span class='rankimg' vel='1'><img src='../src/images/rank-green.png'/></span>",
-		"msgname": "杭州西湖区2017年09月09日晚台...",
-		"pubdep": "杭州市西湖区应急广播中心",
-		"principal": "橙子",
-		"reletime": "2016-09-08  18:10:20",
-		"operate": "<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>",
-		"edit": "<a href='' class='editbtn'><i class='iconfont icon-bianji'></i>编辑</a>",
-		"issue": "",
-		"check": "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>",
-		"del": "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>"
-	}, {
-		"checkbox": "<div class='checkone'><input type='checkbox' name='checkone' id='check_20' /><label for='check_20'></label></div>",
-		"sernumb": "<span class='tabnumb'>20</span>",
-		"condmon": "审核中",
-		"rank": "<span class='rankimg' vel='2'><img src='../src/images/rank-blue.png'/></span>",
 		"msgname": "杭州西湖区2017年09月09日晚台...",
 		"pubdep": "杭州市西湖区应急广播中心",
 		"principal": "橙子",

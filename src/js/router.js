@@ -37,6 +37,10 @@ Router.route('/taskMsg', function() {
 Router.route('/newTaskMsg', function() {
   gbMainContent('components/newTaskMsg.html', RoundaboutSet);
 });
+/*发布策略*/
+Router.route('/releasePolicy', function() {
+  gbMainContent('components/releasePolicy.html', RoundaboutSet);
+});
 Router.route('/round2', function() {
   gbMainContent('components/round2.html', RoundaboutSet);
 });

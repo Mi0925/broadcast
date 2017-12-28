@@ -184,7 +184,7 @@
 					<p class="precount">橙子</p>
 				</div>
 			</div>
-		</div></form>
+		</div>
 		<div class="tocreat">
 			<input type="button" value="确认创建" class="tocreatbtn" />
 			<p class="warnword"><i class="iconfont icon-iconfontjinggao"></i>选择调度方案后，后面的信息将自动匹配为预设的事件信息并且不能修改</p>
@@ -266,15 +266,15 @@
 				</div>
 			</div>
 			<div class="tomat">
-				<div class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="demo"><!--  -->
-				  <div class="layui-progress-bar" lay-percent="30%"></div><!--   layui-bg-red -->
+				<div class="layui-progress layui-progress-big" lay-filter="demo"><!--  lay-showpercent="true" -->
+				  <div class="layui-progress-bar" lay-percent="0%"></div><!--   layui-bg-red -->
 				</div>
 				<p class="forword">转换中...</p>
 			</div>
 			<p class="succmat"><i class="iconfont icon-11"></i>转换成功！</p>
-			<input type="button" value="转换" class="switchbtn" />
+			<input type="button" value="转换" class="layui-btn site-demo-active"  data-type="loading"/>
 		</div>
-	</div>
+	</div></form>
 </div>
 
 	
@@ -353,18 +353,26 @@
 			$('.unreason').css({'z-index':'1','opacity':1,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"});
 		})
 
-
+	
 		$('.popwindow').click(function(){
 			$(this).hide();
+			$('.toshift').hide();
 			$('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
 		})
 		$('.popclose').click(function(){
 			$('.popwindow').hide();
+			$('.toshift').hide();
 			$('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
 		})
 		$('.un-confirm').click(function(){
 			$('.popwindow').hide();
 			$(this).parents('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+		})
+
+		$(document).on('click','.fileconv-btn',function(){
+			$('.popwindow').show();
+			$('.toshift').show();
+			$('.matlist li ').eq(0).find('input').prop('checked',true);
 		})
 
 		layui.use('element', function(){
@@ -373,11 +381,7 @@
 		  
 		  //触发事件
 		  var active = {
-		    setPercent: function(){
-		      //设置50%进度
-		      element.progress('demo', '50%')
-		    }
-		    ,loading: function(othis){
+		    loading: function(othis){
 		      var DISABLED = 'layui-btn-disabled';
 		      if(othis.hasClass(DISABLED)) return;
 		    
@@ -387,7 +391,9 @@
 		        if(n>100){
 		          n = 100;
 		          clearInterval(timer);
-		          othis.removeClass(DISABLED);
+		          //othis.removeClass(DISABLED);
+		          $('.tomat').hide();
+		          $('.succmat').show();
 		        }
 		        element.progress('demo', n+'%');
 		      }, 300+Math.random()*1000);
@@ -396,9 +402,12 @@
 		    }
 		  };
 		  
-		  $('.site-demo-active').on('click', function(){
-		    var othis = $(this), type = $(this).data('type');
-		    active[type] ? active[type].call(this, othis) : '';
+		  $('.uncont .site-demo-active').on('click', function(){
+		  	if($('.tomat').is(':hidden') && $('.succmat').is(':hidden')){
+		  		$('.tomat').show();
+		  		var othis = $(this), type = $(this).data('type');
+		   		active[type] ? active[type].call(this, othis) : '';
+		  	}
 		  });
 		});
 	})
