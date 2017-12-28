@@ -1,5 +1,5 @@
 <div class="gb-table">
-	<div class="taskmsg">
+	<div class="taskmsg" id="table-main">
 		<div class="tkrange">
 			<div class="tklay">
 				<span class="talay-word"><i class="iconfont icon-rili"></i>发布时间</span>
@@ -21,7 +21,7 @@
 		</div>
 		<div class="thetab">
 			<div class="tablecont">
-			    <table id="table-main" class="display" cellspacing="0" width="100%">
+			    <table class="table-main display" cellspacing="0" width="100%">
 			        <thead>
 				        <tr>
 				        	<th></th>
@@ -157,26 +157,11 @@
 			$(this).addClass('msgact');
 		})
 		
-		jQuery.extend(jQuery.fn.dataTableExt.oSort, {
-		    "html-percent-pre": function (a) {
-		    	//console.log($(a).attr('vel'));
-		        var x = $(a).attr('vel');
-		        return parseFloat(x);
-		    },
-
-		    "html-percent-asc": function (a, b) {                //正序排序引用方法
-		        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-		    },
-
-		    "html-percent-desc": function (a, b) {                //倒序排序引用方法
-		        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-		    }
-		});
 
 		/*table*/
 		$(function () {
 
-           var table = $('#table-main').DataTable({
+           var table = $('#table-main table').DataTable({
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
                //"dom":'<"domab"f>',
@@ -209,29 +194,7 @@
 		            { "data": "check" },
 		            { "data": "del" }
 		       ],
-               "oLanguage": {//国际语言转化
-                   "oAria": {
-                       "sSortAscending": " - click/return to sort ascending",
-                       "sSortDescending": " - click/return to sort descending"
-                   },
-                   "sLengthMenu": " _MENU_ 条",
-                   "sZeroRecords": "对不起，查询不到任何相关数据",
-                   "sEmptyTable": "未有相关数据",
-                   "sLoadingRecords": "正在加载数据-请等待...",
-                   "sInfo": "共 _TOTAL_ 条 ",//当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。
-                   "sInfoEmpty": "当前显示0到0条，共0条记录",
-                   "sInfoFiltered": "（数据库中共为 _MAX_ 条记录）",
-                   "sProcessing": "正在加载数据...",
-                   "sSearch": "模糊查询：",
-                   "sUrl": "",
-                   //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
-                   "oPaginate": {
-                       "sFirst": "首页",
-                       "sPrevious": " <i class='iconfont icon-zuo'></i> ",
-                       "sNext": " <i class='iconfont icon-you-copy'></i> ",
-                       "sLast": " 尾页 "
-                   }
-               },
+               "oLanguage": oLanguage,
                "columnDefs": [
                		{
 	                   orderable: false,
@@ -269,16 +232,7 @@
                        "aTargets": [3] }   //指定列号使用自定义排序
                ],//第一列与第二列禁止排序
                fnDrawCallback: function(table) {  
-               		$(".dataTables_paginate").append("<div class='jump-page'>前往第 <input class='changePage' type='text'> 页  <a class='dataTable-btn' href='javascript:void(0);'>确认</a></div>");  
-		            var oTable = $("#table-main").dataTable();  
-		            $(' .dataTable-btn').click(function(e) { 
-		                if($(".changePage").val() && $(".changePage").val() > 0) {  
-		                    var redirectpage = $(".changePage").val() - 1;
-		                } else {  
-		                    var redirectpage = 0;
-		                }
-		                oTable.fnPageChange(redirectpage);  
-		            });
+               		jumpPage($("#table-main"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
@@ -321,11 +275,9 @@
 			
 			
 			//自定义显示数量
-			var tabot = $('<div class="botdiv"></div>');	
-			$('.tablecont').append(tabot);
-			$('.dataTables_info').appendTo($('.botdiv'));
-			$('.dataTables_length').appendTo($('.botdiv'));
-			$('.dataTables_paginate').appendTo($('.botdiv'));
+			$('.taskmsg').each(function(){
+		    	tabot($(this))
+		    })
  
            //自定义搜索
            $('.dsearch').on('keyup click', function () {
