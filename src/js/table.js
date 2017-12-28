@@ -33,10 +33,10 @@ var oLanguage={ //国际语言转化
     "sUrl": "",
     //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
     "oPaginate": {
-        "sFirst": "首页",
-        "sPrevious": " < ",
-        "sNext": " > ",
-        "sLast": " 尾页 "
+        // "sFirst": "首页",
+        "sPrevious": " <i class='iconfont icon-zuo'></i> ",
+        "sNext": " <i class='iconfont icon-you-copy'></i> ",
+        // "sLast": " 尾页 "
     }
 }
 
