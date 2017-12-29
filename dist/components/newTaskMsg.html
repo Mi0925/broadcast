@@ -133,14 +133,17 @@
 			</div>
 			<div class="oneitem-cont">
 				<p class="oneitem-tit"><small>*</small>覆盖范围</p>
-				<div class="covarea-sel">
+				<div class="covarea-sel gb-tree-box">
 					<span class="systit"><i class="iconfont icon-xuanze"></i>已选择地区</span>
 					<div class="gb-tree">
-						<ul id="treeDemo" class="ztree"></ul>
+						<ul id="treeRegion1" class="ztree"></ul>
 					</div>
 				</div>
-				<div class="covarea-all">
+				<div class="covarea-all gb-tree-box">
 					<span class="systit"><i class="iconfont icon-quanbu"></i>全部地区</span>
+					<div class="gb-tree">
+						<ul id="treeRegion2" class="ztree"></ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -412,16 +415,66 @@
 	})
 
 	var zTreeObj;
-   // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-   var setting = {};
-   // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-   var zNodes = [
-   {name:"test1", open:true, children:[
-      {name:"test1_1"}, {name:"test1_2"}]},
-   {name:"test2", open:true, children:[
-      {name:"test2_1"}, {name:"test2_2"}]}
-   ];
-   $(document).ready(function(){
-      zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-   });
+	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+	var selSetting = {
+		view:{
+			showLine:false,//去掉连接线
+			addDiyDom:addDiyDom
+		},
+		// edit:{
+		// 	enable:true,
+		// 	showRemoveBtn:true,//添加删除按钮
+		// 	showRenameBtn:false,//隐藏编辑按钮
+		// }
+	};
+	function removeTreeNode(event) {
+		setTimeout(function(){
+			var zTree = $.fn.zTree.getZTreeObj("treeRegion1"),
+			nodes = zTree.getSelectedNodes(),
+			treeNode = nodes[0];
+			if (nodes.length == 0) {
+				alert("请先选择一个节点");
+				return;
+			}
+			var callbackFlag = $("#callbackTrigger").attr("checked");
+			zTree.removeNode(treeNode, callbackFlag);
+		},100)
+	};
+	function addDiyDom(treeId, treeNode) {
+		var aObj = $("#" + treeNode.tId + "_a");
+		if ($("#diyBtn_"+treeNode.id).length>0) return;
+		var editStr ="<i class='iconfont icon-guanbi1' onclick='removeTreeNode()'></i>";
+		aObj.append(editStr);
+	};
+	
+	var allSetting = {
+		view:{
+			showLine:false,//去掉连接线
+		},
+		check:{//添加复选框
+			enable:true,
+		}
+	};
+	// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+	var zNodes = [{
+	    name: "test1",
+	    open: true,
+	    children: [{
+	        name: "test1_1"
+	    }, {
+	        name: "test1_2"
+	    }]
+	}, {
+	    name: "test2",
+	    open: true,
+	    children: [{
+	        name: "test2_1"
+	    }, {
+	        name: "test2_2"
+	    }]
+	}];
+	$(document).ready(function() {
+	    zTreeObj = $.fn.zTree.init($("#treeRegion1"), selSetting, zNodes);
+	    zTreeObj = $.fn.zTree.init($("#treeRegion2"), allSetting, zNodes);
+	});
 </script>
