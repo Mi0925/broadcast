@@ -193,3 +193,4 @@ $("body").on("click",".j-table-chart-tab",function(event) {
         $(".gb-table-chart-tab .gb-ctab").show().siblings("div").hide()
     }
 });
+

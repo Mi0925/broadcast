@@ -7,6 +7,7 @@ img { border: 0 none; width: auto\9; height: auto; max-width: 100%; vertical-ali
 .laydate_box,.laydate_box *{-moz-box-sizing: content-box;-webkit-box-sizing: content-box;box-sizing: content-box;}
 h1,h2,h3,h4,h5,h6{font-weight: normal;}
 .i{display: inline-block;vertical-align: middle;}
+.iT{display: inline-block;vertical-align: top;}
 input{outline: none;}
 /*去除iphone中input超大圆角的样式*/
 input[type=checkbox]{-webkit-appearance: none;-moz-appearance:none;appearance:none;-ms-appearance:none;}

@@ -97,6 +97,7 @@
 			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
 		}
 		function showRemoveBtn(treeId, treeNode) {
+			console.log(treeNode)
 			return !treeNode.isFirstNode;
 		}
 		function showRenameBtn(treeId, treeNode) {
