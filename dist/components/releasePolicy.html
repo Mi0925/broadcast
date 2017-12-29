@@ -21,11 +21,19 @@
 		    	<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>根据选择的内容自动筛选下方的系统资源</p>
 				<p class="gb-line"></p>
 				<p class="oneitem-tit"><small>*</small>调用系统资源</p>
-				<div class="sysreso-sel">
-					<span class="systit"><i class="iconfont icon-xuanze"></i>已选择资源</span>
-				</div>
-				<div class="sysreso-all">
-					<span class="systit"><i class="iconfont icon-quanbu"></i>全部资源</span>
+				<div class="sysreso-box">
+					<div class="sysreso-sel gb-tree-box left">
+						<span class="systit"><i class="iconfont icon-xuanze"></i>已选择资源</span>
+						<div class="gb-tree scroll">
+							<ul id="gb_tree_sel2" class="ztree"></ul>
+						</div>
+					</div>
+					<div class="sysreso-all gb-tree-box right">
+						<span class="systit"><i class="iconfont icon-quanbu"></i>全部资源</span>
+						<div class="gb-tree scroll">
+							<ul id="gb_tree_all2" class="ztree"></ul>
+						</div>
+					</div>
 				</div>
 				<p class="gb-line"></p>
 				<div class="predictone">
@@ -231,4 +239,117 @@
 			$('.matlist li ').eq(0).find('input').prop('checked',true);
 		})
 	})
+
+
+
+	var treeNode_id=0;
+	var zTreeObj;
+	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+	var selSetting = {
+		view:{
+			showLine:false,//去掉连接线
+			addDiyDom:addDiyDom
+		}
+	};
+	var allSetting = {
+		view:{
+			showLine:false,//去掉连接线
+		},
+		check:{//添加复选框
+			enable:true,
+		}
+	};
+
+
+	// 添加树关闭按钮点击事件
+	$("body").on('click', '#gb_tree_sel1 .tree-close', function(event) {
+		removeDom("gb_tree_sel1")
+	});
+	$("body").on('click', '#gb_tree_sel2 .tree-close', function(event) {
+		removeDom("gb_tree_sel2")
+	});
+
+
+	// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+	var zNodes = [{
+	    name: "浙江省",
+	    open: true,
+	    children: [{
+	        name: "杭州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "宁波市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    }]
+	}];
+
+
+
+
+	$(document).ready(function() {
+		$.fn.zTree.init($("#gb_tree_sel1"), selSetting, zNodes);
+		$.fn.zTree.init($("#gb_tree_sel2"), selSetting, zNodes);
+
+
+		$.fn.zTree.init($("#gb_tree_all1"), allSetting, zNodes);
+		$.fn.zTree.init($("#gb_tree_all2"), allSetting, zNodes);
+	});
 </script>
