@@ -13,70 +13,241 @@
 				<p class="oneitem-tit"><small>*</small>节目类型</p>
 				<div class="progtype">
 					<div class="progresone">
-						
-						
+						<ul class="matlist">
+							<li>
+								<div class="matcheck">
+									<input type="radio" name="matcho" id="matone" checked="checked" />
+									<label for="matone">调频电台</label>
+								</div>
+							</li>
+							<li>
+								<div class="matcheck">
+									<input type="radio" name="matcho" id="matwo" />
+									<label for="matwo">有线电视</label>
+								</div>
+							</li>
+							<li>
+								<div class="matcheck">
+									<input type="radio" name="matcho" id="mathr" />
+									<label for="mathr">无线地面数字电视</label>
+								</div>
+							</li>
+							<li>
+								<div class="matcheck">
+									<input type="radio" name="matcho" id="matfou" />
+									<label for="matfou">卫星电视</label>
+								</div>
+							</li>
+							<li>
+								<div class="matcheck">
+									<input type="radio" name="matcho" id="matfiv" />
+									<label for="matfiv">网络在线直播</label>
+								</div>
+							</li>
+							<li>
+								<div class="matcheck">
+									<input type="radio" name="matcho" id="matsix" />
+									<label for="matsix">网络在线媒体</label>
+								</div>
+							</li>
+						</ul>
 					</div>
 					<i class="iconfont icon-youjiantou"></i>
 					<div class="progrestwo">
-						
+						<div class="prchodiv prtype-onecho">
+							<p class="oneitem-tit">调频电台</p>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>频率</p>
+								<div class="layui-input-inline">
+									<select name="dispatch">
+										<option value="">请选择频率</option>
+										<option value="1">频率一</option>
+										<option value="2">频率二</option>
+										<option value="3">频率三</option>
+										<option value="4">频率四</option>
+										<option value="5">频率五</option>
+									</select>
+								</div>
+							</div>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>制式</p>
+								<ul class="msgrank">
+									<li>
+										<input type="radio" name="checkone" id="radone" checked="checked" />
+										<label for="radone">FM</label>
+									</li>
+									<li>
+										<input type="radio" name="checkone" id="radtwo" />
+										<label for="radtwo">CDR</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="prchodiv prtype-twocho">
+							<p class="oneitem-tit">有线电视</p>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>频率</p>
+								<div class="layui-input-inline">
+									<select name="dispatch">
+										<option value="">请选择频率</option>
+										<option value="1">频率一</option>
+										<option value="2">频率二</option>
+										<option value="3">频率三</option>
+										<option value="4">频率四</option>
+										<option value="5">频率五</option>
+									</select>
+								</div>
+							</div>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>调制方式</p>
+								<div class="layui-input-inline">
+									<select name="dispatch">
+										<option value="">请选择调试方式</option>
+										<option value="1">方式一</option>
+										<option value="2">方式二</option>
+										<option value="3">方式三</option>
+										<option value="4">方式四</option>
+									</select>
+								</div>
+							</div>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>符号率</p>
+								<ul class="msgrank">
+									<li>
+										<input type="radio" name="checkone" id="radone" />
+										<label for="radone">6875</label>
+									</li>
+									<li>
+										<input type="radio" name="checkone" id="radtwo" />
+										<label for="radtwo">6900</label>
+									</li>
+								</ul>
+							</div>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>节目号</p>
+								<div class="oneimp">
+									<input type="text"  id="impcontent" class="imptxt"/>
+								</div>
+							</div>
+						</div>
+						<div class="prchodiv prtype-thrcho">
+							<p class="oneitem-tit">无线地面数字电视</p>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>频率</p>
+								<div class="layui-input-inline">
+									<select name="dispatch">
+										<option value="">请选择频率</option>
+										<option value="1">频率一</option>
+										<option value="2">频率二</option>
+										<option value="3">频率三</option>
+										<option value="4">频率四</option>
+										<option value="5">频率五</option>
+									</select>
+								</div>
+							</div>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>节目号</p>
+								<div class="oneimp">
+									<input type="text"  id="impcontent" class="imptxt"/>
+								</div>
+							</div>
+						</div>
+						<div class="prchodiv prtype-foucho">
+							<p class="oneitem-tit">卫星电视</p>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>卫星型号</p>
+								<ul class="msgrank">
+									<li>
+										<input type="radio" name="checkone" id="radone" />
+										<label for="radone">中星6B</label>
+									</li>
+									<li>
+										<input type="radio" name="checkone" id="radtwo" />
+										<label for="radtwo">中星9</label>
+									</li>
+								</ul>
+							</div>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>极化方式</p>
+								<div class="layui-input-inline">
+									<select name="dispatch">
+										<option value="">请选择极化方式</option>
+										<option value="1">方式一</option>
+										<option value="2">方式二</option>
+										<option value="3">方式三</option>
+										<option value="4">方式四</option>
+									</select>
+								</div>
+							</div>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>节目号</p>
+								<div class="oneimp">
+									<input type="text"  id="impcontent" class="imptxt"/>
+								</div>
+							</div>
+						</div>
+						<div class="prchodiv prtype-fivcho">
+							<p class="oneitem-tit">网络在线直播</p>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>直播链接地址</p>
+								<div class="oneimp">
+									<input type="text"  id="impcontent" class="imptxt"/>
+								</div>
+							</div>
+						</div>
+						<div class="prchodiv prtype-sixcho">
+							<p class="oneitem-tit">网络在线媒体</p>
+							<div class="prtop">
+								<p class="oneitem-tit"><small>*</small>在线媒体列表</p>
+								<div class="layui-input-inline">
+									<select name="dispatch">
+										<option value="">请选择在线媒体列表</option>
+										<option value="1">在线媒体一</option>
+										<option value="2">在线媒体二</option>
+										<option value="3">在线媒体三</option>
+										<option value="4">在线媒体四</option>
+										<option value="5">在线媒体五</option>
+									</select>
+								</div>
+							</div>
+						</div>
 					</div>	
 				</div>
-				<div class="predictone">
-					<p class="oneitem-tit"><small>*</small>播出模式</p>
+				<div class="progtype">
+					<p class="oneitem-tit"><small>*</small>所属地区</p>
 					<div class="layui-input-inline">
 						<select name="dispatch"> <!-- lay-verify="required" lay-search="" -->
-							<option value="">请选择播出模式</option>
-							<option value="1">模式一</option>
-							<option value="2">模式二</option>
-							<option value="3">模式三</option>
+							<option value="">请选择所属地区</option>
+							<option value="1">地区一</option>
+							<option value="2">地区二</option>
+							<option value="3">地区三</option>
+							<option value="4">地区四</option>
+							<option value="5">地区五</option>
+							<option value="6">地区六</option>
+							<option value="7">地区七</option>
+							<option value="8">地区八</option>
+							<option value="9">地区九</option>
+							<option value="10">地区十</option>
+							<option value="11">地区十一</option>
+							<option value="12">地区十二</option>
 						</select>
 					</div>
 				</div>
-				<div class="predictwo">
-					<p class="oneitem-tit"><small>*</small>播出时长</p>
-					<div class="layui-input-inline">
-						<select name="dispatch"> <!-- lay-verify="required" lay-search="" -->
-							<option value="">请选择播出时长</option>
-							<option value="1">1分钟</option>
-							<option value="2">2分钟</option>
-							<option value="3">3分钟</option>
-							<option value="4">4分钟</option>
-							<option value="5">5分钟</option>
-							<option value="6">6分钟</option>
-							<option value="7">7分钟</option>
-						</select>
-					</div>
-				</div>
-				<div class="predictone">
-					<p class="oneitem-tit"><small>*</small>发布间隔</p>
-					<div class="layui-input-inline">
-						<select name="dispatch"> <!-- lay-verify="required" lay-search="" -->
-							<option value="">请选择发布间隔</option>
-							<option value="1">1分钟</option>
-							<option value="2">2分钟</option>
-							<option value="3">3分钟</option>
-							<option value="4">4分钟</option>
-						</select>
-					</div>
-				</div>
-				<div class="predictwo">
-					<p class="oneitem-tit"><small>*</small>重复次数</p>
-					<div class="layui-input-inline">
-						<select name="dispatch"> <!-- lay-verify="required" lay-search="" -->
-							<option value="">请选择重复次数</option>
-							<option value="1">不重复</option>
-							<option value="2">一次</option>
-							<option value="3">两次</option>
-							<option value="4">三次</option>
-						</select>
+				<div class="msgcont">
+					<p class="oneitem-tit">备注</p>
+					<div class="txtimp">
+						<textarea id="imparea" class="imparea" maxlength="200" onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#ccc'}">请输入消息文本</textarea>
+						<span class="area-count"><span class="countnew">0</span>/200</span>
 					</div>
 				</div>
 			</div>
 		</div>
 		
 		<div class="tocreat">
-			<input type="button" value="确认创建" class="tocreatbtn" />
-			<p class="warnword relwarn"><i class="iconfont icon-11"></i>0123任务消息的任务策略已经创建，请等待审核！</p>
+			<div class="progcreat">
+				<input type="button" value="清空" class="toemptybtn" />
+				<input type="button" value="确认创建" class="tocreatbtn" />
+			</div>
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 	</div>
@@ -88,7 +259,7 @@
 		</div>
 		<span class="triangle"><em></em></span>
 	</div></form>
-	
+
 </div>
 
 	
@@ -97,7 +268,23 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		var poltit = ['策略一','策略二','策略三','策略四','策略五','策略六','策略七','策略八','策略九','策略十'];
+		if(parseInt($('.progtype').css('height')) > 418){
+			$('.progtype i').removeClass('icon-youjiantou').addClass('icon-dotted-arrow-down');
+		}else{
+			$('.progtype i').removeClass('icon-dotted-arrow-down').addClass('icon-youjiantou');
+		}
+		$(window).resize(function(){
+			if(parseInt($('.progtype').css('height')) > 418){
+				$('.progtype i').removeClass('icon-youjiantou').addClass('icon-dotted-arrow-down');
+			}else{
+				$('.progtype i').removeClass('icon-dotted-arrow-down').addClass('icon-youjiantou');
+			}
+		})
+
+		$('#imparea').on('keyup', function() {  
+		    $('.area-count .countnew').html($('#imparea').val().length);  
+		});
+
 		layui.use('form', function(){
 			var form = layui.form;
 
@@ -106,77 +293,23 @@
 			$('.layui-select-title').append(itbtn);
 			$('.gb-form .layui-form-radio').remove();
 			
-			var thePolicy = $('.form-oneitem').eq(0).clone(true);
-			//console.log(thePolicy);
-			$('#toadd').click(toadd);
-			function toadd(){
-				$('.reladd').before(thePolicy);
-				thePolicy = $('.form-oneitem').eq(0).clone(true);
-				var thecount = $('.form-oneitem').length;
-				//console.log(thecount);
-				for(var i=0;i<thecount;i++){
-					$('.form-oneitem').eq(i).find('.fortit .oneitem-tit').html(poltit[i]);
-				}
-				layui.use('form', function(){
-					var form = layui.form;//高版本建议把括号去掉，有的低版本，需要加()
-					form.render();
-
-					var itbtn = $('<span class="itbtn"></span>');
-					$('.layui-select-title').append(itbtn);
-					$('.gb-form .layui-form-radio').remove();
-				})
-			}
 		});
 		
-
-		$(function() {
-			$(document).on('click','#reltodel',function(event) {
-		        showDiv();
-		        $(this).parents('.form-oneitem').addClass('waitdel');
-		        //$(myDiv).toggle();
-		        $(document).one("click",
-		        function() { 
-		            $('.choose').hide();
-		            $('.form-oneitem').removeClass('waitdel');
-		        });
-		        event.stopPropagation(); 
-		    });
-		    
-		    $('.choose').click(function(event) {
-		        event.stopPropagation(); 
-		    });
-		});
-		function showDiv() {
-			var x = event.clientX - event.offsetX;
-			var y = event.clientY - event.offsetY;
-			$('.choose').css({'display':'block','top':y-80,'left':x-112});
-		}
-
-		$('.cho-delete').click(function(){
-			$('.choose').hide();
-			$('.form-oneitem.waitdel').remove();
-			var thecount = $('.form-oneitem').length;
-			for(var i=0;i<thecount;i++){
-				$('.form-oneitem').eq(i).find('.fortit .oneitem-tit').html(poltit[i]);
-			}
+		$('.matlist li').find('.matcheck label').click(function(){
+			//console.log($(this).parents('li').index());
+			var theshow = $(this).parents('li').index();
+			$('.prchodiv').hide();
+			$('.prchodiv').eq(theshow).show();
 		})
-		$('.cho-cancel').click(function(){
-			$('.choose').hide();
-			$('.form-oneitem').removeClass('waitdel');
-		})
-
-		$('.gb-main-item').scroll(function(){
-			if($('.choose').is(':visible')){
-				$('.choose').hide();
-				$('.form-oneitem').removeClass('waitdel');
-			}
-		})
-
-
-		$(document).on('click','.fileconv-btn',function(){
-			$('.popwindow').show();
-			$('.toshift').show();
-			$('.matlist li ').eq(0).find('input').prop('checked',true);
+		
+		$('.toemptybtn').click(function(){
+			$('.imptxt').val('');
+			$('.imparea').val('请输入消息文本');
+			$('.imparea').css('color','#ccc');
+			$('.countnew').html('0');
+			$('.prtop .msgrank li input').prop('checked',false);
+			$('.gb-form .layui-form-select .layui-input').val('');
+			$('.layui-anim-upbit dd').removeClass('layui-this');
 		})
 	})
 </script>
