@@ -350,51 +350,47 @@
 		var uncH = parseInt($('.uncont').css('height'));
 		$('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});
 
+		$(document).on('click','.toswitch',function(){
+			$('.popwindow').show();
+			$('.toshift').show();
+			$('.matlist li ').eq(0).find('input').prop('checked',true);
+			$('.succmat').hide();
+			$('.tomat').hide();
+		})
+
 		$(document).on('click','.filepre-btn',function(){
 			$('.popwindow').show();
 			$('.unword').html($(this).parents('li').find('.thename').html());
 			$('.unreason').css({'z-index':'1','opacity':1,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"});
 		})
 
-	
-		$('.popwindow').click(function(){
-			$(this).hide();
-			$('.toshift').hide();
-			$('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
-		})
-		$('.popclose').click(function(){
-			$('.popwindow').hide();
-			$('.toshift').hide();
-			$('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
-		})
-		$('.un-confirm').click(function(){
-			$('.popwindow').hide();
-			$(this).parents('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
-		})
-
 		$(document).on('click','.fileconv-btn',function(){
 			$('.popwindow').show();
 			$('.toshift').show();
 			$('.matlist li ').eq(0).find('input').prop('checked',true);
+			$('.succmat').hide();
+			$('.tomat').hide();
 		})
 
+		
 		layui.use('element', function(){
 		  var $ = layui.jquery
 		  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 		  
 		  //触发事件
+
 		  var active = {
 		    loading: function(othis){
 		      var DISABLED = 'layui-btn-disabled';
 		      if(othis.hasClass(DISABLED)) return;
-		    
+		      
 		      //模拟loading
-		      var n = 0, timer = setInterval(function(){
+		      var n = 0,timer = setInterval(function(){
 		        n = n + Math.random()*10|0;  
 		        if(n>100){
 		          n = 100;
 		          clearInterval(timer);
-		          //othis.removeClass(DISABLED);
+		          othis.removeClass(DISABLED);
 		          $('.tomat').hide();
 		          $('.succmat').show();
 		        }

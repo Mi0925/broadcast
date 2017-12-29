@@ -57,7 +57,7 @@ table.dataTable thead th{height:36px;line-height:36px;padding-top:0;padding-bott
 th span.addselect{display:inline-block;background:transparent; overflow: visible;position:absolute;top:0;left:-10px;width:20px;height:36px;margin:0;text-align: left;color:#7c8491;font-size:15px;margin-left: 78px;cursor: pointer;}
 th .dataTables_sizing{display: none} 
 th .dataTables_sizing .addselect{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"}
-.addselect select{position: absolute;top: 0px;left: -60px;z-index: 1;height:36px;color:#7c8491;line-height:36px;border-radius:5px;cursor: pointer;opacity: 0;display:block;font-size:12px;}
+.addselect select{position: absolute;top: 0px;left: -50px;z-index: 1;height:36px;color:#7c8491;line-height:36px;border-radius:5px;cursor: pointer;opacity: 0;display:block;font-size:12px;}
 .dataTables_wrapper{overflow-x:auto;}
 .dataTables_scrollHeadInner,table.dataTable,.dataTables_scrollBody{width:100%!important;}
 .dataTables_scrollHead{width:100%!important;}
@@ -121,12 +121,14 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 .ellipsis{margin-left:6px;}
 .jump-page{display: inline-block;vertical-align: middle;font-size: 12px;margin-left: 15px;}
 .jump-page input{width: 28px;height: 28px;line-height: 28px;text-align: center;}
+.jump-page .dataTable-btn{margin-left:5px;}
+.jump-page .dataTable-btn:hover{color:#4579d8;}
 /* table end */
 
 
 /* popwindow start */
 .popwindow{width:100%;height:100%;position:fixed;top:0;left:0;background:#000;opacity:0.5;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";z-index: 1;display: none}
-.preview,.review,.unreason,.fillin,.toshift{width:518px;height:460px;position:absolute;top:50%;left:50%;margin-left:-259px;margin-top:-230px;background:#fff;z-index: 1;border:1px solid #d8d8d8;border-radius:5px;display: none}
+.preview,.review,.unreason,.fillin,.toshift{width:518px;height:460px;position:absolute;top:50%;left:50%;margin-left:-259px;margin-top:-230px;background:#fff;z-index: 2;border:1px solid #d8d8d8;border-radius:5px;display: none}
 .unreason{z-index: -1;display: block;opacity: 0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"}
 .poptit{width:100%;height:43px;line-height:42px;border-bottom:1px solid #D8D8D8;box-shadow:0px -20px 15px #f4f4f4 inset;padding-left:19px;color:#585c65;}
 .popclose{width:16px;height:16px;display: inline-block;color:#9aa3b2;cursor: pointer;position:absolute;top:12px;right:20px;}
@@ -182,7 +184,16 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 @media screen and (max-width:1365px){
 	.gb-ctab .tklay{width:100%;}
 	.gb-ctab .tksearch{float:left;margin-top:15px;}
-	.gb-ctab .tksearch input{width:433px;} 
+	.gb-ctab .tksearch input{width:432px;} 
 }
 /* popwindow end */
 
+
+/* programResources */
+#table-mainthr .thetab{padding-top:60px;}
+@media screen and (max-width:1500px){
+	.gb-table .tklay{width:100%;}
+	#table-mainthr .tksearch{float:left;margin:13px 0;}
+	#table-mainthr .thetab{padding-top:110px;}
+	#table-mainthr .tksearch input{width:432px;}
+}

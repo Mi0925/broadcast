@@ -41,6 +41,14 @@ Router.route('/newTaskMsg', function() {
 Router.route('/releasePolicy', function() {
   gbMainContent('components/releasePolicy.html', RoundaboutSet);
 });
+/*节目资源*/
+Router.route('/programResources', function() {
+  gbMainContent('components/programResources.html', RoundaboutSet);
+});
+/*新建节目资源*/
+Router.route('/newProgResources', function() {
+  gbMainContent('components/newProgResources.html', RoundaboutSet);
+});
 Router.route('/round2', function() {
   gbMainContent('components/round2.html', RoundaboutSet);
 });

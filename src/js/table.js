@@ -62,3 +62,50 @@ function jumpPage($this) {
         oTable.fnPageChange(redirectpage);  
     });  
 }
+
+/*popwindow*/
+$(document).on('click','.operbtn',function(){
+    $('.popwindow').show();
+    $('.preview').show();
+})
+
+$(document).on('click','.audit',function(){
+    $('.popwindow').show();
+    $('.review').show();
+})
+$(document).on('click','.notpass',function(){
+    $('.popwindow').show();
+    $('.unreason').css({'z-index':'1','opacity':1,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"});
+})
+
+$(document).on('click','.popwindow',function(){
+    $(this).hide();
+    $('.preview').hide();
+    $('.review').hide();
+    $('.fillin').hide();
+    $('.toshift').hide();
+    $('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+})
+$(document).on('click','.popclose',function(){
+    $('.popwindow').hide();
+    
+    $(this).parent().hide();
+    $('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+})
+$(document).on('click','.revno',function(){
+    $('.review').hide();
+    $('.fillin').show();
+})
+$(document).on('click','.rev-cancel',function(){
+    $('.popwindow').hide();
+    $(this).parents('.fillin').hide();
+})
+$(document).on('click','.revyes',function(){
+    $('.popwindow').hide();
+    $(this).parents('.review').hide();
+    $(this).parents('.fillin').hide();
+})
+$(document).on('click','.un-confirm',function(){
+    $('.popwindow').hide();
+    $(this).parents('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+})
