@@ -69,3 +69,4 @@ var unitybmap=null;//单一事件地图
 var legendSucceed=[];
 var legendProcess=[];
 var legendFailure=[];
+
