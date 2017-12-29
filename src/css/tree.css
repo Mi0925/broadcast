@@ -5,3 +5,6 @@
 .gb-tree-box .systit i{font-size: 12px;margin-right: 8px;}
 .gb-tree-box{margin-top: 10px;}
 .gb-tree{border: 1px solid #d8d8d8;border-radius: 5px;padding: 10px;}
+
+
+.gb-tree .ztree li span.button.noline_close{background-position: 0px 0px;}
