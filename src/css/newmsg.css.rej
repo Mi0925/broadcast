@@ -1,0 +1,25 @@
+diff a/src/css/newmsg.css b/src/css/newmsg.css	(rejected hunks)
+@@ -113,4 +113,23 @@
+ .progrestwo{float:right;}
+ .progtype i{position:absolute;top:50%;left:50%;margin-left:-8px;color:#7c8491;}
+ 
++=======
++
++
++
++/*树*/
++.covarea-sel{width: 48%;float: left;}
++.covarea-all{width: 48%;float: right;}
++.gb-tree-box .systit{font-size: 12px;margin-bottom: 5px;display: block;}
++.gb-tree-box .systit i{font-size: 12px;margin-right: 8px;}
++.gb-tree-box{margin-top: 10px;}
++.gb-tree{border: 1px solid #d8d8d8;border-radius: 5px;padding: 10px;}
++
++
++
++
++
++
++
++>>>>>>> ce6fa55de1657dd5d4ccdcab425fd36aa25f6263
+ 
