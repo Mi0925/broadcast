@@ -52,7 +52,7 @@
 .filelist{width:100%;}
 .filelist li{width:100%;zoom:1;line-height:50px;border-bottom:1px dashed #d8d8d8;}
 .filename{float:left;}
-.filename i{color:#ffa41f;font-size:24px;float:left;margin-top: 1px;margin-right:2px;}
+.filename i{color:#ffa41f;float:left;margin-top: 1px;margin-right:5px;}
 .filebtn{float:right;}
 .filedel-btn,.filepre-btn,.fileconv-btn{width: 44px;height: 22px;line-height: 20px;font-size: 12px;margin-left: 6px;color:#7c8491;background:#fff;border:1px solid #d8d8d8;cursor: pointer;border-radius:2px;box-shadow:0px -10px 10px #f4f4f4 inset;}
 .fileconv-btn{border-color:#4579d8;background:#4579d8;box-shadow:0px 0px 0px #4579d8 inset;color:#fff;}
@@ -106,20 +106,10 @@
 
 /* newProgResources */
 .newprog .oneimp{margin-bottom:20px;}
+.progtype{width:100%;position:relative;zoom:1;}
+.progtype:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
+.progresone,.progrestwo{float:left;width:48.5%;height:418px;border:1px solid #d8d8d8;border-radius:5px;}
+.progrestwo{float:right;}
+.progtype i{position:absolute;top:50%;left:50%;margin-left:-8px;color:#7c8491;}
 
-/*树*/
-.covarea-sel{width: 48%;float: left;}
-.covarea-all{width: 48%;float: right;}
-.gb-tree-box .systit{font-size: 12px;margin-bottom: 5px;display: block;}
-.gb-tree-box .systit i{font-size: 12px;margin-right: 8px;}
-.gb-tree-box{margin-top: 10px;}
-.gb-tree{border: 1px solid #d8d8d8;border-radius: 5px;padding: 10px;}
-
-
-
-
-
-
-
->>>>>>> 95fbb7b2b80a872ff212f906b6005dca7e26ce15
 
