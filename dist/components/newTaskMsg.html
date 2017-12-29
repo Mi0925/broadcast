@@ -133,16 +133,16 @@
 			</div>
 			<div class="oneitem-cont">
 				<p class="oneitem-tit"><small>*</small>覆盖范围</p>
-				<div class="covarea-sel gb-tree-box">
+				<div class="covarea-sel gb-tree-box left">
 					<span class="systit"><i class="iconfont icon-xuanze"></i>已选择地区</span>
-					<div class="gb-tree">
-						<ul id="treeRegion1" class="ztree"></ul>
+					<div class="gb-tree scroll">
+						<ul id="gb_tree_sel1" class="ztree"></ul>
 					</div>
 				</div>
-				<div class="covarea-all gb-tree-box">
+				<div class="covarea-all gb-tree-box right">
 					<span class="systit"><i class="iconfont icon-quanbu"></i>全部地区</span>
-					<div class="gb-tree">
-						<ul id="treeRegion2" class="ztree"></ul>
+					<div class="gb-tree scroll">
+						<ul id="gb_tree_all1" class="ztree"></ul>
 					</div>
 				</div>
 			</div>
@@ -153,11 +153,17 @@
 			</div>
 			<div class="oneitem-cont">
 				<p class="oneitem-tit"><small>*</small>调用系统资源</p>
-				<div class="sysreso-sel">
+				<div class="sysreso-sel gb-tree-box left">
 					<span class="systit"><i class="iconfont icon-xuanze"></i>已选择资源</span>
+					<div class="gb-tree scroll">
+						<ul id="gb_tree_sel2" class="ztree"></ul>
+					</div>
 				</div>
-				<div class="sysreso-all">
+				<div class="sysreso-all gb-tree-box right">
 					<span class="systit"><i class="iconfont icon-quanbu"></i>全部资源</span>
+					<div class="gb-tree scroll">
+						<ul id="gb_tree_all2" class="ztree"></ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -414,39 +420,15 @@
 		});
 	})
 
+	var treeNode_id=0;
 	var zTreeObj;
 	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 	var selSetting = {
 		view:{
 			showLine:false,//去掉连接线
 			addDiyDom:addDiyDom
-		},
-		// edit:{
-		// 	enable:true,
-		// 	showRemoveBtn:true,//添加删除按钮
-		// 	showRenameBtn:false,//隐藏编辑按钮
-		// }
+		}
 	};
-	function removeTreeNode(event) {
-		setTimeout(function(){
-			var zTree = $.fn.zTree.getZTreeObj("treeRegion1"),
-			nodes = zTree.getSelectedNodes(),
-			treeNode = nodes[0];
-			if (nodes.length == 0) {
-				alert("请先选择一个节点");
-				return;
-			}
-			var callbackFlag = $("#callbackTrigger").attr("checked");
-			zTree.removeNode(treeNode, callbackFlag);
-		},100)
-	};
-	function addDiyDom(treeId, treeNode) {
-		var aObj = $("#" + treeNode.tId + "_a");
-		if ($("#diyBtn_"+treeNode.id).length>0) return;
-		var editStr ="<i class='iconfont icon-guanbi1' onclick='removeTreeNode()'></i>";
-		aObj.append(editStr);
-	};
-	
 	var allSetting = {
 		view:{
 			showLine:false,//去掉连接线
@@ -455,26 +437,89 @@
 			enable:true,
 		}
 	};
+	// 添加树关闭按钮点击事件
+	$("body").on('click', '#gb_tree_sel1 .tree-close', function(event) {
+		removeDom("gb_tree_sel1")
+	});
+	$("body").on('click', '#gb_tree_sel2 .tree-close', function(event) {
+		removeDom("gb_tree_sel2")
+	});
 	// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
 	var zNodes = [{
-	    name: "test1",
+	    name: "浙江省",
 	    open: true,
 	    children: [{
-	        name: "test1_1"
-	    }, {
-	        name: "test1_2"
-	    }]
-	}, {
-	    name: "test2",
-	    open: true,
-	    children: [{
-	        name: "test2_1"
-	    }, {
-	        name: "test2_2"
+	        name: "杭州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "宁波市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
+	    },{
+	        name: "温州市",
+	        children: [{
+		        name: "上城区",
+		        children: [{
+			        name: "湖滨街道"
+			    }]
+		    }]
 	    }]
 	}];
 	$(document).ready(function() {
-		$.fn.zTree.init($("#treeRegion1"), selSetting, zNodes);
-		$.fn.zTree.init($("#treeRegion2"), allSetting, zNodes);
+		$.fn.zTree.init($("#gb_tree_sel1"), selSetting, zNodes);
+		$.fn.zTree.init($("#gb_tree_sel2"), selSetting, zNodes);
+
+
+		$.fn.zTree.init($("#gb_tree_all1"), allSetting, zNodes);
+		$.fn.zTree.init($("#gb_tree_all2"), allSetting, zNodes);
 	});
 </script>
