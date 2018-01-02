@@ -75,10 +75,10 @@ $(document).on('click','.audit',function(){
 })
 $(document).on('click','.notpass',function(){
     $('.popwindow').show();
-    $('.unreason').css({'z-index':'1','opacity':1,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"});
+    $('.unreason').css({'z-index':'101','opacity':1,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"});
 })
 
-$(document).on('click','.popwindow',function(){
+/**/$(document).on('click','.popwindow',function(){
     $(this).hide();
     $('.preview').hide();
     $('.review').hide();

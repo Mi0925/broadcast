@@ -14,7 +14,7 @@
 	<!-- 图标本地链接 -->
 	<!-- <link rel="stylesheet" href="./iconfont/iconfont.css"> -->
 	<!-- 图标在线链接 -->
-	<link rel="stylesheet" href="http://at.alicdn.com/t/font_484596_72bnwugciynzh0k9.css">
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_484596_mdgri8b8y7xecdi.css">
 </head>
 <body>
 <div class="gb-wrap">
@@ -39,9 +39,7 @@
 					</div>
 					<div class="fratwo">
 						<span class="ictwo"><i class="iconfont icon-mima"></i></span>
-						<!-- <input type="text" value="密码" onfocus="if(this.value==defaultValue){this.value = '';this.type='password';this.style.color='#333';this.style.borderColor='#999';}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';this.type='text';}this.style.borderColor='#d8d8d8';"/> -->
-						<input type="password" id="pwd" />
-						<input type="text" value="密码" id="tx"/>
+						<input type="text" value="密码" onfocus="if(this.value==defaultValue){this.value = '';this.type='password';this.style.color='#333';this.style.borderColor='#999';}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';this.type='text';}this.style.borderColor='#d8d8d8';"/>
 						<span class="iconfont icon-11 itok "></span>
 						<span class=" iconfont icon-iconfontjinggao itwarn"></span>
 					</div>
@@ -52,8 +50,8 @@
 						</div>
 						<span class="codeimg"><img src="src/images/authcode.png" alt="" /></span>
 					</div>
-					<input type="button" value="登录" class="loginbtn" />
-					<a href="javascript:void(0);" class=" forget"><i class="iconfont icon-wenhao"></i>忘记密码</a>
+					<input type="button" value="登录" class="disablebtn " disabled="disabled" /><!-- loginbtn -->
+					<a href="forget.html" class=" forget"><i class="iconfont icon-wenhao"></i>忘记密码</a>
 				</div>
 			</div>
 		</div>
@@ -63,10 +61,43 @@
 
 <script src="plugins/DataTables-1.10.12/media/js/jquery.js"></script>
 <!--<script src="plugins/jquery.roundabout2.js"></script>
-<script src="plugins/layui/layui.js"></script> -->
-<script src="src/js/main.min.js"></script> 
-<script>
+<script src="plugins/layui/layui.js"></script>
+<script src="src/js/main.min.js"></script>  -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		
 
+		$('.fracode input').bind('input propertychange',function(){
+			if($('.fracode input').val() != '' && $('.fracode input').val() != '验证码' && $('.fraone input').val() != '' && $('.fraone input').val() != '用户名' && $('.fratwo input').val() != '' && $('.fratwo input').val() != '密码'){
+				$('.disablebtn').addClass('loginbtn');
+				$('.disablebtn').attr('disabled',false);
+			}else{
+				$('.disablebtn').removeClass('loginbtn');
+				$('.disablebtn').attr('disabled',true);
+			}
+		})
+		$('.fraone input').bind('input propertychange',function(){
+			if($('.fracode input').val() != '' && $('.fracode input').val() != '验证码' && $('.fraone input').val() != '' && $('.fraone input').val() != '用户名' && $('.fratwo input').val() != '' && $('.fratwo input').val() != '密码'){
+				$('.disablebtn').addClass('loginbtn');
+				$('.disablebtn').attr('disabled',false);
+			}else{
+				$('.disablebtn').removeClass('loginbtn');
+				$('.disablebtn').attr('disabled',true);
+			}
+		})
+		$('.fratwo input').bind('input propertychange',function(){
+			if($('.fracode input').val() != '' && $('.fracode input').val() != '验证码' && $('.fraone input').val() != '' && $('.fraone input').val() != '用户名' && $('.fratwo input').val() != '' && $('.fratwo input').val() != '密码'){
+				$('.disablebtn').addClass('loginbtn');
+				$('.disablebtn').attr('disabled',false);
+			}else{
+				$('.disablebtn').removeClass('loginbtn');
+				$('.disablebtn').attr('disabled',true);
+			}
+		})
+		$(document).on('click','.loginbtn',function(){
+			//console.log(1);
+		})
+	})
 </script>
 </body>
 </html>
