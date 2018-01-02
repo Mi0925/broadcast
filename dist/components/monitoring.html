@@ -95,7 +95,7 @@
 						        </tfoot>
 						        <tbody>
 						        	<tr>
-						        		<td><span class='rankimg' vel='5'><img src='../src/images/rank-red.png'/></span></td>
+						        		<td><span class='rankimg' vel='5'><img src='src/images/rank-red.png'/></span></td>
 						        		<td>杭州西湖区雷暴红色警报消息</td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
@@ -103,7 +103,7 @@
 						        		<td><input type="button" value="监控" class="tomonitoring" /></td>
 						        	</tr>
 						        	<tr>
-						        		<td><span class='rankimg' vel='5'><img src='../src/images/rank-red.png'/></span></td>
+						        		<td><span class='rankimg' vel='5'><img src='src/images/rank-red.png'/></span></td>
 						        		<td>杭州西湖区雷暴红色警报消息</td>
 						        		<td>浙江省应急办</td>
 						        		<td>橙子</td>
@@ -111,7 +111,7 @@
 						        		<td><input type="button" value="监控" class="tomonitoring" /></td>
 						        	</tr>
 						        	<tr>
-						        		<td><span class='rankimg' vel='3'><img src='../src/images/rank-yellow.png'/></span></td>
+						        		<td><span class='rankimg' vel='3'><img src='src/images/rank-yellow.png'/></span></td>
 						        		<td>杭州西湖区雷暴红色警报消息</td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
@@ -119,7 +119,7 @@
 						        		<td><input type="button" value="监控" class="tomonitoring" /></td>
 						        	</tr>
 						        	<tr>
-						        		<td><span class='rankimg' vel='1'><img src='../src/images/rank-green.png'/></span></td>
+						        		<td><span class='rankimg' vel='1'><img src='src/images/rank-green.png'/></span></td>
 						        		<td>杭州西湖区雷暴红色警报消息</td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
@@ -127,7 +127,7 @@
 						        		<td><input type="button" value="监控" class="tomonitoring tomact" /></td>
 						        	</tr>
 						        	<tr>
-						        		<td><span class='rankimg' vel='4'><img src='../src/images/rank-orange.png'/></span></td>
+						        		<td><span class='rankimg' vel='4'><img src='src/images/rank-orange.png'/></span></td>
 						        		<td>杭州西湖区2017年09月09日晚台...</td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
@@ -135,7 +135,7 @@
 						        		<td><input type="button" value="监控" class="tomonitoring" /></td>
 						        	</tr>
 						        	<tr>
-						        		<td><span class='rankimg' vel='2'><img src='../src/images/rank-blue.png'/></span></td>
+						        		<td><span class='rankimg' vel='2'><img src='src/images/rank-blue.png'/></span></td>
 						        		<td>杭州西湖区2017年09月09日晚台...</td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
@@ -407,7 +407,7 @@ function unityIncident() {
 		    series: [{
 		    	name:'覆盖人口',
 		        type: 'line',
-		        symbol:'image://../src/images/icon-line-formatter.png',
+		        symbol:'image://src/images/icon-line-formatter.png',
 		        // showSymbol:false,
 		        symbolSize:'15',
 		        data: [
@@ -565,7 +565,7 @@ function unityIncident() {
 		    series: [{
 		    	name:'覆盖人口',
 		        type: 'line',
-		        symbol:'image://../src/images/icon-taskNumformatter.png',
+		        symbol:'image://src/images/icon-taskNumformatter.png',
 		        // showSymbol:false,
 		        symbolSize:'15',
 		        data: [
@@ -601,6 +601,7 @@ function unityIncident() {
 		setTimeout(function () {
 		    // 地图划分区域地点
 		    addDistrict("杭州",unitybmap,"#ff5b57");
+		    addDistrict("龙游县",unitybmap,"#ff5b57");
 		    addDistrict("宁波",unitybmap,"#ff5b57");
 		    addDistrict("嘉兴",unitybmap,"#fada00");
 		    addDistrict("绍兴",unitybmap,"#14ae8f");
@@ -1645,6 +1646,7 @@ function addIncident() {
 		setTimeout(function () {
 			// 地图划分区域地点
 		    addDistrict("杭州",allbmap);
+		    addDistrict("平阳县",allbmap);
 		    addDistrict("宁波",allbmap);
 		    addDistrict("嘉兴",allbmap);
 		    addDistrict("绍兴",allbmap);

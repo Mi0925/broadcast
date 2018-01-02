@@ -49,6 +49,10 @@ Router.route('/programResources', function() {
 Router.route('/newProgResources', function() {
   gbMainContent('components/newProgResources.html', RoundaboutSet);
 });
+// 编辑
+Router.route('/newTaskMsgEdit', function() {
+  gbMainContent('components/newTaskMsgEdit.html', RoundaboutSet);
+});
 Router.route('/round2', function() {
   gbMainContent('components/round2.html', RoundaboutSet);
 });

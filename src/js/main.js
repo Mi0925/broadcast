@@ -53,6 +53,36 @@ if (!Function.prototype.bind) {
 }
 
 
+// 点击链接加载对应页面
+$("body").on("click",".add_tab",function(){
+	// gbMainContent($(this).attr("url"),RoundaboutSet);
+	var nav_text=$(this).attr("name");
+	console.log(nav_text)
+	var url=$(this).attr("url")
+	add_tab(nav_text,url);
+})
+function add_tab(nav_text,url) {
+	$(".gb-tab .swiper-slide").removeClass('cur');
+	var blo=false;
+	$(".gb-tab .swiper-slide").each(function(){
+		if($(this).find("span").text()==nav_text){
+			$(".gb-tab .swiper-slide").eq($(this).index()).addClass("cur");
+			tabSwiper.swipeTo($(this).index());
+			blo=true;
+			return;
+		}
+	})
+	if(blo==true){
+		return;
+	}
+	var tabSlideHtml='<a href="#'+url.slice(10,-5)+'" url="'+url+'"><span>'+nav_text+
+						'</span>' +
+					'</a><i class="iconfont icon-guanbi close-tab"></i>';
+	tabSwiper.appendSlide(tabSlideHtml);
+	tabActive=$(".gb-tab .swiper-slide").length-1;
+	tabSwiper.swipeTo(tabActive);
+	$(".gb-tab .swiper-slide:last-child").addClass("cur");
+}
 
 
 // 全局变量

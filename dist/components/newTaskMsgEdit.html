@@ -1,7 +1,7 @@
 <div class="gb-form">
 	<form class="layui-form" action="">
 		<div class="newform">
-			<p class="newform-tit"><i class="iconfont icon-iconfontxinjianwenjian"></i>新建任务消息</p>
+			<p class="newform-tit"><i class="iconfont icon-iconfontxinjianwenjian"></i>编辑任务消息</p>
 			<div class="form-oneitem">
 				<div class="fortit">
 					<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
@@ -423,29 +423,8 @@
 	})
 
 	
-	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-	var selSetting = {
-		view:{
-			showLine:false,//去掉连接线
-			addDiyDom:addDiyDom
-		}
-	};
-	var allSetting = {
-		view:{
-			showLine:false,//去掉连接线
-		},
-		check:{//添加复选框
-			enable:true,
-		},
-		callback: {
-			onCheck: zTreeOnCheck
-		}
-	};
-	function zTreeOnCheck(event, treeId, treeNode) {
-	    console.log(treeNode)
-	};
 	// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-	var allData = [{
+	var zNodes = [{
 	    name: "浙江省",
 	    open: true,
 	    children: [{
@@ -514,18 +493,9 @@
 		    }]
 	    }]
 	}];
-	var selData=[]
 	$(document).ready(function() {
-		//带关闭按钮的树
-		$(".ztree-close").each(function() {
-			$.fn.zTree.init($(this), selSetting, selData);
-		});
-		//带复选框的树
-		$(".ztree-check").each(function() {
-			$.fn.zTree.init($(this), allSetting, allData);
-		});
 		// 初始化树
-		// ztree_Initialize();
+		ztree_Initialize();
 		// $.fn.zTree.init($("#gb_tree_all1"), allSetting, zNodes);
 		// $.fn.zTree.init($("#gb_tree_all2"), allSetting, zNodes);
 	});
