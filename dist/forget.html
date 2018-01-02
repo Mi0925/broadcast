@@ -9,47 +9,51 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1,maximum-scale=2,minimum-scale=1">
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="./layui/css/layui.css">
-	<link rel="stylesheet" type="text/css" href="./src/css/main.min.css">
+	<link rel="stylesheet" type="text/css" href="plugins/layui/css/layui.css">
+	<link rel="stylesheet" type="text/css" href="src/css/main.min.css">
 	<!-- 图标本地链接 -->
 	<!-- <link rel="stylesheet" href="./iconfont/iconfont.css"> -->
 	<!-- 图标在线链接 -->
-	<link rel="stylesheet" href="http://at.alicdn.com/t/font_484596_904hcey5f12oi529.css">
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_484596_mdgri8b8y7xecdi.css">
 </head>
 <body>
 <div class="gb-wrap">
-	<div class="loginout">
+	<div class="loginout gb-sign">
 		<div class="titbg">
 			<span class="titbef"></span>
 			<span class="titaft"></span>
 		</div>
 		<div class="logcent">
-			
 			<img src="src/images/log-tit.png" class="logtit">
-			<div class="logframe">
+			<div class="logframe forframe">
 				<div class="fratop">
-					<span class="fratit">忘记密码</span>
+					<span class="fratit">找回密码</span>
 				</div>
-				<div class="fracent">
-					<div class="fraone">
-						<span class="icone"></span>
-						<input type="text" value="用户名" onfocus="if(this.value==defaultValue){this.value = '';this.style.borderColor='#999';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}this.style.borderColor='#d8d8d8';"/>
+				<div class="fracent forcent">
+					<div class="forone">
+						<p class="forproblem">问题1：<span class="probdet">你女儿的出生日期？</span></p>
+						<input type="text"/>
+						<p class="pro-error">答案错误！</p>
 					</div>
-					<div class="fratwo">
-						<span class="ictwo"></span>
-						<!-- <input type="text" value="密码" onfocus="if(this.value==defaultValue){this.value = '';this.type='password';this.style.color='#333';this.style.borderColor='#999';}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';this.type='text';}this.style.borderColor='#d8d8d8';"/> -->
-						<input type="password" id="pwd" />
-						<input type="text" value="密码" id="tx"/>
+					<div class="fortwo">
+						<p class="forproblem">问题2：<span class="probdet">你的出生日期？</span></p>
+						<input type="text"/>
+						<!-- <p class="pro-error">答案错误！</p> -->
 					</div>
-					<div class="frathr">
-						<div class="fracode">
-							<span class="icthr"></span>
-							<input type="text" value="验证码" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333';this.style.borderColor='#999';}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}this.style.borderColor='#d8d8d8';"/>
+					<div class="forthr">
+						<p class="forproblem">问题3：<span class="probdet">你女儿的小名？</span></p>
+						<input type="text"/>
+						<!-- <p class="pro-error">答案错误！</p> -->
+					</div>
+					<div class="forfou">
+						<p class="forproblem">新密码</p>
+						<div class="forchange">
+							<input type="password"/>
+							<span class="seetxt"><i class="iconfont icon-yulan"></i></span>
 						</div>
-						<span class="codeimg"><img src="src/images/authcode.png" alt="" /></span>
 					</div>
-					<input type="button" value="登录" class="loginbtn" />
-					<a href="javascript:void(0);" class="forget">忘记密码</a>
+					<a href="javascript:void(0);" class="disablebtn ">确定</a><!--sign.html loginbtn -->
+					<a href="sign.html" class=" tosign"><i class="iconfont icon-signin"></i>登录</a>
 				</div>
 			</div>
 		</div>
@@ -57,28 +61,61 @@
 	</div>
 </div>
 
-<script src="src/plugins/jquery.js"></script>
-<script src="src/plugins/jquery.roundabout2.js"></script>
-<script src="layui/layui.js"></script>
-<script src="src/js/main.min.js"></script>
-<script>
- 	var tx = document.getElementById("tx"), pwd = document.getElementById("pwd");
-	tx.onfocus = function(){
-		if(this.value != "密码") return;
-		this.style.display = "none";
-		pwd.style.display = "";
-		pwd.value = "";
-		pwd.focus();
-	}
-	pwd.onblur = function(){
-		if(this.value != "") {
-			pwd.style.borderColor='#d8d8d8'; 
-		}else{
-			this.style.display = "none";
-			tx.style.display = "";
-			tx.value = "密码";
-		}
-	}
+<script src="plugins/DataTables-1.10.12/media/js/jquery.js"></script>
+<!--<script src="plugins/jquery.roundabout2.js"></script>
+<script src="plugins/layui/layui.js"></script>
+<script src="src/js/main.min.js"></script>  -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.seetxt').click(function(){
+			if($('.forchange input').val() != ''){
+				if($(this).hasClass('seepass')){
+					$('.forchange input').attr('type','password');
+					$(this).removeClass('seepass');
+				}else{
+					$('.forchange input').attr('type','text');
+					$(this).addClass('seepass');
+				}
+			}
+		})
+
+		$('.forone input').bind('input propertychange',function(){
+			if($('.forone input').val() != '' && $('.fortwo input').val() != '' && $('.forthr input').val() != '' && $('.forfou input').val() != ''){
+				$('.disablebtn').addClass('loginbtn');
+				$('.disablebtn').attr('href','sign.html');
+			}else{
+				$('.disablebtn').removeClass('loginbtn');
+				$('.disablebtn').attr('href','javascript:void(0);');
+			}
+		})
+		$('.fortwo input').bind('input propertychange',function(){
+			if($('.forone input').val() != '' && $('.fortwo input').val() != '' && $('.forthr input').val() != '' && $('.forfou input').val() != ''){
+				$('.disablebtn').addClass('loginbtn');
+				$('.disablebtn').attr('href','sign.html');
+			}else{
+				$('.disablebtn').removeClass('loginbtn');
+				$('.disablebtn').attr('href','javascript:void(0);');
+			}
+		})
+		$('.forthr input').bind('input propertychange',function(){
+			if($('.forone input').val() != '' && $('.fortwo input').val() != '' && $('.forthr input').val() != '' && $('.forfou input').val() != ''){
+				$('.disablebtn').addClass('loginbtn');
+				$('.disablebtn').attr('href','sign.html');
+			}else{
+				$('.disablebtn').removeClass('loginbtn');
+				$('.disablebtn').attr('href','javascript:void(0);');
+			}
+		})
+		$('.forfou input').bind('input propertychange',function(){
+			if($('.forone input').val() != '' && $('.fortwo input').val() != '' && $('.forthr input').val() != '' && $('.forfou input').val() != ''){
+				$('.disablebtn').addClass('loginbtn');
+				$('.disablebtn').attr('href','sign.html');
+			}else{
+				$('.disablebtn').removeClass('loginbtn');
+				$('.disablebtn').attr('href','javascript:void(0);');
+			}
+		})
+	})
 </script>
 </body>
 </html>
