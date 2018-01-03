@@ -7,8 +7,8 @@
 .talay-word{color:#585d66;margin-right:16px;float:left;line-height:40px;font-size:14px;}
 .talay-word i{font-size:13px;margin-right:8px;}
 .tklay .layui-input-inline{position:relative;margin-right:20px;float:left;}
-.tklay .layui-input{width:402px;height:40px;border-radius:5px;border:1px solid #d8d8d8;padding-left:20px;font-size:14px;color:#333;/* line-height:38px; */box-shadow:0px -10px 10px #f4f4f4 inset;}
-
+.tklay .layui-input{width:402px;height:40px;border-radius:5px;border:1px solid #d8d8d8;padding-left:20px;font-size:14px;color:#333;/* line-height:38px;box-shadow:0px -10px 10px #f4f4f4 inset; */}
+#layui-laydate1{box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.1);}
 
 /* placeholder style start */
 .layui-input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {color:#ccc;}
@@ -53,7 +53,8 @@
 .table-main thead th{border-bottom:1px solid #d8d8d8;}
 table.dataTable,table.dataTable th,table.dataTable td{box-sizing:border-box;}
 .gb-table table.dataTable.row-border tbody th,.gb-table  table.dataTable.row-border tbody td,.gb-table table.dataTable.display tbody th,.gb-table table.dataTable.display tbody td{border-bottom:1px solid #d8d8d8;border-top:0;}
-.gb-table table.dataTable tbody tr td:nth-child(2){/* width:100px; */text-align: center}
+/* table.dataTable thead th:nth-child(2){text-align: center}
+.gb-table table.dataTable tbody tr td:nth-child(1),.gb-table table.dataTable tbody tr td:nth-child(2){text-align: center} */
 table.dataTable thead th,.gb-table  table.dataTable thead td{border:0;}
 table.dataTable thead th{height:36px;line-height:36px;padding-top:0;padding-bottom:0;font-weight: 500;position:relative;}
 th span.addselect{display:inline-block;background:transparent; overflow: visible;position:absolute;top:0;left:-10px;width:20px;height:36px;margin:0;text-align: left;color:#7c8491;font-size:15px;margin-left: 78px;cursor: pointer;}
@@ -118,7 +119,7 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 .gb-table .chedel i{font-size:14px;margin-right:6px;}
 .gb-table .chedel:hover{color:#4579d8;} 
 .gb-table .warnword{width:100%;text-align: center;line-height:40px;font-size:14px;color:#7c8491;display: none}
-.gb-table table.dataTable.display tbody tr td:nth-child(4){text-align: center}
+#table-main table.dataTable.display tbody tr td:nth-child(4){text-align: center}
 .gb-table table.dataTable tbody td.dataTables_empty{width:100%;text-align: center}
 .ellipsis{margin-left:6px;}
 .jump-page{display: inline-block;vertical-align: middle;font-size: 12px;margin-left: 15px;}
