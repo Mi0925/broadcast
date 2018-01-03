@@ -33,6 +33,10 @@ Router.route('/recordOfSuccession', function() {
 Router.route('/newHandoverRecord', function() {
   gbMainContent('components/newHandoverRecord.html', RoundaboutSet);
 });
+/*编辑交接记录*/
+Router.route('/EditHandoverRecord', function() {
+  gbMainContent('components/EditHandoverRecord.html', RoundaboutSet);
+});
 
 /*首页*/
 Router.route("/index", function() {
