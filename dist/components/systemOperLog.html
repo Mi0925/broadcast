@@ -7,10 +7,10 @@
 			        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
 			        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
 		    	</div>
-		    	<a href="#/newHandoverRecord" class="add_tab newtk-btn" url="components/newHandoverRecord.html" name="新建交接记录">新建交接记录</a>
+		    	<a href="#/newOperLog" class="add_tab newtk-btn" url="components/newOperLog.html" name="新建运维日志">新建运维日志</a>
 			</div>
 			<div class="tksearch">
-				<input type="text" value="请输入操作帐号，操作内容" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
+				<input type="text" value="请输入登陆IP ，运维名称，运维内容" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
 				<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
 			</div>
 		</div>
@@ -23,13 +23,19 @@
 				            <th>序号</th>
 				            <th>操作账号</th>
 				            <th>登录IP</th>
-				            <th>操作内容</th>
+				            <th>运维名称</th>
+				            <th>运维内容</th>
 				            <th>操作时间</th>
+				            <th>操作</th>
+				            <th></th>
 				        </tr>
 			        </thead>
 			        <tfoot>
 				        <tr>
 							<th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
 				            <th></th>
 				            <th></th>
 				            <th></th>
@@ -43,8 +49,11 @@
 			        		<td><span class='tabnumb'>1</span></td>
 			        		<td>橙子</td>
 			        		<td>122.234.60.113</td>
-			        		<td>登录</td>
+			        		<td>运维名称</td>
+			        		<td>运维内容</td>
 			        		<td>2017-09-08  18:10:20</td>
+			        		<td><a href='#/newTaskMsgEdit' url='components/newTaskMsgEdit.html' class='editbtn add_tab' name='编辑'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_2' /><label for='check_2'></label></div></td>

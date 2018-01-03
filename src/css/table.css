@@ -34,9 +34,9 @@
 .tocho{text-align:center;width:24px;height:24px;display: inline-block;border:1px solid #d8d8d8;border-radius:3px;position:absolute;top:50%;margin-top:-12px;right:20px;cursor: pointer;box-shadow:0px -10px 10px #f4f4f4 inset;font-size:14px;color:#585d66;line-height:24px;}
 .newtk-btn{text-align:center;width:160px;height:40px;line-height:40px;color:#fff;font-size:14px;background:#4579d8;border-radius:5px;border:0;cursor: pointer;display: inline-block;}
 .newtk-btn:hover{background:#3c6dc7;color:#fff;}
-.tksearch{float:right;zoom:1;border:1px solid #d8d8d8;border-radius:5px;overflow: hidden;}
-.tksearch input{float:left;width:390px;height:40px;line-height:40px;padding-left:20px;font-size:14px;color:#ccc;border:0;}
-.tksrh-btn{float:left;width:60px;height:40px;border-left:1px solid #d8d8d8;background:#fff;box-shadow:0px -20px 10px #f4f4f4 inset;padding:9px 20px;cursor: pointer;}
+.tksearch{width:450px;float:right;zoom:1;border:1px solid #d8d8d8;border-radius:5px;overflow: hidden;position:relative;}
+.tksearch input{width:100%;height:40px;line-height:40px;padding-left:20px;padding-right:60px;font-size:14px;color:#ccc;border:0;}
+.tksrh-btn{position:absolute;top:0;right:0;width:60px;height:40px;border-left:1px solid #d8d8d8;background:#fff;box-shadow:0px -20px 10px #f4f4f4 inset;padding:9px 20px;cursor: pointer;}
 .tksrh-btn i{font-size:18px;color:#585d66;}
 .tksrh-btn:hover i{color:#000;}
 .msgtype{width:100%;margin:26px 0px 13px 0px;zoom:1;float:left;}
@@ -186,8 +186,7 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 .gb-ctab .botdiv{margin-top:30px;}
 @media screen and (max-width:1365px){
 	.gb-ctab .tklay{width:100%;}
-	.gb-ctab .tksearch{float:left;margin-top:15px;}
-	.gb-ctab .tksearch input{width:432px;} 
+	.gb-ctab .tksearch{float:left;margin-top:15px;width:492px;}
 }
 /* popwindow end */
 
@@ -196,9 +195,8 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 #table-mainthr .thetab,#table-mainfou .thetab{padding-top:60px;}
 @media screen and (max-width:1500px){
 	.gb-table .tklay{width:100%;}
-	#table-mainthr .tksearch{float:left;margin:13px 0;}
+	#table-mainthr .tksearch{float:left;margin:13px 0;width:492px;}
 	#table-mainthr .thetab{padding-top:110px;}
-	#table-mainthr .tksearch input{width:432px;}
 	#table-mainfou .tklay{width:auto;}
 	#table-mainfou .tksearch{margin:0;}
 }
