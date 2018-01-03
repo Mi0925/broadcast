@@ -53,6 +53,18 @@ Router.route('/newProgResources', function() {
 Router.route('/newTaskMsgEdit', function() {
   gbMainContent('components/newTaskMsgEdit.html', RoundaboutSet);
 });
+/*个人设置*/
+Router.route('/personalSetting', function() {
+  gbMainContent('components/personalSetting.html', RoundaboutSet);
+});
+/*交接班记录*/
+Router.route('/recordOfSuccession', function() {
+  gbMainContent('components/recordOfSuccession.html', RoundaboutSet);
+});
+/*新建交接记录*/
+Router.route('/newHandoverRecord', function() {
+  gbMainContent('components/newHandoverRecord.html', RoundaboutSet);
+});
 Router.route('/round2', function() {
   gbMainContent('components/round2.html', RoundaboutSet);
 });

@@ -1,9 +1,10 @@
 .gb-form{width:100%;height:100%;}
+.gb-form form{width:100%;height:100%;}
 .newform{width:100%;min-height:100%;padding:40px 40px 60px;position:relative;}
 .newform-tit{font-size:18px;font-weight: bold;color:#5A5E69;padding-bottom:10px;margin-bottom:30px;border-bottom:1px solid #E4E6E5;}
 .newform-tit i{margin-right:5px;font-size:16px;}
 .form-oneitem{width:100%;background:#fff;border-radius:4px;margin-bottom:20px;border:1px solid #d8d8d8;}
-.fortit{width:100%;box-shadow:0px -30px 10px #f4f4f4 inset;padding-left:20px;border-bottom:1px solid #d8d8d8;}
+.fortit{width:100%;height:41px;box-shadow:0px -30px 10px #f4f4f4 inset;padding-left:20px;border-bottom:1px solid #d8d8d8;}
 .onenumb{float:left;line-height:40px;margin-right:10px;font-size:18px;font-family: impact;color:#585d66;}
 .oneitem-tit{color:#585d66;line-height:40px;font-size:14px;font-weight: bold;}
 .oneitem-tit small{color:#ff5b57;margin-right:10px;}
@@ -19,7 +20,7 @@
 .itbtn{width:39px;height:38px;border-left:1px solid #d8d8d8;background:#fff;box-shadow:0px -30px 10px #f4f4f4 inset;position:absolute;top:1px;right:1px;z-index: 1;cursor: pointer;border-top-right-radius:5px;border-bottom-right-radius:5px;}
 .gb-form .layui-form-select .layui-edge{z-index: 2;right: 16px;margin-top: -2px;border-left:4px solid transparent;border-right:4px solid transparent;border-top: 5px solid #7c8491;}
 .gb-form .layui-form-selected .layui-edge{margin-top:-8px;}
-.gb-form .layui-form-select dl{border-color:#d8d8d8;border-radius:5px;}
+.gb-form .layui-form-select dl{border-color:#d8d8d8;border-radius:5px;z-index: 1000}
 .gb-form .layui-form-select dl dd,.oneitem-cont  .layui-form-select dl dt{padding:0 20px;}
 .gb-form .layui-form-select dl dd.layui-select-tips{padding-left:20px!important;}
 .gb-form  .layui-form-select dl dd.layui-this{background:#4579d8;}
@@ -84,8 +85,8 @@
 .predictone{width:48.5%;float:left;}
 .predictwo{width:48.5%;float:right;}
 .tocreat{width:100%;height:40px;text-align: center;margin-top:50px;margin-bottom:80px;position:relative;}
-.tocreatbtn,.toemptybtn{text-align:center;width:160px;height:40px;line-height:40px;color:#fff;font-size:14px;background:#4579d8;border-radius:5px;border:0;cursor: pointer;display: inline-block;}
-.tocreatbtn:hover{background:#3c6dc7;color:#fff;}
+.tocreatbtn,.toemptybtn,.setting-save{text-align:center;width:160px;height:40px;line-height:40px;color:#fff;font-size:14px;background:#4579d8;border-radius:5px;border:0;cursor: pointer;display: inline-block;}
+.tocreatbtn:hover,.setting-save:hover{background:#3c6dc7;color:#fff;}
 .warnword{font-size:12px;margin-top:15px;}
 .warnword i{font-size:12px;margin-right:5px;}
 @media screen and (max-width:1365px){
@@ -125,7 +126,7 @@
 .toemptybtn{color:#7c8491;float:left;margin-right:8px;border:1px solid #d8d8d8;background:#fff;box-shadow:0px -25px 10px #f4f4f4 inset;}
 .toemptybtn:hover{box-shadow:0px -15px 10px #eee inset;}
 .prtop .oneimp{margin:0;width:90%;}
-.prtop .oneimp input{padding-right:15px;}
+.gb-form .oneimp input{padding-right:15px;}
 .prtype-onecho{display: block;}
 @media screen and (max-width:1365px){
 	.progresone,.progrestwo{width:80%;float:left;}
@@ -133,3 +134,7 @@
 	.progtype i.iconfont{left:40%;margin-top:-7px;}
 }
 
+
+
+/* newHandoverRecord */
+.theditor{width:48.5%;}
