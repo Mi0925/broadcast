@@ -65,6 +65,10 @@ Router.route('/recordOfSuccession', function() {
 Router.route('/newHandoverRecord', function() {
   gbMainContent('components/newHandoverRecord.html', RoundaboutSet);
 });
+/*值班管理*/
+Router.route('/watch', function() {
+  gbMainContent('components/watch.html', RoundaboutSet);
+});
 Router.route('/round2', function() {
   gbMainContent('components/round2.html', RoundaboutSet);
 });
