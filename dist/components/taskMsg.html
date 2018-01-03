@@ -289,16 +289,16 @@
            $("#checkAll").on("click", function () {
                if ($(this).prop("checked") === true) {
                    $("input[name='checkone']").prop("checked", $(this).prop("checked"));
-                   $('#table-main tbody tr').addClass('selected');
+                   $('.dataTables_wrapper tbody tr').addClass('selected');
                } else {
                    $("input[name='checkone']").prop("checked", false);
-                   $('#table-main tbody tr').removeClass('selected');
+                   $('.dataTables_wrapper tbody tr').removeClass('selected');
                }
            });
  
  
            //删除选中行
-           $('#table-main tbody').on('click', 'tr input[name="checkone"]', function () {
+           $('.dataTables_wrapper tbody').on('click', 'tr input[name="checkone"]', function () {
                var $tr = $(this).parents('tr');
                $tr.toggleClass('selected');
                var $tmp = $('[name=checkone]:checkbox');

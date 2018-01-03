@@ -189,11 +189,13 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 /* popwindow end */
 
 
-/* programResources */
-#table-mainthr .thetab{padding-top:60px;}
+/* programResources && recordOfSuccession */
+#table-mainthr .thetab,#table-mainfou .thetab{padding-top:60px;}
 @media screen and (max-width:1500px){
 	.gb-table .tklay{width:100%;}
 	#table-mainthr .tksearch{float:left;margin:13px 0;}
 	#table-mainthr .thetab{padding-top:110px;}
 	#table-mainthr .tksearch input{width:432px;}
+	#table-mainfou .tklay{width:auto;}
+	#table-mainfou .tksearch{margin:0;}
 }

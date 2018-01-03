@@ -1,0 +1,111 @@
+<div class="gb-setting">
+	<div class="perset">
+		<p class="newform-tit"><i class="iconfont icon-gerenshezhi"></i>个人设置</p>
+		<div class="settingbox">
+			<div class="fortit">
+				<span class="toedit"><i class="iconfont icon-bianji"></i>编辑</span>
+			</div>
+			<div class="oneitem-cont">
+				<div class="settingone">
+					<p class="oneitem-tit"><small>*</small>账号名</p>
+					<div class="oneimp">
+						<input type="text" value="橙子" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="settingone">
+					<p class="oneitem-tit"><small>*</small>密码</p>
+					<div class="oneimp">
+						<input type="password" value="123456" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="settingone">
+					<p class="oneitem-tit">新密码</p>
+					<div class="oneimp">
+						<input type="password" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="settingone">
+					<p class="oneitem-tit">确认密码</p>
+					<div class="oneimp">
+						<input type="password" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="settingone">
+					<p class="oneitem-tit">手机号</p>
+					<div class="oneimp">
+						<input type="text" readonly="readonly"/>
+					</div>
+				</div>
+				<p class="gb-line"></p>
+				<p class="oneitem-tit tosetit">找回密码的三个问题设置</p>
+				<div class="settingone">
+					<p class="oneitem-tit">问题一</p>
+					<div class="oneimp">
+						<input type="text" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="settingone">
+					<p class="oneitem-tit">答案</p>
+					<div class="oneimp">
+						<input type="text" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="settingone">
+					<p class="oneitem-tit">问题二</p>
+					<div class="oneimp">
+						<input type="text" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="settingone">
+					<p class="oneitem-tit">答案</p>
+					<div class="oneimp">
+						<input type="text" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="settingone">
+					<p class="oneitem-tit">问题三</p>
+					<div class="oneimp">
+						<input type="text" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="settingone">
+					<p class="oneitem-tit">答案</p>
+					<div class="oneimp">
+						<input type="text" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="settingone setsee">
+					<input type="button" value="保存" class="setting-save" />
+				</div>
+			</div>
+			
+		</div>
+		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.toedit').click(function(){
+			if($(this).hasClass('disable-edit')){
+				$(this).removeClass('disable-edit');
+				$(this).html('<i class="iconfont icon-bianji"></i>编辑');
+				$('.setsee').hide();
+				$('.settingone .oneimp input').attr('readonly',true);
+				$('.settingone .oneimp input').css('color','#7c8491');
+			}else{
+				$(this).addClass('disable-edit');
+				$(this).html('<i class="iconfont icon-baocun"></i>保存');//<i class="iconfont icon-weitongguo"></i>取消编辑
+				$('.setsee').show();
+				$('.settingone .oneimp input').attr('readonly',false);
+				$('.settingone .oneimp input').css('color','#333');
+			}
+		})
+		$('.setting-save').click(function(){
+			$('.toedit').removeClass('disable-edit');
+			$('.toedit').html('<i class="iconfont icon-bianji"></i>编辑');
+			$('.setsee').hide();
+			$('.settingone .oneimp input').attr('readonly',true);
+			$('.settingone .oneimp input').css('color','#7c8491');
+		})
+	})
+</script>
