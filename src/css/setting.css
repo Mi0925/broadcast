@@ -13,4 +13,8 @@
 .tosetit{margin-bottom:15px;}
 .setting-save{position:absolute;bottom:0px;left:24.25%;margin-left:-80px;}
 
+@media screen and (max-width:1365px){
+	.setting-save{left:35%;}
+}
+
 

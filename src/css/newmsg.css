@@ -90,8 +90,9 @@
 .warnword{font-size:12px;margin-top:15px;}
 .warnword i{font-size:12px;margin-right:5px;}
 @media screen and (max-width:1365px){
-	.oneimp,.gb-form .layui-input-inline,.msgcont,.filecont{width:80%;}
+	.oneimp,.gb-form .layui-input-inline,.msgcont,.filecont{width:70%;}
 	.filecont{float:left;margin-top:30px;}
+	.form-oneitem-box .predictone,.form-oneitem-box .predictwo{width:70%;float:left;}
 }
 
 /* releasePolicy */
@@ -129,12 +130,15 @@
 .gb-form .oneimp input{padding-right:15px;}
 .prtype-onecho{display: block;}
 @media screen and (max-width:1365px){
-	.progresone,.progrestwo{width:80%;float:left;}
+	.progresone,.progrestwo{width:70%;float:left;}
 	.progresone{margin-bottom:30px;}
-	.progtype i.iconfont{left:40%;margin-top:-7px;}
+	.progtype i.iconfont{left:35%;margin-top:-7px;}
 }
 
 
 
 /* newHandoverRecord */
 .theditor{width:48.5%;}
+@media screen and (max-width:1365px){
+	.theditor{width:70%;}
+}
