@@ -56,7 +56,7 @@ Router.route('/taskMsg', function() {
 Router.route('/newTaskMsg', function() {
   gbMainContent('components/newTaskMsg.html', RoundaboutSet);
 });
-// 编辑
+// 编辑任务消息
 Router.route('/newTaskMsgEdit', function() {
   gbMainContent('components/newTaskMsgEdit.html', RoundaboutSet);
 });
@@ -90,11 +90,11 @@ Router.route('/userOperationLog', function() {
 Router.route('/systemOperLog', function() {
   gbMainContent('components/systemOperLog.html', RoundaboutSet);
 });
-/*//新建运维日志
-Router.route('/newHandoverRecord', function() {
-  gbMainContent('components/newHandoverRecord.html', RoundaboutSet);
+//新建运维日志
+Router.route('/newOperLog', function() {
+  gbMainContent('components/newOperLog.html', RoundaboutSet);
 });
-//数据联动日志
+/*//数据联动日志
 Router.route('/newHandoverRecord', function() {
   gbMainContent('components/newHandoverRecord.html', RoundaboutSet);
 });*/
