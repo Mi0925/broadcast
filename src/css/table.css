@@ -7,7 +7,7 @@
 .talay-word{color:#585d66;margin-right:16px;float:left;line-height:40px;font-size:14px;}
 .talay-word i{font-size:13px;margin-right:8px;}
 .tklay .layui-input-inline{position:relative;margin-right:20px;float:left;}
-.tklay .layui-input{width:402px;height:40px;border-radius:5px;border:1px solid #d8d8d8;padding-left:20px;font-size:14px;color:#333;line-height:38px;box-shadow:0px -10px 10px #f4f4f4 inset;}
+.tklay .layui-input{width:402px;height:40px;border-radius:5px;border:1px solid #d8d8d8;padding-left:20px;font-size:14px;color:#333;/* line-height:38px; */box-shadow:0px -10px 10px #f4f4f4 inset;}
 
 
 /* placeholder style start */
@@ -27,6 +27,8 @@
 #layui-laydate1 .laydate-footer-btns span{color:#7c8491;width:50px;border-radius:3px;text-align: center;margin-left:6px;}
 #layui-laydate1 .laydate-disabled,#layui-laydate1 .laydate-disabled:hover{background:#4579d8!important;border-color:#4579d8;color:#fff!important;}
 #layui-laydate1 .laydate-btns-confirm{background:#3c6dc7;color:#fff!important;border-color:#3c6dc7;}
+.layui-laydate-footer span.laydate-btns-time:hover,.layui-laydate .layui-laydate-footer span[lay-type=date]:hover{color: #4579d8;}
+.layui-laydate .layui-laydate-footer span[lay-type=date]{color:#6498FA;}
 /* daterange end */
 
 .tocho{text-align:center;width:24px;height:24px;display: inline-block;border:1px solid #d8d8d8;border-radius:3px;position:absolute;top:50%;margin-top:-12px;right:20px;cursor: pointer;box-shadow:0px -10px 10px #f4f4f4 inset;font-size:14px;color:#585d66;line-height:24px;}

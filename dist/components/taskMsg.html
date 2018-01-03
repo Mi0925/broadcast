@@ -138,7 +138,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		var ue = UE.getEditor('myEditor');//富文本框
+		var editorOption = {
+	        scaleEnabled:true
+	    };
+	    var editor_a = new baidu.editor.ui.Editor(editorOption);
+	    editor_a.render('myEditor');
 
 		/*calendar*/
 		layui.use('laydate', function(){
@@ -147,6 +151,7 @@
 			    elem: '#daterg',
 			    eventElem: '#tochobtn',
 			    trigger: 'click',
+			    type:'datetime',
 			    range: true
 			});
 		})
