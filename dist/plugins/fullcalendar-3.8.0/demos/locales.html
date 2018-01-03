@@ -96,6 +96,7 @@
 
     // when the selected option changes, dynamically change the calendar option
     $('#locale-selector').on('change', function() {
+      alert(this.value)
       if (this.value) {
         $('#calendar').fullCalendar('option', 'locale', this.value);
       }

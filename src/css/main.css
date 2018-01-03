@@ -38,7 +38,8 @@ a:hover{color: inherit;}
 
 /*无缝滚动*/
 .gb-marquee{color: #fff;background: #7c8491;margin: 20px 0;}
-.gb-marquee a{display: inline-block;line-height: 40px;width: 40%;text-align: center;}
+.gb-marquee marquee{white-space: nowrap;}
+.gb-marquee a{display: inline-block;line-height: 40px;min-width:50%;text-align: center;}
 
 /*图表box*/
 .gb-chart-box{border: 1px solid #d8d8d8;border-radius: 3px;background: #fff;font-size: 0;padding-bottom: 50px;}
