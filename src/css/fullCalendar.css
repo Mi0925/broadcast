@@ -1,4 +1,6 @@
 .gb-watch{margin: 40px 2%;background: #fff;border: 1px solid #d8d8d8;border-radius: 5px;display: table;}
+.gb-watch .tksearch{width: 100%;}
+.gb-watch .tksearch input{color: #000;}
 .gb-calendar{width: 80%;display: table-cell;}
 .gb-watch .fc-toolbar h2{display: inline-block;vertical-align: middle;margin: 0 20px;color: #585d66;font-size: 14px;font-weight: bold;}
 .gb-watch .fc-toolbar.fc-header-toolbar{background: linear-gradient(#fefefe, #f1f1f1);margin-bottom: 0;padding: 18px 10px;}
