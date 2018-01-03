@@ -1,6 +1,12 @@
 <div class="gb-monitoring">
-	<div class="qm-watch">
-		<div class="qm-calendar">
+	<div class="gb-watch">
+		<div class="gb-watch-list">
+			<div class="tksearch">
+				<input type="text" value="请输入任务消息名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main" style="color: rgb(204, 204, 204);">
+				<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
+			</div>
+		</div>
+		<div class="gb-calendar">
 			
 		</div>
 	</div>
@@ -12,7 +18,7 @@ $(document).ready(function() {
 	var m = date.getMonth();
 	var y = date.getFullYear();
     // 页面加载完毕，初始化Canlendar
-    $('.qm-calendar').fullCalendar({
+    $('.gb-calendar').fullCalendar({
 		header: {
 			left: 'agendaWeek,month, today',
 			center: 'prev,title,next',
