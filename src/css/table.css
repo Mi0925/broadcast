@@ -83,8 +83,8 @@ table.dataTable tbody th,table.dataTable tbody td{padding:0 20px;line-height:40p
 
 th,td {white-space: nowrap;}
 
-th span{color:#7c8491;font-size:12px;}
-td span,div{color:#7c8491;}
+.gb-table th span{color:#7c8491;font-size:12px;}
+.gb-table td span,.gb-table div{color:#7c8491;}
 table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd{background:#fff;}
 table.dataTable.display tbody tr.odd:hover,table.dataTable.stripe tbody tr.odd:hover,table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover{background-color: #eff5ff;}
 table.dataTable.stripe tbody tr.odd.selected,table.dataTable.display tbody tr.odd.selected,table.dataTable tbody tr.selected{background:#eee;}

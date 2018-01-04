@@ -1,21 +1,128 @@
-<div class="gb-monitoring">
+<div class="gb-monitoring gb-watch-body">
 	<div class="gb-watch">
 		<div class="gb-watch-list">
 			<div class="tksearch">
 				<input type="text" class="dsearch" placeholder="搜索">
 				<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
 			</div>
-			<ul class="gb-watch-list-ul">
+			<ul class="gb-watch-list-ul scroll">
 				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo-all.png);"></i>
+					<em class="i">所有人员</em>
 					<div class="matcheck">
-						<input type="checkbox" name="matcho" id="matone" checked="checked">
-						<label for="matone"></label>
+						<input type="radio" name="matcho" id="matone1" checked="checked">
+						<label for="matone1"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
+					</div>
+				</li>
+				<li>
+					<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+					<em class="i">橙子</em>
+					<div class="matcheck">
+						<input type="radio" name="matcho" id="matone2">
+						<label for="matone2"></label>
 					</div>
 				</li>
 			</ul>
+			<div class="gb-watch-list-btn-box">
+				<div class="add-watch">
+					<button class="layui-btn add-watch-btn">添加值班人员</button>
+				</div>
+				<div class="add-watch-ok-no" style="display: none;">
+					<button class="layui-btn add-watch-no layui-btn-sm layui-btn-primary">取消</button>
+					<button class="layui-btn add-watch-ok layui-btn-sm">确认</button>
+				</div>
+			</div>
 		</div>
-		<div class="gb-calendar">
-			
+		<div class="gb-calendar-body">
+			<div class="gb-calendar"></div>
 		</div>
 	</div>
 </div>
@@ -81,9 +188,26 @@ $(document).ready(function() {
 				end: new Date(y, m, 29),
 				url: 'http://www.baidu.com/'
 			}
-		]
+		],
+		height :$(".gb-watch").innerHeight(),  
+	    windowResize: function(view) {  
+	        $('#calendar').fullCalendar('option', 'height',$(".gb-watch").innerHeight());  
+	    },
+	    locale:"zh-cn"
+		// eventColor: '#fff'
 	});
-	$('.calendar').fullCalendar('option', 'locale', "zh-cn");
+
+
+	// 点击添加值班人员按钮切换按钮
+	$(".add-watch-btn").click(function(argument) {
+		$(".add-watch").hide();
+		$(".add-watch-ok-no").show();
+	});
+	// 点击取消按钮切换按钮
+	$(".add-watch-no").click(function(argument) {
+		$(".add-watch").show();
+		$(".add-watch-ok-no").hide();
+	})
 });
 	
 </script>

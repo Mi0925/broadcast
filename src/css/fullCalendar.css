@@ -1,19 +1,22 @@
-.gb-watch{margin: 40px 2%;background: #fff;border: 1px solid #d8d8d8;border-radius: 5px;display: table;}
-.gb-watch .tksearch{width: 100%;}
-.gb-watch .tksearch input{color: #000;}
-.gb-calendar{width: 80%;display: table-cell;}
+.gb-watch-body{height: 100%;padding: 40px 0;}
+.gb-watch{margin: 0px 2%;height:100%; background: #fff;border: 1px solid #d8d8d8;border-radius: 5px;overflow: hidden;}
+.gb-watch .tksearch{width: 100%;float: none;}
+.gb-watch .tksearch input{color: #000;} 
+.gb-calendar-body{width: 80%;float: left;/*height: 100%;overflow-x: auto;*/}
+.gb-calendar{width:100%;/*height: 100%;*/}
 .gb-watch .fc-toolbar h2{display: inline-block;vertical-align: middle;margin: 0 20px;color: #585d66;font-size: 14px;font-weight: bold;}
-.gb-watch .fc-toolbar.fc-header-toolbar{background: linear-gradient(#fefefe, #f1f1f1);margin-bottom: 0;padding: 18px 10px;}
+.gb-watch .fc-toolbar.fc-header-toolbar{background: linear-gradient(#fefefe, #f1f1f1);margin-bottom: 0;padding:10px;}
+/*.gb-calendar td span,.gb-calendar div{color: #fff;}*/
+.gb-calendar .fc-center .fc-state-default{background: none;border: none;box-shadow: none;}
 
 
 
+.gb-watch-list-ul{margin-top: 15%;height: 80%;overflow-x: auto;}
+.gb-watch-list{width: 20%;float: left;border-right: 1px solid #d8d8d8;height: 100%;padding: 20px;position: relative;}
+.gb-watch-logo{width: 30px;height: 30px;border-radius: 50%;margin-right: 5%;background-position: center;}
+.gb-watch-list-ul li{margin-bottom: 16px;}
+.gb-watch-list-ul li .matcheck{margin:8px 0; }
 
-
-.gb-watch-list{width: 20%;display: table-cell;border-right: 1px solid #d8d8d8;height: 100%;padding: 20px;}
-
-
-
-
-
-
-
+.gb-watch-list-btn-box{text-align: center;position: absolute;bottom: 20px;width: 100%;left: 0px}
+.add-watch-btn{width: 60%;background: #4579d8;}
+.add-watch-ok{background: #4579d8;}
