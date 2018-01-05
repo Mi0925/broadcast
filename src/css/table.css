@@ -7,7 +7,7 @@
 .talay-word{color:#585d66;margin-right:16px;float:left;line-height:40px;font-size:14px;}
 .talay-word i{font-size:13px;margin-right:8px;}
 .tklay .layui-input-inline{position:relative;margin-right:20px;float:left;}
-.tklay .layui-input{width:402px;height:40px;border-radius:5px;border:1px solid #d8d8d8;padding-left:20px;font-size:14px;color:#333;/* line-height:38px;box-shadow:0px -10px 10px #f4f4f4 inset; */}
+.tklay .layui-input{width:402px;height:40px;border-radius:5px;border:1px solid #d8d8d8;padding-left:15px;font-size:14px;color:#333;/* line-height:38px;box-shadow:0px -10px 10px #f4f4f4 inset; */}
 #layui-laydate1{box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.1);}
 
 /* placeholder style start */
@@ -35,7 +35,7 @@
 .newtk-btn{text-align:center;width:160px;height:40px;line-height:40px;color:#fff;font-size:14px;background:#4579d8;border-radius:5px;border:0;cursor: pointer;display: inline-block;}
 .newtk-btn:hover{background:#3c6dc7;color:#fff;}
 .tksearch{width:450px;float:right;zoom:1;border:1px solid #d8d8d8;border-radius:5px;overflow: hidden;position:relative;}
-.tksearch input{width:100%;height:40px;line-height:40px;padding-left:20px;padding-right:80px;font-size:14px;color:#ccc;border:0;}
+.tksearch input{width:100%;height:40px;line-height:40px;padding-left:15px;padding-right:80px;font-size:14px;color:#ccc;border:0;}
 .tksrh-btn{position:absolute;top:0;right:0;width:60px;height:40px;border-left:1px solid #d8d8d8;background:#fff;box-shadow:0px -20px 10px #f4f4f4 inset;padding:9px 20px;cursor: pointer;}
 .tksrh-btn i{font-size:18px;color:#585d66;}
 .tksrh-btn:hover i{color:#000;}
@@ -94,10 +94,12 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 /* */ table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1,table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1{background:transparent;}
 
 
-.gb-table .operbtn ,.gb-table .editbtn ,.gb-table .issue ,.gb-table .check ,.gb-table .del {cursor: pointer;}
-.gb-table .operbtn:hover,.gb-table .editbtn:hover,.gb-table .issue:hover,.gb-table .check:hover,.gb-table .del:hover{color:#4579d8;}
+.gb-table .operbtn ,.gb-table .editbtn ,.gb-table .issue ,.gb-table .check ,.gb-table .del ,.gb-table .convert{cursor: pointer;}
+.gb-table .operbtn:hover,.gb-table .editbtn:hover,.gb-table .issue:hover,.gb-table .check:hover,.gb-table .del:hover,.gb-table .convert:hover{color:#4579d8;}
 .gb-table .operbtn i,.gb-table .editbtn i,.gb-table .issue i,.gb-table .check i,.gb-table .del i{font-size:14px;margin-right:3px;}
 .gb-table .isstop i,.gb-table .editbtn i,.gb-table .iscont i,.gb-table .decancel i{font-size:12px;}
+.gb-table .check.tbdownload i{font-size:16px;}
+.gb-table .convert i{margin-right:3px;}
 .rankimg{display: inline-block;width:14px;height:14px;}
 .rankimg img{display: block;}
 .gb-table .tabnumb{min-width:20px;height:20px;padding:0 3px;display: inline-block;border:1px solid #d8d8d8;border-radius:3px;font-size:12px;line-height:18px;text-align: center;}
@@ -200,3 +202,27 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 	#table-mainfou .tklay{width:auto;}
 	#table-mainfou .tksearch{margin:0;}
 }
+
+/* dataLinkageLog */
+#table-mainfiv .thetab{padding-top:60px;}
+@media screen and (max-width:1500px){
+	#table-mainfiv .tklay{width:auto;}
+	#table-mainfiv .tksearch{margin:0;}
+}
+@media screen and (max-width:1365px){
+	#table-mainfiv .tklay{width:100%;}
+	#table-mainfiv .tksearch{float:left;margin:13px 0;width:492px;}
+	#table-mainfiv .thetab{padding-top:110px;}
+}
+
+
+.smcho th span.addselect{margin-left:58px;}
+.smcho .addselect select{left:-30px;}
+
+
+/* exportAReport */
+.oneitem-cont .gb-table{height:580px;}
+.oneitem-cont .taskmsg{background:#fff;padding:0;}
+.oneitem-cont .tkrange{padding:0;top:20px;}
+.oneitem-cont .gb-table .tklay .layui-input-inline{width:402px;}
+.oneitem-cont #table-mainfiv .thetab{padding-top:80px;}

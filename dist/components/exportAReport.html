@@ -1,0 +1,352 @@
+<div class="gb-form">
+	<div class="newform">
+		<p class="newform-tit"><i class="iconfont icon-daochuexcelbaobiao"></i>报表导出</p>
+		<div class="form-oneitem">
+			<div class="fortit">
+				<span class="oneitem-tit">报表导出</span>
+				<span class="reldelbtn" id="reltodel"> <i class="iconfont icon-download"></i>下载</span>
+			</div>
+			<div class="oneitem-cont">
+				<p class="oneitem-tit">全局数据</p>
+				<ul class="msgrank">
+					<li>
+						<input type="radio" name="checkone" id="radone" />
+						<label for="radone">事件总数</label>
+					</li>
+					<li>
+						<input type="radio" name="checkone" id="radtwo" />
+						<label for="radtwo">播放总数</label>
+					</li>
+					<li>
+						<input type="radio" name="checkone" id="radthr" />
+						<label for="radthr">事件分布</label>
+					</li>
+					<li>
+						<input type="radio" name="checkone" id="radfou" />
+						<label for="radfou">事件类型分布</label>
+					</li>
+				</ul>
+				<p class="gb-line"></p>
+				<p class="oneitem-tit">单一事件数据</p>
+				<div class="gb-table">
+					<div class="taskmsg" id="table-mainfiv">
+						<div class="tkrange">
+							<div class="tklay">
+								<span class="talay-word"><i class="iconfont icon-rili"></i>操作时间</span>
+								<div class="layui-input-inline">
+							        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
+							        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
+						    	</div>
+							</div>
+							<div class="tksearch">
+								<input type="text" value="请输入任务消息名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
+								<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
+							</div>
+						</div>
+						<div class="thetab">
+							<div class="tablecont">
+							    <table class="table-main display smcho" cellspacing="0" width="100%">
+							        <thead>
+								        <tr>
+								        	<th></th>
+								            <th>序号</th>
+								            <th>任务消息名称</th>
+								            <th>发布部门</th>
+								            <th>负责人</th>
+								            <th>发布时间</th>
+								            <th>数据</th>
+								            <th></th>
+								        </tr>
+							        </thead>
+							        <tfoot>
+								        <tr>
+											<th></th>
+								            <th></th>
+								            <th></th>
+								            <th></th>
+								            <th></th>
+								            <th></th>
+								            <th></th>
+								            <th></th>
+								        </tr>
+							        </tfoot>
+							         <tbody>
+							        	<tr>
+							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_1' /><label for='check_1'></label></div></td>
+							        		<td><span class='tabnumb'>1</span></td>
+							        		<td><span class='rankimg' vel='5'><img src='src/images/rank-red.png'/></span></td>
+							        		<td>杭州西湖区2017年09月09日晚台...</td>
+							        		<td>杭州市西湖区应急广播中心</td>
+							        		<td>橙子</td>
+							        		<td>2017-09-08  18:10:20</td>
+							        		<td><div class='checkone'><input type='checkbox' name='coverpop' id='cover_1' /><label for='cover_1'>覆盖人口</label></div></td>
+							        		<td><div class='checkone'><input type='checkbox' name='overlayarea' id='over_1' /><label for='over_1'>覆盖区域</label></div></td>
+							        	</tr>
+							        	<tr>
+							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_2' /><label for='check_2'></label></div></td>
+							        		<td><span class='tabnumb'>2</span></td>
+							        		<td>接口</td>
+							        		<td>数据联动内容</td>
+							        		<td>2017-09-08  18:10:20</td>
+							        	</tr>
+							        	<tr>
+							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_3' /><label for='check_3'></label></div></td>
+							        		<td><span class='tabnumb'>3</span></td>
+							        		<td>上级平台</td>
+							        		<td>数据联动内容</td>
+							        		<td>2017-10-08  18:10:20</td>
+							        	</tr>
+							        	<tr>
+							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_4' /><label for='check_4'></label></div></td>
+							        		<td><span class='tabnumb'>4</span></td>
+							        		<td>上级平台</td>
+							        		<td>数据联动内容</td>
+							        		<td>2017-09-11  18:10:20</td>
+							        		
+							        	</tr>
+							        	<tr>
+							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_5' /><label for='check_5'></label></div></td>
+							        		<td><span class='tabnumb'>5</span></td>
+							        		<td>上级平台</td>
+							        		<td>数据联动内容</td>
+							        		<td>2017-09-08  18:10:20</td>
+							        	</tr>
+							        	<tr>
+							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_6' /><label for='check_6'></label></div></td>
+							        		<td><span class='tabnumb'>6</span></td>
+							        		<td>上级平台</td>
+							        		<td>数据联动内容</td>
+							        		<td>2017-09-08  18:10:20</td>
+							        	</tr>
+
+							        </tbody>
+							    </table>
+							</div>
+							<div class="theche">
+								<div class="tocheck">
+									<input type="checkbox" name="checkall" id="checkAll" />
+									<label for="checkAll">全选</label>
+								</div>
+								<span class="chedel"><i class="iconfont icon-shanchu"></i>删除</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
+	</div>
+	<div class="popwindow"></div>
+	<div class="unreason">
+		<p class="poptit">预览</p>
+		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="uncont">
+			<p class="unword">视频.mp4</p>
+			<input type="button" value="预览" class="un-confirm" />
+		</div>
+	</div>
+	<div class="choose">
+		<p class="choword">确定删除此任务消息吗？</p>
+		<div class="chobtn">
+			<input type="button" value="删除" class="chopri cho-delete" />
+			<input type="button" value="取消" class="cho-cancel" />
+		</div>
+		<span class="triangle"><em></em></span>
+	</div>
+	<div class="toshift">
+		<p class="poptit">格式转换</p>
+		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="uncont">
+			<div class="format">
+				<span class="matit">当前格式：</span>
+				<span class="themat">mp3</span>
+			</div>
+			<div class="format">
+				<span class="matit">目标格式：</span>
+				<div class="matchoose">
+					<ul class="matlist">
+						<li>
+							<span class="matype">格式一</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matone" checked="checked" />
+								<label for="matone"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式二</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matwo" />
+								<label for="matwo"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式三</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="mathr" />
+								<label for="mathr"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式四</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matfou" />
+								<label for="matfou"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式五</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matfiv" />
+								<label for="matfiv"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式六</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matsix" />
+								<label for="matsix"></label>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="tomat">
+				<div class="layui-progress layui-progress-big" lay-filter="demo"><!--  lay-showpercent="true" -->
+				  <div class="layui-progress-bar" lay-percent="0%"></div><!--   layui-bg-red -->
+				</div>
+				<p class="forword">转换中...</p>
+			</div>
+			<p class="succmat"><i class="iconfont icon-11"></i>转换成功！</p>
+			<input type="button" value="转换" class="layui-btn site-demo-active"  data-type="loading"/>
+		</div>
+	</div>
+</div>
+
+	
+
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var uncH = parseInt($('.uncont').css('height'));
+		$('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});
+		
+	
+		/*calendar*/
+		layui.use('laydate', function(){
+			var laydate = layui.laydate;
+			laydate.render({
+			    elem: '#daterg',
+			    eventElem: '#tochobtn',
+			    trigger: 'click',
+			    type:'datetime',
+			    range: true
+			});
+		})
+
+
+		/*table*/
+		$(function () {
+
+           var table = $('#table-mainfiv table').DataTable({
+               "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+               "dom": 'tiprl',//自定义显示项
+               "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
+               "lengthChange": true,//是否允许用户自定义显示数量
+               "bPaginate": true, //翻页功能
+               "bFilter": true, //列筛序功能
+               "searching": true,//本地搜索
+               "order": [ 1, "asc" ],//desc降序
+               "Info": true,//页脚信息
+               "oLanguage": oLanguage,
+               "columnDefs": [
+               		{
+	                   orderable: false,
+
+	                   targets: 0 },
+                   {
+	                   orderable: false,
+
+	                   targets: 2 },
+                    {
+	                   orderable: false,
+
+	                   targets: 3 }
+               ],//第一列与第二列禁止排序
+               fnDrawCallback: function(table) {  
+               		jumpPage($("#table-mainfiv"))
+	           },
+               initComplete: function () {//列筛选
+                   var api = this.api();
+                   api.columns().indexes().flatten().each(function (i) {
+                       if (i == 2) {//删除第一列与第二列的筛选框
+                           var column = api.column(i);
+                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
+                           var select = $('<select><option value="">全部</option></select>')
+                                   .appendTo($(column.header()))
+                                   .on('click', function (evt) {
+                                       evt.stopPropagation();
+                                       var val = $.fn.dataTable.util.escapeRegex(
+                                               $(this).val()
+                                       );
+                                       column
+                                               .search(val ? '^' + val + '$' : '', true, false)
+                                               .draw();
+                                   });
+                           column.data().unique().sort().each(function (d, j) {
+                               function delHtmlTag(str) {
+                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
+                               }
+ 
+                               d = delHtmlTag(d)
+                               select.append('<option value="' + d + '">' + d + '</option>')
+                               $span.append(select)
+                           });
+ 
+                       }
+                   });
+ 
+               }
+			})
+			
+			
+			$(window).resize(function(){
+				$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
+			})
+			$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
+			
+			
+			//自定义显示数量
+			$('.taskmsg').each(function(){
+		    	tabot($(this))
+		    })
+ 
+ 			//checkbox全选
+           $("#checkAll").on("click", function () {
+               if ($(this).prop("checked") === true) {
+                   $("input[name='checkone']").prop("checked", $(this).prop("checked"));
+                   $('.dataTables_wrapper tbody tr').addClass('selected');
+               } else {
+                   $("input[name='checkone']").prop("checked", false);
+                   $('.dataTables_wrapper tbody tr').removeClass('selected');
+               }
+           });
+ 
+ 
+           //删除选中行
+           $('.dataTables_wrapper tbody').on('click', 'tr input[name="checkone"]', function () {
+               var $tr = $(this).parents('tr');
+               $tr.toggleClass('selected');
+               var $tmp = $('[name=checkone]:checkbox');
+               $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
+ 
+           });
+ 
+           $('.chedel').click(function () {
+               table.rows('tr.selected').remove().draw(false);
+               $('#checkAll').attr('checked',false);
+           });
+       })
+	})
+
+</script>

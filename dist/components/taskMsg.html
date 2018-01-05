@@ -328,7 +328,12 @@
 					$('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
 				}
 			})
-		
+			$(window).resize(function(){
+				if($('.choose').is(':visible')){
+					$(myDiv).hide();
+					$('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
+				}
+			})
        })
 
 		

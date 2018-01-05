@@ -109,3 +109,47 @@ $(document).on('click','.un-confirm',function(){
     $('.popwindow').hide();
     $(this).parents('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
 })
+
+layui.use(['form', 'element'], function(){
+            var $ = layui.jquery
+            ,element = layui.element //Tab的切换功能，切换事件监听等，需要依赖element模块
+            ,form = layui.form;
+            form.render();
+
+            var itbtn = $('<span class="itbtn"></span>');
+            $('.layui-select-title').append(itbtn);
+            $('.gb-form .layui-form-radio').remove();
+
+          
+            //触发事件
+            var active = {
+                loading: function(othis){
+                  var DISABLED = 'layui-btn-disabled';
+                  if(othis.hasClass(DISABLED)) return;
+                  
+                  //模拟loading
+                  var n = 0,timer = setInterval(function(){
+                    n = n + Math.random()*10|0;  
+                    if(n>100){
+                      n = 100;
+                      clearInterval(timer);
+                      othis.removeClass(DISABLED);
+                      $('.tomat').hide();
+                      $('.succmat').show();
+                    }
+                    element.progress('demo', n+'%');
+                  }, 300+Math.random()*1000);
+                  
+                  othis.addClass(DISABLED);
+                }
+            };
+          
+            $('.uncont .site-demo-active').on('click', function(){
+                //if($('.tomat').is(':hidden') && $('.succmat').is(':hidden')){
+                    $('.tomat').show();
+                    $('.succmat').hide();
+                    var othis = $(this), type = $(this).data('type');
+                    active[type] ? active[type].call(this, othis) : '';
+                //}
+            });
+        });

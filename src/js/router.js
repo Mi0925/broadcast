@@ -34,8 +34,8 @@ Router.route('/newHandoverRecord', function() {
   gbMainContent('components/newHandoverRecord.html', RoundaboutSet);
 });
 /*编辑交接记录*/
-Router.route('/EditHandoverRecord', function() {
-  gbMainContent('components/EditHandoverRecord.html', RoundaboutSet);
+Router.route('/editHandoverRecord', function() {
+  gbMainContent('components/editHandoverRecord.html', RoundaboutSet);
 });
 
 /*首页*/
@@ -47,7 +47,7 @@ Router.route('/monitoring', function() {
   gbMainContent('components/monitoring.html', RoundaboutSet);
 });
 
-/*调度指挥 start*/
+/*调度指挥模块 start*/
 //任务消息
 Router.route('/taskMsg', function() {
   gbMainContent('components/taskMsg.html', RoundaboutSet);
@@ -56,7 +56,7 @@ Router.route('/taskMsg', function() {
 Router.route('/newTaskMsg', function() {
   gbMainContent('components/newTaskMsg.html', RoundaboutSet);
 });
-// 编辑任务消息
+//编辑任务消息
 Router.route('/newTaskMsgEdit', function() {
   gbMainContent('components/newTaskMsgEdit.html', RoundaboutSet);
 });
@@ -64,9 +64,13 @@ Router.route('/newTaskMsgEdit', function() {
 Router.route('/releasePolicy', function() {
   gbMainContent('components/releasePolicy.html', RoundaboutSet);
 });
-/*调度指挥 end*/
+//报表导出
+Router.route('/exportAReport', function() {
+  gbMainContent('components/exportAReport.html', RoundaboutSet);
+});
+/*调度指挥模块 end*/
 
-/*资源管理 start*/
+/*资源管理模块 start*/
 //节目资源管理
 Router.route('/programResources', function() {
   gbMainContent('components/programResources.html', RoundaboutSet);
@@ -75,7 +79,19 @@ Router.route('/programResources', function() {
 Router.route('/newProgResources', function() {
   gbMainContent('components/newProgResources.html', RoundaboutSet);
 });
-/*资源管理 end*/
+//文字语音管理
+Router.route('/characterVoice', function() {
+  gbMainContent('components/characterVoice.html', RoundaboutSet);
+});
+//上传文字语音
+Router.route('/uploadingCharVoice', function() {
+  gbMainContent('components/uploadingCharVoice.html', RoundaboutSet);
+});
+//编辑文字语音
+Router.route('/editCharVoice', function() {
+  gbMainContent('components/editCharVoice.html', RoundaboutSet);
+});
+/*资源管理模块 end*/
 
 /*日志管理模块 start*/
 //系统登录日志
@@ -94,19 +110,25 @@ Router.route('/systemOperLog', function() {
 Router.route('/newOperLog', function() {
   gbMainContent('components/newOperLog.html', RoundaboutSet);
 });
-/*//数据联动日志
-Router.route('/newHandoverRecord', function() {
-  gbMainContent('components/newHandoverRecord.html', RoundaboutSet);
-});*/
+//编辑运维日志
+Router.route('/editOperLog', function() {
+  gbMainContent('components/editOperLog.html', RoundaboutSet);
+});
+//数据联动日志
+Router.route('/dataLinkageLog', function() {
+  gbMainContent('components/dataLinkageLog.html', RoundaboutSet);
+});
 /*日志管理模块 end*/
 
-/*系统管理 start*/
+/*系统管理模块 start*/
 //值班管理
 Router.route('/watch', function() {
   gbMainContent('components/watch.html', RoundaboutSet);
 });
-/*系统管理 end*/
-
+/*系统管理模块 end*/
+Router.route('/test', function() {
+  gbMainContent('components/test.html', RoundaboutSet);
+});
 Router.route('/round2', function() {
   gbMainContent('components/round2.html', RoundaboutSet);
 });
