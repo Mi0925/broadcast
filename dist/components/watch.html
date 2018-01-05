@@ -1,5 +1,65 @@
 <div class="gb-monitoring gb-watch-body">
 	<div class="gb-watch">
+		<div class="gb-dialog">
+			<h3 class="gb-dialog-title">
+				<i class="iconfont icon-guanbi"></i>
+			</h3>
+			<form class="layui-form" action="">
+				<div class="gb-dialog-main">
+					<div class="gb-dialog-edit-watch">
+						<div class="item">
+							<h4>
+								值班人员
+								<a href="javascript:;"> 
+									<i class="iconfont icon-xinjian"></i>
+									添加
+								</a>
+							</h4>
+							<ul class="gb-people-list">
+								<li>橙子</li>
+								<li>苹果</li>
+								<li>香蕉</li>
+							</ul>
+						</div>
+						<div class="item">
+							<h4>
+								值班时间
+							</h4>
+				    		<div class="matcheck i gb-dialog-day">
+								<input type="checkbox" id="day">
+								<label for="day">全天</label>
+							</div>
+							<div class="gb-dialog-laydate i">
+								<i class="iconfont icon-rili i"></i>
+						        <input type="text" class="layui-input i" id="daterg" placeholder="选择时间范围">
+					    	</div>
+					    	<div class="gb-dialog-radio i">
+					    		<div class="matcheck i">
+									<input type="radio" name="circulation" id="weeks" checked="checked">
+									<label for="weeks">周循环</label>
+								</div>
+					    		<div class="matcheck i">
+									<input type="radio" name="circulation" id="month">
+									<label for="month">月循环</label>
+								</div>
+					    	</div>
+						</div>
+						<div class="item">
+							<h4>确认超时时间</h4>
+							<select name="dispatch" lay-search="">
+								<option value="">请选择调度方案</option>
+								<option value="1">Scheme one</option>
+								<option value="2">Scheme two</option>
+								<option value="3">Scheme three</option>
+								<option value="4">Scheme four</option>
+								<option value="5">Scheme five</option>
+								<option value="6">Scheme six</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
 		<div class="gb-watch-list">
 			<div class="tksearch">
 				<input type="text" class="dsearch" placeholder="搜索">
@@ -128,75 +188,139 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-	var date = new Date();
-	var d = date.getDate();
-	var m = date.getMonth();
-	var y = date.getFullYear();
-    // 页面加载完毕，初始化Canlendar
-    $('.gb-calendar').fullCalendar({
-		header: {
-			left: 'agendaWeek,month, today',
-			center: 'prev,title,next',
-			right:false
-		},
-		buttonText:{
-			today:'今天'
-		},
-		editable: true,
-		events: [
-			{
-				title: '全天事项',
-				start: new Date(y, m, 1)
-			},
-			{
-				title: '长距离项目',
-				start: new Date(y, m, d-5),
-				end: new Date(y, m, d-2)
-			},
-			{
-				id: 999,
-				title: '重复项目',
-				start: new Date(y, m, d-3, 16, 0),
-				allDay: false
-			},
-			{
-				id: 999,
-				title: '重复项目',
-				start: new Date(y, m, d+4, 16, 0),
-				allDay: false
-			},
-			{
-				title: '会议',
-				start: new Date(y, m, d, 10, 30),
-				allDay: false
-			},
-			{
-				title: '午餐',
-				start: new Date(y, m, d, 12, 0),
-				end: new Date(y, m, d, 14, 0),
-				allDay: false
-			},
-			{
-				title: '生日聚会',
-				start: new Date(y, m, d+1, 19, 0),
-				end: new Date(y, m, d+1, 22, 30),
-				allDay: false
-			},
-			{
-				title: '点击跳转百度',
-				start: new Date(y, m, 28),
-				end: new Date(y, m, 29),
-				url: 'http://www.baidu.com/'
-			}
-		],
-		height :$(".gb-watch").innerHeight(),  
-	    windowResize: function(view) {  
-	        $('#calendar').fullCalendar('option', 'height',$(".gb-watch").innerHeight());  
-	    },
-	    locale:"zh-cn"
-		// eventColor: '#fff'
-	});
 
+
+    layui.use(['layer','laydate','form'], function() {
+		var layer = layui.layer,laydate = layui.laydate,form = layui.form;
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+	    // 页面加载完毕，初始化Canlendar
+	    $('.gb-calendar').fullCalendar({
+			header: {
+				left: 'agendaWeek,month, today',
+				center: 'prev,title,next',
+				right:false
+			},
+			buttonText:{
+				today:'今天'
+			},
+			editable: true,
+			defaultView:'agendaWeek',
+			scrollTime : "06:00:00",
+			slotLabelFormat : "aH(:mm)点", //日期视图左边那一列显示的每一格日期时间格式  
+			slotDuration : "00:30:00",//一格时间槽代表多长时间，默认00:30:00（30分钟）
+			slotLabelInterval : "00:30:00",//日期视图左边那一列多长间隔显示一条日期文字(默认跟着slotDuration走的，可自定义)  
+			events: [
+				{
+					title: '橙子、苹果、香蕉、苹果、香蕉、苹果、香蕉、苹果、香蕉',
+					start: new Date(y, m, 2,1),//(a,b,c,d,e) a年，b月，c日，d时，e分
+					end: new Date(y, m, 2,2)
+				},
+				{
+					title: '橙子、苹果、香蕉',
+					start: new Date(y, m, 2,2),
+					end: new Date(y, m, 2,3)
+				},
+				{
+					title: '橙子、苹果、香蕉',
+					start: new Date(y, m, 2,3),
+					end: new Date(y, m, 2,4)
+				},
+				{
+					title: '橙子、苹果、香蕉',
+					start: new Date(y, m, 2,4),
+					end: new Date(y, m, 2,5)
+				},
+				{
+					title: '橙子、苹果、香蕉',
+					start: new Date(y, m, 2,5),
+					end: new Date(y, m, 2,6)
+				},
+				{
+					title: '橙子、苹果、香蕉',
+					start: new Date(y, m, 2,7),
+					end: new Date(y, m, 2,8)
+				},
+				{
+					title: '橙子、苹果、香蕉',
+					start: new Date(y, m, 2,9),
+					end: new Date(y, m, 2,10)
+				},
+				{
+					title: '橙子、苹果、香蕉',
+					start: new Date(y, m, 4)
+				},
+				// {
+				// 	title: '长距离项目',
+				// 	start: new Date(y, m, d-5),
+				// 	end: new Date(y, m, d-2)
+				// },
+				// {
+				// 	id: 999,
+				// 	title: '重复项目',
+				// 	start: new Date(y, m, d-3, 16, 0),
+				// 	allDay: false
+				// },
+				// {
+				// 	id: 999,
+				// 	title: '重复项目',
+				// 	start: new Date(y, m, d+4, 16, 0),
+				// 	allDay: false
+				// },
+				// {
+				// 	title: '会议',
+				// 	start: new Date(y, m, d, 10, 30),
+				// 	allDay: false
+				// },
+				// {
+				// 	title: '午餐',
+				// 	start: new Date(y, m, d, 12, 0),
+				// 	end: new Date(y, m, d, 14, 0),
+				// 	allDay: false
+				// },
+				// {
+				// 	title: '生日聚会',
+				// 	start: new Date(y, m, d+1, 19, 0),
+				// 	end: new Date(y, m, d+1, 22, 30),
+				// 	allDay: false
+				// },
+				// {
+				// 	title: '点击跳转百度',
+				// 	start: new Date(y, m, 28),
+				// 	end: new Date(y, m, 29),
+				// 	url: 'http://www.baidu.com/'
+				// }
+			],
+			height :$(".gb-watch").innerHeight(),  
+		    windowResize: function(view) {  
+		        $('#calendar').fullCalendar('option', 'height',$(".gb-watch").innerHeight());  
+		    },
+		    locale:"zh-cn",
+		    dayClick: function(date, allDay, jsEvent, view) { 
+				layer.open({
+					title: false, //不显示标题栏
+        			closeBtn: false,
+					id: 'layerfull', //防止重复弹出
+					content: '<div style="padding: 20px 100px;">' + 123 + '</div>',
+					btnAlign: 'c', //按钮居中
+					shadeClose:true,//是否点击遮罩关闭
+				});
+	        } 
+			// eventColor: '#fff'
+		});
+		laydate.render({
+		    elem: '#daterg',
+		    eventElem: '#tochobtn',
+		    trigger: 'click',
+		    type:'datetime',
+		    range: true,
+		    format:"M月d日 HH点mm分"
+		});
+
+
+	});
 
 	// 点击添加值班人员按钮切换按钮
 	$(".add-watch-btn").click(function(argument) {
@@ -207,6 +331,16 @@ $(document).ready(function() {
 	$(".add-watch-no").click(function(argument) {
 		$(".add-watch").show();
 		$(".add-watch-ok-no").hide();
+	});
+	// 点击全天禁用时间范围选择
+	$("#day").change(function(argument) {
+		if($("#day").is(':checked')==true){
+			$('#daterg').prop('disabled', true);
+			$(".gb-dialog-laydate").css("opacity","0.4");
+		}else{
+			$('#daterg').prop('disabled', false);
+			$(".gb-dialog-laydate").css("opacity","1");
+		}
 	})
 });
 	

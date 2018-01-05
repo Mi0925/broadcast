@@ -56,3 +56,4 @@ function removeDom($this) {
 		zTree.removeNode(treeNode, callbackFlag);
 	},100)
 };
+
