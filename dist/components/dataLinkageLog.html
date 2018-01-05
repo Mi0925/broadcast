@@ -1,5 +1,5 @@
 <div class="gb-table">
-	<div class="taskmsg" id="table-mainthr">
+	<div class="taskmsg" id="table-mainfiv">
 		<div class="tkrange">
 			<div class="tklay">
 				<span class="talay-word"><i class="iconfont icon-rili"></i>操作时间</span>
@@ -7,36 +7,27 @@
 			        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
 			        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
 		    	</div>
-		    	<a href="#/newOperLog" class="add_tab newtk-btn" url="components/newOperLog.html" name="新建运维日志">新建运维日志</a>
 			</div>
 			<div class="tksearch">
-				<input type="text" value="请输入登陆IP ，运维名称，运维内容" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
+				<input type="text" value="请输入来源，数据联动内容" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
 				<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
 			</div>
 		</div>
 		<div class="thetab">
 			<div class="tablecont">
-			    <table class="table-main display" cellspacing="0" width="100%">
+			    <table class="table-main display smcho" cellspacing="0" width="100%">
 			        <thead>
 				        <tr>
 				        	<th></th>
 				            <th>序号</th>
-				            <th>操作账号</th>
-				            <th>登录IP</th>
-				            <th>运维名称</th>
-				            <th>运维内容</th>
-				            <th>操作时间</th>
-				            <th>操作</th>
-				            <th></th>
+				            <th>来源</th>
+				            <th>数据联动内容</th>
+				            <th>联动时间</th>
 				        </tr>
 			        </thead>
 			        <tfoot>
 				        <tr>
 							<th></th>
-				            <th></th>
-				            <th></th>
-				            <th></th>
-				            <th></th>
 				            <th></th>
 				            <th></th>
 				            <th></th>
@@ -47,68 +38,45 @@
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_1' /><label for='check_1'></label></div></td>
 			        		<td><span class='tabnumb'>1</span></td>
-			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称</td>
-			        		<td>运维内容</td>
+			        		<td>上级平台</td>
+			        		<td>数据联动内容</td>
 			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
-			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_2' /><label for='check_2'></label></div></td>
 			        		<td><span class='tabnumb'>2</span></td>
-			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称</td>
-			        		<td>运维内容运维内容</td>
+			        		<td>接口</td>
+			        		<td>数据联动内容</td>
 			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
-			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_3' /><label for='check_3'></label></div></td>
 			        		<td><span class='tabnumb'>3</span></td>
-			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称运维名称</td>
-			        		<td>运维内容</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
-			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
+			        		<td>上级平台</td>
+			        		<td>数据联动内容</td>
+			        		<td>2017-10-08  18:10:20</td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_4' /><label for='check_4'></label></div></td>
 			        		<td><span class='tabnumb'>4</span></td>
-			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称</td>
-			        		<td>运维内容</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
-			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
+			        		<td>上级平台</td>
+			        		<td>数据联动内容</td>
+			        		<td>2017-09-11  18:10:20</td>
+			        		
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_5' /><label for='check_5'></label></div></td>
 			        		<td><span class='tabnumb'>5</span></td>
-			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称</td>
-			        		<td>运维内容</td>
-			        		<td>2017-10-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
-			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
+			        		<td>上级平台</td>
+			        		<td>数据联动内容</td>
+			        		<td>2017-09-08  18:10:20</td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_6' /><label for='check_6'></label></div></td>
 			        		<td><span class='tabnumb'>6</span></td>
-			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称</td>
-			        		<td>运维内容</td>
-			        		<td>2017-06-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
-			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
+			        		<td>上级平台</td>
+			        		<td>数据联动内容</td>
+			        		<td>2017-09-08  18:10:20</td>
 			        	</tr>
 			        </tbody>
 			    </table>
@@ -122,16 +90,6 @@
 			</div>
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
-	</div>
-	
-
-	<div class="choose">
-		<p class="choword">确定删除此任务消息吗？</p>
-		<div class="chobtn">
-			<input type="button" value="删除" class="chopri cho-delete" />
-			<input type="button" value="取消" class="cho-cancel" />
-		</div>
-		<span class="triangle"><em></em></span>
 	</div>
 </div>
 	
@@ -156,7 +114,7 @@
 		/*table*/
 		$(function () {
 
-           var table = $('#table-mainthr table').DataTable({
+           var table = $('#table-mainfiv table').DataTable({
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
                "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
@@ -179,26 +137,10 @@
                     {
 	                   orderable: false,
 
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 }
+	                   targets: 3 }
                ],//第一列与第二列禁止排序
                fnDrawCallback: function(table) {  
-               		jumpPage($("#table-mainthr"))
+               		jumpPage($("#table-mainfiv"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
@@ -270,57 +212,6 @@
                table.rows('tr.selected').remove().draw(false);
                $('#checkAll').attr('checked',false);
            });
-           $('.cho-delete').click(function(){
-				table.row('.trdel').remove().draw(false);
-				$(this).parents('.choose').hide();
-		   })
- 			
-		
-			$('.dataTables_wrapper').on('scroll',function(){
-				if($('.choose').is(':visible')){
-					$(myDiv).hide();
-					$('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
-				}
-			})
-			$(window).resize(function(){
-				if($('.choose').is(':visible')){
-					$(myDiv).hide();
-					$('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
-				}
-			})
        })
-		/*popwindow*/
-        var uncH = parseInt($('.uncont').css('height'));
-        $('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});
-        
-        //删除
-        var myDiv = $(".choose");
-        $(function() {
-            $(document).on('click','.delete',function(event) {
-                showDiv();
-                $(this).parents('tr').addClass('trdel');
-                //$(myDiv).toggle();
-                $(document).one("click",
-                function() { 
-                    $(myDiv).hide();
-                    $('table.dataTable tbody tr').removeClass('trdel');
-                });
-                event.stopPropagation();
-            });
-            $(myDiv).click(function(event) {
-                event.stopPropagation(); 
-            });
-        });
-        function showDiv() {
-            var x = event.clientX - event.offsetX;
-            var y = event.clientY - event.offsetY;
-            $(myDiv).css({'display':'block','top':y-80,'left':x-110});
-        }
-        
-        $('.cho-cancel').click(function(){
-            $(this).parents('.choose').hide();
-            $('tr').removeClass('trdel');
-        })
-        /*popwindow*/
 	})
 </script>

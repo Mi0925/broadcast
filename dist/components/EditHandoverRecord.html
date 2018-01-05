@@ -52,12 +52,6 @@
 			
 		});
 
-		/*setTimeout(function(){
-			var ue = UE.getEditor('myEditor',{
-				scaleEnabled:true
-			}); //富文本框
-			alert(ue);
-		},1000)*/
 
 		var editorOption = {
 	        scaleEnabled:true
@@ -68,7 +62,7 @@
 		
 
 		$('.toemptybtn').click(function(){
-			ue.execCommand('cleardoc');
+			UE.getEditor('myEditor').execCommand('cleardoc');
 			$('.gb-form .layui-form-select .layui-input').val('');
 			$('.layui-anim-upbit dd').removeClass('layui-this');
 		})

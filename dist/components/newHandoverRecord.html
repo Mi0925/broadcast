@@ -68,7 +68,7 @@
 		
 
 		$('.toemptybtn').click(function(){
-			ue.execCommand('cleardoc');
+			UE.getEditor('myEditor').execCommand('cleardoc');
 			$('.gb-form .layui-form-select .layui-input').val('');
 			$('.layui-anim-upbit dd').removeClass('layui-this');
 		})

@@ -7,10 +7,10 @@
 			        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
 			        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
 		    	</div>
-		    	<a href="#/newProgResources" class="add_tab newtk-btn" url="components/newProgResources.html" name="新建节目资源">新建节目资源</a>
+		    	<a href="#/uploadingCharVoice" class="add_tab newtk-btn" url="components/uploadingCharVoice.html" name="上传文字语音">上传</a>
 			</div>
 			<div class="tksearch">
-				<input type="text" value="请输入资源名称，上传账号，备注" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
+				<input type="text" value="请输入音频名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
 				<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
 			</div>
 		</div>
@@ -21,13 +21,15 @@
 				        <tr>
 				        	<th></th>
 				            <th>序号</th>
-				            <th>审核状态</th>
-				            <th>在线状态</th>
-				            <th>节目资源名称</th>
-				            <th>备注</th>
-				            <th>新建账号</th>
+				            <th>状态监测</th>
+				            <th>资源类型</th>
+				            <th>音频名称</th>
+				            <th>发布部门</th>
+				            <th>负责人</th>
 				            <th>上传时间</th>
 				            <th>操作</th>
+				            <th></th>
+				            <th></th>
 				            <th></th>
 				        </tr>
 			        </thead>
@@ -43,68 +45,93 @@
 				            <th></th>
 				            <th></th>
 				            <th></th>
+				            <th></th>
+				            <th></th>
 				        </tr>
 			        </tfoot>
 			         <tbody>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_1' /><label for='check_1'></label></div></td>
 			        		<td><span class='tabnumb'>1</span></td>
-			        		<td>审核中</td>
-			        		<td>在线</td>
-			        		<td>节目资源名称</td>
-			        		<td>备注备注备注内容备注备注备注内容</td>
+			        		<td>待审核</td>
+			        		<td>音频</td>
+			        		<td>杭州市红色台风预警音频</td>
+			        		<td>杭州市西湖区应急广播中心</td>
 			        		<td>橙子</td>
 			        		<td>2017-09-08  18:10:20</td>
 			        		<td><span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span></td>
+			        		<td><span class='convert'><i class='iconfont icon-zhuanhuan1'></i>转换</span></td>
+			        		<td><a href='#/editCharVoice' url='components/editCharVoice.html' class='editbtn add_tab' name='编辑文字语音'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_2' /><label for='check_2'></label></div></td>
 			        		<td><span class='tabnumb'>2</span></td>
-			        		<td>审核中</td>
-			        		<td>在线</td>
-			        		<td>节目资源名称</td>
-			        		<td>备注备注备注内容备注备注备注内容</td>
+			        		<td>待审核</td>
+			        		<td>音频</td>
+			        		<td>杭州市红色台风预警音频</td>
+			        		<td>杭州市西湖区应急广播中心</td>
 			        		<td>橙子</td>
 			        		<td>2017-09-08  18:10:20</td>
 			        		<td><span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span></td>
+			        		<td><span class='convert'><i class='iconfont icon-zhuanhuan1'></i>转换</span></td>
+			        		<td><a href='#/editCharVoice' url='components/editCharVoice.html' class='editbtn add_tab' name='编辑文字语音'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_3' /><label for='check_3'></label></div></td>
 			        		<td><span class='tabnumb'>3</span></td>
-			        		<td>审核通过</td>
-			        		<td>不在线</td>
-			        		<td>节目资源名称</td>
-			        		<td>备注备注备注内容备注备注备注内容</td>
+			        		<td>审核中</td>
+			        		<td>视频</td>
+			        		<td>杭州市红色台风预警音频</td>
+			        		<td>浙江省应急办</td>
 			        		<td>橙子</td>
-			        		<td>2016-09-08  18:10:20</td>
-			        		<td></td>
+			        		<td>2017-09-18  18:10:20</td>
+			        		<td><span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span></td>
+			        		<td><span class='convert'><i class='iconfont icon-zhuanhuan1'></i>转换</span></td>
+			        		<td><a href='#/editCharVoice' url='components/editCharVoice.html' class='editbtn add_tab' name='编辑文字语音'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_4' /><label for='check_4'></label></div></td>
 			        		<td><span class='tabnumb'>4</span></td>
-			        		<td>审核未通过</td>
-			        		<td>在线</td>
-			        		<td>节目资源名称</td>
-			        		<td>备注备注备注内容备注备注备注内容</td>
+			        		<td>审核通过</td>
+			        		<td>视频</td>
+			        		<td>杭州市红色台风预警音频</td>
+			        		<td>杭州市西湖区应急广播中心</td>
 			        		<td>橙子</td>
-			        		<td>2017-11-08  18:10:20</td>
-			        		<td><span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span></td>
+			        		<td>2017-09-08  18:10:20</td>
+			        		<td><span class='check tbdownload'><i class='iconfont icon-download'></i>下载</span></td>
+			        		<td><span class='convert'><i class='iconfont icon-zhuanhuan1'></i>转换</span></td>
+			        		<td><a href='#/editCharVoice' url='components/editCharVoice.html' class='editbtn add_tab' name='编辑文字语音'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
-			        		
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_5' /><label for='check_5'></label></div></td>
 			        		<td><span class='tabnumb'>5</span></td>
-			        		<td>审核未通过</td>
-			        		<td>在线</td>
-			        		<td>节目资源名称</td>
-			        		<td>备注备注备注内容备注备注备注内容</td>
+			        		<td>审核通过</td>
+			        		<td>视频</td>
+			        		<td>杭州市红色台风预警音频</td>
+			        		<td>浙江省应急办</td>
 			        		<td>橙子</td>
-			        		<td>2017-11-08  18:10:20</td>
+			        		<td>2017-09-08  18:10:20</td>
+			        		<td><span class='check tbdownload'><i class='iconfont icon-download'></i>下载</span></td>
+			        		<td><span class='convert'><i class='iconfont icon-zhuanhuan1'></i>转换</span></td>
+			        		<td><a href='#/editCharVoice' url='components/editCharVoice.html' class='editbtn add_tab' name='编辑文字语音'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
+			        	</tr>
+			        	<tr>
+			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_6' /><label for='check_6'></label></div></td>
+			        		<td><span class='tabnumb'>6</span></td>
+			        		<td>审核未通过</td>
+			        		<td>音频</td>
+			        		<td>杭州市红色台风预警音频</td>
+			        		<td>浙江省应急办</td>
+			        		<td>橙子</td>
+			        		<td>2016-09-08  18:10:20</td>
 			        		<td><span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span></td>
+			        		<td><span class='convert'><i class='iconfont icon-zhuanhuan1'></i>转换</span></td>
+			        		<td><a href='#/editCharVoice' url='components/editCharVoice.html' class='editbtn add_tab' name='编辑文字语音'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        </tbody>
@@ -151,6 +178,73 @@
 		<div class="uncont">
 			<p class="unword">未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因</p>
 			<input type="button" value="确定" class="un-confirm" />
+		</div>
+	</div>
+	<div class="toshift">
+		<p class="poptit">格式转换</p>
+		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="uncont">
+			<div class="format">
+				<span class="matit">当前格式：</span>
+				<span class="themat">mp3</span>
+			</div>
+			<div class="format">
+				<span class="matit">目标格式：</span>
+				<div class="matchoose">
+					<ul class="matlist">
+						<li>
+							<span class="matype">格式一</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matone" checked="checked" />
+								<label for="matone"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式二</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matwo" />
+								<label for="matwo"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式三</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="mathr" />
+								<label for="mathr"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式四</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matfou" />
+								<label for="matfou"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式五</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matfiv" />
+								<label for="matfiv"></label>
+							</div>
+						</li>
+						<li>
+							<span class="matype">格式六</span>
+							<div class="matcheck">
+								<input type="radio" name="matcho" id="matsix" />
+								<label for="matsix"></label>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="tomat">
+				<div class="layui-progress layui-progress-big" lay-filter="demo"><!--  lay-showpercent="true" -->
+				  <div class="layui-progress-bar" lay-percent="0%"></div><!--   layui-bg-red -->
+				</div>
+				<p class="forword">转换中...</p>
+			</div>
+			<p class="succmat"><i class="iconfont icon-11"></i>转换成功！</p>
+			<input type="button" value="转换" class="layui-btn site-demo-active"  data-type="loading"/>
 		</div>
 	</div>
 	<div class="choose">
@@ -233,7 +327,15 @@
                 	{
 	                   orderable: false,
 
-	                   targets: 9 }
+	                   targets: 9 },
+                	{
+	                   orderable: false,
+
+	                   targets: 10 },
+                	{
+	                   orderable: false,
+
+	                   targets: 11 }
                ],//第一列与第二列禁止排序
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainthr"))
@@ -241,7 +343,7 @@
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 2 || i == 3 || i == 6) {//删除第一列与第二列的筛选框
+                       if (i == 2 || i == 3 || i == 5 || i == 6) {//删除第一列与第二列的筛选框
                            var column = api.column(i);
                            var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
                            var select = $('<select><option value="">全部</option></select>')
@@ -329,7 +431,7 @@
 			$(window).resize(function(){
 				if($('.choose').is(':visible')){
 					$(myDiv).hide();
-					$('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
+					$('table.dataTable tbody tr').removeClass('trdel');
 				}
 			})
        })
@@ -367,6 +469,51 @@
 			$(this).parents('.choose').hide();
 			$('tr').removeClass('trdel');
 		})
+		
+		$(document).on('click','.convert',function(){
+			$('.popwindow').show();
+			$('.toshift').show();
+			$('.matlist li ').eq(0).find('input').prop('checked',true);
+			//$('.succmat').hide();
+		})
+		
+		layui.use('element', function(){
+		  var $ = layui.jquery
+		  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+		  
+		  //触发事件
+
+		  var active = {
+		    loading: function(othis){
+		      var DISABLED = 'layui-btn-disabled';
+		      if(othis.hasClass(DISABLED)) return;
+		      
+		      //模拟loading
+		      var n = 0,timer = setInterval(function(){
+		        n = n + Math.random()*10|0;  
+		        if(n>100){
+		          n = 100;
+		          clearInterval(timer);
+		          othis.removeClass(DISABLED);
+		          $('.tomat').hide();
+		          $('.succmat').show();
+		        }
+		        element.progress('demo', n+'%');
+		      }, 300+Math.random()*1000);
+		      
+		      othis.addClass(DISABLED);
+		    }
+		  };
+		  
+		  $('.uncont .site-demo-active').on('click', function(){
+		  	//if($('.tomat').is(':hidden') && $('.succmat').is(':hidden')){
+		  		$('.tomat').show();
+		  		$('.succmat').hide();
+		  		var othis = $(this), type = $(this).data('type');
+		   		active[type] ? active[type].call(this, othis) : '';
+		  	//}
+		  });
+		});
 		/*popwindow*/
 	})
 </script>

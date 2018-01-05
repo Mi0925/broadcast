@@ -1,5 +1,5 @@
 <div class="gb-table">
-	<div class="taskmsg" id="table-mainthr">
+	<div class="taskmsg" id="table-mainfiv">
 		<div class="tkrange">
 			<div class="tklay">
 				<span class="talay-word"><i class="iconfont icon-rili"></i>操作时间</span>
@@ -163,7 +163,7 @@
 		/*table*/
 		$(function () {
 
-           var table = $('#table-mainthr table').DataTable({
+           var table = $('#table-mainfiv table').DataTable({
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
                "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
@@ -193,7 +193,7 @@
 	                   targets: 4 }
                ],//第一列与第二列禁止排序
                fnDrawCallback: function(table) {  
-               		jumpPage($("#table-mainthr"))
+               		jumpPage($("#table-mainfiv"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
