@@ -1,19 +1,13 @@
-.gb-setting{width:100%;height:100%;}
-.perset{width:100%;min-height:100%;padding:40px 40px 60px;position:relative;}
 .perset .newform-tit i{font-size:18px;}
 .settingbox{width:100%;border:1px solid #d8d8d8;background:#fff;border-radius:5px;}
 .toedit{float:right;line-height:40px;margin-right:20px;cursor: pointer;}
 .toedit i{font-size:12px;margin-right:4px;}
 .toedit:hover{color:#4579D8;}
 .settingone{margin-bottom:20px;position:relative;}
-.setsee{height:60px;margin-bottom:0;display: none}
-.settingone .oneimp input{color:#7c8491;}
+.perset .tnoneimp input{color:#7c8491;}
 .oneitem-cont .gb-line{margin:30px 0 20px 0;}
 .tosetit{margin-bottom:15px;}
-.setting-save{position:absolute;bottom:0px;left:24.25%;margin-left:-80px;}
+#tosave{display: none}
 
-@media screen and (max-width:1365px){
-	.setting-save{left:35%;}
-}
 
 

@@ -240,6 +240,12 @@
 		    	tabot($(this))
 		    })
  
+ 			//自定义搜索
+           $('.dsearch').on('keyup click', function () {
+               var tsval = $(".dsearch").val()
+               table.search(tsval, false, false).draw();
+           });
+           
  			//checkbox全选
            $("#checkAll").on("click", function () {
                if ($(this).prop("checked") === true) {

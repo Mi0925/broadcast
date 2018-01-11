@@ -4,17 +4,16 @@
 .newform-tit{font-size:18px;font-weight: bold;color:#5A5E69;padding-bottom:10px;margin-bottom:30px;border-bottom:1px solid #E4E6E5;}
 .newform-tit i{margin-right:5px;font-size:16px;}
 .form-oneitem{width:100%;background:#fff;border-radius:4px;margin-bottom:20px;border:1px solid #d8d8d8;}
-.fortit{width:100%;height:41px;box-shadow:0px -30px 10px #f4f4f4 inset;padding-left:20px;border-bottom:1px solid #d8d8d8;}
+.fortit{width:100%;height:41px;box-shadow:0px -30px 10px #f4f4f4 inset;padding-left:20px;border-bottom:1px solid #d8d8d8;color:#7c8491;}
 .onenumb{float:left;line-height:40px;margin-right:10px;font-size:18px;font-family: impact;color:#585d66;}
 .oneitem-tit{color:#585d66;line-height:40px;font-size:14px;font-weight: bold;}
 .oneitem-tit small{color:#ff5b57;margin-right:10px;}
-.oneitem-cont{width:100%;padding:25px 30px 30px 30px;zoom:1;}
+.oneitem-cont{width:100%;padding:25px 30px 30px 30px;zoom:1;color:#7c8491;}
 .oneitem-cont:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
 .oneitem-cont .oneitem-tit{line-height:28px;}
-.oneimp{position:relative;/* width:750px; */width:48.5%;}
-.oneimp input{width:100%;height:40px;border:1px solid #d8d8d8;border-radius:5px;padding:0px 60px 0px 15px;}
+.oneimp,.tnoneimp{position:relative;/* width:750px; */width:48.5%;}
+.oneimp input,.tnoneimp input{width:100%;height:40px;border:1px solid #d8d8d8;border-radius:5px;padding:0px 60px 0px 15px;}
 .oneimp-count{color:#ccc;position:absolute;right:20px;top:0;line-height:40px;}
-/*.gb-form .layui-inline{width:100%;}*/
 .gb-form .layui-input-inline{/* width:750px; */width:48.5%;}
 .gb-form .layui-form-select .layui-input{height:40px;border:1px solid #d8d8d8;border-radius:5px;padding-right:45px;padding-left:15px;}
 .itbtn{width:39px;height:38px;border-left:1px solid #d8d8d8;background:#fff;box-shadow:0px -30px 10px #f4f4f4 inset;position:absolute;top:1px;right:1px;z-index: 1;cursor: pointer;border-top-right-radius:5px;border-bottom-right-radius:5px;}
@@ -75,9 +74,9 @@
 .matcheck{float:right;margin:13px 0;}
 .tomat{margin-top:40px;text-align: center;padding-top:12px;position:relative;display: none}
 .tomat .layui-progress{width:270px;position:absolute;top:0;left:50%;margin-left:-135px;}
-.tomat .layui-progress-big,.tomat .layui-progress-big .layui-progress-bar{height:12px;line-height:12px;}
+.tomat .layui-progress,.tomat .layui-progress-bar{height:12px;line-height:12px;}
 .tomat .layui-progress-bar{background-color:#4479d7;}
-.forword{font-size:12px;margin-top:10px;}
+.forword,.uplword{font-size:12px;margin-top:10px;}
 .succmat{margin-top:40px;font-size:12px;text-align: center;color:#14ad91;display: none}
 .succmat i{margin-right:5px;font-size:12px;}
 .uncont{position:relative;}
@@ -88,10 +87,10 @@
 .tocreat{width:100%;height:40px;text-align: center;margin-top:50px;margin-bottom:80px;position:relative;}
 .tocreatbtn,.toemptybtn,.setting-save{text-align:center;width:160px;height:40px;line-height:40px;color:#fff;font-size:14px;background:#4579d8;border-radius:5px;border:0;cursor: pointer;display: inline-block;}
 .tocreatbtn:hover,.setting-save:hover{background:#3c6dc7;color:#fff;}
-.warnword{font-size:12px;margin-top:15px;}
+.warnword{font-size:12px;margin-top:15px;color:#7c8491;}
 .warnword i{font-size:12px;margin-right:5px;}
 @media screen and (max-width:1365px){
-	.oneimp,.gb-form .layui-input-inline,.msgcont,.filecont{width:70%;}
+	.oneimp,.tnoneimp,.gb-form .layui-input-inline,.msgcont,.filecont{width:70%;}
 	.filecont{float:left;margin-top:30px;}
 	.form-oneitem-box .predictone,.form-oneitem-box .predictwo{width:70%;float:left;}
 }
@@ -100,7 +99,8 @@
 .reldelbtn{float:right;margin-right:20px;line-height:40px;cursor: pointer;}
 .reldelbtn i{margin-right:3px;font-size:14px;}
 .reldelbtn:hover{color:#4579D8;}
-.gb-line{width:100%;height:1px;background:#d8d8d8;margin:15px 0 20px 0;}
+.gb-line,.gb-linetw{width:100%;height:1px;background:#d8d8d8;margin:15px 0 20px 0;}
+.gb-linetw{margin-bottom:0;/* display: none */}
 .predictone .layui-input-inline,.predictwo .layui-input-inline{width:100%;margin-bottom:10px;}
 .reladd{border:1px solid #d8d8d8;border-radius:4px;}
 #toadd i{font-size:12px;}
@@ -108,7 +108,7 @@
 .relwarn{color:#14ae8f;}
 
 /* newProgResources */
-.newprog .oneimp{margin-bottom:20px;}
+.newprog .tnoneimp{margin-bottom:20px;}
 .progtype{width:100%;position:relative;zoom:1;margin-bottom:20px;}
 .progtype:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
 .progresone,.progrestwo{padding:15px 30px 30px;float:left;width:48.5%;height:418px;border:1px solid #d8d8d8;border-radius:5px;}
@@ -127,8 +127,8 @@
 .progcreat:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
 .toemptybtn{color:#7c8491;float:left;margin-right:8px;border:1px solid #d8d8d8;background:#fff;box-shadow:0px -25px 10px #f4f4f4 inset;}
 .toemptybtn:hover{box-shadow:0px -15px 10px #eee inset;}
-.prtop .oneimp{margin:0;width:90%;}
-.gb-form .oneimp input{padding-right:15px;}
+.prtop .tnoneimp{margin:0;width:90%;}
+.tnoneimp input{padding-right:15px;}
 .prtype-onecho{display: block;}
 @media screen and (max-width:1365px){
 	.progresone,.progrestwo{width:70%;float:left;}
@@ -155,16 +155,21 @@
 .touploading .uplbtn{margin-top:0;}
 .touploading:hover .uplbtn{background:#3c6dc7;}
 .locupload .itemexp{float:left;margin-left:10px;margin-top:0;display: inline-block;line-height:30px;}
-.onearea{margin-top:20px;}
-.thefile{zoom:1;width:48.5%;margin-bottom:20px;}
+#upthefile{width:48.5%;margin-top:0px;/* display: none; */}
+.onearea{width:48.5%;padding:20px 0px;border-bottom:1px dashed #d8d8d8;}
+.onearea .oneimp{width:100%;}
+.thefile{zoom:1;width:100%;}
 .foconv-btn,.wordconv-btn,.todel-btn{width: 64px;}
 .onearea .imparea{color:#333;padding-bottom:10px;}
 .onearea .uncont{width:48.5%;padding:0;}
 .onearea .tomat{display: block;margin-top:0;padding-top:0;}
-.onearea .tomat .layui-progress{position:static;margin:0;}
-.onearea .tomat .layui-progress{width:100%;}
-.onearea .forword{margin-top:0;margin-bottom:6px;text-align: left;}
-.forword .thename{margin-right:40px;}
+.onearea .tomat .layui-progress,#upthefile .layui-progress{position:relative;left:0;margin:0;}
+.onearea .tomat .layui-progress,#upthefile .layui-progress{width:100%;}
+.onearea .tomat .layui-progress-text{top:12px;}
+.uplword{margin-top:0;margin-bottom:6px;text-align: left;}
+.uplword .thename{margin-right:40px;}
+.onearea .tomat.theprog-bar,.onearea .imparea{display: none;margin-top:20px;}
+#upthefile .layui-progress-big .layui-progress-text{display: inline-block;margin-top:15px;color:#7c8491;}
 @media screen and (max-width:1365px){
-	.thefile{width:70%;}
+	#upthefile,.onearea{width:70%;}
 }

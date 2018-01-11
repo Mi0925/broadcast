@@ -71,6 +71,35 @@ Router.route('/exportAReport', function() {
 /*调度指挥模块 end*/
 
 /*资源管理模块 start*/
+//资源信息管理
+Router.route('/resourceInformation', function() {
+  gbMainContent('components/resourceInformation.html', RoundaboutSet);
+});
+//新建平台资源信息
+Router.route('/newPlatResoInfo', function() {
+  gbMainContent('components/newPlatResoInfo.html', RoundaboutSet);
+});
+//编辑平台资源信息
+Router.route('/editPlatResoInfo', function() {
+  gbMainContent('components/editPlatResoInfo.html', RoundaboutSet);
+});
+//新建下级终端
+Router.route('/newJuniorTerminal', function() {
+  gbMainContent('components/newJuniorTerminal.html', RoundaboutSet);
+});
+//编辑下级终端
+Router.route('/editJuniorTerminal', function() {
+  gbMainContent('components/editJuniorTerminal.html', RoundaboutSet);
+});
+//新建台站资源信息
+Router.route('/newStationResoInfo', function() {
+  gbMainContent('components/newStationResoInfo.html', RoundaboutSet);
+});
+//编辑台站资源信息
+Router.route('/editStationResoInfo', function() {
+  gbMainContent('components/editStationResoInfo.html', RoundaboutSet);
+});
+
 //节目资源管理
 Router.route('/programResources', function() {
   gbMainContent('components/programResources.html', RoundaboutSet);
