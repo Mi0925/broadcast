@@ -29,19 +29,46 @@
 
 // 添加树关闭按钮点击事件
 $("body").on('click', '.ztree .tree-close', function(event) {
-	removeDom($(this).parents(".ztree").attr("id"))
+	var bool = confirm('确定删除吗？');
+    if (bool) {
+		removeDom($(this).parents(".ztree").attr("id"))
+    }
 });
 // 添加树关闭按钮
 function addDiyDom(treeId, treeNode) {
 	var aObj = $("#" + treeNode.tId + "_a");
 	if ($("#diyBtn_"+treeNode.id).length>0) return;
-	var editStr ="<i class='iconfont icon-guanbi1 tree-close'></i>";
+	var editStr ="<i class='iconfont icon-guanbi1 tree-icon tree-close'></i>";
 	aObj.append(editStr);
 	// var btn = $("#diyBtn_"+treeNode_id);
 	// btn.bind("click", function(){
 	// 	removeDom("gb_tree_sel1")
 	// })
 };
+
+// 添加树增加、删除、关闭
+function resourceDom(treeId, treeNode) {
+	console.log(treeNode)
+	console.log(treeNode.editIcon)
+	var aObj = $("#" + treeNode.tId + "_a");
+	var editStr="";
+	if ($("#diyBtn_"+treeNode.id).length>0) return;
+	if(treeNode.editIcon){
+		editStr +="<a href='##'><i class='iconfont icon-bianji tree-icon tree-add'> 编辑</i></a>";
+	};
+	if(treeNode.removeIcon){
+		editStr +="<i class='iconfont icon-guanbi1 tree-icon tree-close'> 删除</i>";
+	};
+	if(treeNode.addIcon){
+		editStr +="<a href='##'><i class='iconfont icon-xinjian tree-icon tree-edit'> 增加</i></a>";
+	};
+	aObj.append('<div class="tree-icon-box">'+editStr+'</div>');
+	// var btn = $("#diyBtn_"+treeNode_id);
+	// btn.bind("click", function(){
+	// 	removeDom("gb_tree_sel1")
+	// })
+};
+
 // 树关闭事件
 function removeDom($this) {
 	setTimeout(function(){

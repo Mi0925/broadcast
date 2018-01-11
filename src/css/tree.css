@@ -10,17 +10,20 @@
 
 
 .gb-tree .ztree li{margin-bottom: 6px;}
-.gb-tree .ztree .tree-close{font-size: 12px;color: #7c8491;float: right;}
-.gb-tree .ztree .tree-close:hover{color: #4579d8;}
+.gb-tree .ztree .tree-icon{font-size: 12px;color: #7c8491;float: right;margin-left:20px;}
+.gb-tree .ztree .tree-icon:hover{color: #4579d8;}
 .gb-tree .ztree li ul{margin-top: 6px;}
-.gb-tree .ztree li a{width: 96%;position: relative;}
-.gb-tree .ztree li a:after{content: "";height: 1px;border-bottom: 1px dashed #ced5e0;width:84%;right: 30px;top: 8px;position: absolute;}
+.gb-tree .ztree li>a{width: 96%;position: relative;}
+.gb-tree .ztree li>a:after{content: "";height: 1px;border-bottom: 1px dashed #ced5e0;right: 30px;top: 8px;position: absolute;left: 66px;}
+.gb-tree .ztree.ztree-resource li>a:after{left: 66px;}
 .gb-tree .ztree li span.button.noline_close{background-position: 2px -81px;}
 .gb-tree .ztree li span.button.noline_open{background-position: -11px -81px;}
 .gb-tree .ztree li span.button.ico_open{background-position: -43px -81px;}
 .gb-tree .ztree li span.button.ico_close{background-position: -43px -81px;}
 .gb-tree .ztree li span.button.ico_docu{background-position: -26px -81px;}
 
+.tree-icon-box{float: right;background: #fff;position: relative;z-index: 999;}
+.tree-icon-box i{float:none;}
 
 .ztree li span { background-color: #fff; position: relative; z-index: 9; display: inline-block; padding-right: 10px; }
 .ztree li span.button.chk{margin-top: 3px;}
@@ -33,7 +36,7 @@
 .gb-tree .ztree li span.button.chk.checkbox_true_part{background-position: -14px -101px;}
 .gb-tree .ztree li span.button.chk.checkbox_true_part_focus{background-position: -14px -101px;}
 
-.gb-tree .ztree li a.curSelectedNode{background: none;border:none;height: auto;padding-top: 1px;}
+.gb-tree .ztree li a.curSelectedNode{background: none;border:none;height: auto;padding-top: 1px;opacity: 1;}
 
 
 
