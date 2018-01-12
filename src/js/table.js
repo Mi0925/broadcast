@@ -75,22 +75,28 @@ $(document).on('click','.audit',function(){
 })
 $(document).on('click','.notpass',function(){
     $('.popwindow').show();
-    $('.unreason').css({'z-index':'101','opacity':1,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"});
+    $('.unreason').show();//.css({'z-index':'101','opacity':1,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"});
 })
 
 /**/$(document).on('click','.popwindow',function(){
-    $(this).hide();
-    $('.preview').hide();
-    $('.review').hide();
-    $('.fillin').hide();
-    $('.toshift').hide();
-    $('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+    /*if($(this).hasClass('popnone')){
+        return;
+    }else{*/
+        $(this).hide();
+        $('.preview').hide();
+        $('.review').hide();
+        $('.fillin').hide();
+        $('.toshift').hide();
+        $('.unreason').hide();
+        $('.tolead').hide();
+    //}
+    //.css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
 })
 $(document).on('click','.popclose',function(){
     $('.popwindow').hide();
     
     $(this).parent().hide();
-    $('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+    $('.unreason').hide();//.css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
 })
 $(document).on('click','.revno',function(){
     $('.review').hide();
@@ -107,5 +113,5 @@ $(document).on('click','.revyes',function(){
 })
 $(document).on('click','.un-confirm',function(){
     $('.popwindow').hide();
-    $(this).parents('.unreason').css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+    $(this).parents('.unreason').hide();//.css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
 })

@@ -14,7 +14,7 @@
 		    			<li><a href="#/newJuniorTerminal" class="add_tab newtk-btn" url="components/newJuniorTerminal.html" name="新建下级终端">新建下级终端</a></li>
 		    			<li><a href="#/newStationResoInfo" class="add_tab newtk-btn" url="components/newStationResoInfo.html" name="新建台站">新建台站</a></li>
 		    			<li>
-		    				<input type="file" class="leadin"/>
+		    				<input type="file" class="leadin" accept="xls,xlsx"  data-type="loading"/>
 		    				<a href="javascript:void(0);" class="newtk-btn">快速导入（excel）</a>
 		    			</li>
 		    		</ul>
@@ -2452,66 +2452,81 @@
 					<span class="syncall"><i class="iconfont icon-zhuanhuan"></i>同步</span>
 				</div>
 			</div>
-			<div class="gb-tree scroll" id="treea">
-				<ul id="gb_tree_resource1" class="ztree ztree-resource"></ul>
+			<div class="treediv">
+				<div class="gb-tree scroll" id="treea">
+					<ul id="gb_tree_resource1" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treeb">
+					<ul id="gb_tree_resource2" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treec">
+					<ul id="gb_tree_resource3" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treed">
+					<ul id="gb_tree_resource4" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treee">
+					<ul id="gb_tree_resource5" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treef">
+					<ul id="gb_tree_resource6" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treeg">
+					<ul id="gb_tree_resource7" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treeh">
+					<ul id="gb_tree_resource8" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treei">
+					<ul id="gb_tree_resource9" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treej">
+					<ul id="gb_tree_resource10" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treek">
+					<ul id="gb_tree_resource11" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treel">
+					<ul id="gb_tree_resource12" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treem">
+					<ul id="gb_tree_resource13" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treen">
+					<ul id="gb_tree_resource14" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treeo">
+					<ul id="gb_tree_resource15" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treep">
+					<ul id="gb_tree_resource16" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treeq">
+					<ul id="gb_tree_resource17" class="ztree ztree-resource"></ul>
+				</div>
+				<div class="gb-tree scroll" id="treer">
+					<ul id="gb_tree_resource18" class="ztree ztree-resource"></ul>
+				</div>
 			</div>
-			<!-- <div class="gb-tree scroll" id="treeb">
-				<ul id="gb_tree_resource2" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treec">
-				<ul id="gb_tree_resource3" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treed">
-				<ul id="gb_tree_resource4" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treee">
-				<ul id="gb_tree_resource5" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treef">
-				<ul id="gb_tree_resource6" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treeg">
-				<ul id="gb_tree_resource7" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treeh">
-				<ul id="gb_tree_resource8" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treei">
-				<ul id="gb_tree_resource9" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treej">
-				<ul id="gb_tree_resource10" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treek">
-				<ul id="gb_tree_resource11" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treel">
-				<ul id="gb_tree_resource12" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treem">
-				<ul id="gb_tree_resource13" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treen">
-				<ul id="gb_tree_resource14" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treeo">
-				<ul id="gb_tree_resource15" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treep">
-				<ul id="gb_tree_resource16" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treeq">
-				<ul id="gb_tree_resource17" class="ztree ztree-resource"></ul>
-			</div>
-			<div class="gb-tree scroll" id="treer">
-				<ul id="gb_tree_resource18" class="ztree ztree-resource"></ul>
-			</div> -->
+			
+			
 		</div>
 		
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 	</div>
 	
-
+	<div class="popwindow popnone"></div>
+	<div class="tolead">
+		<p class="poptit">导入excel</p>
+		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="leadiv">
+			<div class="layui-progress layui-progress-big" lay-filter="demo" lay-showpercent="true">
+				<div class="layui-progress-bar" lay-percent="0%"></div>
+			</div>
+			<p class="leadhint">正在导入<span class="lefile">xxx.xls</span></p>
+			<p class="succmat"><i class="iconfont icon-11"></i>转换成功！</p>
+		</div>
+	</div>
 	<div class="choose">
 		<p class="choword">确定删除此任务消息吗？</p>
 		<div class="chobtn">
@@ -2526,8 +2541,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		/*calendar*/
-		layui.use('laydate', function(){
-			var laydate = layui.laydate;
+		layui.use(['laydate','element'], function(){
+			var laydate = layui.laydate,element = layui.element;
 			laydate.render({
 			    elem: '#daterg',
 			    eventElem: '#tochobtn',
@@ -2535,7 +2550,45 @@
 			    type:'datetime',
 			    range: true
 			});
+
+
+			//触发事件
+			var active = {
+			    loading: function(othis){
+			      var DISABLED = 'layui-btn-disabled';
+			      if(othis.hasClass(DISABLED)) return;
+			      
+			      //模拟loading
+			      var n = 0,timer = setInterval(function(){
+			        n = n + Math.random()*10|0;  
+			        if(n>100){
+			          n = 100;
+			          clearInterval(timer);
+			          othis.removeClass(DISABLED);
+			          $('.leadiv .layui-progress').hide();
+			          $('.leadhint').hide();
+			          $('.leadiv .succmat').show();
+			        }
+			        element.progress('demo', n+'%');
+			      }, 300+Math.random()*1000);
+			      
+			      othis.addClass(DISABLED);
+			    }
+			};
+		  
+			$('.leadin').change(function(){
+				$('.leadiv .succmat').hide();
+				$('.leadiv .layui-progress').show();
+			    $('.leadhint').show();
+				$('.popnone').show();
+				$('.tolead').show();
+
+				var othis = $(this), type = $(this).data('type');
+				active[type] ? active[type].call(this, othis) : '';
+			})
 		})
+
+			
 		//新建资源下拉框
 		$('.catonew').click(function(){
 			if($('.tonewlist').is(':hidden')){
@@ -2565,6 +2618,8 @@
 			stopPropagation(e); 
 		});
 
+		
+
 		//菜单栏
 		$('.resolist li').click(function(){
 			$(this).parent().find('li').removeClass('resact');
@@ -2576,18 +2631,24 @@
 				$('.resolist').eq(2).find('li:first-child').addClass('resact');
 			}
 
-			//表格切换
-			toChangeTab();
+			if($('.resnav').hasClass('navtree')){
+				//目录树切换
+				toChangeNav();
+			}else{
+				//表格切换
+				toChangeTab();
+			}
 		})
 		$('.resnav').click(function(){
 			if($(this).hasClass('navtree')){
 				$(this).removeClass('navtree');
+				//表格切换
+				toChangeTab();
 			}else{
 				$(this).addClass('navtree');
+				//目录树切换
+				toChangeNav();
 			}
-
-			//目录树切换
-			toChangeNav();
 		})
 		var tabone,tabtwo,tabthr,newstr;
 		function toChangeTab(){
@@ -2597,6 +2658,7 @@
 			newstr = tabone + tabtwo + tabthr;
 			//console.log(newstr);
 			$('.thetab').hide();
+			$('.treediv').hide();
 			if(newstr == '025'){
 				$('#table-maina').show();
 			}else if(newstr == '026'){
@@ -2642,42 +2704,44 @@
 			newstr = tabone + tabtwo + tabthr;
 			//console.log(newstr);
 			$('.thetab').hide();
+			$('.treediv').show();
+			$('.gb-tree').hide();
 			if(newstr == '025'){
-				$('#table-maina').show();
+				$('#treea').show();
 			}else if(newstr == '026'){
-				$('#table-mainb').show();
+				$('#treeb').show();
 			}else if(newstr == '027'){
-				$('#table-mainc').show();
+				$('#treec').show();
 			}else if(newstr == '035'){
-				$('#table-maind').show();
+				$('#treed').show();
 			}else if(newstr == '036'){
-				$('#table-maine').show();
+				$('#treee').show();
 			}else if(newstr == '037'){
-				$('#table-mainf').show();
+				$('#treef').show();
 			}else if(newstr == '045'){
-				$('#table-maing').show();
+				$('#treeg').show();
 			}else if(newstr == '046'){
-				$('#table-mainh').show();
+				$('#treeh').show();
 			}else if(newstr == '047'){
-				$('#table-maini').show();
+				$('#treei').show();
 			}else if(newstr == '125'){
-				$('#table-mainj').show();
+				$('#treej').show();
 			}else if(newstr == '126'){
-				$('#table-maink').show();
+				$('#treek').show();
 			}else if(newstr == '127'){
-				$('#table-mainl').show();
+				$('#treel').show();
 			}else if(newstr == '135'){
-				$('#table-mainm').show();
+				$('#treem').show();
 			}else if(newstr == '136'){
-				$('#table-mainn').show();
+				$('#treen').show();
 			}else if(newstr == '137'){
-				$('#table-maino').show();
+				$('#treeo').show();
 			}else if(newstr == '145'){
-				$('#table-mainp').show();
+				$('#treep').show();
 			}else if(newstr == '146'){
-				$('#table-mainq').show();
+				$('#treeq').show();
 			}else if(newstr == '147'){
-				$('#table-mainr').show();
+				$('#treer').show();
 			}
 		}
 		/*table start*/
@@ -4862,10 +4926,10 @@
 			view:{
 				showLine:false,//去掉连接线
 				addDiyDom:resourceDom
-			},
+			}/*,
 			callback: {
 				onCheck: zTreeOnCheck
-			}
+			}*/
 		};
 		// 树数据
 		var resourceData=[{
@@ -4903,6 +4967,7 @@
 			        name: "上城区",
 		    		addIcon:true,
 			        children: [{
+			        	addIcon:true,
 				        name: "湖滨街道"
 				    }]
 			    }]
