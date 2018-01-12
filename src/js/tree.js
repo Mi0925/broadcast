@@ -48,8 +48,6 @@ function addDiyDom(treeId, treeNode) {
 
 // 添加树增加、删除、关闭
 function resourceDom(treeId, treeNode) {
-	console.log(treeNode)
-	console.log(treeNode.editIcon)
 	var aObj = $("#" + treeNode.tId + "_a");
 	var editStr="";
 	if ($("#diyBtn_"+treeNode.id).length>0) return;

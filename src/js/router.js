@@ -38,6 +38,11 @@ Router.route('/editHandoverRecord', function() {
   gbMainContent('components/editHandoverRecord.html', RoundaboutSet);
 });
 
+/*演练效果*/
+Router.route('/manoeuvre', function() {
+  gbMainContent('components/manoeuvre.html', RoundaboutSet);
+});
+
 /*首页*/
 Router.route("/index", function() {
   gbMainContent('components/index.html', RoundaboutSet);

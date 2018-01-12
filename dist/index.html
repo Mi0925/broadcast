@@ -58,7 +58,7 @@
 						</span>
 					</a>
 					<div class="left-sub-nav">
-						<a href="#/round3" class="nav-router add_tab" url="components/round3.html" name="演练效果"><em><strong>演练效果</strong></em></a>
+						<a href="#/manoeuvre" class="nav-router add_tab" url="components/manoeuvre.html" name="演练效果"><em><strong>演练效果</strong></em></a>
 						<a href="#/round3" class="nav-router add_tab" url="components/round3.html" name="演练计划"><em><strong>演练计划</strong></em></a>
 					</div>
 				</li>
@@ -168,7 +168,23 @@
 					<span class="i">收起导航栏</span>
 				</em>
 				<div class="gb-header-operation">
-					<button class="layui-btn layui-btn-mini layui-btn-primary i">上 班</button>
+					<div class="gb-work-btn i">
+						<label class="iT gb-work-countdown" style="display: none;">
+							<div class="name iT">
+								倒计时
+								<span id="day_show" style="display: none;"></span>
+								<span id="hour_show" style="display: none;"><s id="h"></s></span>
+								<span id="minute_show"><s></s></span>:
+								<span id="second_show"><s></s></span>
+							</div>
+							<button class="layui-btn layui-btn-xs layui-btn-warm iT j-ok-work">确认在岗</button>
+						</label>
+						<label class="iT">
+							<span class="name iT" style="display: none;">8：00上班</span>
+							<!-- <button class="layui-btn layui-btn-xs layui-btn-primary iT j-dialog-off-word">下 班</button> -->
+							<button class="layui-btn layui-btn-xs layui-btn-primary iT j-work j-dialog-work" attr="上班">上 班</button>
+						</label>
+					</div>
 					<span class="name i">橙子，欢迎您333！</span>
 					<a href="#/personalSetting" url="components/personalSetting.html" class="add_tab succession i" name="个人设置">
 						<i class="iconfont icon-gerenxinxi i"></i>
@@ -219,6 +235,33 @@
 	</div>
 </div>
 
+<!-- 上下班弹出框 -->
+<div class="gb-dialog gb-dialog-work" style="display: none;">
+	<form class="layui-form" action="">
+		<div class="gb-dialog-main i">
+			<h3 class="gb-dialog-title">
+				<i class="iconfont icon-guanbi j-close-dialog"></i>
+			</h3>
+			<div class="gb-dialog-word">
+				<p>是否下班？</p>
+			</div>
+		</div>
+	</form>
+</div>
+
+<!-- 上班弹出框 -->
+<div class="gb-dialog gb-go-work" style="display: none;">
+	<form class="layui-form" action="">
+		<div class="gb-dialog-main i">
+			<h3 class="gb-dialog-title">
+				<i class="iconfont icon-guanbi j-close-dialog"></i>
+			</h3>
+			<div class="gb-dialog-word">
+				<p>上班前请填写交接班记录</p>
+			</div>
+		</div>
+	</form>
+</div>
 
 <script src="http://api.map.baidu.com/api?v=2.0&ak=Pg78EjHlM1Ma0Bs5gZwkmgrQ"></script>
 <script src="plugins/jquery-1.11.3.min.js"></script>
@@ -245,13 +288,76 @@
 <!-- 打包过的主要js -->
 <script src="src/js/main.min.js"></script>
 <script>
+/* 倒计时 */
+var worksetInterval=null;
+function timer(intDiff) {
+	worksetInterval=window.setInterval(function() {
+		var day = 0,
+			hour = 0,
+			minute = 0,
+			second = 0; //时间默认值    
+		if (intDiff > 0) {
+			day = Math.floor(intDiff / (60 * 60 * 24));
+			hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+			minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+			second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+		}
+		if (minute <= 9) minute = '0' + minute;
+		if (second <= 9) second = '0' + second;
+		$('#day_show').html(day);
+		$('#hour_show').html('<s id="h"></s>' + hour);
+		$('#minute_show').html('<s></s>' + minute);
+		$('#second_show').html('<s></s>' + second);
+		intDiff--;
+	}, 1000);
+}
+$(".j-ok-work").click(function() {
+	clearInterval(worksetInterval);
+	timer(parseInt(1000));
+})
+layui.use(['layer','laydate','form'], function() {
+	var layer = layui.layer,laydate = layui.laydate,form = layui.form;
+    $("body").on('click','.j-work',function() {
+		if($(this).attr("attr")=="上班"){
+			clearInterval(worksetInterval);
+			timer(parseInt(1000));//倒计时总秒数量
+			$(this).attr("attr","下班");
+			$(this).html("下 班");
+			$(".gb-dialog-word p").html("上班前请填写交接班记录");
+			$(this).siblings(".name").show().html("8：00上班");
+			$(".gb-work-countdown").show();
+		}else{
+			$(this).attr("attr","上班");
+			$(this).html("上 班");
+			$(".gb-dialog-word p").html("下班前请填写交接班记录");
+			$(this).siblings(".name").html("18：00下班");
+			$(".gb-work-countdown").hide();
+		}
+		// 上班弹出框
+		layer.open({
+			type: 1, 
+			title:false,
+			shadeClose:true,
+			closeBtn: 0,
+			content: $(".gb-dialog-work"),
+			btn: ['新建交接班记录','取 消'],
+			yes: function(index, layero){
+				window.location.href="#/newHandoverRecord";
+				layer.closeAll();
+			},
+			success: function(layero, index){
+				
+			}
+		});
+    });
+});
+
+
  	var RoundaboutSet=null;//首页轮播定时器
 	var tabActive=0;//当前活动tab
 	// 刷新页面清除url参数
 	// var shortURL=top.location.href.substring(0,top.location.href.indexOf('#'));
 	// history.replaceState(null,null,shortURL)
-
-
 	// tab标签
 	$(".gb-tab .swiper-slide").eq(0).addClass('cur');
 	var tabSwiper = new Swiper('.gb-tab .swiper-container',{

@@ -38,5 +38,5 @@
 .add-watch-btn{width: 60%;}
 
 .layui-btn.bg4579d8{background: #4579d8;}
-.layui-layer-btn { position: absolute; bottom: 7px; left: 203px; }
-.layui-layer .layui-layer-btn .layui-layer-btn0{background-color: #4579d8;height: 38px;line-height: 38px;}
+.gb-watch-dialog .layui-layer-btn { position: absolute; bottom: 7px; left: 203px; }
+.gb-watch-dialog .layui-layer-btn .layui-layer-btn0{background-color: #4579d8;height: 38px;line-height: 38px;}

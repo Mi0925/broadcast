@@ -44,7 +44,7 @@
 		<div class="gb-calendar-body">
 			<div class="gb-calendar"></div>
 			<div class="gb-calendar-fun">
-				<a href="##">
+				<a href="#/recordOfSuccession" url="components/recordOfSuccession.html" class="add_tab" name="交接班记录">
 					<i class="iconfont icon-rili"></i>
 					<em>交接班表</em>
 				</a>
@@ -266,6 +266,7 @@ $(document).ready(function() {
 					closeBtn: 0,
 					content: dialog_html,
 					btn: ['确定创建'],
+					skin: 'gb-watch-dialog',
 					yes: function(index, layero){
 						var eventData,people="";
 						$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
@@ -603,7 +604,6 @@ $(document).ready(function() {
 			'					</div>'+
 			'				</div>'+
 			'			</form>'+
-			'			<!-- <div class="gb-dialog-shade"></div> -->'+
 			'		</div>';
 		return dialog_html;
 	}
