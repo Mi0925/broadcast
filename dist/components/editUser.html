@@ -1,0 +1,93 @@
+<div class="gb-form">
+	<form class="layui-form" action="">
+		<div class="newform newprog">
+			<p class="newform-tit"><i class="iconfont icon-bianji1"></i>编辑角色</p>
+			<div class="form-oneitem">
+				<div class="fortit">
+					<span class="oneitem-tit">编辑角色</span>
+				</div>
+				<div class="oneitem-cont">
+					<div class="progtype">
+						<p class="oneitem-tit"><small>*</small>角色名称</p>
+						<div class="tnoneimp">
+							<input type="text" class="imptxt"/>
+							<p class="itemexp" style="color: red;">！角色名称重复</p>
+						</div>
+					</div>
+					<div class="progtype">
+						<p class="oneitem-tit"><small>*</small>角色名称</p>
+						<div class="tnoneimp">
+							<input type="text" class="imptxt"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tocreat">
+				<div class="progcreat">
+					<input type="button" value="保存" class="tocreatbtn" />
+				</div>
+			</div>
+			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
+		</div>
+		<div class="choose">
+			<p class="choword">确定删除此任务消息吗？</p>
+			<div class="chobtn">
+				<input type="button" value="删除" class="chopri cho-delete" />
+				<input type="button" value="取消" class="cho-cancel" />
+			</div>
+			<span class="triangle"><em></em></span>
+		</div>
+	</form>
+</div>
+
+	
+
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		if(parseInt($('.progtype').css('height')) > 418){
+			$('.progtype i').removeClass('icon-youjiantou').addClass('icon-dotted-arrow-down');
+		}else{
+			$('.progtype i').removeClass('icon-dotted-arrow-down').addClass('icon-youjiantou');
+		}
+		$(window).resize(function(){
+			if(parseInt($('.progtype').css('height')) > 418){
+				$('.progtype i').removeClass('icon-youjiantou').addClass('icon-dotted-arrow-down');
+			}else{
+				$('.progtype i').removeClass('icon-dotted-arrow-down').addClass('icon-youjiantou');
+			}
+		})
+
+		$('#imparea').on('keyup', function() {  
+		    $('.area-count .countnew').html($('#imparea').val().length);  
+		});
+
+		layui.use('form', function(){
+			var form = layui.form;
+			form.render();
+
+			var itbtn = $('<span class="itbtn"></span>');
+			$('.layui-select-title').append(itbtn);
+			$('.gb-form .layui-form-radio').remove();
+			
+		});
+		
+		$('.matlist li').find('.matcheck label').click(function(){
+			//console.log($(this).parents('li').index());
+			var theshow = $(this).parents('li').index();
+			$('.prchodiv').hide();
+			$('.prchodiv').eq(theshow).show();
+		})
+		
+		$('.toemptybtn').click(function(){
+			$('.imptxt').val('');
+			$('.imparea').val('请输入消息文本');
+			$('.imparea').css('color','#ccc');
+			$('.countnew').html('0');
+			$('.prtop .msgrank li input').prop('checked',false);
+			$('.gb-form .layui-form-select .layui-input').val('');
+			$('.layui-anim-upbit dd').removeClass('layui-this');
+		})
+	})
+</script>

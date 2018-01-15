@@ -167,4 +167,8 @@ Router.route('/onDuty', function() {
 Router.route('/userManage', function() {
   gbMainContent('components/userManage.html', RoundaboutSet);
 });
+//用户编辑
+Router.route('/editUser', function() {
+  gbMainContent('components/editUser.html', RoundaboutSet);
+});
 /*系统管理模块 end*/
