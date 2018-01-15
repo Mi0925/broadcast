@@ -195,6 +195,7 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 
 /* programResources && recordOfSuccession */
 #table-mainthr .thetab,#table-mainfou .thetab{padding-top:60px;}
+.gb-role-list{padding-bottom: 41px;}
 @media screen and (max-width:1500px){
 	.gb-table .tklay{width:100%;}
 	#table-mainthr .tksearch{float:left;margin:13px 0;width:495px;}
