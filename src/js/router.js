@@ -159,13 +159,12 @@ Router.route('/dataLinkageLog', function() {
 Router.route('/watch', function() {
   gbMainContent('components/watch.html', RoundaboutSet);
 });
+//值班日志
+Router.route('/onDuty', function() {
+  gbMainContent('components/onDuty.html', RoundaboutSet);
+});
+//用户管理
+Router.route('/userManage', function() {
+  gbMainContent('components/userManage.html', RoundaboutSet);
+});
 /*系统管理模块 end*/
-Router.route('/test', function() {
-  gbMainContent('components/test.html', RoundaboutSet);
-});
-Router.route('/round2', function() {
-  gbMainContent('components/round2.html', RoundaboutSet);
-});
-Router.route('/round3', function() {
-  gbMainContent('components/round3.html', RoundaboutSet);
-});
