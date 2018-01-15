@@ -174,90 +174,6 @@
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 	</div>
-	<div class="popwindow"></div>
-	<div class="unreason">
-		<p class="poptit">预览</p>
-		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
-		<div class="uncont">
-			<p class="unword">视频.mp4</p>
-			<input type="button" value="预览" class="un-confirm" />
-		</div>
-	</div>
-	<div class="choose">
-		<p class="choword">确定删除此任务消息吗？</p>
-		<div class="chobtn">
-			<input type="button" value="删除" class="chopri cho-delete" />
-			<input type="button" value="取消" class="cho-cancel" />
-		</div>
-		<span class="triangle"><em></em></span>
-	</div>
-	<div class="toshift">
-		<p class="poptit">格式转换</p>
-		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
-		<div class="uncont">
-			<div class="format">
-				<span class="matit">当前格式：</span>
-				<span class="themat">mp3</span>
-			</div>
-			<div class="format">
-				<span class="matit">目标格式：</span>
-				<div class="matchoose">
-					<ul class="matlist">
-						<li>
-							<span class="matype">格式一</span>
-							<div class="matcheck">
-								<input type="radio" name="matcho" id="matone" checked="checked" />
-								<label for="matone"></label>
-							</div>
-						</li>
-						<li>
-							<span class="matype">格式二</span>
-							<div class="matcheck">
-								<input type="radio" name="matcho" id="matwo" />
-								<label for="matwo"></label>
-							</div>
-						</li>
-						<li>
-							<span class="matype">格式三</span>
-							<div class="matcheck">
-								<input type="radio" name="matcho" id="mathr" />
-								<label for="mathr"></label>
-							</div>
-						</li>
-						<li>
-							<span class="matype">格式四</span>
-							<div class="matcheck">
-								<input type="radio" name="matcho" id="matfou" />
-								<label for="matfou"></label>
-							</div>
-						</li>
-						<li>
-							<span class="matype">格式五</span>
-							<div class="matcheck">
-								<input type="radio" name="matcho" id="matfiv" />
-								<label for="matfiv"></label>
-							</div>
-						</li>
-						<li>
-							<span class="matype">格式六</span>
-							<div class="matcheck">
-								<input type="radio" name="matcho" id="matsix" />
-								<label for="matsix"></label>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="tomat">
-				<div class="layui-progress layui-progress-big" lay-filter="demo"><!--  lay-showpercent="true" -->
-				  <div class="layui-progress-bar" lay-percent="0%"></div><!--   layui-bg-red -->
-				</div>
-				<p class="forword">转换中...</p>
-			</div>
-			<p class="succmat"><i class="iconfont icon-11"></i>转换成功！</p>
-			<input type="button" value="转换" class="layui-btn site-demo-active"  data-type="loading"/>
-		</div>
-	</div>
 </div>
 
 	
@@ -266,10 +182,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		var uncH = parseInt($('.uncont').css('height'));
-		$('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});
-		
-	
 		/*calendar*/
 		layui.use('laydate', function(){
 			var laydate = layui.laydate;
@@ -302,10 +214,6 @@
 	                   orderable: false,
 
 	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
                     {
 	                   orderable: false,
 
@@ -329,7 +237,10 @@
                     {
 	                   orderable: false,
 
-	                   targets: 9 }
+	                   targets: 9 },
+	                { 
+	                	"sType": "html-percent", 
+                       "aTargets": [2] }   //指定列号使用自定义排序
                ],//第一列与第二列禁止排序
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainfiv"))
@@ -337,7 +248,7 @@
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 2) {//删除第一列与第二列的筛选框
+                       if (i == 4 || i == 5) {//删除第一列与第二列的筛选框
                            var column = api.column(i);
                            var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
                            var select = $('<select><option value="">全部</option></select>')
@@ -388,43 +299,45 @@
  			//checkbox全选
            $("#checkAll").on("click", function () {
                if ($(this).prop("checked") === true) {
-                   $("input[name='checkone']").prop("checked", $(this).prop("checked"));
+               		$('#invert').attr('checked',false);
+                   $('.dataTables_wrapper tbody tr').find("input").prop("checked", $(this).prop("checked"));
                    $('.dataTables_wrapper tbody tr').addClass('selected');
-                   $("input[name='coverpop']").prop("checked", $(this).prop("checked"));
-                   $("input[name='areacrea']").prop("checked", $(this).prop("checked"));
-                   $("input[name='areaname']").prop("checked", $(this).prop("checked"));
                } else {
-                   $("input[name='checkone']").prop("checked", false);
+                   $('.dataTables_wrapper tbody tr').find("input").prop("checked", false);
                    $('.dataTables_wrapper tbody tr').removeClass('selected');
-                   $("input[name='coverpop']").prop("checked", false);
-                   $("input[name='areacrea']").prop("checked", false);
-                   $("input[name='areaname']").prop("checked", false);
                }    
            });
 
            //反选
            $('#invert').on("click", function () {
-               if ($(this).prop("checked") === true) {
-               	   $('#checkAll').attr('checked',false);
-               	   $('.dataTables_wrapper tbody tr').each(function(){
-               	   		console.log(1);
-               	   		/*if(){
-
-               	   		}*/
-               	   })
-               	   
-                   /*$("input[name='checkone']").prop("checked", $(this).prop("checked"));
-                   $('.dataTables_wrapper tbody tr').addClass('selected');
-                   $("input[name='coverpop']").prop("checked", $(this).prop("checked"));
-                   $("input[name='areacrea']").prop("checked", $(this).prop("checked"));
-                   $("input[name='areaname']").prop("checked", $(this).prop("checked"));*/
-               } else {
-                   /*$("input[name='checkone']").prop("checked", false);
-                   $('.dataTables_wrapper tbody tr').removeClass('selected');
-                   $("input[name='coverpop']").prop("checked", false);
-                   $("input[name='areacrea']").prop("checked", false);
-                   $("input[name='areaname']").prop("checked", false);*/
-               }    
+           	   var $tmp = $('[name=checkone]:checkbox');
+           	   $('#checkAll').prop('checked', );
+           	   //console.log($tmp.length);
+           	   //console.log($tmp.filter(':checked').length);
+           	   if($tmp.filter(':checked').length == 0){
+           	   	$('#checkAll').prop('checked', true);
+           	   }else{
+           	   	$('#checkAll').prop('checked', false);
+           	   }
+           	   $('.dataTables_wrapper tbody tr').each(function(){
+           	   		if($(this).hasClass('selected')){
+           	   			if($(this).find("input[name='coverpop']").prop("checked") === true && $(this).find("input[name='areacrea']").prop("checked") === true && $(this).find("input[name='areaname']").prop("checked") === true){
+							$(this).removeClass('selected');
+               	   			$(this).find("input").prop("checked", false);
+           	   			}else{
+           	   				$(this).find("input").not("input[name='checkone']").each(function(){
+           	   					if($(this).prop("checked") === true){
+           	   						$(this).prop("checked", false);
+           	   					}else{
+           	   						$(this).prop("checked", true);
+           	   					}
+           	   				})
+           	   			}
+           	   		}else{
+           	   			$(this).addClass('selected');
+           	   			$(this).find("input").prop("checked", true);
+           	   		}
+           	   })
            });
  
            //删除选中行
@@ -433,12 +346,28 @@
                $tr.toggleClass('selected');
                var $tmp = $('[name=checkone]:checkbox');
                $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
- 
+               if($tr.hasClass('selected')){
+               		$tr.find("input").prop("checked", $(this).prop("checked"));
+               }else{
+               		$tr.find("input").prop("checked", false);
+               }
+ 				$('#invert').attr('checked',false);
            });
- 
-           $('.chedel').click(function () {
-               table.rows('tr.selected').remove().draw(false);
-               $('#checkAll').attr('checked',false);
+ 			
+ 			//选择数据
+ 		  $('.dataTables_wrapper tbody').find("input").not("input[name='checkone']"). on('click', function () {
+               var $tr = $(this).parents('tr');
+	           if($tr.find("input[name='coverpop']").prop("checked") === false && $tr.find("input[name='areacrea']").prop("checked") === false && $tr.find("input[name='areaname']").prop("checked") === false){
+					$tr.removeClass('selected');
+       	   			$tr.find("input[name='checkone']").prop("checked", false);
+   	   			}else{
+   	   				$tr.addClass('selected');
+       	   			$tr.find("input[name='checkone']").prop("checked", true);
+   	   			}
+               var $tmp = $('.dataTables_wrapper tbody').find("input:checkbox").not("input[name='checkone']");
+               $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
+               //console.log($tmp);
+ 			   $('#invert').attr('checked',false);
            });
        })
 	})
