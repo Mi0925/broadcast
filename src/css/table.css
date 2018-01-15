@@ -94,9 +94,9 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 /* */ table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1,table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1{background:transparent;}
 
 
-.gb-table .operbtn ,.gb-table .editbtn ,.gb-table .issue ,.gb-table .check ,.gb-table .del ,.gb-table .convert,.gb-table .syncbtn{cursor: pointer;}
-.gb-table .operbtn:hover,.gb-table .editbtn:hover,.gb-table .issue:hover,.gb-table .check:hover,.gb-table .del:hover,.gb-table .convert:hover,.gb-table .syncbtn:hover{color:#4579d8;}
-.gb-table .operbtn i,.gb-table .editbtn i,.gb-table .issue i,.gb-table .check i,.gb-table .del i,.gb-table .syncbtn i{font-size:14px;margin-right:3px;}
+.gb-table .operbtn ,.gb-table .editbtn ,.gb-table .issue ,.gb-table .check ,.gb-table .del ,.gb-table .convert,.gb-table .syncbtn,.gb-table .portbtn{cursor: pointer;}
+.gb-table .operbtn:hover,.gb-table .editbtn:hover,.gb-table .issue:hover,.gb-table .check:hover,.gb-table .del:hover,.gb-table .convert:hover,.gb-table .syncbtn:hover,.gb-table .portbtn:hover{color:#4579d8;}
+.gb-table .operbtn i,.gb-table .editbtn i,.gb-table .issue i,.gb-table .check i,.gb-table .del i,.gb-table .syncbtn i,.gb-table .portbtn i{font-size:14px;margin-right:3px;}
 .gb-table .isstop i,.gb-table .editbtn i,.gb-table .iscont i,.gb-table .decancel i{font-size:12px;}
 .gb-table .check.tbdownload i{font-size:16px;}
 .gb-table .convert i{margin-right:3px;}
@@ -160,7 +160,7 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 .unword{line-height:24px;}
 .fillin{height:356px;/* margin-top:-178px; */}
 .fillcnt{padding-top:20px;height:310px;position:relative;}
-.choose{width:180px;height:80px;line-height:16px;position:fixed;bottom:40px;right:-5px;background:#fff;border:1px solid #d8d8d8;padding:15px 18px;zoom:1;border-radius:5px;box-shadow:0px 0px 15px #d8d8d8;color:#7c8491;z-index:1;display: none}
+.choose{width:180px;height:80px;line-height:16px;position:fixed;bottom:40px;right:-5px;background:#fff;border:1px solid #d8d8d8;padding:15px 18px;zoom:1;border-radius:5px;box-shadow:0px 0px 15px #d8d8d8;color:#7c8491;z-index:3;display: none}
 .choose:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
 .choword{font-size:12px;}
 .chobtn{float:right;margin-top:15px;}

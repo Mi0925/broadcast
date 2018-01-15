@@ -2,15 +2,15 @@
 	<div class="taskmsg" id="table-mainthr">
 		<div class="tkrange">
 			<div class="tklay">
-				<span class="talay-word"><i class="iconfont icon-rili"></i>操作时间</span>
+				<span class="talay-word"><i class="iconfont icon-rili"></i>发布时间</span>
 				<div class="layui-input-inline">
 			        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
 			        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
 		    	</div>
-		    	<a href="#/newOperLog" class="add_tab newtk-btn" url="components/newOperLog.html" name="新建运维日志">新建运维日志</a>
+		    	<a href="#/newSchedulingPlan" class="add_tab newtk-btn" url="components/newSchedulingPlan.html" name="新建调度方案">新建调度方案</a>
 			</div>
 			<div class="tksearch">
-				<input type="text" value="请输入登陆IP ，运维名称，运维内容" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
+				<input type="text" value="请输入任务消息名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
 				<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
 			</div>
 		</div>
@@ -21,11 +21,12 @@
 				        <tr>
 				        	<th></th>
 				            <th>序号</th>
-				            <th>操作账号</th>
-				            <th>登录IP</th>
-				            <th>运维名称</th>
-				            <th>运维内容</th>
-				            <th>操作时间</th>
+				            <th>事件类别</th>
+				            <th>事件等级</th>
+				            <th>调度/事件名称</th>
+				            <th>创建部门</th>
+				            <th>创建人</th>
+				            <th>编辑时间</th>
 				            <th>操作</th>
 				            <th></th>
 				        </tr>
@@ -41,73 +42,80 @@
 				            <th></th>
 				            <th></th>
 				            <th></th>
+				            <th></th>
 				        </tr>
 			        </tfoot>
 			         <tbody>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_1' /><label for='check_1'></label></div></td>
 			        		<td><span class='tabnumb'>1</span></td>
+			        		<td>事件类别</td>
+			        		<td><span class='rankimg' vel='5'><img src='src/images/rank-red.png'/></span></td>
+			        		<td>杭州市1级地震</td>
+			        		<td>杭州市西湖区应急广播中心</td>
 			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称</td>
-			        		<td>运维内容</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>2017-09-18  18:10:20</td>
+			        		<td><a href='#/editSchedulingPlan' url='components/editSchedulingPlan.html' class='editbtn add_tab' name='编辑调度方案'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_2' /><label for='check_2'></label></div></td>
 			        		<td><span class='tabnumb'>2</span></td>
+			        		<td>事件类别</td>
+			        		<td><span class='rankimg' vel='2'><img src='src/images/rank-blue.png'/></span></td>
+			        		<td>杭州市1级地震</td>
+			        		<td>浙江省应急办</td>
 			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称</td>
-			        		<td>运维内容运维内容</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>2017-09-18  18:10:20</td>
+			        		<td><a href='#/editSchedulingPlan' url='components/editSchedulingPlan.html' class='editbtn add_tab' name='编辑调度方案'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_3' /><label for='check_3'></label></div></td>
 			        		<td><span class='tabnumb'>3</span></td>
+			        		<td>事件类别</td>
+			        		<td><span class='rankimg' vel='1'><img src='src/images/rank-green.png'/></span></td>
+			        		<td>杭州市1级地震</td>
+			        		<td>杭州市西湖区应急广播中心</td>
 			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称运维名称</td>
-			        		<td>运维内容</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>2017-11-18  18:10:20</td>
+			        		<td><a href='#/editSchedulingPlan' url='components/editSchedulingPlan.html' class='editbtn add_tab' name='编辑调度方案'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_4' /><label for='check_4'></label></div></td>
 			        		<td><span class='tabnumb'>4</span></td>
+			        		<td>事件类别</td>
+			        		<td><span class='rankimg' vel='4'><img src='src/images/rank-orange.png'/></span></td>
+			        		<td>杭州市3级地震</td>
+			        		<td>浙江省应急办</td>
 			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称</td>
-			        		<td>运维内容</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>2017-09-18  18:10:20</td>
+			        		<td><a href='#/editSchedulingPlan' url='components/editSchedulingPlan.html' class='editbtn add_tab' name='编辑调度方案'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_5' /><label for='check_5'></label></div></td>
 			        		<td><span class='tabnumb'>5</span></td>
+			        		<td>事件类别事件类别</td>
+			        		<td><span class='rankimg' vel='5'><img src='src/images/rank-red.png'/></span></td>
+			        		<td>杭州市1级地震</td>
+			        		<td>浙江省应急办</td>
 			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称</td>
-			        		<td>运维内容</td>
-			        		<td>2017-10-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>2017-09-18  18:10:20</td>
+			        		<td><a href='#/editSchedulingPlan' url='components/editSchedulingPlan.html' class='editbtn add_tab' name='编辑调度方案'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_6' /><label for='check_6'></label></div></td>
 			        		<td><span class='tabnumb'>6</span></td>
+			        		<td>事件类别</td>
+			        		<td><span class='rankimg' vel='3'><img src='src/images/rank-yellow.png'/></span></td>
+			        		<td>杭州市4级地震</td>
+			        		<td>杭州市西湖区应急广播中心</td>
 			        		<td>橙子</td>
-			        		<td>122.234.60.113</td>
-			        		<td>运维名称</td>
-			        		<td>运维内容</td>
-			        		<td>2017-06-08  18:10:20</td>
-			        		<td><a href='#/editOperLog' url='components/editOperLog.html' class='editbtn add_tab' name='编辑运维日志'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>2017-09-18  18:10:20</td>
+			        		<td><a href='#/editSchedulingPlan' url='components/editSchedulingPlan.html' class='editbtn add_tab' name='编辑调度方案'><i class='iconfont icon-bianji'></i>编辑</a></td>
 			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        </tbody>
@@ -176,10 +184,6 @@
 	                   orderable: false,
 
 	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
                    {
 	                   orderable: false,
 
@@ -188,14 +192,21 @@
 	                   orderable: false,
 
 	                   targets: 5 },
+	               {
+	                   orderable: false,
+
+	                   targets: 6 },
                    {
 	                   orderable: false,
 
-	                   targets: 7 },
+	                   targets: 8 },
                    {
 	                   orderable: false,
 
-	                   targets: 8 }
+	                   targets: 9 },
+                    { 
+                    	"sType": "html-percent", 
+                       "aTargets": [3] }   //指定列号使用自定义排序
                ],//第一列与第二列禁止排序
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainthr"))
@@ -203,7 +214,7 @@
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 2) {//删除第一列与第二列的筛选框
+                       if (i == 2 || i == 5 || i == 6) {//删除第一列与第二列的筛选框
                            var column = api.column(i);
                            var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
                            var select = $('<select><option value="">全部</option></select>')

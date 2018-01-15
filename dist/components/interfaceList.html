@@ -2,10 +2,10 @@
 	<div class="taskmsg" id="table-mainfou">
 		<div class="tkrange">
 			<div class="tklay">
-		    	<a href="#/newHandoverRecord" class="add_tab newtk-btn" url="components/newHandoverRecord.html" name="新建交接记录">新建交接记录</a>
+		    	<a href="#/newInterface" class="add_tab newtk-btn" url="components/newInterface.html" name="新增接口">新增接口</a>
 			</div>
 			<div class="tksearch">
-				<input type="text" value="请输入交接班人，或备注内容" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
+				<input type="text" value="请输入接口名称，所属地区" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
 				<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
 			</div>
 		</div>
@@ -16,17 +16,27 @@
 				        <tr>
 				        	<th></th>
 				            <th>序号</th>
-				            <th>交班人</th>
-				            <th>交接人备注</th>
-				            <th>交班时间</th>
-				            <th>接班人</th>
-				            <th>接班人备注</th>
-				            <th>接班时间</th>
+				            <th>接口类型</th>
+				            <th>接口名称</th>
+				            <th>服务端口</th>
+				            <th>接入端口</th>
+				            <th>协议</th>
+				            <th>秘钥</th>
+				            <th>所属地区</th>
+				            <th>编辑时间</th>
+				            <th>接收的消息数量</th>
 				            <th>操作</th>
+				            <th></th>
+				            <th></th>
 				        </tr>
 			        </thead>
 			        <tfoot>
 				        <tr>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
 				            <th></th>
 				            <th></th>
 				            <th></th>
@@ -42,57 +52,82 @@
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_1' /><label for='check_1'></label></div></td>
 			        		<td><span class='tabnumb'>1</span></td>
-			        		<td>元汐</td>
-			        		<td>交接人备注交接人备注交接人备注交接人备注</td>
-			        		<td>2016-09-08  18:10:20</td>
-			        		<td>橙子</td>
-			        		<td>备注备注备注内容备注备注备注内容</td>
-			        		<td>2016-09-08  18:10:20</td>
-			        		<td><a href='#/editHandoverRecord' url='components/editHandoverRecord.html' class='editbtn add_tab' name='编辑交接记录'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>上级平台</td>
+			        		<td>接口名称</td>
+			        		<td>8080</td>
+			        		<td>8080</td>
+			        		<td>协议</td>
+			        		<td>秘钥</td>
+			        		<td>地区地区</td>
+			        		<td>2016-09-08  12:10:20</td>
+			        		<td><a href='#/taskMsg' url='components/taskMsg.html' class='editbtn add_tab' name='任务消息'>2</a></td>
+			        		<td><a href='#/editInterface' url='components/editInterface.html' class='editbtn add_tab' name='编辑接口'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td><span class="portbtn porclose"><i class='iconfont icon-guanbi2'></i>关闭</span></td>
+			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_2' /><label for='check_2'></label></div></td>
 			        		<td><span class='tabnumb'>2</span></td>
-			        		<td>元汐</td>
-			        		<td>交接人备注交接人备注交接人备注交接人备注</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td>橙子</td>
-			        		<td>备注备注备注内容备注备注备注内容</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editHandoverRecord' url='components/editHandoverRecord.html' class='editbtn add_tab' name='编辑交接记录'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>下级平台</td>
+			        		<td>接口名称</td>
+			        		<td>8080</td>
+			        		<td>8080</td>
+			        		<td>协议</td>
+			        		<td>秘钥</td>
+			        		<td>地区地区</td>
+			        		<td>2016-09-08  12:16:20</td>
+			        		<td><a href='#/taskMsg' url='components/taskMsg.html' class='editbtn add_tab' name='任务消息'>1</a></td>
+			        		<td><a href='#/editInterface' url='components/editInterface.html' class='editbtn add_tab' name='编辑接口'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td><span class="portbtn porclose"><i class='iconfont icon-guanbi2'></i>关闭</span></td>
+			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_3' /><label for='check_3'></label></div></td>
 			        		<td><span class='tabnumb'>3</span></td>
-			        		<td>元汐</td>
-			        		<td>交接人备注交接人备注交接人备注交接人备注</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td>橙子</td>
-			        		<td>备注备注备注内容备注备注备注内容</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editHandoverRecord' url='components/editHandoverRecord.html' class='editbtn add_tab' name='编辑交接记录'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>上级平台</td>
+			        		<td>接口名称</td>
+			        		<td>8080</td>
+			        		<td>8080</td>
+			        		<td>协议</td>
+			        		<td>秘钥</td>
+			        		<td>地区地区地区</td>
+			        		<td>2016-09-08  12:10:20</td>
+			        		<td><a href='#/taskMsg' url='components/taskMsg.html' class='editbtn add_tab' name='任务消息'>112</a></td>
+			        		<td><a href='#/editInterface' url='components/editInterface.html' class='editbtn add_tab' name='编辑接口'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td><span class="portbtn porusing"><i class='iconfont icon-qiyong'></i>启用</span></td>
+			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_4' /><label for='check_4'></label></div></td>
 			        		<td><span class='tabnumb'>4</span></td>
-			        		<td>元汐</td>
-			        		<td>交接人备注交接人备注交接人备注交接人备注</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td>橙子</td>
-			        		<td>备注备注备注内容备注备注备注内容</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editHandoverRecord' url='components/editHandoverRecord.html' class='editbtn add_tab' name='编辑交接记录'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>上级平台</td>
+			        		<td>接口名称</td>
+			        		<td>8080</td>
+			        		<td>8080</td>
+			        		<td>协议</td>
+			        		<td>秘钥</td>
+			        		<td>地区地区地区</td>
+			        		<td>2016-09-08  18:10:20</td>
+			        		<td><a href='#/taskMsg' url='components/taskMsg.html' class='editbtn add_tab' name='任务消息'>221</a></td>
+			        		<td><a href='#/editInterface' url='components/editInterface.html' class='editbtn add_tab' name='编辑接口'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td><span class="portbtn porusing"><i class='iconfont icon-qiyong'></i>启用</span></td>
+			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_5' /><label for='check_5'></label></div></td>
 			        		<td><span class='tabnumb'>5</span></td>
-			        		<td>元汐</td>
-			        		<td>交接人备注交接人备注交接人备注交接人备注</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td>橙子</td>
-			        		<td>备注备注备注内容备注备注备注内容</td>
-			        		<td>2017-09-08  18:10:20</td>
-			        		<td><a href='#/editHandoverRecord' url='components/editHandoverRecord.html' class='editbtn add_tab' name='编辑交接记录'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td>上级平台</td>
+			        		<td>接口名称</td>
+			        		<td>8080</td>
+			        		<td>8080</td>
+			        		<td>协议</td>
+			        		<td>秘钥</td>
+			        		<td>地区地区地区</td>
+			        		<td>2016-09-08  12:10:20</td>
+			        		<td><a href='#/taskMsg' url='components/taskMsg.html' class='editbtn add_tab' name='任务消息'>12</a></td>
+			        		<td><a href='#/editInterface' url='components/editInterface.html' class='editbtn add_tab' name='编辑接口'><i class='iconfont icon-bianji'></i>编辑</a></td>
+			        		<td><span class="portbtn porusing"><i class='iconfont icon-qiyong'></i>启用</span></td>
+			        		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
 			        	</tr>
 			        </tbody>
 			    </table>
@@ -106,6 +141,14 @@
 			</div>
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
+	</div>
+	<div class="choose">
+		<p class="choword">确定删除此任务消息吗？</p>
+		<div class="chobtn">
+			<input type="button" value="删除" class="chopri cho-delete" />
+			<input type="button" value="取消" class="cho-cancel" />
+		</div>
+		<span class="triangle"><em></em></span>
 	</div>
 </div>
 	
@@ -141,6 +184,10 @@
 	                   orderable: false,
 
 	                   targets: 3 },
+	                {
+	                   orderable: false,
+
+	                   targets: 4 },
                 	{
 	                   orderable: false,
 
@@ -149,10 +196,30 @@
 	                   orderable: false,
 
 	                   targets: 6 },
+	                {
+	                   orderable: false,
+
+	                   targets: 7 },
                 	{
 	                   orderable: false,
 
-	                   targets: 8 }
+	                   targets: 8 },
+                	{
+	                   orderable: false,
+
+	                   targets: 10 },
+                	{
+	                   orderable: false,
+
+	                   targets: 11 },
+                	{
+	                   orderable: false,
+
+	                   targets: 12 },
+                	{
+	                   orderable: false,
+
+	                   targets: 13 }
                ],//第一列与第二列禁止排序
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainfou"))
@@ -160,7 +227,7 @@
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 2 || i == 5) {
+                       if (i == 2 || i == 8) {
                            var column = api.column(i);
                            var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
                            var select = $('<select><option value="">全部</option></select>')
@@ -233,6 +300,64 @@
                table.rows('tr.selected').remove().draw(false);
                $('#checkAll').attr('checked',false);
            });
+           $('.cho-delete').click(function(){
+				table.row('.trdel').remove().draw(false);
+				$(this).parents('.choose').hide();
+		   })
+
+		   $('.dataTables_wrapper').on('scroll',function(){
+				if($('.choose').is(':visible')){
+					$(myDiv).hide();
+					$('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
+				}
+			})
+			$(window).resize(function(){
+				if($('.choose').is(':visible')){
+					$(myDiv).hide();
+					$('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
+				}
+			})
        })
+
+		/*popwindow*/
+        //删除
+        var myDiv = $(".choose");
+        $(function() {
+            $(document).on('click','.delete',function(event) {
+                showDiv();
+                $(this).parents('tr').addClass('trdel');
+                //$(myDiv).toggle();
+                $(document).one("click",
+                function() { 
+                    $(myDiv).hide();
+                    $('table.dataTable tbody tr').removeClass('trdel');
+                });
+                event.stopPropagation();
+            });
+            $(myDiv).click(function(event) {
+                event.stopPropagation(); 
+            });
+        });
+        function showDiv() {
+            var x = event.clientX - event.offsetX;
+            var y = event.clientY - event.offsetY;
+            $(myDiv).css({'display':'block','top':y-80,'left':x-110});
+        }
+        
+        $('.cho-cancel').click(function(){
+            $(this).parents('.choose').hide();
+            $('tr').removeClass('trdel');
+        })
+        /*popwindow*/
+
+        $('.portbtn').click(function(){
+        	if($(this).hasClass('porclose')){
+        		$(this).html("<i class='iconfont icon-qiyong'></i>启用");
+	        	$(this).removeClass('porclose').addClass('porusing');
+        	}else{
+        		$(this).html("<i class='iconfont icon-guanbi2'></i>关闭");
+	        	$(this).removeClass('porusing').addClass('porclose');
+        	}
+        })
 	})
 </script>
