@@ -52,13 +52,14 @@ function resourceDom(treeId, treeNode) {
 	var editStr="";
 	if ($("#diyBtn_"+treeNode.id).length>0) return;
 	if(treeNode.editIcon){
-		editStr +="<a href='##'><i class='iconfont icon-bianji tree-icon tree-add'> 编辑</i></a>";
+		editStr +='<a<a href="#/'+treeNode.treedit+'" class="add_tab" url="components/'+treeNode.treedit+'.html" name="编辑"><i class="iconfont icon-bianji tree-icon tree-add"> 编辑</i></a>';
 	};
 	if(treeNode.removeIcon){
-		editStr +="<i class='iconfont icon-guanbi1 tree-icon tree-close'> 删除</i>";
+		editStr +='<i class="iconfont icon-guanbi1 tree-icon tree-close"> 删除</i>';
 	};
 	if(treeNode.addIcon){
-		editStr +="<a href='##'><i class='iconfont icon-xinjian tree-icon tree-edit'> 增加</i></a>";
+		//console.log(treeNode.treeadd);
+		editStr +='<a href="#/'+treeNode.treeadd+'" class="add_tab" url="components/'+treeNode.treeadd+'.html" name="新建"><i class="iconfont icon-xinjian tree-icon tree-edit"> 增加</i></a>';
 	};
 	aObj.append('<div class="tree-icon-box">'+editStr+'</div>');
 	// var btn = $("#diyBtn_"+treeNode_id);

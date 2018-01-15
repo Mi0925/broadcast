@@ -112,11 +112,11 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 .gb-table .theche{position:absolute;left:20px;bottom:22px;zoom:1;margin-top:7px;}
 .gb-table .theche:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
 .gb-table .tocheck{float:left;}
-.gb-table .theche .tocheck input[type=checkbox]+label:before,.gb-table .checkone input[type=checkbox]+label:before{margin-right:8px;}
+.gb-table .theche .tocheck input[type=checkbox]+label:before,.gb-table .theche .tocheck input[type=radio]+label:before,.gb-table .checkone input[type=checkbox]+label:before{margin-right:8px;}
 .gb-table .tocheck input,.gb-table .checkone input{display:none;opacity:0;}
-.gb-table .tocheck input[type=checkbox]+label ,.gb-table .checkone input[type=checkbox]+label{cursor:pointer;line-height: 1;position: relative;display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex; -webkit-box-align: center; -webkit-align-items: center;-ms-flex-align: center; align-items: center;font-size:12px;}
-.gb-table .tocheck input[type=checkbox]+label:before,.gb-table .checkone input[type=checkbox]+label:before{line-height: 16px; display: inline-block;width: 14px;height: 14px;content: '';color: #fff; border: 1px solid #d8d8d8;background-color: #fff;border-radius: 3px;}
-.gb-table .tocheck input[type=checkbox]:checked+label:before,.gb-table .checkone input[type=checkbox]:checked+label:before{content:'';color:#fff;border-radius: 3px;text-align: center;border:4px solid #4579d8;}
+.gb-table .tocheck input[type=checkbox]+label ,.gb-table .tocheck input[type=radio]+label,.gb-table .checkone input[type=checkbox]+label{cursor:pointer;line-height: 1;position: relative;display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex; -webkit-box-align: center; -webkit-align-items: center;-ms-flex-align: center; align-items: center;font-size:12px;}
+.gb-table .tocheck input[type=checkbox]+label:before,.gb-table .tocheck input[type=radio]+label:before,.gb-table .checkone input[type=checkbox]+label:before{line-height: 16px; display: inline-block;width: 14px;height: 14px;content: '';color: #fff; border: 1px solid #d8d8d8;background-color: #fff;border-radius: 3px;}
+.gb-table .tocheck input[type=checkbox]:checked+label:before,.gb-table .tocheck input[type=radio]:checked+label:before,.gb-table .checkone input[type=checkbox]:checked+label:before{content:'';color:#fff;border-radius: 3px;text-align: center;border:4px solid #4579d8;}
 .gb-table .chedel,.gb-table .syncall{float:left;font-size:12px;color:#7c8491;margin-left:30px;line-height:14px;cursor: pointer;}
 .gb-table .chedel i,.gb-table .syncall i{font-size:14px;margin-right:6px;}
 .gb-table .chedel:hover,.gb-table .syncall:hover{color:#4579d8;} 
@@ -224,8 +224,13 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 .oneitem-cont .gb-table{height:580px;}
 .oneitem-cont .taskmsg{background:#fff;padding:0;}
 .oneitem-cont .tkrange{padding:0;top:20px;}
-.oneitem-cont .gb-table .tklay .layui-input-inline{width:402px;}
+.oneitem-cont .tklay .layui-input-inline{width:402px;}
 .oneitem-cont #table-mainfiv .thetab{padding-top:80px;}
+/**/.oneitem-cont .tkclear{width:100%;margin-bottom:20px;}
+.secheck{margin-left:30px;}
+@media screen and (max-width:1365px){
+	.oneitem-cont #table-mainfiv .thetab{padding-top:130px;}
+}
 
 /* resourceInformation */
 #tochocase{position:relative;}

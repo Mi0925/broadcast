@@ -9,10 +9,19 @@
 		    	</div>
 		    	<div class="newtk-btn" id="tochocase">
 		    		<span class="catonew">新建资源<i class="iconfont icon-arrow-bottom"></i></span>
+		    		<div>
+		    			
+		    		</div>
 		    		<ul class="tonewlist">
-		    			<li><a href="#/newPlatResoInfo" class="add_tab newtk-btn" url="components/newPlatResoInfo.html" name="新建平台资源信息">新建平台资源信息</a></li>
-		    			<li><a href="#/newJuniorTerminal" class="add_tab newtk-btn" url="components/newJuniorTerminal.html" name="新建下级终端">新建下级终端</a></li>
-		    			<li><a href="#/newStationResoInfo" class="add_tab newtk-btn" url="components/newStationResoInfo.html" name="新建台站">新建台站</a></li>
+		    			<li>
+		    				<a href="#/newPlatResoInfo" class="newtk-btn add_tab" url="components/newPlatResoInfo.html" name="新建平台资源信息">新建平台资源信息</a>
+		    			</li>
+		    			<li>
+		    				<a href="#/newJuniorTerminal" class="newtk-btn add_tab" url="components/newJuniorTerminal.html" name="新建下级终端">新建下级终端</a>
+		    			</li>
+		    			<li>
+		    				<a href="#/newStationResoInfo" class="newtk-btn add_tab" url="components/newStationResoInfo.html" name="新建台站">新建台站</a>
+		    			</li>
 		    			<li>
 		    				<input type="file" class="leadin" accept="xls,xlsx"  data-type="loading"/>
 		    				<a href="javascript:void(0);" class="newtk-btn">快速导入（excel）</a>
@@ -2599,14 +2608,14 @@
 				$('.tonewlist').hide();
 			}
 		})
-		function stopPropagation(e) { 
+		/*function stopPropagation(e) { 
 			if (e.stopPropagation) 
 			e.stopPropagation(); 
 			else 
 			e.cancelBubble = true; 
-		} 
+		} */
 
-		$(document).bind('click',function(){ 
+		/*$(document).bind('click',function(){ 
 			$('.tonewlist').css('display','none'); 
 			$('.catonew i').removeClass('icon-arrow-top').addClass('icon-arrow-bottom');
 		}); 
@@ -2616,7 +2625,7 @@
 		}); 
 		$('.catonew').bind('click',function(e){ 
 			stopPropagation(e); 
-		});
+		});*/
 
 		
 
@@ -2708,40 +2717,94 @@
 			$('.gb-tree').hide();
 			if(newstr == '025'){
 				$('#treea').show();
+				treeadd = 'newPlatResoInfo';
+				treedit = 'editPlatResoInfo';
+				creatTree(treeadd);
 			}else if(newstr == '026'){
 				$('#treeb').show();
+				treeadd = 'newPlatResoInfo';
+				treedit = 'editPlatResoInfo';
+				creatTree(treeadd);
 			}else if(newstr == '027'){
+				treeadd = 'newPlatResoInfo';
+				treedit = 'editPlatResoInfo';
+				creatTree(treeadd);
 				$('#treec').show();
 			}else if(newstr == '035'){
 				$('#treed').show();
+				treeadd = 'newJuniorTerminal';
+				treedit = 'editJuniorTerminal';
+				creatTree(treeadd);
 			}else if(newstr == '036'){
+				treeadd = 'newJuniorTerminal';
+				treedit = 'editJuniorTerminal';
+				creatTree(treeadd);
 				$('#treee').show();
 			}else if(newstr == '037'){
 				$('#treef').show();
+				treeadd = 'newJuniorTerminal';
+				treedit = 'editJuniorTerminal';
+				creatTree(treeadd);
 			}else if(newstr == '045'){
 				$('#treeg').show();
+				treeadd = 'newStationResoInfo';
+				treedit = 'editStationResoInfo';
+				creatTree(treeadd);
 			}else if(newstr == '046'){
 				$('#treeh').show();
+				treeadd = 'newStationResoInfo';
+				treedit = 'editStationResoInfo';
+				creatTree(treeadd);
 			}else if(newstr == '047'){
 				$('#treei').show();
+				treeadd = 'newStationResoInfo';
+				treedit = 'editStationResoInfo';
+				creatTree(treeadd);
 			}else if(newstr == '125'){
 				$('#treej').show();
+				treeadd = 'newPlatResoInfo';
+				treedit = 'editPlatResoInfo';
+				creatTree(treeadd);
 			}else if(newstr == '126'){
 				$('#treek').show();
+				treeadd = 'newPlatResoInfo';
+				treedit = 'editPlatResoInfo';
+				creatTree(treeadd);
 			}else if(newstr == '127'){
 				$('#treel').show();
+				treeadd = 'newPlatResoInfo';
+				treedit = 'editPlatResoInfo';
+				creatTree(treeadd);
 			}else if(newstr == '135'){
 				$('#treem').show();
+				treeadd = 'newJuniorTerminal';
+				treedit = 'editJuniorTerminal';
+				creatTree(treeadd);
 			}else if(newstr == '136'){
 				$('#treen').show();
+				treeadd = 'newJuniorTerminal';
+				treedit = 'editJuniorTerminal';
+				creatTree(treeadd);
 			}else if(newstr == '137'){
 				$('#treeo').show();
+				treeadd = 'newJuniorTerminal';
+				treedit = 'editJuniorTerminal';
+				creatTree(treeadd);
 			}else if(newstr == '145'){
 				$('#treep').show();
+				treeadd = 'newStationResoInfo';
+				treedit = 'editStationResoInfo';
+				creatTree(treeadd);
 			}else if(newstr == '146'){
 				$('#treeq').show();
+				treeadd = 'newStationResoInfo';
+				treedit = 'editStationResoInfo';
+				creatTree(treeadd);
 			}else if(newstr == '147'){
 				$('#treer').show();
+				treeadd = 'newStationResoInfo';
+				treedit = 'editStationResoInfo';
+				creatTree(treeadd);
 			}
 		}
 		/*table start*/
@@ -4931,48 +4994,76 @@
 				onCheck: zTreeOnCheck
 			}*/
 		};
-		// 树数据
-		var resourceData=[{
-		    name: "浙江省",
-		    open: true,
-		    addIcon:true,
-		    children: [{
-		        name: "杭州市",
-		    	addIcon:true,
-		        children: [{
-			        name: "上城区",
-		    		addIcon:true,
-		    		removeIcon:true,
-		    		editIcon:true,
+		var treeadd = 'newPlatResoInfo',treedit = 'editPlatResoInfo',resourceData;
+		creatTree(treeadd);
+		function creatTree(treeadd){
+			// 树数据
+			resourceData=[{
+			    name: "浙江省",
+			    open: true,
+			    addIcon:true,
+			    children: [{
+			        name: "杭州市",
+			    	addIcon:true,
+			    	treeadd:treeadd,
+			    	treedit:treedit,
 			        children: [{
-		    			addIcon:true,
-				        name: "湖滨街道",
+				        name: "上城区",
+			    		addIcon:true,
+			    		removeIcon:true,
+			    		editIcon:true,
+			    		treeadd:treeadd,
+			    		treedit:treedit,
+				        children: [{
+			    			addIcon:true,
+					        name: "湖滨街道",
+					        treeadd:treeadd,
+					        treedit:treedit
+					    }]
+				    }]
+			    },{
+			        name: "宁波市",
+			        treeadd:treeadd,
+			        treedit:treedit,
+			    	addIcon:true,
+			        children: [{
+				        name: "上城区",
+				        treeadd:treeadd,
+				        treedit:treedit,
+			    		addIcon:true,
+				        children: [{
+			    			addIcon:true,
+			    			treeadd:treeadd,
+			    			treedit:treedit,
+					        name: "湖滨街道"
+					    }]
+				    }]
+			    },{
+			        name: "温州市",
+			        treeadd:treeadd,
+			        treedit:treedit,
+			    	addIcon:true,
+			        children: [{
+				        name: "上城区",
+				        treeadd:treeadd,
+				        treedit:treedit,
+			    		addIcon:true,
+				        children: [{
+				        	addIcon:true,
+				        	treeadd:treeadd,
+				        	treedit:treedit,
+					        name: "湖滨街道"
+					    }]
 				    }]
 			    }]
-		    },{
-		        name: "宁波市",
-		    	addIcon:true,
-		        children: [{
-			        name: "上城区",
-		    		addIcon:true,
-			        children: [{
-		    			addIcon:true,
-				        name: "湖滨街道"
-				    }]
-			    }]
-		    },{
-		        name: "温州市",
-		    	addIcon:true,
-		        children: [{
-			        name: "上城区",
-		    		addIcon:true,
-			        children: [{
-			        	addIcon:true,
-				        name: "湖滨街道"
-				    }]
-			    }]
-		    }]
-		}];
+			}];
+
+			//初始化的树
+			$(".ztree-resource").each(function() {
+				$.fn.zTree.init($(this), resourceSetting, resourceData);
+			});
+		}
+		
 
 		//初始化的树
 		$(".ztree-resource").each(function() {
