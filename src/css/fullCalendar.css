@@ -40,3 +40,15 @@
 .layui-btn.bg4579d8{background: #4579d8;}
 .gb-watch-dialog .layui-layer-btn { position: absolute; bottom: 7px; left: 203px; }
 .gb-watch-dialog .layui-layer-btn .layui-layer-btn0{background-color: #4579d8;height: 38px;line-height: 38px;}
+
+
+
+/*角色权限*/
+.gb-permission-list{overflow: hidden;height: 500px;border: 1px solid #d8d8d8;border-radius: 5px;}
+.gb-permission-list .gb-watch-list-ul{}
+
+
+
+
+
+
