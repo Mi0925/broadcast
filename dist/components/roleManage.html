@@ -8,11 +8,11 @@
 		</div>
 		<div class="thetab gb-role-list">
 			<div class="fortit reladd">
-				<span class="oneitem-tit">用户列表</span>
+				<span class="oneitem-tit">角色列表</span>
 				<span class="reldelbtn" id="toadd">
-					<a href="#/addUser" url="components/addUser.html" class="editbtn add_tab" name="新建用户"> 
+					<a href="#/addRole" url="components/addRole.html" class="editbtn add_tab" name="新建角色"> 
 						<i class="iconfont icon-xinjian"></i>
-						新建用户
+						新建角色
 					</a>
 				</span>
 			</div>
@@ -23,10 +23,7 @@
 				        	<th></th>
 				            <th>序号</th>
 				            <th>角色</th>
-				            <th>姓名</th>
-				            <th>密码</th>
-				            <th>权限</th>
-				            <th>创建人</th>
+				            <th>角色说明</th>
 				            <th>创建时间</th>
 				            <th>操作</th>
 				            <th></th>
@@ -36,9 +33,6 @@
 			        <tfoot>
 				        <tr>
 				        	<th></th>
-				            <th></th>
-				            <th></th>
-				            <th></th>
 				            <th></th>
 				            <th></th>
 				            <th></th>
@@ -58,10 +52,7 @@
 			        		</td>
 			        		<td><span class='tabnumb'>1</span></td>
 			        		<td>审核员</td>
-			        		<td>姓名</td>
-			        		<td>密码</td>
-			        		<td>新建任务消息</td>
-			        		<td>橙子</td>
+			        		<td>角色说明角色说明角色说明角色说明</td>
 			        		<td>2016-09-08  18:10:20</td>
 			        		<td>
 								<a href="#/editRole" url="components/editRole.html" class="editbtn add_tab" name="编辑任务消息"> 
@@ -81,10 +72,7 @@
 			        		</td>
 			        		<td><span class='tabnumb'>2</span></td>
 			        		<td>审核员</td>
-			        		<td>姓名</td>
-			        		<td>密码</td>
-			        		<td>新建任务消息2</td>
-			        		<td>橙子2</td>
+			        		<td>角色说明角色说明角色说明角色说明2</td>
 			        		<td>2016-09-08  18:10:20</td>
 			        		<td>
 								<a href="#/editRole" url="components/editRole.html" class="editbtn add_tab" name="编辑任务消息"> 
@@ -159,15 +147,6 @@ $(document).ready(function(){
 				}, {
 				  orderable: false,
 				  targets: 7
-				}, {
-				  orderable: false,
-				  targets: 8
-				}, {
-				  orderable: false,
-				  targets: 9
-				}, {
-				  orderable: false,
-				  targets: 10
 				}
            ],//禁止排序
            fnDrawCallback: function(table) {  
@@ -176,7 +155,7 @@ $(document).ready(function(){
            initComplete: function () {//列筛选
                var api = this.api();
                api.columns().indexes().flatten().each(function (i) {
-                   if (i == 2 || i==5 || i==6) {
+                   if (i == 2) {
                        var column = api.column(i);
                        var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
                        var select = $('<select><option value="">全部</option></select>')

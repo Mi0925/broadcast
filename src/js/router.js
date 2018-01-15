@@ -189,12 +189,24 @@ Router.route('/watch', function() {
 Router.route('/onDuty', function() {
   gbMainContent('components/onDuty.html', RoundaboutSet);
 });
+//角色管理
+Router.route('/roleManage', function() {
+  gbMainContent('components/roleManage.html', RoundaboutSet);
+});
+//角色编辑
+Router.route('/editRole', function() {
+  gbMainContent('components/editRole.html', RoundaboutSet);
+});
+//角色新建
+Router.route('/addRole', function() {
+  gbMainContent('components/addRole.html', RoundaboutSet);
+});
 //用户管理
 Router.route('/userManage', function() {
   gbMainContent('components/userManage.html', RoundaboutSet);
 });
-//用户编辑
-Router.route('/editUser', function() {
-  gbMainContent('components/editUser.html', RoundaboutSet);
+//用户新建
+Router.route('/addUser', function() {
+  gbMainContent('components/addUser.html', RoundaboutSet);
 });
 /*系统管理模块 end*/

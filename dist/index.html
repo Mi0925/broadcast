@@ -152,7 +152,7 @@
 					<div class="left-sub-nav">
 						<a href="#/watch" class="nav-router add_tab" url="components/watch.html" name="值班管理"><em><strong>值班管理</strong></em></a>
 						<a href="#/userManage" class="nav-router add_tab" url="components/userManage.html" name="用户管理"><em><strong>用户管理</strong></em></a>
-						<a href="#/round2" class="nav-router add_tab" url="components/round2.html" name="角色管理"><em><strong>角色管理</strong></em></a>
+						<a href="#/roleManage" class="nav-router add_tab" url="components/roleManage.html" name="角色管理"><em><strong>角色管理</strong></em></a>
 					</div>
 				</li>
 			</ul>
@@ -343,6 +343,7 @@ layui.use(['layer','laydate','form'], function() {
 			btn: ['新建交接班记录','取 消'],
 			yes: function(index, layero){
 				window.location.href="#/newHandoverRecord";
+				add_tab("新建交接班记录",'components/newHandoverRecord.html');
 				layer.closeAll();
 			},
 			success: function(layero, index){

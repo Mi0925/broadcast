@@ -1,0 +1,126 @@
+<div class="gb-form">
+	<form class="layui-form" action="">
+		<div class="newform">
+			<p class="newform-tit"><i class="iconfont icon-bianji1"></i>新建用户</p>
+			<div class="form-oneitem">
+				<div class="fortit">
+					<p class="oneitem-tit">新建用户</p>
+				</div>
+				<div class="oneitem-cont">
+					<div class="settingone">
+						<p class="oneitem-tit"><small>*</small>用户姓名</p>
+						<div class="tnoneimp">
+							<input type="text" class="imptxt" />
+						</div>
+					</div>
+					<div class="settingone">
+						<p class="oneitem-tit"><small>*</small>密码</p>
+						<div class="tnoneimp">
+							<input type="password" class="imptxt" />
+						</div>
+					</div>
+					<div class="settingone">
+						<p class="oneitem-tit"><small>*</small>手机号</p>
+						<div class="tnoneimp">
+							<input type="number" class="imptxt" />
+						</div>
+					</div>
+					<div class="settingone">
+						<p class="oneitem-tit"><small>*</small>用户所属部分</p>
+						<div class="layui-input-inline">
+							<select name="dispatch" lay-search="">
+								<option value="">请选择用户所属部门</option>
+								<option value="1">部门1</option>
+								<option value="2">部门2</option>
+							</select>
+						</div>
+					</div>
+					<div class="settingone">
+						<p class="oneitem-tit"><small>*</small>数字证书可下载次数</p>
+						<div class="layui-input-inline">
+							<select name="dispatch" lay-search="">
+								<option value="">请选择可下载次数</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+					</div>
+					<div class="settingone">
+						<p class="oneitem-tit">选择角色或者权限</p>
+						<div class="gb-permission-list">
+							<div class="gb-watch-list">
+								<!-- <div class="matcheck">
+									<input type="radio" id="matone1" checked="checked" lay-ignore>
+									<label for="matone1"></label>
+								</div> -->
+								<div class="tksearch">
+									<input type="text" class="dsearch" placeholder="搜索">
+									<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
+								</div>
+								<ul class="gb-watch-list-ul scroll">
+									<li>
+										<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+										<em class="i">橙子</em>
+										<div class="matcheck">
+											<input type="radio" name="permission" id="matone1" checked="checked" lay-ignore>
+											<label for="matone1"></label>
+										</div>
+									</li>
+									<li>
+										<i class="gb-watch-logo i" style="background-image: url(../src/images/watch-logo.png);"></i>
+										<em class="i">橙子2</em>
+										<div class="matcheck">
+											<input type="radio" name="permission" id="matone2" lay-ignore>
+											<label for="matone2"></label>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tocreat">
+				<div class="progcreat">
+					<input type="button" value="确定新建" class="tocreatbtn" />
+				</div>
+			</div>
+			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
+		</div>
+	</form>
+</div>
+
+	
+
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#impcontent').on('keyup', function() { 
+		    $('.oneimp-count .countnew').html($('#impcontent').val().length);  
+		});
+
+		layui.use('form', function(){
+			var form = layui.form;
+			form.render();
+
+			var itbtn = $('<span class="itbtn"></span>');
+			$('.layui-select-title').append(itbtn);
+			$('.gb-form .layui-form-radio').remove();
+			
+		});
+		
+		$('.toemptybtn').click(function(){
+			$('.imptxt').val('');
+			$('.countnew').html('0');
+			$('.gb-form .layui-form-select .layui-input').val('');
+			$('.layui-anim-upbit dd').removeClass('layui-this');
+		})
+		
+	})
+</script>
