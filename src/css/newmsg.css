@@ -49,7 +49,7 @@
 .filetit-one:after{content:'';width:1px;height:10px;background:#e5e5e5;position:absolute;top:5px;right:-21px;}
 .filetit-one i{font-size:18px;margin-right:5px;}
 .filetit-two i{font-size:12px;margin-right:5px;}
-.filelist{width:100%;}
+.filelist{width:100%;max-height:156px;overflow-y: auto;}
 .filelist li{width:100%;zoom:1;line-height:50px;border-bottom:1px dashed #d8d8d8;}
 .filename{float:left;}
 .filename i{color:#ffa41f;float:left;margin-top: 1px;margin-right:5px;}
