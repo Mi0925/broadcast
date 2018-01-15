@@ -53,6 +53,18 @@ Router.route('/monitoring', function() {
 });
 
 /*调度指挥模块 start*/
+//调度方案
+Router.route('/schedulingPlan', function() {
+  gbMainContent('components/schedulingPlan.html', RoundaboutSet);
+});
+//新建调度方案
+Router.route('/newSchedulingPlan', function() {
+  gbMainContent('components/newSchedulingPlan.html', RoundaboutSet);
+});
+//编辑调度方案
+Router.route('/editSchedulingPlan', function() {
+  gbMainContent('components/editSchedulingPlan.html', RoundaboutSet);
+});
 //任务消息
 Router.route('/taskMsg', function() {
   gbMainContent('components/taskMsg.html', RoundaboutSet);
@@ -74,6 +86,21 @@ Router.route('/exportAReport', function() {
   gbMainContent('components/exportAReport.html', RoundaboutSet);
 });
 /*调度指挥模块 end*/
+
+/*消息接入模块 start*/
+//接口列表
+Router.route('/interfaceList', function() {
+  gbMainContent('components/interfaceList.html', RoundaboutSet);
+});
+//新建接口
+Router.route('/newInterface', function() {
+  gbMainContent('components/newInterface.html', RoundaboutSet);
+});
+//编辑接口
+Router.route('/editInterface', function() {
+  gbMainContent('components/editInterface.html', RoundaboutSet);
+});
+/*消息接入模块 end*/
 
 /*资源管理模块 start*/
 //资源信息管理
@@ -104,7 +131,6 @@ Router.route('/newStationResoInfo', function() {
 Router.route('/editStationResoInfo', function() {
   gbMainContent('components/editStationResoInfo.html', RoundaboutSet);
 });
-
 //节目资源管理
 Router.route('/programResources', function() {
   gbMainContent('components/programResources.html', RoundaboutSet);
