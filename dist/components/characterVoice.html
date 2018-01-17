@@ -268,18 +268,6 @@
 	    var editor_a = new baidu.editor.ui.Editor(editorOption);
 	    editor_a.render('myEditor');
 
-		/*calendar*/
-		layui.use('laydate', function(){
-			var laydate = layui.laydate;
-			laydate.render({
-			    elem: '#daterg',
-			    eventElem: '#tochobtn',
-			    trigger: 'click',
-			    type:'datetime',
-			    range: true
-			});
-		})
-
 
 		/*table*/
 		$(function () {
@@ -298,178 +286,25 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                	{
-	                   orderable: false,
-
-	                   targets: 5 },
-                	{
-	                   orderable: false,
-
-	                   targets: 6 },
-                	{
-	                   orderable: false,
-
-	                   targets: 8 },
-                	{
-	                   orderable: false,
-
-	                   targets: 9 },
-                	{
-	                   orderable: false,
-
-	                   targets: 10 },
-                	{
-	                   orderable: false,
-
-	                   targets: 11 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,8,9,10,11] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainthr"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 2 || i == 3 || i == 5 || i == 6) {//删除第一列与第二列的筛选框
+                       if (i == 2 || i == 3 || i == 5 || i == 6) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
-			
-			
-			$(window).resize(function(){
-				$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
-			})
-			$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
-			
-			
-			//自定义显示数量
-			$('.taskmsg').each(function(){
-		    	tabot($(this))
-		    })
- 
-           //自定义搜索
-           $('.dsearch').on('keyup click', function () {
-               var tsval = $(".dsearch").val()
-               table.search(tsval, false, false).draw();
-           });
- 
- 			//checkbox全选
-           $("#checkAll").on("click", function () {
-               if ($(this).prop("checked") === true) {
-                   $("input[name='checkone']").prop("checked", $(this).prop("checked"));
-                   $('.dataTables_wrapper tbody tr').addClass('selected');
-               } else {
-                   $("input[name='checkone']").prop("checked", false);
-                   $('.dataTables_wrapper tbody tr').removeClass('selected');
-               }
-           });
- 
- 
-           //删除选中行
-           $('.dataTables_wrapper tbody').on('click', 'tr input[name="checkone"]', function () {
-               var $tr = $(this).parents('tr');
-               $tr.toggleClass('selected');
-               var $tmp = $('[name=checkone]:checkbox');
-               $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
- 
-           });
- 
-           $('.chedel').click(function () {
-               table.rows('tr.selected').remove().draw(false);
-               $('#checkAll').attr('checked',false);
-           });
-           $('.cho-delete').click(function(){
-				table.row('.trdel').remove().draw(false);
-				$(this).parents('.choose').hide();
-		   })
- 			
-		
-			$('.dataTables_wrapper').on('scroll',function(){
-				if($('.choose').is(':visible')){
-					$(myDiv).hide();
-					$('table.dataTable tbody tr').removeClass('trdel');
-				}
-			})
-			$(window).resize(function(){
-				if($('.choose').is(':visible')){
-					$(myDiv).hide();
-					$('table.dataTable tbody tr').removeClass('trdel');
-				}
-			})
+			userDef(table);//table配置--显示数量 搜索 全选 删除 
        })
-
 			
-		/*popwindow*/
-		/*var uncH = parseInt($('.uncont').css('height'));
-		$('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});*/
-		
-		//删除
-		var myDiv = $(".choose");
-		$(function() {
-		    $(document).on('click','.delete',function(event) {
-		        showDiv();
-				$(this).parents('tr').addClass('trdel');
-		        //$(myDiv).toggle();
-		        $(document).one("click",
-		        function() { 
-		            $(myDiv).hide();
-		            $('table.dataTable tbody tr').removeClass('trdel');
-		        });
-		        event.stopPropagation();
-		    });
-		    $(myDiv).click(function(event) {
-		        event.stopPropagation(); 
-		    });
-		});
-		function showDiv() {
-			var x = event.clientX - event.offsetX;
-			var y = event.clientY - event.offsetY;
-			$(myDiv).css({'display':'block','top':y-80,'left':x-110});
-		}
-		
-		$('.cho-cancel').click(function(){
-			$(this).parents('.choose').hide();
-			$('tr').removeClass('trdel');
-		})
-		
 		$(document).on('click','.convert',function(){
 			$('.popwindow').show();
 			$('.toshift').show();
@@ -477,41 +312,5 @@
 			//$('.succmat').hide();
 		})
 		
-		layui.use('element', function(){
-		  var $ = layui.jquery
-		  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
-		  
-		  //触发事件
-
-		  var active = {
-		    loading: function(othis){
-		      var DISABLED = 'layui-btn-disabled';
-		      if(othis.hasClass(DISABLED)) return;
-		      
-		      //模拟loading
-		      var n = 0,timer = setInterval(function(){
-		        n = n + Math.random()*10|0;  
-		        if(n>100){
-		          n = 100;
-		          clearInterval(timer);
-		          othis.removeClass(DISABLED);
-		          $('.uncont .tomat').hide();
-		          $('.uncont .succmat').show();
-		        }
-		        element.progress('demo', n+'%');
-		      }, 300+Math.random()*1000);
-		      
-		      othis.addClass(DISABLED);
-		    }
-		  };
-		  
-		  $('.site-demo-active').on('click', function(){
-	  		$('.uncont .tomat').show();
-	  		$('.uncont .succmat').hide();
-	  		var othis = $(this), type = $(this).data('type');
-	   		active[type] ? active[type].call(this, othis) : '';
-		  });
-		});
-		/*popwindow*/
 	})
 </script>

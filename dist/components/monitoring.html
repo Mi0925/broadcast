@@ -1702,110 +1702,47 @@ $(".gb-packUp-leftNav").click(function(){
 	},400)
 })
 	
-/*calendar*/
-layui.use('laydate', function(){
-	var laydate = layui.laydate;
-	laydate.render({
-	    elem: '#daterg',
-	    eventElem: '#tochobtn',
-	    trigger: 'click',
-	    type:'datetime',
-	    range: true
-	});
-})
 
 
 
 /*table*/
 $(function () {
-
     var table1 = $('#table-main1 table').DataTable({
 		"dom": '<"top"f >rt<"bottom"ilp><"clear">', //dom定位
 		"dom": 'tiprl', //自定义显示项
-		//"dom":'<"domab"f>',
-		// "scrollY": "94%",//dt高度
-		// "scrollX": true
 		"lengthMenu": [2, 6, 10, 16, 24], //每页显示条数设置
 		"lengthChange": true, //是否允许用户自定义显示数量
 		"bPaginate": true, //翻页功能
 		"bFilter": true, //列筛序功能
 		"searching": true, //本地搜索
-		//"ordering": true, //排序功能
 		"order": [0, "asc"], //desc降序
 		"Info": true, //页脚信息
-		// "pagingType": "full_numbers",
 		"oLanguage": oLanguage,
 		"columnDefs": [{
 				orderable: false,
-
-				targets: 1
-			}, {
-				orderable: false,
-
-				targets: 2
-			}, {
-				orderable: false,
-
-				targets: 5
+				targets: [1,2,5] //禁止排序
 			}, {
 				"sType": "html-percent",
-				"aTargets": [0]
-			} //指定列号使用自定义排序
-		], //第一列与第二列禁止排序
-
+				"aTargets": [0] //指定列号使用自定义排序
+			}
+		],
 		initComplete: function() { //列筛选
 			var api = this.api();
 			api.columns().indexes().flatten().each(function(i) {
-				if (i == 2) { //删除第一列与第二列的筛选框
+				if (i == 2) { //对第i列进行筛选
 					var column = api.column(i);
-					var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-					var select = $('<select><option value="">全部</option></select>')
-						.appendTo($(column.header()))
-						.on('change', function(evt) {
-							evt.stopPropagation();
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-							);
-							column
-								.search(val ? '^' + val + '$' : '', true, false)
-								.draw();
-						});
-					column.data().unique().sort().each(function(d, j) {
-						function delHtmlTag(str) {
-							return str.replace(/<[^>]+>/g, ""); //去掉html标签
-						}
-
-						d = delHtmlTag(d)
-						select.append('<option value="' + d + '">' + d + '</option>')
-						$span.append(select)
-					});
-
+					rowScreen(column);
 				}
 			});
-
 		},
 		fnDrawCallback: function(table) {  
-			// alert(2)
 			jumpPage($("#table-main1"))
-            // $("#table-main1 .dataTables_paginate").append("<div class='jump-page'>前往第 <input class='changePage' type='text'> 页  <a class='dataTable-btn' href='javascript:void(0);'>确认</a></div>");  
-            // var oTable = $("#table-main1 table").dataTable();  
-            // $('#table-main1 .dataTable-btn').click(function(e) { 
-            //     if($("#table-main1 .changePage").val() && $("#table-main1 .changePage").val() > 0) {  
-            //         var redirectpage = $("#table-main1 .changePage").val() - 1;
-            //     } else {  
-            //         var redirectpage = 0;
-            //     }
-            //     oTable.fnPageChange(redirectpage);  
-            // });  
-        },
+        }
 	})
 
 	var table2 = $('#table-main2 table').DataTable({
 		"dom": '<"top"f >rt<"bottom"ilp><"clear">', //dom定位
 		"dom": 'tiprl', //自定义显示项
-		//"dom":'<"domab"f>',
-		// "scrollY": "94%",//dt高度
-		// "scrollX": true
 		"lengthMenu": [20,30,40,50], //每页显示条数设置
 		"lengthChange": true, //是否允许用户自定义显示数量
 		"bPaginate": true, //翻页功能
@@ -1814,87 +1751,29 @@ $(function () {
 		//"ordering": true, //排序功能
 		"order": [4, "asc"], //desc降序
 		"Info": true, //页脚信息
-		// "pagingType": "full_numbers",
 		"oLanguage": oLanguage, //国际语言转化
 		"columnDefs": [
 			{
 				orderable: false,
-
-				targets: 0
-			},{
-				orderable: false,
-
-				targets: 1
-			}, {
-				orderable: false,
-
-				targets: 2
-			}, {
-				orderable: false,
-
-				targets: 3
+				targets: [0,1,2,3]//设置某列禁止排序
 			}
-		], //设置某列禁止排序
-
+		], 
 		initComplete: function() { //列筛选
 			var api = this.api();
 			api.columns().indexes().flatten().each(function(i) {
-				if (i == 3) { //删除第一列与第二列的筛选框
+				if (i == 3) { //对第i列进行筛选
 					var column = api.column(i);
-					var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-					var select = $('<select><option value="">全部</option></select>')
-						.appendTo($(column.header()))
-						.on('change', function(evt) {
-							evt.stopPropagation();
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-							);
-							column
-								.search(val ? '^' + val + '$' : '', true, false)
-								.draw();
-						});
-					column.data().unique().sort().each(function(d, j) {
-						function delHtmlTag(str) {
-							return str.replace(/<[^>]+>/g, ""); //去掉html标签
-						}
-
-						d = delHtmlTag(d)
-						select.append('<option value="' + d + '">' + d + '</option>')
-						$span.append(select)
-					});
-
+					rowScreen(column);
 				}
 			});
 		},
 		fnDrawCallback: function(table) {
 			jumpPage($("#table-main2"))
-            // $("#table-main2 .dataTables_paginate").append("<div class='jump-page'>前往第 <input class='changePage' type='text'> 页  <a class='dataTable-btn' href='javascript:void(0);'>确认</a></div>");  
-            // var oTable = $("#table-main2 table").dataTable();  
-            // $('#table-main2 .dataTable-btn').click(function(e) { 
-            //     if($("#table-main2 .changePage").val() && $("#table-main2 .changePage").val() > 0) {  
-            //         var redirectpage = $("#table-main2 .changePage").val() - 1;
-            //     } else {  
-            //         var redirectpage = 0;
-            //     }
-            //     oTable.fnPageChange(redirectpage);  
-            // }); 
-        },
+        }
 	})
 
-	//自定义显示数量
-    $('.gb-ctab').each(function(){
-    	tabot($(this))
-    })
-
-    
+	userDef(table1);//table配置--显示数量 搜索 全选 删除  
 	
-
-   //自定义搜索
-   $('.dsearch').on('keyup click', function () {
-       var tsval = $(".dsearch").val()
-       table1.search(tsval, false, false).draw();
-   });
-
 	$(document).on('click','.tomonitoring',function(){
 		$('.tomonitoring').removeClass('tomact');
 		$(this).addClass('tomact');

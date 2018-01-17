@@ -110,13 +110,10 @@
 </div>
 	
 
-
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		/*table*/
 		$(function () {
-
            var table = $('#table-mainfou table').DataTable({
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
@@ -131,108 +128,23 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                	{
-	                   orderable: false,
-
-	                   targets: 5 },
-                	{
-	                   orderable: false,
-
-	                   targets: 6 },
-                	{
-	                   orderable: false,
-
-	                   targets: 8 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,8] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainfou"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 2 || i == 5) {
-                           var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+                       if (i == 2 || i == 5) {//对第i列进行筛选
+                            var column = api.column(i);
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
-			
-			
-			$(window).resize(function(){
-				$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
-			})
-			$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
-			
-			
-			//自定义显示数量
-			$('.taskmsg').each(function(){
-		    	tabot($(this))
-		    })
- 
-           //自定义搜索
-           $('.dsearch').on('keyup click', function () {
-               var tsval = $(".dsearch").val()
-               table.search(tsval, false, false).draw();
-           });
- 
- 			//checkbox全选
-           $("#checkAll").on("click", function () {
-               if ($(this).prop("checked") === true) {
-                   $("input[name='checkone']").prop("checked", $(this).prop("checked"));
-                   $('.dataTables_wrapper tbody tr').addClass('selected');
-               } else {
-                   $("input[name='checkone']").prop("checked", false);
-                   $('.dataTables_wrapper tbody tr').removeClass('selected');
-               }
-           });
- 
- 
-           //删除选中行
-           $('.dataTables_wrapper tbody').on('click', 'tr input[name="checkone"]', function () {
-               var $tr = $(this).parents('tr');
-               $tr.toggleClass('selected');
-               var $tmp = $('[name=checkone]:checkbox');
-               $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
- 
-           });
- 
-           $('.chedel').click(function () {
-               table.rows('tr.selected').remove().draw(false);
-               $('#checkAll').attr('checked',false);
-           });
+			userDef(table);//table配置--显示数量 搜索 全选 删除 
        })
 	})
 </script>
