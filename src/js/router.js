@@ -62,10 +62,18 @@ Router.route('/exercisePlan', function() {
 Router.route('/newManualExerProg', function() {
   gbMainContent('components/newManualExerProg.html', RoundaboutSet);
 });
-/*//新建周期计划
-Router.route('/newManualExerProg', function() {
-  gbMainContent('components/newManualExerProg.html', RoundaboutSet);
-});*/
+//编辑手动演练计划
+Router.route('/editManualExerProg', function() {
+  gbMainContent('components/editManualExerProg.html', RoundaboutSet);
+});
+//新建周期计划
+Router.route('/newCyclePlan', function() {
+  gbMainContent('components/newCyclePlan.html', RoundaboutSet);
+});
+//编辑周期计划
+Router.route('/editCyclePlan', function() {
+  gbMainContent('components/editCyclePlan.html', RoundaboutSet);
+});
 //发布策略设置
 Router.route('/planReleasePolicy', function() {
   gbMainContent('components/planReleasePolicy.html', RoundaboutSet);

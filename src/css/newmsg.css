@@ -45,7 +45,9 @@
 .filecont{float:right;width:48.5%;}
 .filetit{zoom:1;border-bottom:1px solid #d8d8d8;padding-bottom:15px;}
 .filetit:after,.filelist li:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
-.filetit-one,.filetit-two{float:left;color:#585d66;font-weight: bold;margin-right:41px;position:relative;line-height:19px;}
+.filetit-one,.filetit-two{float:left;color:#585d66;font-weight: bold;margin-right:41px;position:relative;line-height:19px;cursor:pointer;}
+.filetit-one input{position:absolute;top:0;left:0;width:100%;height:100%;font-size:0;cursor: pointer;opacity: 0}
+.filetit-one:hover,.filetit-two:hover{color:#4579D8;} 
 .filetit-one:after{content:'';width:1px;height:10px;background:#e5e5e5;position:absolute;top:5px;right:-21px;}
 .filetit-one i{font-size:18px;margin-right:5px;}
 .filetit-two i{font-size:12px;margin-right:5px;}
@@ -177,8 +179,23 @@
 /* newInterface */
 .impcol{color:#ccc;}
 
+/* newManualExerProg */
+.crepad{padding-top:40px;}
 
-input.layui-btn-disabled{opacity: 0;}
+
+/* newCyclePlan */
+.gb-form .datecho{padding:20px;/* */height:auto; display: block;}
+.layui-form .datecho .layui-input-inline{width:60%;}
+.datecho .layui-input{width: 100%;height: 40px;border-radius: 5px;border: 1px solid #d8d8d8;padding-left: 15px;font-size: 14px;color: #333;}
+.layui-laydate .layui-laydate-header i:hover,.layui-laydate .layui-laydate-header span:hover{color:#4479d7;}
+.layui-laydate ul .layui-this{background-color: #4479d7!important;}
+.layui-laydate .layui-laydate-footer span:hover{color:#4479d7;}
+.theday{zoom:1;margin-bottom:25px;}
+.theday:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
+.daywrod{float:left;line-height:40px;margin-right:5px;}
+.layui-form .datecho .theday .layui-input-inline{width:110px;float:left;margin-right:10px;}
+
+.touploading input.layui-btn-disabled{opacity: 0;}
 
 .tocreat input.layui-btn-disabled{opacity: 1;background:#3c6dc7;}
 

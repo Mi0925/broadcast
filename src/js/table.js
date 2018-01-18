@@ -169,9 +169,9 @@ function userDef(table){
         }
     })
 
-    var tobH = parseInt($('.dataTables_wrapper').css('height')) - 38;
+    /*var tobH = parseInt($('.dataTables_wrapper').css('height')) - 38;
     $('table thead').css({'table-layout':'fixed','display':'table'})//,width:100%;
-    $('table tbody').css({'max-height':tobH,'overflow-y':'scroll','display':"block"});
+    $('table tbody').css({'max-height':tobH,'overflow-y':'scroll','display':"block"});*/
 
 }
 
@@ -232,6 +232,7 @@ $(document).on('click','.revyes',function(){
 $(document).on('click','.un-confirm',function(){
     $('.popwindow').hide();
     $(this).parents('.unreason').hide();//.css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
+    $(this).parents('.datecho').hide();
 })
 
 

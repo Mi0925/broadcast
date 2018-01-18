@@ -63,29 +63,14 @@
 		}
 		$('.toedit').click(function(){
 			if($(this).hasClass('disable-edit')){
-				$(this).removeClass('disable-edit');
-				$(this).html('<i class="iconfont icon-bianji"></i>编辑');
-				$('#tosave').hide();
-				$('.settingone .tnoneimp input').attr('readonly',true);
-				$('.settingone .tnoneimp input').css('color','#d8d8d8');
 				$('.layui-input-inline select').attr("disabled",true);
 				rsetForm();
 			}else{
-				$(this).addClass('disable-edit');
-				$(this).html('<i class="iconfont icon-baocun"></i>保存');//<i class="iconfont icon-weitongguo"></i>取消编辑
-				$('#tosave').show();
-				$('.settingone .tnoneimp input').attr('readonly',false);
-				$('.settingone .tnoneimp input').css('color','#333');
 				$('.layui-input-inline select').attr("disabled",false);
 				rsetForm();
 			}
 		})
 		$('.tocreatbtn').click(function(){
-			$('.toedit').removeClass('disable-edit');
-			$('.toedit').html('<i class="iconfont icon-bianji"></i>编辑');
-			$('#tosave').hide();
-			$('.settingone .tnoneimp input').attr('readonly',true);
-			$('.settingone .tnoneimp input').css('color','#d8d8d8');
 			$('.layui-input-inline select').attr("disabled",true);
 			rsetForm();
 		})

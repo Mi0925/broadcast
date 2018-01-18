@@ -31,7 +31,10 @@
 					</div>
 					<div class="filecont">
 						<div class="filetit">
-							<span class="filetit-one"><i class="iconfont icon-wushanguanwangziti-"></i>本地上传</span>
+							<div class="filetit-one">
+								<input type="file" accept="audio/*,video/*" />
+								<i class="iconfont icon-wushanguanwangziti-"></i>本地上传
+							</div>
 							<span class="filetit-two"><i class="iconfont icon-kucun"></i>在应急音频资源库中选择</span>
 						</div>
 						<ul class="filelist">
@@ -173,69 +176,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#impcontent').on('keyup', function() { 
-		    $('.oneimp-count .countnew').html($('#impcontent').val().length);  
-		});
-		$('#imparea').on('keyup', function() {  
-		    $('.area-count .countnew').html($('#imparea').val().length);  
-		});
-
-		
-		$(function() {
-			$(document).on('click','.filedel-btn',function(event) {
-		        showDiv();
-		        $(this).parents('li').addClass('todel');
-		        //$(myDiv).toggle();
-		        $(document).one("click",
-		        function() { 
-		            $('.choose').hide();
-		            $('.filelist li').removeClass('todel');
-		        });
-		        event.stopPropagation(); 
-		    });
-		    
-		    $('.choose').click(function(event) {
-		        event.stopPropagation(); 
-		    });
-		});
-		function showDiv() {
-			var x = event.clientX - event.offsetX;
-			var y = event.clientY - event.offsetY;
-			$('.choose').css({'display':'block','top':y-90,'left':x-130});
-		}
-
-		$('.cho-delete').click(function(){
-			$('.choose').hide();
-			$('.filelist li.todel').remove();
-		})
-		$('.cho-cancel').click(function(){
-			$('.choose').hide();
-			$('.filelist li').removeClass('todel');
-		})
-
-		$('.gb-main-item').scroll(function(){
-			if($('.choose').is(':visible')){
-				$('.choose').hide();
-				$('.filelist li').removeClass('todel');
-			}
-		})
-
-		
-
-		$(document).on('click','.toswitch',function(){
-			$('.popwindow').show();
-			$('.toshift').show();
-			$('.matlist li ').eq(0).find('input').prop('checked',true);
-		})
-
-
-		$(document).on('click','.fileconv-btn',function(){
-			$('.popwindow').show();
-			$('.toshift').show();
-			$('.matlist li ').eq(0).find('input').prop('checked',true);
-		})
-
-		
 		layui.use(['form', 'element'], function(){
 			var element = layui.element,form = layui.form;
 			form.render();

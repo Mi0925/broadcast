@@ -87,9 +87,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#impcontent').on('keyup', function() { 
-		    $('.oneimp-count .countnew').html($('#impcontent').val().length);  
-		});
 		$('#secretkey').on('keyup', function() { 
 		    $('.oneimp-count .countser').html($('#secretkey').val().length);  
 		});
@@ -105,12 +102,7 @@
 		});
 		
 		$('.toemptybtn').click(function(){
-			$('.imptxt').val('');
-			$('.countnew').html('0');
 			$('.countser').html('0');
-			$('.gb-form .layui-form-select .layui-input').val('');
-			$('.layui-anim-upbit dd').removeClass('layui-this');
 		})
-		
 	})
 </script>
