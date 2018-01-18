@@ -9,9 +9,6 @@
 		    	</div>
 		    	<div class="newtk-btn" id="tochocase">
 		    		<span class="catonew">新建资源<i class="iconfont icon-arrow-bottom"></i></span>
-		    		<div>
-		    			
-		    		</div>
 		    		<ul class="tonewlist">
 		    			<li>
 		    				<a href="#/newPlatResoInfo" class="newtk-btn add_tab" url="components/newPlatResoInfo.html" name="新建平台资源信息">新建平台资源信息</a>
@@ -2549,17 +2546,8 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		/*calendar*/
-		layui.use(['laydate','element'], function(){
-			var laydate = layui.laydate,element = layui.element;
-			laydate.render({
-			    elem: '#daterg',
-			    eventElem: '#tochobtn',
-			    trigger: 'click',
-			    type:'datetime',
-			    range: true
-			});
-
+		layui.use('element', function(){
+			var element = layui.element;
 
 			//触发事件
 			var active = {
@@ -2596,37 +2584,6 @@
 				active[type] ? active[type].call(this, othis) : '';
 			})
 		})
-
-			
-		//新建资源下拉框
-		$('.catonew').click(function(){
-			if($('.tonewlist').is(':hidden')){
-				$('.catonew i').removeClass('icon-arrow-bottom').addClass('icon-arrow-top');
-				$('.tonewlist').show();
-			}else{
-				$('.catonew i').removeClass('icon-arrow-top').addClass('icon-arrow-bottom');
-				$('.tonewlist').hide();
-			}
-		})
-		/*function stopPropagation(e) { 
-			if (e.stopPropagation) 
-			e.stopPropagation(); 
-			else 
-			e.cancelBubble = true; 
-		} */
-
-		/*$(document).bind('click',function(){ 
-			$('.tonewlist').css('display','none'); 
-			$('.catonew i').removeClass('icon-arrow-top').addClass('icon-arrow-bottom');
-		}); 
-
-		$('.tonewlist').bind('click',function(e){ 
-			stopPropagation(e); 
-		}); 
-		$('.catonew').bind('click',function(e){ 
-			stopPropagation(e); 
-		});*/
-
 		
 
 		//菜单栏
@@ -2823,78 +2780,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,10,11] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-maina"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 5 || i == 8) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 4 || i == 5 || i == 8) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-miana
@@ -2934,75 +2833,18 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,10,11] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainb"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 5 || i == 8) {//删除第一列与第二列的筛选框
-                           var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+                       if (i == 3 || i == 4 || i == 5 || i == 8) { //对第i列进行筛选
+                            var column = api.column(i);
+ 							rowScreen(column);
                        }
                    });
  
@@ -3045,78 +2887,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,10,11] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-maina"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 5 || i == 8) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 4 || i == 5 || i == 8) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-mianc
@@ -3156,82 +2940,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10,11] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-maind"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 8) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 4 || i == 8) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect addlonger"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-miand
@@ -3271,82 +2993,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10,11] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-maine"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 8) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 4 || i == 8) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect addlonger"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-miane
@@ -3386,82 +3046,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10,11] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainf"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 8) {//删除第一列与第二列的筛选框
-                           var column = api.column(i);
-                           var $span = $('<span class="addselect addlonger"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+                       if (i == 3 || i == 4 || i == 8) { //对第i列进行筛选
+                            var column = api.column(i);
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-mianf
@@ -3501,78 +3099,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-maing"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 7) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 7) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-miang
@@ -3612,78 +3152,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainh"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 7) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 7) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-mianh
@@ -3723,78 +3205,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-maini"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 7) {//删除第一列与第二列的筛选框
-                           var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+                       if (i == 3 || i == 7) { //对第i列进行筛选
+                          var column = api.column(i);
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-miani
@@ -3836,82 +3260,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 },
-                   {
-	                   orderable: false,
-
-	                   targets: 12 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,10,11,12] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainj"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 5 || i == 8) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 4 || i == 5 || i == 8) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-mianj
@@ -3951,82 +3313,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 },
-                   {
-	                   orderable: false,
-
-	                   targets: 12 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,10,11,12] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-maink"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 5 || i == 8) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 4 || i == 5 || i == 8) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-miank
@@ -4066,82 +3366,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 },
-                   {
-	                   orderable: false,
-
-	                   targets: 12 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,10,11,12] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainl"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 5 || i == 8) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 4 || i == 5 || i == 8) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-mianl
@@ -4181,86 +3419,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 },
-                   {
-	                   orderable: false,
-
-	                   targets: 12 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10,11,12] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainm"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 8) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 4 || i == 8) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect addlonger"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-mianm
@@ -4300,86 +3472,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 },
-                   {
-	                   orderable: false,
-
-	                   targets: 12 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10,11,12] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainn"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 8) {//删除第一列与第二列的筛选框
-                           var column = api.column(i);
-                           var $span = $('<span class="addselect addlonger"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+                       if (i == 3 || i == 4 || i == 8) { //对第i列进行筛选
+                            var column = api.column(i);
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-miann
@@ -4419,86 +3525,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 },
-                   {
-	                   orderable: false,
-
-	                   targets: 12 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10,11,12] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-maino"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 4 || i == 8) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 4 || i == 8) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect addlonger"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-miano
@@ -4538,82 +3578,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10,11] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainp"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 7) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 7) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-mianp
@@ -4653,82 +3631,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10,11] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainq"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 7) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 7) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-mianq
@@ -4768,82 +3684,20 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                   {
-	                   orderable: false,
-
-	                   targets: 2 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                   {
-	                   orderable: false,
-
-	                   targets: 4 },
-                   {
-	                   orderable: false,
-
-	                   targets: 5 },
-                   {
-	                   orderable: false,
-
-	                   targets: 6 },
-                   {
-	                   orderable: false,
-
-	                   targets: 7 },
-                   {
-	                   orderable: false,
-
-	                   targets: 8 },
-	               {
-	                   orderable: false,
-
-	                   targets: 9 },
-                   {
-	                   orderable: false,
-
-	                   targets: 10 },
-                   {
-	                   orderable: false,
-
-	                   targets: 11 }
-               ],//第一列与第二列禁止排序
+	                   targets: [0,2,3,4,5,6,7,8,9,10,11] //禁止排序
+	               }
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainr"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 3 || i == 7) {//删除第一列与第二列的筛选框
+                       if (i == 3 || i == 7) { //对第i列进行筛选
                            var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			//checkbox全选——table-mianr
@@ -4870,12 +3724,6 @@
            });
 
 			/*共用*/
-			$(window).resize(function(){
-				$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
-			})
-			$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
-			
-			
 			
 			//自定义显示数量
 			$('.thetab').each(function(){
@@ -4946,40 +3794,6 @@
 			/*共用*/
        })
 		/*table end*/
-
-		/*popwindow*/
-        var uncH = parseInt($('.uncont').css('height'));
-        $('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});
-        
-        //删除
-        var myDiv = $(".choose");
-        $(function() {
-            $(document).on('click','.delete',function(event) {
-                showDiv();
-                $(this).parents('tr').addClass('trdel');
-                //$(myDiv).toggle();
-                $(document).one("click",
-                function() { 
-                    $(myDiv).hide();
-                    $('table.dataTable tbody tr').removeClass('trdel');
-                });
-                event.stopPropagation();
-            });
-            $(myDiv).click(function(event) {
-                event.stopPropagation(); 
-            });
-        });
-        function showDiv() {
-            var x = event.clientX - event.offsetX;
-            var y = event.clientY - event.offsetY;
-            $(myDiv).css({'display':'block','top':y-80,'left':x-110});
-        }
-        
-        $('.cho-cancel').click(function(){
-            $(this).parents('.choose').hide();
-            $('tr').removeClass('trdel');
-        })
-        /*popwindow*/
 
 
 

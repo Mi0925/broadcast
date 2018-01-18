@@ -1,7 +1,7 @@
 <div class="gb-form">
 	<form class="layui-form" action="">
 		<div class="newform">
-			<p class="newform-tit"><i class="iconfont icon-celvebianjiqi"></i>0123任务消息发布策略设置</p>
+			<p class="newform-tit"><i class="iconfont icon-celvebianjiqi"></i>0123演练计划发布策略设置</p>
 			<div class="form-oneitem-box">
 				<div class="form-oneitem">
 					<div class="fortit">
@@ -186,7 +186,7 @@
 				<input type="button" value="确认创建" class="tocreatbtn" />		
 				<p class="warnword relwarn">
 					<i class="iconfont icon-11"></i>
-					0123任务消息的任务策略已经创建，请等待审核！
+					0123演练计划的发布策略已经创建，请等待审核！
 				</p>
 			</div>
 			<p class="botword">
@@ -448,6 +448,13 @@
 				$('.choose').hide();
 				$('.form-oneitem').removeClass('waitdel');
 			}
+		})
+
+
+		$(document).on('click','.fileconv-btn',function(){
+			$('.popwindow').show();
+			$('.toshift').show();
+			$('.matlist li ').eq(0).find('input').prop('checked',true);
 		})
 	})
 

@@ -1,13 +1,14 @@
 <div class="gb-form">
 	<form class="layui-form" action="">
 		<div class="newform">
-			<p class="newform-tit"><i class="iconfont icon-iconfontxinjianwenjian"></i>新建任务消息</p>
+			<p class="newform-tit"><i class="iconfont icon-yujing"></i>新建预警消息</p>
+			
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
+					<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>消息名称</p>
 				</div>
 				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>任务消息</p>
+					<p class="oneitem-tit"><small>*</small>消息名称</p>
 					<div class="oneimp">
 						<input type="text"  id="impcontent" class="imptxt" maxlength="20"/>
 						<span class="oneimp-count"><span class="countnew">0</span>/20</span>
@@ -16,79 +17,7 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">02</span><small>*</small>调度方案</p>
-				</div>
-				<div class="oneitem-cont">
-					<p class="oneitem-tit">选择调度方案</p>
-					
-						<div class="layui-input-inline">
-							<select name="dispatch" lay-search=""> <!-- lay-verify="required" lay-search="" -->
-								<option value="">请选择调度方案</option>
-								<option value="1">Scheme one</option>
-								<option value="2">Scheme two</option>
-								<option value="3">Scheme three</option>
-								<option value="4">Scheme four</option>
-								<option value="5">Scheme five</option>
-								<option value="6">Scheme six</option>
-							</select>
-						</div>
-			    	<!-- </form> -->
-			    	<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>选择调度方案后，后面的信息将自动匹配为预设的事件信息并且不能修改</p>
-				</div>
-			</div>
-			<div class="form-oneitem">
-				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>事件类型</p>
-				</div>
-				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>事件类型</p>
-					<div class="layui-input-inline">
-				        <select name="type" lay-search="">
-							<option value="">请选择事件类型</option>
-							<option value="1">Event type one</option>
-							<option value="2">Event type two</option>
-							<option value="3">Event type three</option>
-							<option value="4">Event type four</option>
-							<option value="5">Event type five</option>
-							<option value="6">Event type six</option>
-							<option value="7">Event type seven</option>
-				        </select>
-				    </div>
-				</div>
-			</div>
-			<div class="form-oneitem">
-				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">04</span><small>*</small>消息级别</p>
-				</div>
-				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>消息级别</p>
-					<ul class="msgrank">
-						<li>
-							<input type="radio" name="checkone" id="radone" />
-							<label for="radone"><img src="src/images/rank-red.png">红色</label>
-						</li>
-						<li>
-							<input type="radio" name="checkone" id="radtwo" />
-							<label for="radtwo"><img src="src/images/rank-orange.png">橙色</label>
-						</li>
-						<li>
-							<input type="radio" name="checkone" id="radthr" />
-							<label for="radthr"><img src="src/images/rank-yellow.png">黄色</label>
-						</li>
-						<li>
-							<input type="radio" name="checkone" id="radfou" />
-							<label for="radfou"><img src="src/images/rank-blue.png">蓝色</label>
-						</li>
-						<li>
-							<input type="radio" name="checkone" id="radfiv" />
-							<label for="radfiv"><img src="src/images/rank-green.png">绿色</label>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="form-oneitem">
-				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">05</span><small>*</small>消息内容</p>
+					<p class="oneitem-tit"><span class="onenumb">02</span><small>*</small>消息内容</p>
 				</div>
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>消息内容</p>
@@ -113,7 +42,6 @@
 								<div class="filename"><i class="iconfont icon-1"></i><span class="thename">视频.mp4</span></div>
 								<div class="filebtn">
 									<input type="button" value="删除" class="filedel-btn"/>
-									<input type="button" value="预览" class="filepre-btn"/>
 									<input type="button" value="转换" class="fileconv-btn"/>
 								</div>
 							</li>
@@ -121,7 +49,6 @@
 								<div class="filename"><i class="iconfont icon-1"></i><span class="thename">文本.txt</span></div>
 								<div class="filebtn">
 									<input type="button" value="删除" class="filedel-btn"/>
-									<input type="button" value="预览" class="filepre-btn"/>
 									<input type="button" value="转换" class="fileconv-btn"/>
 								</div>
 							</li>
@@ -131,62 +58,25 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">06</span><small>*</small>覆盖范围</p>
+					<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>消息级别</p>
 				</div>
 				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>覆盖范围</p>
-					<div class="covarea-sel gb-tree-box left">
-						<span class="systit"><i class="iconfont icon-xuanze"></i>已选择地区</span>
-						<div class="gb-tree scroll">
-							<ul id="gb_tree_sel1" class="ztree ztree-close"></ul>
-						</div>
-					</div>
-					<div class="covarea-all gb-tree-box right">
-						<span class="systit"><i class="iconfont icon-quanbu"></i>全部地区</span>
-						<div class="gb-tree scroll">
-							<ul id="gb_tree_all1" class="ztree ztree-check"></ul>
-						</div>
+					<p class="oneitem-tit"><small>*</small>选择消息级别</p>
+					<div class="layui-input-inline">
+						<select name="dispatch" lay-search=""> 
+							<option value="">请选择消息级别</option>
+							<option value="1">红色</option>
+							<option value="2">橙色</option>
+							<option value="3">黄色</option>
+							<option value="4">蓝色</option>
+							<option value="5">绿色</option>
+						</select>
 					</div>
 				</div>
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">07</span><small>*</small>调用系统资源</p>
-				</div>
-				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>调用系统资源</p>
-					<div class="sysreso-sel gb-tree-box left">
-						<span class="systit"><i class="iconfont icon-xuanze"></i>已选择资源</span>
-						<div class="gb-tree scroll">
-							<ul id="gb_tree_sel2" class="ztree ztree-close"></ul>
-						</div>
-					</div>
-					<div class="sysreso-all gb-tree-box right">
-						<span class="systit"><i class="iconfont icon-quanbu"></i>全部资源</span>
-						<div class="gb-tree scroll">
-							<ul id="gb_tree_all2" class="ztree ztree-check"></ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="form-oneitem">
-				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">08</span>预覆盖人数/预覆盖面积</p>
-				</div>
-				<div class="oneitem-cont">
-					<div class="predictone">
-						<p class="oneitem-tit">预覆盖人数</p>
-						<p class="precount">1000万人</p>
-					</div>
-					<div class="predictwo">
-						<p class="oneitem-tit">预覆盖面积</p>
-						<p class="precount">120万平方公里</p>
-					</div>
-				</div>
-			</div>
-			<div class="form-oneitem">
-				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">09</span>发布部门/负责人</p>
+					<p class="oneitem-tit"><span class="onenumb">04</span>发布部门/负责人</p>
 				</div>
 				<div class="oneitem-cont">
 					<div class="predictone">
@@ -201,19 +91,10 @@
 			</div>
 			<div class="tocreat">
 				<input type="button" value="确认创建" class="tocreatbtn" />
-				<p class="warnword"><i class="iconfont icon-iconfontjinggao"></i>成功创建后，需编写对应的发布策略后，方能提交审核</p>
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 		</div>
 		<div class="popwindow"></div>
-		<div class="unreason">
-			<p class="poptit">预览</p>
-			<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
-			<div class="uncont">
-				<p class="unword">视频.mp4</p>
-				<input type="button" value="预览" class="un-confirm" />
-			</div>
-		</div>
 		<div class="choose">
 			<p class="choword">确定删除此任务消息吗？</p>
 			<div class="chobtn">
@@ -280,8 +161,8 @@
 					</div>
 				</div>
 				<div class="tomat">
-					<div class="layui-progress layui-progress-big" lay-filter="demo"><!--  lay-showpercent="true" -->
-					  <div class="layui-progress-bar" lay-percent="0%"></div><!--   layui-bg-red -->
+					<div class="layui-progress layui-progress-big" lay-filter="demo">
+					  <div class="layui-progress-bar" lay-percent="0%"></div>
 					</div>
 					<p class="forword">转换中...</p>
 				</div>
@@ -291,7 +172,6 @@
 		</div>
 	</form>
 </div>
-
 
 
 <script type="text/javascript">

@@ -43,18 +43,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		/*calendar*/
-		layui.use('laydate', function(){
-			var laydate = layui.laydate;
-			laydate.render({
-			    elem: '#daterg',
-			    eventElem: '#tochobtn',
-			    trigger: 'click',
-			    type:'datetime',
-			    range: true
-			});
-		})
-
 		/*layui.use('form', function(){
 			var form = layui.form;
 			form.render();
@@ -65,21 +53,14 @@
 			
 		});*/
 
-
 		var editorOption = {
 	        scaleEnabled:true
 	    };
 	    var editor_a = new baidu.editor.ui.Editor(editorOption);
 	    editor_a.render('myEditor');
-	   
 		
 
-		$('.toemptybtn').click(function(){
-			$('.imptxt').val('');
-			$('.gb-form .layui-input-inline .layui-input').val('');
-			$('.layui-laydate-content td').removeClass('layui-this laydate-selected laydate-day-next');
-			$('.layui-laydate-content ol li').removeClass('layui-this');
-			$('.layui-laydate-content ol li').eq(0).addClass('layui-this');
+		$(document).on('click','.toemptybtn',function(){
 			UE.getEditor('myEditor').execCommand('cleardoc');
 		})
 	})

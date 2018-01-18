@@ -28,8 +28,8 @@
 						<span class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>音频大小不超过5M</span>
 					</div>
 					<p class="gb-linetw"></p>
-					<!-- <div class="onearea">
-						<div class="thefile">
+					<!--<div class="onearea">
+						 <div class="thefile">
 							<div class="filename"><i class="iconfont icon-1"></i><span class="thename">杭州台风预警杭州台风预警.mp3</span></div>
 							<div class="filebtn">
 								<input type="button" value="格式转换" class="foconv-btn"/>
@@ -145,10 +145,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#imparea').on('keyup', function() {  
-		    $('.area-count .countnew').html($('#imparea').val().length);  
-		});
-
 		if($('.onearea').length <= 0){
 			$('.gb-linetw').hide();
 		}
@@ -207,7 +203,7 @@
 		
 		$(function() {
 			$(document).on('click','.todel-btn',function(event) {
-		        showDiv();
+		        upFile();
 		        $(this).parents('.onearea').addClass('todel');
 		        //$(myDiv).toggle();
 		        $(document).one("click",
@@ -222,10 +218,10 @@
 		        event.stopPropagation(); 
 		    });
 		});
-		function showDiv() {
+		function upFile() {
 			var x = event.clientX - event.offsetX;
 			var y = event.clientY - event.offsetY;
-			$('.choose').css({'display':'block','top':y-90,'left':x-130});
+			$('.choose').css({'display':'block','top':y-90,'left':x-110});
 		}
 
 		$('.cho-delete').click(function(){
@@ -243,12 +239,10 @@
 		$('.gb-main-item').scroll(function(){
 			if($('.choose').is(':visible')){
 				$('.choose').hide();
-				$('.filelist li').removeClass('todel');
+				$('.onearea').removeClass('todel');
 			}
 		})
 
-		var uncH = parseInt($('.uncont').css('height'));
-		$('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});
 
 		$(document).on('click','.toswitch',function(){
 			$('.popwindow').show();

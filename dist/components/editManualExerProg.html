@@ -1,13 +1,13 @@
 <div class="gb-form">
 	<form class="layui-form" action="">
 		<div class="newform">
-			<p class="newform-tit"><i class="iconfont icon-iconfontxinjianwenjian"></i>新建任务消息</p>
+			<p class="newform-tit"><i class="iconfont icon-iconfontxinjianwenjian"></i>新建手动演练计划</p>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
+					<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>演练计划名称</p>
 				</div>
 				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>任务消息</p>
+					<p class="oneitem-tit"><small>*</small>演练计划名称</p>
 					<div class="oneimp">
 						<input type="text"  id="impcontent" class="imptxt" maxlength="20"/>
 						<span class="oneimp-count"><span class="countnew">0</span>/20</span>
@@ -22,7 +22,7 @@
 					<p class="oneitem-tit">选择调度方案</p>
 					
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search=""> <!-- lay-verify="required" lay-search="" -->
+							<select name="dispatch" lay-search="">
 								<option value="">请选择调度方案</option>
 								<option value="1">Scheme one</option>
 								<option value="2">Scheme two</option>
@@ -38,57 +38,7 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>事件类型</p>
-				</div>
-				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>事件类型</p>
-					<div class="layui-input-inline">
-				        <select name="type" lay-search="">
-							<option value="">请选择事件类型</option>
-							<option value="1">Event type one</option>
-							<option value="2">Event type two</option>
-							<option value="3">Event type three</option>
-							<option value="4">Event type four</option>
-							<option value="5">Event type five</option>
-							<option value="6">Event type six</option>
-							<option value="7">Event type seven</option>
-				        </select>
-				    </div>
-				</div>
-			</div>
-			<div class="form-oneitem">
-				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">04</span><small>*</small>消息级别</p>
-				</div>
-				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>消息级别</p>
-					<ul class="msgrank">
-						<li>
-							<input type="radio" name="checkone" id="radone" />
-							<label for="radone"><img src="src/images/rank-red.png">红色</label>
-						</li>
-						<li>
-							<input type="radio" name="checkone" id="radtwo" />
-							<label for="radtwo"><img src="src/images/rank-orange.png">橙色</label>
-						</li>
-						<li>
-							<input type="radio" name="checkone" id="radthr" />
-							<label for="radthr"><img src="src/images/rank-yellow.png">黄色</label>
-						</li>
-						<li>
-							<input type="radio" name="checkone" id="radfou" />
-							<label for="radfou"><img src="src/images/rank-blue.png">蓝色</label>
-						</li>
-						<li>
-							<input type="radio" name="checkone" id="radfiv" />
-							<label for="radfiv"><img src="src/images/rank-green.png">绿色</label>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="form-oneitem">
-				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">05</span><small>*</small>消息内容</p>
+					<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>消息内容</p>
 				</div>
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>消息内容</p>
@@ -113,7 +63,6 @@
 								<div class="filename"><i class="iconfont icon-1"></i><span class="thename">视频.mp4</span></div>
 								<div class="filebtn">
 									<input type="button" value="删除" class="filedel-btn"/>
-									<input type="button" value="预览" class="filepre-btn"/>
 									<input type="button" value="转换" class="fileconv-btn"/>
 								</div>
 							</li>
@@ -121,7 +70,6 @@
 								<div class="filename"><i class="iconfont icon-1"></i><span class="thename">文本.txt</span></div>
 								<div class="filebtn">
 									<input type="button" value="删除" class="filedel-btn"/>
-									<input type="button" value="预览" class="filepre-btn"/>
 									<input type="button" value="转换" class="fileconv-btn"/>
 								</div>
 							</li>
@@ -131,7 +79,25 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">06</span><small>*</small>覆盖范围</p>
+					<p class="oneitem-tit"><span class="onenumb">04</span><small>*</small>消息级别</p>
+				</div>
+				<div class="oneitem-cont">
+					<p class="oneitem-tit"><small>*</small>选择消息级别</p>
+					<div class="layui-input-inline">
+						<select name="dispatch" lay-search=""> 
+							<option value="">请选择消息级别</option>
+							<option value="1">红色</option>
+							<option value="2">橙色</option>
+							<option value="3">黄色</option>
+							<option value="4">蓝色</option>
+							<option value="5">绿色</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-oneitem">
+				<div class="fortit">
+					<p class="oneitem-tit"><span class="onenumb">05</span><small>*</small>覆盖范围</p>
 				</div>
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>覆盖范围</p>
@@ -151,7 +117,7 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">07</span><small>*</small>调用系统资源</p>
+					<p class="oneitem-tit"><span class="onenumb">06</span><small>*</small>调用系统资源</p>
 				</div>
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>调用系统资源</p>
@@ -171,7 +137,7 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">08</span>预覆盖人数/预覆盖面积</p>
+					<p class="oneitem-tit"><span class="onenumb">07</span>预覆盖人数/预覆盖面积</p>
 				</div>
 				<div class="oneitem-cont">
 					<div class="predictone">
@@ -186,7 +152,7 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">09</span>发布部门/负责人</p>
+					<p class="oneitem-tit"><span class="onenumb">08</span>发布部门/负责人</p>
 				</div>
 				<div class="oneitem-cont">
 					<div class="predictone">
@@ -199,8 +165,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="tocreat">
-				<input type="button" value="确认创建" class="tocreatbtn" />
+			<div class="tocreat crepad">
+				<div class="progcreat">
+					<input type="button" value="清空" class="toemptybtn" />
+					<input type="button" value="确认创建" class="tocreatbtn" />
+				</div>
 				<p class="warnword"><i class="iconfont icon-iconfontjinggao"></i>成功创建后，需编写对应的发布策略后，方能提交审核</p>
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
@@ -292,10 +261,88 @@
 	</form>
 </div>
 
+	
+
 
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		/*$('#impcontent').bind('input propertychange', function() { 
+		    $('.oneimp-count .countnew').html($('#impcontent').val().length);  
+		});
+		$('#imparea').bind('input propertychange', function() {  
+		    $('.area-count .countnew').html($('#imparea').val().length);  
+		});*/
+		$('#impcontent').on('keyup', function() { 
+		    $('.oneimp-count .countnew').html($('#impcontent').val().length);  
+		});
+		$('#imparea').on('keyup', function() {  
+		    $('.area-count .countnew').html($('#imparea').val().length);  
+		});
+
+		
+		$(function() {
+			$(document).on('click','.filedel-btn',function(event) {
+		        showDiv();
+		        $(this).parents('li').addClass('todel');
+		        //$(myDiv).toggle();
+		        $(document).one("click",
+		        function() { 
+		            $('.choose').hide();
+		            $('.filelist li').removeClass('todel');
+		        });
+		        event.stopPropagation(); 
+		    });
+		    
+		    $('.choose').click(function(event) {
+		        event.stopPropagation(); 
+		    });
+		});
+		function showDiv() {
+			var x = event.clientX - event.offsetX;
+			var y = event.clientY - event.offsetY;
+			$('.choose').css({'display':'block','top':y-90,'left':x-130});
+		}
+
+		$('.cho-delete').click(function(){
+			$('.choose').hide();
+			$('.filelist li.todel').remove();
+		})
+		$('.cho-cancel').click(function(){
+			$('.choose').hide();
+			$('.filelist li').removeClass('todel');
+		})
+
+		$('.gb-main-item').scroll(function(){
+			if($('.choose').is(':visible')){
+				$('.choose').hide();
+				$('.filelist li').removeClass('todel');
+			}
+		})
+
+		/*var uncH = parseInt($('.uncont').css('height'));
+		$('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});*/
+
+		$(document).on('click','.toswitch',function(){
+			$('.popwindow').show();
+			$('.toshift').show();
+			$('.matlist li ').eq(0).find('input').prop('checked',true);
+			//$('.succmat').hide();
+		})
+
+		$(document).on('click','.filepre-btn',function(){
+			$('.popwindow').show();
+			$('.unword').html($(this).parents('li').find('.thename').html());
+			$('.unreason').show();
+		})
+
+		$(document).on('click','.fileconv-btn',function(){
+			$('.popwindow').show();
+			$('.toshift').show();
+			$('.matlist li ').eq(0).find('input').prop('checked',true);
+		})
+
+		
 		layui.use(['form', 'element'], function(){
 			var element = layui.element,form = layui.form;
 			form.render();
@@ -337,6 +384,16 @@
 		});
 	})
 
+
+	$('.toemptybtn').click(function(){
+		$('.imptxt').val('');
+		$('.imparea').val('请输入消息文本');
+		$('.imparea').css('color','#ccc');
+		$('.countnew').html('0');
+		$('.filelist').remove();
+		$('.gb-form .layui-form-select .layui-input').val('');
+		$('.layui-anim-upbit dd').removeClass('layui-this');
+	})
 	
 	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 	var selSetting = {

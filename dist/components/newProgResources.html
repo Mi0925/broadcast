@@ -74,12 +74,12 @@
 									<p class="oneitem-tit"><small>*</small>制式</p>
 									<ul class="msgrank">
 										<li>
-											<input type="radio" name="checkone" id="radone" checked="checked" />
-											<label for="radone">FM</label>
+											<input type="radio" name="wache" id="wacheone" checked="checked" />
+											<label for="wacheone">FM</label>
 										</li>
 										<li>
-											<input type="radio" name="checkone" id="radtwo" />
-											<label for="radtwo">CDR</label>
+											<input type="radio" name="wache" id="wachetwo" />
+											<label for="wachetwo">CDR</label>
 										</li>
 									</ul>
 								</div>
@@ -115,12 +115,12 @@
 									<p class="oneitem-tit"><small>*</small>符号率</p>
 									<ul class="msgrank">
 										<li>
-											<input type="radio" name="checkone" id="radone" />
-											<label for="radone">6875</label>
+											<input type="radio" name="syche" id="sycheone" />
+											<label for="sycheone">6875</label>
 										</li>
 										<li>
-											<input type="radio" name="checkone" id="radtwo" />
-											<label for="radtwo">6900</label>
+											<input type="radio" name="syche" id="sychetwo" />
+											<label for="sychetwo">6900</label>
 										</li>
 									</ul>
 								</div>
@@ -159,12 +159,12 @@
 									<p class="oneitem-tit"><small>*</small>卫星型号</p>
 									<ul class="msgrank">
 										<li>
-											<input type="radio" name="checkone" id="radone" />
-											<label for="radone">中星6B</label>
+											<input type="radio" name="numche" id="numcheone" />
+											<label for="numcheone">中星6B</label>
 										</li>
 										<li>
-											<input type="radio" name="checkone" id="radtwo" />
-											<label for="radtwo">中星9</label>
+											<input type="radio" name="numche" id="numchetwo" />
+											<label for="numchetwo">中星9</label>
 										</li>
 									</ul>
 								</div>
@@ -281,9 +281,6 @@
 			}
 		})
 
-		$('#imparea').on('keyup', function() {  
-		    $('.area-count .countnew').html($('#imparea').val().length);  
-		});
 
 		layui.use('form', function(){
 			var form = layui.form;
@@ -302,14 +299,5 @@
 			$('.prchodiv').eq(theshow).show();
 		})
 		
-		$('.toemptybtn').click(function(){
-			$('.imptxt').val('');
-			$('.imparea').val('请输入消息文本');
-			$('.imparea').css('color','#ccc');
-			$('.countnew').html('0');
-			$('.prtop .msgrank li input').prop('checked',false);
-			$('.gb-form .layui-form-select .layui-input').val('');
-			$('.layui-anim-upbit dd').removeClass('layui-this');
-		})
 	})
 </script>

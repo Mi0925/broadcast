@@ -41,8 +41,8 @@
 							<div class="tklay">
 								<span class="talay-word"><i class="iconfont icon-rili"></i>操作时间</span>
 								<div class="layui-input-inline">
-							        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
-							        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
+							        <input type="text" class="layui-input" id="soledate" placeholder="选择时间范围">
+							        <span class="tocho iconfont icon-shijian" id="solebtn"></span> 
 						    	</div>
 							</div>
 							<div class="tksearch">
@@ -186,8 +186,8 @@
 		layui.use('laydate', function(){
 			var laydate = layui.laydate;
 			laydate.render({
-			    elem: '#daterg',
-			    eventElem: '#tochobtn',
+			    elem: '#soledate',
+			    eventElem: '#solebtn',
 			    trigger: 'click',
 			    type:'datetime',
 			    range: true
@@ -197,7 +197,6 @@
 
 		/*table*/
 		$(function () {
-
            var table = $('#table-mainfiv table').DataTable({
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
@@ -212,77 +211,26 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-
-	                   targets: 0 },
-                    {
-	                   orderable: false,
-
-	                   targets: 3 },
-                    {
-	                   orderable: false,
-
-	                   targets: 4 },
-                    {
-	                   orderable: false,
-
-	                   targets: 5 },
-                    {
-	                   orderable: false,
-
-	                   targets: 7 },
-                    {
-	                   orderable: false,
-
-	                   targets: 8 },
-                    {
-	                   orderable: false,
-
-	                   targets: 9 },
-	                { 
+	                   targets: [0,3,4,5,7,8,9] //禁止排序
+	               },{ 
 	                	"sType": "html-percent", 
-                       "aTargets": [2] }   //指定列号使用自定义排序
-               ],//第一列与第二列禁止排序
+                       "aTargets": [2]  //指定列号使用自定义排序
+                   	}  
+               ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-mainfiv"))
 	           },
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 4 || i == 5) {//删除第一列与第二列的筛选框
-                           var column = api.column(i);
-                           var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
-                           var select = $('<select><option value="">全部</option></select>')
-                                   .appendTo($(column.header()))
-                                   .on('click', function (evt) {
-                                       evt.stopPropagation();
-                                       var val = $.fn.dataTable.util.escapeRegex(
-                                               $(this).val()
-                                       );
-                                       column
-                                               .search(val ? '^' + val + '$' : '', true, false)
-                                               .draw();
-                                   });
-                           column.data().unique().sort().each(function (d, j) {
-                               function delHtmlTag(str) {
-                                   return str.replace(/<[^>]+>/g, "");//去掉html标签
-                               }
- 
-                               d = delHtmlTag(d)
-                               select.append('<option value="' + d + '">' + d + '</option>')
-                               $span.append(select)
-                           });
- 
+                       if (i == 4 || i == 5) { //对第i列进行筛选
+                            var column = api.column(i);
+ 							rowScreen(column);
                        }
                    });
- 
                }
 			})
 			
-			
-			$(window).resize(function(){
-				$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
-			})
-			$('.dataTables_scrollBody').css('height',parseInt($('.dataTables_scroll').css('height')) - 40);
 			
 			
 			//自定义显示数量

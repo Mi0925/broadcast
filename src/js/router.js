@@ -38,19 +38,47 @@ Router.route('/editHandoverRecord', function() {
   gbMainContent('components/editHandoverRecord.html', RoundaboutSet);
 });
 
-/*演练效果*/
-Router.route('/manoeuvre', function() {
-  gbMainContent('components/manoeuvre.html', RoundaboutSet);
-});
 
 /*首页*/
 Router.route("/index", function() {
   gbMainContent('components/index.html', RoundaboutSet);
 });
+
 /*实时监控*/
 Router.route('/monitoring', function() {
   gbMainContent('components/monitoring.html', RoundaboutSet);
 });
+
+/*应急演练模块 start*/
+//演练效果
+Router.route('/manoeuvre', function() {
+  gbMainContent('components/manoeuvre.html', RoundaboutSet);
+});
+//演练计划
+Router.route('/exercisePlan', function() {
+  gbMainContent('components/exercisePlan.html', RoundaboutSet);
+});
+//新建手动演练计划
+Router.route('/newManualExerProg', function() {
+  gbMainContent('components/newManualExerProg.html', RoundaboutSet);
+});
+//编辑手动演练计划
+Router.route('/editManualExerProg', function() {
+  gbMainContent('components/editManualExerProg.html', RoundaboutSet);
+});
+//新建周期计划
+Router.route('/newCyclePlan', function() {
+  gbMainContent('components/newCyclePlan.html', RoundaboutSet);
+});
+//编辑周期计划
+Router.route('/editCyclePlan', function() {
+  gbMainContent('components/editCyclePlan.html', RoundaboutSet);
+});
+//发布策略设置
+Router.route('/planReleasePolicy', function() {
+  gbMainContent('components/planReleasePolicy.html', RoundaboutSet);
+});
+/*应急演练模块 end*/
 
 /*调度指挥模块 start*/
 //调度方案
@@ -80,6 +108,18 @@ Router.route('/newTaskMsgEdit', function() {
 //发布策略
 Router.route('/releasePolicy', function() {
   gbMainContent('components/releasePolicy.html', RoundaboutSet);
+});
+//预警消息
+Router.route('/warningMessage', function() {
+  gbMainContent('components/warningMessage.html', RoundaboutSet);
+});
+//新建预警消息
+Router.route('/newWarningMsg', function() {
+  gbMainContent('components/newWarningMsg.html', RoundaboutSet);
+});
+//编辑预警消息
+Router.route('/editWarningMsg', function() {
+  gbMainContent('components/editWarningMsg.html', RoundaboutSet);
 });
 //报表导出
 Router.route('/exportAReport', function() {
@@ -152,6 +192,33 @@ Router.route('/editCharVoice', function() {
   gbMainContent('components/editCharVoice.html', RoundaboutSet);
 });
 /*资源管理模块 end*/
+
+/*安全管理模块 start*/
+//上传证书
+Router.route('/uploadTheCertif', function() {
+  gbMainContent('components/uploadTheCertif.html', RoundaboutSet);
+});
+//我的证书
+Router.route('/myCertificates', function() {
+  gbMainContent('components/myCertificates.html', RoundaboutSet);
+});
+//安装证书
+Router.route('/certInstaller', function() {
+  gbMainContent('components/certInstaller.html', RoundaboutSet);
+});
+//用户证书管理
+Router.route('/userCertifMana', function() {
+  gbMainContent('components/userCertifMana.html', RoundaboutSet);
+});
+//平台证书管理
+Router.route('/platformCertifMana', function() {
+  gbMainContent('components/platformCertifMana.html', RoundaboutSet);
+});
+//安全服务系统配置
+Router.route('/securityServSystemConfig', function() {
+  gbMainContent('components/securityServSystemConfig.html', RoundaboutSet);
+});
+/*安全管理模块 end*/
 
 /*日志管理模块 start*/
 //系统登录日志

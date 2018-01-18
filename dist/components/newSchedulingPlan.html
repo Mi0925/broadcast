@@ -1,13 +1,39 @@
 <div class="gb-form">
 	<form class="layui-form" action="">
 		<div class="newform">
-			<p class="newform-tit"><i class="iconfont icon-iconfontxinjianwenjian"></i>新建任务消息</p>
+			<p class="newform-tit"><i class="iconfont icon-renwutiaoduchuangjian"></i>新建调度方案</p>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
+					<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>事件类别</p>
 				</div>
 				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>任务消息</p>
+					<p class="oneitem-tit"><small>*</small>选择事件类别</p>
+					<div class="layui-input-inline">
+						<select name="dispatch" lay-search=""> 
+							<option value="">请选择事件类别</option>
+							<option value="1">10000 突发事件</option>
+							<option value="2">11A00 水旱灾害</option>
+							<option value="3">11A01 洪水</option>
+							<option value="4">11A02 内涝</option>
+							<option value="5">11A03 水库重大险情</option>
+							<option value="6">11A04 堤防重大险情</option>
+							<option value="7">11A05 凌汛灾害</option>
+							<option value="8">11A51 山洪灾害事件</option>
+							<option value="9">11A52 农业干旱</option>
+							<option value="10">11A53 城镇缺水</option>
+							<option value="11">11A54 生态干旱</option>
+							<option value="12">11A53 农村人畜饮水困难</option>
+							<option value="13">11A54 其他干旱</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-oneitem">
+				<div class="fortit">
+					<p class="oneitem-tit"><span class="onenumb">02</span><small>*</small>事件名称</p>
+				</div>
+				<div class="oneitem-cont">
+					<p class="oneitem-tit"><small>*</small>事件名称</p>
 					<div class="oneimp">
 						<input type="text"  id="impcontent" class="imptxt" maxlength="20"/>
 						<span class="oneimp-count"><span class="countnew">0</span>/20</span>
@@ -16,51 +42,7 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">02</span><small>*</small>调度方案</p>
-				</div>
-				<div class="oneitem-cont">
-					<p class="oneitem-tit">选择调度方案</p>
-					
-						<div class="layui-input-inline">
-							<select name="dispatch" lay-search=""> <!-- lay-verify="required" lay-search="" -->
-								<option value="">请选择调度方案</option>
-								<option value="1">Scheme one</option>
-								<option value="2">Scheme two</option>
-								<option value="3">Scheme three</option>
-								<option value="4">Scheme four</option>
-								<option value="5">Scheme five</option>
-								<option value="6">Scheme six</option>
-							</select>
-						</div>
-			    	<!-- </form> -->
-			    	<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>选择调度方案后，后面的信息将自动匹配为预设的事件信息并且不能修改</p>
-				</div>
-			</div>
-			<div class="form-oneitem">
-				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>事件类型</p>
-				</div>
-				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>事件类型</p>
-					<!-- <form class="layui-form" action=""> -->
-						<div class="layui-input-inline">
-					        <select name="type" lay-search=""><!--  lay-verify="required" lay-search="" -->
-								<option value="">请选择事件类型</option>
-								<option value="1">Event type one</option>
-								<option value="2">Event type two</option>
-								<option value="3">Event type three</option>
-								<option value="4">Event type four</option>
-								<option value="5">Event type five</option>
-								<option value="6">Event type six</option>
-								<option value="7">Event type seven</option>
-					        </select>
-					    </div>
-			    	
-				</div>
-			</div>
-			<div class="form-oneitem">
-				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">04</span><small>*</small>消息级别</p>
+					<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>消息级别</p>
 				</div>
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>消息级别</p>
@@ -90,7 +72,7 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">05</span><small>*</small>消息内容</p>
+					<p class="oneitem-tit"><span class="onenumb">04</span><small>*</small>消息内容</p>
 				</div>
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>消息内容</p>
@@ -104,7 +86,10 @@
 					</div>
 					<div class="filecont">
 						<div class="filetit">
-							<span class="filetit-one"><i class="iconfont icon-wushanguanwangziti-"></i>本地上传</span>
+							<div class="filetit-one">
+								<input type="file" accept="audio/*,video/*" />
+								<i class="iconfont icon-wushanguanwangziti-"></i>本地上传
+							</div>
 							<span class="filetit-two"><i class="iconfont icon-kucun"></i>在应急音频资源库中选择</span>
 						</div>
 						<ul class="filelist">
@@ -112,7 +97,6 @@
 								<div class="filename"><i class="iconfont icon-1"></i><span class="thename">视频.mp4</span></div>
 								<div class="filebtn">
 									<input type="button" value="删除" class="filedel-btn"/>
-									<input type="button" value="预览" class="filepre-btn"/>
 									<input type="button" value="转换" class="fileconv-btn"/>
 								</div>
 							</li>
@@ -120,7 +104,6 @@
 								<div class="filename"><i class="iconfont icon-1"></i><span class="thename">文本.txt</span></div>
 								<div class="filebtn">
 									<input type="button" value="删除" class="filedel-btn"/>
-									<input type="button" value="预览" class="filepre-btn"/>
 									<input type="button" value="转换" class="fileconv-btn"/>
 								</div>
 							</li>
@@ -130,10 +113,10 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">06</span><small>*</small>覆盖范围</p>
+					<p class="oneitem-tit"><span class="onenumb">05</span><small>*</small>发生/覆盖地区</p>
 				</div>
 				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>覆盖范围</p>
+					<p class="oneitem-tit"><small>*</small>发生/覆盖地区</p>
 					<div class="covarea-sel gb-tree-box left">
 						<span class="systit"><i class="iconfont icon-xuanze"></i>已选择地区</span>
 						<div class="gb-tree scroll">
@@ -150,10 +133,10 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">07</span><small>*</small>调用系统资源</p>
+					<p class="oneitem-tit"><span class="onenumb">06</span><small>*</small>调用系统资源</p>
 				</div>
 				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>调用系统资源</p>
+					<p class="oneitem-tit"><small>*</small>可调用系统资源</p>
 					<div class="sysreso-sel gb-tree-box left">
 						<span class="systit"><i class="iconfont icon-xuanze"></i>已选择资源</span>
 						<div class="gb-tree scroll">
@@ -170,7 +153,7 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">08</span>预覆盖人数/预覆盖面积</p>
+					<p class="oneitem-tit"><span class="onenumb">07</span>预覆盖人数/预覆盖面积</p>
 				</div>
 				<div class="oneitem-cont">
 					<div class="predictone">
@@ -185,7 +168,7 @@
 			</div>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">09</span>发布部门/负责人</p>
+					<p class="oneitem-tit"><span class="onenumb">08</span>发布部门/负责人</p>
 				</div>
 				<div class="oneitem-cont">
 					<div class="predictone">
@@ -198,21 +181,30 @@
 					</div>
 				</div>
 			</div>
+			<div class="form-oneitem">
+				<div class="fortit">
+					<p class="oneitem-tit"><span class="onenumb">09</span><small>*</small>直接发布</p>
+				</div>
+				<div class="oneitem-cont">
+					<p class="oneitem-tit"><small>*</small>直接发布</p>
+					<ul class="msgrank">
+						<li>
+							<input type="radio" name="cheyesno" id="cheone" />
+							<label for="cheone">是</label>
+						</li>
+						<li>
+							<input type="radio" name="cheyesno" id="chetwo" />
+							<label for="chetwo">否</label>
+						</li>
+					</ul>
+				</div>
+			</div>
 			<div class="tocreat">
-				<input type="button" value="确认创建" class="tocreatbtn" />
-				<p class="warnword"><i class="iconfont icon-iconfontjinggao"></i>成功创建后，需编写对应的发布策略后，方能提交审核</p>
+				<input type="button" value="确定" class="tocreatbtn" />
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 		</div>
 		<div class="popwindow"></div>
-		<div class="unreason">
-			<p class="poptit">预览</p>
-			<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
-			<div class="uncont">
-				<p class="unword">视频.mp4</p>
-				<input type="button" value="预览" class="un-confirm" />
-			</div>
-		</div>
 		<div class="choose">
 			<p class="choword">确定删除此任务消息吗？</p>
 			<div class="chobtn">
@@ -297,82 +289,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		/*$('#impcontent').bind('input propertychange', function() { 
-		    $('.oneimp-count .countnew').html($('#impcontent').val().length);  
-		});
-		$('#imparea').bind('input propertychange', function() {  
-		    $('.area-count .countnew').html($('#imparea').val().length);  
-		});*/
-		$('#impcontent').on('keyup', function() { 
-		    $('.oneimp-count .countnew').html($('#impcontent').val().length);  
-		});
-		$('#imparea').on('keyup', function() {  
-		    $('.area-count .countnew').html($('#imparea').val().length);  
-		});
-
-		
-		$(function() {
-			$(document).on('click','.filedel-btn',function(event) {
-		        showDiv();
-		        $(this).parents('li').addClass('todel');
-		        //$(myDiv).toggle();
-		        $(document).one("click",
-		        function() { 
-		            $('.choose').hide();
-		            $('.filelist li').removeClass('todel');
-		        });
-		        event.stopPropagation(); 
-		    });
-		    
-		    $('.choose').click(function(event) {
-		        event.stopPropagation(); 
-		    });
-		});
-		function showDiv() {
-			var x = event.clientX - event.offsetX;
-			var y = event.clientY - event.offsetY;
-			$('.choose').css({'display':'block','top':y-90,'left':x-130});
-		}
-
-		$('.cho-delete').click(function(){
-			$('.choose').hide();
-			$('.filelist li.todel').remove();
-		})
-		$('.cho-cancel').click(function(){
-			$('.choose').hide();
-			$('.filelist li').removeClass('todel');
-		})
-
-		$('.gb-main-item').scroll(function(){
-			if($('.choose').is(':visible')){
-				$('.choose').hide();
-				$('.filelist li').removeClass('todel');
-			}
-		})
-
-		/*var uncH = parseInt($('.uncont').css('height'));
-		$('.unreason').css({'height':uncH+45,'margin-top':-(uncH+45)/2});*/
-
-		$(document).on('click','.toswitch',function(){
-			$('.popwindow').show();
-			$('.toshift').show();
-			$('.matlist li ').eq(0).find('input').prop('checked',true);
-			//$('.succmat').hide();
-		})
-
-		$(document).on('click','.filepre-btn',function(){
-			$('.popwindow').show();
-			$('.unword').html($(this).parents('li').find('.thename').html());
-			$('.unreason').show();
-		})
-
-		$(document).on('click','.fileconv-btn',function(){
-			$('.popwindow').show();
-			$('.toshift').show();
-			$('.matlist li ').eq(0).find('input').prop('checked',true);
-		})
-
-		
 		layui.use(['form', 'element'], function(){
 			var element = layui.element,form = layui.form;
 			form.render();
