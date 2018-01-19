@@ -5,17 +5,30 @@ $(document).on('click','.msgtype li',function(){
 })
 
 /*calendar*/
-layui.use('laydate', function(){
-    var laydate = layui.laydate;
-    laydate.render({
-        elem: '#daterg',
-        eventElem: '#tochobtn',
-        trigger: 'click',
-        type:'datetime',
-        range: true
-    });
-
-})
+// layui.use('laydate', function(){
+//     var laydate = layui.laydate;
+//     laydate.render({
+//         elem: '#daterg',
+//         eventElem: '#tochobtn',
+//         trigger: 'click',
+//         type:'datetime',
+//         range: true
+//     });
+// })
+function body_load() {
+    setTimeout(function(argument) {
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#daterg',
+                eventElem: '#tochobtn',
+                trigger: 'click',
+                type:'datetime',
+                range: true
+            });
+        })
+    },500)
+}
 
 
 //table
