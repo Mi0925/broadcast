@@ -184,16 +184,30 @@
 
 
 /* newCyclePlan */
-.gb-form .datecho{padding:20px;/* */height:auto; display: block;}
-.layui-form .datecho .layui-input-inline{width:60%;}
-.datecho .layui-input{width: 100%;height: 40px;border-radius: 5px;border: 1px solid #d8d8d8;padding-left: 15px;font-size: 14px;color: #333;}
+.gb-form .datecho,.gb-form .weekcho,.gb-form .yemon{width:316px;padding:20px; height:auto; /*display: block;*/}
+.layui-form .datecho .layui-input-inline,.layui-form .weekcho .layui-input-inline{width:100%;}
+.datecho .layui-input,.weekcho .layui-input,.monthcho .layui-input{width: 100%;height: 40px;border-radius: 5px;border: 1px solid #d8d8d8;padding-left: 15px;font-size: 14px;color: #333;}
+.gb-form .yemon{padding:0;}
+.monthcho{padding:20px;}
+.monthcho .layui-input{margin-bottom:5px;}
 .layui-laydate .layui-laydate-header i:hover,.layui-laydate .layui-laydate-header span:hover{color:#4479d7;}
 .layui-laydate ul .layui-this{background-color: #4479d7!important;}
 .layui-laydate .layui-laydate-footer span:hover{color:#4479d7;}
 .theday{zoom:1;margin-bottom:25px;}
-.theday:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
+.theday:after,.weeklist:after,.daytime:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
 .daywrod{float:left;line-height:40px;margin-right:5px;}
-.layui-form .datecho .theday .layui-input-inline{width:110px;float:left;margin-right:10px;}
+.layui-form .datecho .theday .layui-input-inline,.layui-form .weekcho .theday .layui-input-inline{width:110px;float:left;margin-right:10px;}
+.weeklist{zoom:1;margin-bottom:20px;}
+.weeklist li{float:left;width:36px;height:36px;text-align: center;line-height:36px;border:1px solid #d8d8d8;border-right:0;cursor:pointer;}
+.weeklist li:last-child{border-right:1px solid #d8d8d8;}
+.weeklist li:hover,.weeklist li.weekact{color:#fff;background:#4479d7;border-color:#4479d7;}
+.daytime{zoom:1;}
+.daytime div.layui-input-inline{float:left;}
+.daytime div.layui-input-inline:last-child{float:right;}
+.daytime div.layui-input-inline.layshow{z-index: 1}
+.daytime div.layui-input-inline:last-child .layui-laydate-static{float:right;}
+.monthcho .layui-laydate .layui-this{background-color: #4479d7!important;}
+#layui-laydate2,#layui-laydate3{margin-left:10px;}
 
 .touploading input.layui-btn-disabled{opacity: 0;}
 

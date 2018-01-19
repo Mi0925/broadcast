@@ -55,24 +55,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		if(parseInt($('.progtype').css('height')) > 418){
-			$('.progtype i').removeClass('icon-youjiantou').addClass('icon-dotted-arrow-down');
-		}else{
-			$('.progtype i').removeClass('icon-dotted-arrow-down').addClass('icon-youjiantou');
-		}
-		$(window).resize(function(){
-			if(parseInt($('.progtype').css('height')) > 418){
-				$('.progtype i').removeClass('icon-youjiantou').addClass('icon-dotted-arrow-down');
-			}else{
-				$('.progtype i').removeClass('icon-dotted-arrow-down').addClass('icon-youjiantou');
-			}
-		})
-
-		$('#imparea').on('keyup', function() {  
-		    $('.area-count .countnew').html($('#imparea').val().length);  
-		});
-
-		layui.use('form', function(){
+		/*layui.use('form', function(){
 			var form = layui.form;
 			form.render();
 
@@ -80,24 +63,7 @@
 			$('.layui-select-title').append(itbtn);
 			$('.gb-form .layui-form-radio').remove();
 			
-		});
-		
-		$('.matlist li').find('.matcheck label').click(function(){
-			//console.log($(this).parents('li').index());
-			var theshow = $(this).parents('li').index();
-			$('.prchodiv').hide();
-			$('.prchodiv').eq(theshow).show();
-		})
-		
-		$('.toemptybtn').click(function(){
-			$('.imptxt').val('');
-			$('.imparea').val('请输入消息文本');
-			$('.imparea').css('color','#ccc');
-			$('.countnew').html('0');
-			$('.prtop .msgrank li input').prop('checked',false);
-			$('.gb-form .layui-form-select .layui-input').val('');
-			$('.layui-anim-upbit dd').removeClass('layui-this');
-		})
+		});*/
 	})
 
 	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）

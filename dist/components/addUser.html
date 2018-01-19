@@ -111,10 +111,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#impcontent').on('keyup', function() { 
-		    $('.oneimp-count .countnew').html($('#impcontent').val().length);  
-		});
-
 		layui.use('form', function(){
 			var form = layui.form;
 			form.render();
@@ -124,14 +120,6 @@
 			$('.gb-form .layui-form-radio').remove();
 			
 		});
-		
-		$('.toemptybtn').click(function(){
-			$('.imptxt').val('');
-			$('.countnew').html('0');
-			$('.gb-form .layui-form-select .layui-input').val('');
-			$('.layui-anim-upbit dd').removeClass('layui-this');
-		})
-		
 	})
 
 	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）

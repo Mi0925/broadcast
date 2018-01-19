@@ -21,7 +21,7 @@
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>选择周期类型</p>
 					<div class="layui-input-inline">
-						<select name="dispatch" lay-search="">
+						<select name="dispatch" lay-search="" lay-filter="period">
 							<option value="">请选择周期类型</option>
 							<option value="1">每天</option>
 							<option value="2">每周</option>
@@ -296,7 +296,7 @@
 	    	<p class="repeat"><span class="repcho">每天</span>重复</p>
 	    	<input type="button" value="确定" class="un-confirm" />
 		</div>
-		<!-- <div class="weekcho">
+		<div class="weekcho">
 			<div class="layui-input-inline">
 		        <input type="text" class="layui-input" id="weekday" placeholder="请选择时间">
 	    	</div>
@@ -304,7 +304,7 @@
 	    	<div class="theday">
 	    		<span class="daywrod">间隔：</span>
 	    		<div class="layui-input-inline">
-					<select name="dispatch" lay-search="">
+					<select name="dispatch" lay-search="" lay-filter="weekday">
 						<option value=""></option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -325,19 +325,23 @@
 				<li>六</li>
 				<li>日</li>
 	    	</ul>
-	    	<p class="repeat">每<span class="repcho"></span>周重复</p>
+	    	<p class="repeat"><span class="repcho">每周</span>重复</p>
 	    	<input type="button" value="确定" class="un-confirm" />
 		</div>
-		<div class="monthcho">
-			<div class="daytime">
-				<div class="layui-input-inline">
-			        <input type="text" class="layui-input" id="monday" placeholder="请选择日期">
-		    	</div>
-		    	<div class="layui-input-inline">
-			        <input type="text" class="layui-input" id="montime" placeholder="请选择时间">
-		    	</div>
+		<div class="yemon">
+			<p class="poptit"></p>
+			<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
+			<div class="monthcho">
+				<div class="daytime">
+					<div class="layui-input-inline layshow" id="monday">
+				        <input type="text" class="layui-input" id="dayinp" placeholder="请选择日期">
+			    	</div>
+			    	<div class="layui-input-inline" id="montime">
+				        <input type="text" class="layui-input" id="timeinp" placeholder="请选择时间">
+			    	</div>
+				</div>
 			</div>
-		</div> -->
+		</div>
 	</form>
 </div>
 
@@ -353,9 +357,43 @@
 			    elem: '#thedate'
 			    ,type: 'time'
 			});
+			laydate.render({
+			    elem: '#weekday'
+			    ,type: 'time'
+			});
+			laydate.render({
+			    elem: '#monday'
+			    ,position: 'static'
+			    ,done: function(value, date){
+				    //console.log('你选择的日期是：' + value);
+				    $('#dayinp').val(value);
+				}
+			});
+			laydate.render({
+			    elem: '#montime'
+			    ,type: 'time'
+			    ,position: 'static'
+			    ,done: function(value, date){
+				    //console.log('你选择的时间是：' + value);
+				    $('#timeinp').val(value);
+				}
+			});
 		})
 
+		$('.weeklist li').click(function(){
+			if($(this).hasClass('weekact')){
+				$(this).removeClass('weekact');
+			}else{
+				$(this).addClass('weekact');
+			}
+		})
+		$('.daytime .layui-input-inline input').click(function(){
+			//console.log(11);
+			$('.daytime .layui-input-inline').removeClass('layshow');
+			$(this).parent().addClass('layshow');
+		})
 		var dayarr = ['每天','每两天','每三天','每四天','每五天','每六天'];
+		var weekarr = ['每周','每两周','每三周','每四周','每五周','每六周'];
 		layui.use(['form', 'element'], function(){
 			var element = layui.element,form = layui.form;
 			form.render();
@@ -364,10 +402,27 @@
 			$('.layui-select-title').append(itbtn);
 			$('.gb-form .layui-form-radio').remove();
 
-			form.on('select(theday)', function(data){
+			form.on('select(period)', function(data){
 			  //console.log(data.value); //得到被选中的值
+			  var selnumb = data.value;
+			  $('.popwindow').show();
+			  if(selnumb == 1){
+			  	$('.datecho').show();
+			  }else if(selnumb == 2){
+			  	$('.weekcho').show();
+			  }else if(selnumb == 3 || selnumb == 4){
+			  	$('.yemon').show();
+			  }
+			});
+
+			form.on('select(theday)', function(data){
 			  var selnumb = data.value - 1;
 			  $('.datecho .repcho').html(dayarr[selnumb]);
+			});
+
+			form.on('select(weekday)', function(data){
+			  var selnumb = data.value - 1;
+			  $('.weekcho .repcho').html(weekarr[selnumb]);
 			});
 
 		  
@@ -402,17 +457,7 @@
 			});
 		});
 	})
-
-
-	$('.toemptybtn').click(function(){
-		$('.imptxt').val('');
-		$('.imparea').val('请输入消息文本');
-		$('.imparea').css('color','#ccc');
-		$('.countnew').html('0');
-		$('.filelist').remove();
-		$('.gb-form .layui-form-select .layui-input').val('');
-		$('.layui-anim-upbit dd').removeClass('layui-this');
-	})
+	
 	
 	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 	var selSetting = {

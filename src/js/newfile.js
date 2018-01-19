@@ -82,7 +82,14 @@ $(document).on('click','.toemptybtn',function(){
 	$('.gb-form .layui-input-inline .layui-input').val('');
 	$('.layui-laydate-content td').removeClass('layui-this laydate-selected laydate-day-next');
 	$('.layui-laydate-content ol li').removeClass('layui-this');
-	$('.layui-laydate-content ol li').eq(0).addClass('layui-this');
+	$('.layui-laydate-content ol li:first-child').addClass('layui-this');
+	
+	//newCyclePlan
+	$('.datecho .repcho').html('每天');
+	$('.weekcho .repcho').html('每周');
+	$('.weeklist li').removeClass('weekact');
+	$('.daytime .layui-input-inline').removeClass('layshow');
+	$('.daytime .layui-input-inline').eq(0).addClass('layshow');
 })
 
 

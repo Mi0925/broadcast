@@ -205,6 +205,9 @@ $(document).on('click','.notpass',function(){
         $('.unreason').hide();
         $('.tolead').hide();
         $('.upcert').hide();
+        $('.datecho').hide();
+        $('.weekcho').hide();
+        $('.yemon').hide();
     //}
     //.css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
 })
@@ -233,6 +236,7 @@ $(document).on('click','.un-confirm',function(){
     $('.popwindow').hide();
     $(this).parents('.unreason').hide();//.css({'z-index':'-1','display':'block','opacity':0,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"});
     $(this).parents('.datecho').hide();
+    $(this).parents('.weekcho').hide();
 })
 
 
