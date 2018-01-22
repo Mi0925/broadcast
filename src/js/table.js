@@ -186,11 +186,6 @@ function userDef(table){
             $('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
         }
     })
-
-    /*var tobH = parseInt($('.dataTables_wrapper').css('height')) - 38;
-    $('table thead').css({'table-layout':'fixed','display':'table'})//,width:100%;
-    $('table tbody').css({'max-height':tobH,'overflow-y':'scroll','display':"block"});*/
-
 }
 
 
@@ -352,3 +347,34 @@ $(document).on('click','.catonew',function(){
         $('.tonewlist').hide();
     }
 })
+
+
+
+$(function() {
+    //查看详情
+    $(document).on('click','.view-cont',function(event) {
+        $('.viewdetail').css('height','100%');
+        $('.detadiv').animate({
+            'right':'0'
+        },500);
+        $(document).one("click",
+        function() { 
+            $('.detadiv').animate({
+                'right':'-516px'
+            },500,function(){
+                $('.viewdetail').css('height','0');
+            });
+        });
+        event.stopPropagation(); 
+    }) 
+    $(".viewdetail").click(function(event) {
+        event.stopPropagation(); 
+    });
+    $('.viewclose').click(function(){
+        $('.detadiv').animate({
+            'right':'-516px'
+        },500,function(){
+            $('.viewdetail').css('height','0');
+        });
+    })
+});

@@ -96,7 +96,7 @@
 						        <tbody>
 						        	<tr>
 						        		<td><span class='rankimg' vel='5'><img src='src/images/rank-red.png'/></span></td>
-						        		<td>杭州西湖区雷暴红色警报消息</td>
+						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
 						        		<td>2017-09-08  18:10:20</td>
@@ -104,7 +104,7 @@
 						        	</tr>
 						        	<tr>
 						        		<td><span class='rankimg' vel='5'><img src='src/images/rank-red.png'/></span></td>
-						        		<td>杭州西湖区雷暴红色警报消息</td>
+						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>浙江省应急办</td>
 						        		<td>橙子</td>
 						        		<td>2017-09-08  18:10:20</td>
@@ -112,7 +112,7 @@
 						        	</tr>
 						        	<tr>
 						        		<td><span class='rankimg' vel='3'><img src='src/images/rank-yellow.png'/></span></td>
-						        		<td>杭州西湖区雷暴红色警报消息</td>
+						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
 						        		<td>2017-09-08  18:10:20</td>
@@ -120,7 +120,7 @@
 						        	</tr>
 						        	<tr>
 						        		<td><span class='rankimg' vel='1'><img src='src/images/rank-green.png'/></span></td>
-						        		<td>杭州西湖区雷暴红色警报消息</td>
+						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
 						        		<td>2017-09-08  18:16:20</td>
@@ -128,7 +128,7 @@
 						        	</tr>
 						        	<tr>
 						        		<td><span class='rankimg' vel='4'><img src='src/images/rank-orange.png'/></span></td>
-						        		<td>杭州西湖区2017年09月09日晚台...</td>
+						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
 						        		<td>2016-09-08  18:10:20</td>
@@ -136,7 +136,7 @@
 						        	</tr>
 						        	<tr>
 						        		<td><span class='rankimg' vel='2'><img src='src/images/rank-blue.png'/></span></td>
-						        		<td>杭州西湖区2017年09月09日晚台...</td>
+						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
 						        		<td>2017-09-08  18:10:20</td>
@@ -262,6 +262,24 @@
 	
 
 	<p class="gb-copyright">© 2017-2018 浙江省应急广播平台</p>
+</div>
+<div class="viewdetail">
+	<div class="detadiv">
+		<p class="poptit">任务消息详情</p>
+		<span class="viewclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="uncont">
+			<p class="oneitem-tit">消息等级</p>
+			<p class="unword">红色</p>
+			<p class="oneitem-tit">任务消息名称</p>
+			<p class="unword">杭州西湖区雷暴红色警报消息</p>
+			<p class="oneitem-tit">发布部门</p>
+			<p class="unword">杭州市西湖区应急广播中心</p>
+			<p class="oneitem-tit">负责人</p>
+			<p class="unword">橙子</p>
+			<p class="oneitem-tit">创建时间</p>
+			<p class="unword">2017-11-09 12:00</p>
+		</div>
+	</div>
 </div>
 <script type="text/javascript">
 var boolunity=true;//控制全事件和单一事件只执行一次
@@ -1772,7 +1790,11 @@ $(function () {
 	})
 
 	userDef(table1);//table配置--显示数量 搜索 全选 删除  
-	
+	$(".gb-packUp-leftNav").click(function(){
+        setTimeout(function(){
+            table2.draw();
+        },500)
+    });//重绘
 	$(document).on('click','.tomonitoring',function(){
 		$('.tomonitoring').removeClass('tomact');
 		$(this).addClass('tomact');
