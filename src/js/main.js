@@ -11,7 +11,9 @@ $(document).ready(function(){
 			$this.find("i").removeClass("icon-packUp-right").addClass("icon-packUp-left");
 			$this.find('span').html("收起导航栏");
 		}
-	})
+
+
+	});
 
 	// 左边一级导航
 	$(".gb-left-nav").on("click",".nav-tit",function(){
