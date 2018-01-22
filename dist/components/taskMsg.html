@@ -389,6 +389,7 @@
 
 
 <script type="text/javascript">
+var table;
 	$(document).ready(function(){
 		//富文本框
 		var editorOption = {
@@ -399,7 +400,9 @@
 
 		/*table*/
 		$(function () {
-           var table = $('#table-main table').DataTable({
+           table = $('#table-main table').DataTable({
+				"scrollY": "calc(100% - 50px)",
+				"scrollX": true,
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
                "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
@@ -452,4 +455,6 @@
 			userDef(table);//table配置--显示数量 搜索 全选 删除  
        })
 	})
+
+	
 </script>

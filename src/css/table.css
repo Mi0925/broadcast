@@ -62,9 +62,11 @@ th span.addselect{display:inline-block;position:relative;height:36px;margin-left
 th .dataTables_sizing{display: none} 
 th .dataTables_sizing .addselect{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"}
 .addselect select{position: absolute;top: 0px;left: 0px;z-index: 1;height:36px;color:#7c8491;line-height:36px;border-radius:5px;cursor: pointer;opacity: 0;display:block;font-size:12px;}
-.dataTables_wrapper{overflow-x:auto;overflow-y:hidden;}
-.dataTables_scrollHeadInner,table.dataTable,.dataTables_scrollBody{width:100%!important;}
-.dataTables_scrollHead{width:100%!important;}
+/*.dataTables_wrapper{overflow-x:auto;overflow-y:hidden;}*/
+/*.dataTables_scrollHeadInner,table.dataTable,.dataTables_scrollBody{width:100%!important;}*/
+.dataTables_scrollHead,.dataTables_scrollBody,.dataTables_scrollHeadInner{width:100%!important;}
+/*.dataTables_scrollHeadInner{width: auto!important;}*/
+/*.dataTables_scrollHead{width:100%!important;}*/
 table.dataTable tfoot th, table.dataTable tfoot td{padding:0;border:0;}
 .dataTables_paginate{float:left;}
 .dataTables_paginate span{float:left;}

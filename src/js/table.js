@@ -125,6 +125,11 @@ function rowScreen(column){
 
 //table配置
 function userDef(table){
+    $(".gb-packUp-leftNav").click(function(){
+        setTimeout(function(){
+            table.draw();
+        },500)
+    });//重绘
     //自定义显示数量
     $('.taskmsg').each(function(){
         tabot($(this))
