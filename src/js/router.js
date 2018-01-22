@@ -70,6 +70,10 @@ Router.route('/newManualExerProg', function() {
 Router.route('/editManualExerProg', function() {
   gbMainContent('components/editManualExerProg.html', RoundaboutSet);
 });
+//查看手动演练计划
+Router.route('/viewManualExerProg', function() {
+  gbMainContent('components/viewManualExerProg.html', RoundaboutSet);
+});
 //新建周期计划
 Router.route('/newCyclePlan', function() {
   gbMainContent('components/newCyclePlan.html', RoundaboutSet);
@@ -77,6 +81,10 @@ Router.route('/newCyclePlan', function() {
 //编辑周期计划
 Router.route('/editCyclePlan', function() {
   gbMainContent('components/editCyclePlan.html', RoundaboutSet);
+});
+//查看周期计划
+Router.route('/viewCyclePlan', function() {
+  gbMainContent('components/viewCyclePlan.html', RoundaboutSet);
 });
 //发布策略设置
 Router.route('/planReleasePolicy', function() {

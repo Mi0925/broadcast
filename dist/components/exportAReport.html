@@ -17,19 +17,19 @@
 				</div>
 				<ul class="msgrank">
 					<li>
-						<input type="radio" name="checkmsg" id="radone" />
+						<input type="checkbox" name="checkmsg" id="radone" />
 						<label for="radone">事件总数</label>
 					</li>
 					<li>
-						<input type="radio" name="checkmsg" id="radtwo" />
+						<input type="checkbox" name="checkmsg" id="radtwo" />
 						<label for="radtwo">播放总数</label>
 					</li>
 					<li>
-						<input type="radio" name="checkmsg" id="radthr" />
+						<input type="checkbox" name="checkmsg" id="radthr" />
 						<label for="radthr">事件分布</label>
 					</li>
 					<li>
-						<input type="radio" name="checkmsg" id="radfou" />
+						<input type="checkbox" name="checkmsg" id="radfou" />
 						<label for="radfou">事件类型分布</label>
 					</li>
 				</ul>
@@ -232,7 +232,12 @@
 			})
 			
 			
-			
+			$(".gb-packUp-leftNav").click(function(){
+		        setTimeout(function(){
+		            table.draw();
+		        },500)
+		    });//重绘
+
 			//自定义显示数量
 			$('.taskmsg').each(function(){
 		    	tabot($(this))
