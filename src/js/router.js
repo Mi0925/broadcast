@@ -37,6 +37,10 @@ Router.route('/newHandoverRecord', function() {
 Router.route('/editHandoverRecord', function() {
   gbMainContent('components/editHandoverRecord.html', RoundaboutSet);
 });
+/*查看交接记录*/
+Router.route('/viewHandoverRecord', function() {
+  gbMainContent('components/viewHandoverRecord.html', RoundaboutSet);
+});
 
 
 /*首页*/
