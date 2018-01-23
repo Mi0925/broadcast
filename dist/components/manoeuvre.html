@@ -1725,7 +1725,9 @@ $(".gb-packUp-leftNav").click(function(){
 /*table*/
 $(function () {
     var table1 = $('#table-main1 table').DataTable({
-		"dom": '<"top"f >rt<"bottom"ilp><"clear">', //dom定位
+		"scrollY": "calc(100% - 50px)",
+	    "scrollX": true,
+        "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
 		"dom": 'tiprl', //自定义显示项
 		"lengthMenu": [2, 6, 10, 16, 24], //每页显示条数设置
 		"lengthChange": true, //是否允许用户自定义显示数量
@@ -1758,7 +1760,9 @@ $(function () {
 	})
 
 	var table2 = $('#table-main2 table').DataTable({
-		"dom": '<"top"f >rt<"bottom"ilp><"clear">', //dom定位
+		"scrollY": "calc(100% - 50px)",
+	    "scrollX": true,
+        "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
 		"dom": 'tiprl', //自定义显示项
 		"lengthMenu": [20,30,40,50], //每页显示条数设置
 		"lengthChange": true, //是否允许用户自定义显示数量
@@ -1790,6 +1794,18 @@ $(function () {
 	})
 
 	userDef(table1);//table配置--显示数量 搜索 全选 删除  
+	$(".gb-main-item").on("click",".gb-unity-incident",function(){
+		setTimeout(function(){
+			table1.draw();
+	    },10)
+	})
+	$("body").on("click",".j-table-chart-tab",function(event) {
+	    if($(".j-table-chart-tab").text()=="折线"){
+	        setTimeout(function(){
+				table2.draw();
+		    },10)
+	    }
+	});
 	$(".gb-packUp-leftNav").click(function(){
         setTimeout(function(){
             table2.draw();
@@ -1797,8 +1813,7 @@ $(function () {
     });//重绘
 	$(document).on('click','.tomonitoring',function(){
 		$('.tomonitoring').removeClass('tomact');
-		$(this).addClass('tomact');
-	})
+	})	
 
 })
 	

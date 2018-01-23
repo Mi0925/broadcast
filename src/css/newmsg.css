@@ -219,3 +219,4 @@
 /* view */
 .gb-viewfile input,.gb-viewfile textarea{color:#7c8491;}
 .gb-viewfile .gb-tree .ztree li>a:after{border-bottom:0;}
+.gb-viewfile .gb-permission-list{height:auto;max-height:500px;}

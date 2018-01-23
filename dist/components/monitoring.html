@@ -95,7 +95,7 @@
 						        </tfoot>
 						        <tbody>
 						        	<tr>
-						        		<td><span class='rankimg' vel='5'><img src='src/images/rank-red.png'/></span></td>
+						        		<td><span class='rankimg' vel='红色'><img src='src/images/rank-red.png'/></span></td>
 						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
@@ -103,7 +103,7 @@
 						        		<td><input type="button" value="监控" class="tomonitoring" /></td>
 						        	</tr>
 						        	<tr>
-						        		<td><span class='rankimg' vel='5'><img src='src/images/rank-red.png'/></span></td>
+						        		<td><span class='rankimg' vel='红色'><img src='src/images/rank-red.png'/></span></td>
 						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>浙江省应急办</td>
 						        		<td>橙子</td>
@@ -111,7 +111,7 @@
 						        		<td><input type="button" value="监控" class="tomonitoring" /></td>
 						        	</tr>
 						        	<tr>
-						        		<td><span class='rankimg' vel='3'><img src='src/images/rank-yellow.png'/></span></td>
+						        		<td><span class='rankimg' vel='黄色'><img src='src/images/rank-yellow.png'/></span></td>
 						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
@@ -119,23 +119,23 @@
 						        		<td><input type="button" value="监控" class="tomonitoring" /></td>
 						        	</tr>
 						        	<tr>
-						        		<td><span class='rankimg' vel='1'><img src='src/images/rank-green.png'/></span></td>
+						        		<td><span class='rankimg' vel='绿色'><img src='src/images/rank-green.png'/></span></td>
 						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
-						        		<td>2017-09-08  18:16:20</td>
+						        		<td>2016-09-08  18:16:20</td>
 						        		<td><input type="button" value="监控" class="tomonitoring tomact" /></td>
 						        	</tr>
 						        	<tr>
-						        		<td><span class='rankimg' vel='4'><img src='src/images/rank-orange.png'/></span></td>
+						        		<td><span class='rankimg' vel='橙色'><img src='src/images/rank-orange.png'/></span></td>
 						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
-						        		<td>2016-09-08  18:10:20</td>
+						        		<td>2016-10-08  18:10:20</td>
 						        		<td><input type="button" value="监控" class="tomonitoring" /></td>
 						        	</tr>
 						        	<tr>
-						        		<td><span class='rankimg' vel='2'><img src='src/images/rank-blue.png'/></span></td>
+						        		<td><span class='rankimg' vel='蓝色'><img src='src/images/rank-blue.png'/></span></td>
 						        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
 						        		<td>杭州市西湖区应急广播中心</td>
 						        		<td>橙子</td>
@@ -1726,31 +1726,35 @@ $(".gb-packUp-leftNav").click(function(){
 /*table*/
 $(function () {
     var table1 = $('#table-main1 table').DataTable({
-		"dom": '<"top"f >rt<"bottom"ilp><"clear">', //dom定位
+		"scrollY": "calc(100% - 50px)",
+		"scrollX": true,
+		"dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
 		"dom": 'tiprl', //自定义显示项
 		"lengthMenu": [2, 6, 10, 16, 24], //每页显示条数设置
 		"lengthChange": true, //是否允许用户自定义显示数量
 		"bPaginate": true, //翻页功能
 		"bFilter": true, //列筛序功能
 		"searching": true, //本地搜索
-		"order": [0, "asc"], //desc降序
+		"order": [4, "asc"], //desc降序
 		"Info": true, //页脚信息
 		"oLanguage": oLanguage,
 		"columnDefs": [{
 				orderable: false,
-				targets: [1,2,5] //禁止排序
-			}, {
+				targets: [0,1,2,5] //禁止排序
+			}/*, {
 				"sType": "html-percent",
 				"aTargets": [0] //指定列号使用自定义排序
-			}
+			}*/
 		],
 		initComplete: function() { //列筛选
 			var api = this.api();
 			api.columns().indexes().flatten().each(function(i) {
-				if (i == 2) { //对第i列进行筛选
-					var column = api.column(i);
+				var column = api.column(i);
+                if (i == 2) { //对第i列进行筛选
 					rowScreen(column);
-				}
+                }else if (i==0) { //对第i列进行筛选
+					rowLevScreen(column);
+                }
 			});
 		},
 		fnDrawCallback: function(table) {  
@@ -1759,7 +1763,9 @@ $(function () {
 	})
 
 	var table2 = $('#table-main2 table').DataTable({
-		"dom": '<"top"f >rt<"bottom"ilp><"clear">', //dom定位
+		"scrollY": "calc(100% - 50px)",
+	    "scrollX": true,
+        "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
 		"dom": 'tiprl', //自定义显示项
 		"lengthMenu": [20,30,40,50], //每页显示条数设置
 		"lengthChange": true, //是否允许用户自定义显示数量
@@ -1791,6 +1797,18 @@ $(function () {
 	})
 
 	userDef(table1);//table配置--显示数量 搜索 全选 删除  
+	$(".gb-main-item").on("click",".gb-unity-incident",function(){
+		setTimeout(function(){
+			table1.draw();
+	    },10)
+	})
+	$("body").on("click",".j-table-chart-tab",function(event) {
+	    if($(".j-table-chart-tab").text()=="折线"){
+	        setTimeout(function(){
+				table2.draw();
+		    },10)
+	    }
+	});
 	$(".gb-packUp-leftNav").click(function(){
         setTimeout(function(){
             table2.draw();

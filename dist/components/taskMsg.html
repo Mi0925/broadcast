@@ -402,8 +402,8 @@ var table;
 		/*table*/
 		$(function () {
            table = $('#table-main table').DataTable({
-				"scrollY": "calc(100% - 50px)",
-				"scrollX": true,
+			   "scrollY": "calc(100% - 50px)",
+			   "scrollX": true,
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
                "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
@@ -435,10 +435,10 @@ var table;
                		{
 	                   orderable: false,
 	                   targets: [0,3,4,5,8,9,10,11,12,13,14,15] //禁止排序
-                    },{ 
+                    }/*,{ 
                     	"sType": "html-percent", 
                        "aTargets": [3] //指定列号使用自定义排序
-                    }   
+                    }  */ 
                ],
                fnDrawCallback: function(table) {  
                		jumpPage($("#table-main"))

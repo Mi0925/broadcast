@@ -374,16 +374,16 @@ $(document).on('click','.catonew',function(){
 $(function() {
     //查看详情
     $(document).on('click','.view-cont',function(event) {
-        $('.viewdetail').css('height','100%');
+        $('.viewdetail').css({'height':'100%','padding-top':'130px'});
         $('.detadiv').animate({
-            'right':'0'
+            'margin-right':'0'
         },500);
         $(document).one("click",
         function() { 
             $('.detadiv').animate({
-                'right':'-516px'
+                'margin-right':'-516px'
             },500,function(){
-                $('.viewdetail').css('height','0');
+                $('.viewdetail').css({'height':'0','padding-top':'0'});
             });
         });
         event.stopPropagation(); 
@@ -393,9 +393,9 @@ $(function() {
     });
     $('.viewclose').click(function(){
         $('.detadiv').animate({
-            'right':'-516px'
+            'margin-right':'-516px'
         },500,function(){
-            $('.viewdetail').css('height','0');
+            $('.viewdetail').css({'height':'0','padding-top':'0'});
         });
     })
 });
