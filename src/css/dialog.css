@@ -6,8 +6,8 @@
 .gb-dialog-main .item{margin-bottom: 25px;}
 .gb-dialog-title{background: linear-gradient(#fefefe, #f1f1f1);line-height: 40px;overflow: hidden;border-bottom: 1px solid #d8d8d8;padding: 0 20px;border-radius: 5px 5px 0 0;}
 .gb-dialog-title i{float: right;cursor: pointer;}
-.gb-dialog-sel{width: 146px;}
-.gb-dialog-main .layui-form-select{width: 63%;display: inline-block;vertical-align: middle;font-size: 12px;}
+.gb-dialog-sel{width: 156px;}
+.gb-dialog-main .layui-form-select{width: 73%;display: inline-block;vertical-align: middle;font-size: 12px;}
 .gb-dialog-main .layui-input-block{margin-left: 0;}
 
 .gb-dialog-edit-watch{width: 534px;float: left;padding: 25px 20px;margin-bottom: 20px;}

@@ -96,7 +96,8 @@ table.dataTable.display tbody tr.odd > .sorting_1,table.dataTable.order-column.s
 table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_1,table.dataTable.display tbody tr.even.selected > .sorting_1,table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_1{background:transparent;}
 /* */ table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1,table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1{background:transparent;}
 
-.gb-table .table-main tr td:nth-child(1n){width: 10px;}
+.gb-table .table-main tr td:nth-child(1){width: 1%;}
+.gb-table .table-main tr td:nth-child(2){width: 1%;}
 
 
 .gb-table .operbtn ,.gb-table .editbtn ,.gb-table .issue ,.gb-table .check ,.gb-table .del ,.gb-table .convert,.gb-table .syncbtn,.gb-table .portbtn,.gb-table .transbtn,.gb-table .logout{cursor: pointer;}
