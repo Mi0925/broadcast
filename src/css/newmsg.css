@@ -43,7 +43,7 @@
 .toswitch,.uplbtn{width:100px;height:30px;line-height:30px;cursor:pointer;font-size:12px;color:#fff;background:#4579d8;border:0;border-radius:5px;margin-top:12px;}
 .toswitch:hover{background:#3c6dc7;}
 .filecont{float:right;width:48.5%;}
-.filetit{zoom:1;border-bottom:1px solid #d8d8d8;padding-bottom:15px;}
+.filetit{zoom:1;padding-bottom:15px;}
 .filetit:after,.filelist li:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
 .filetit-one,.filetit-two{float:left;color:#585d66;font-weight: bold;margin-right:41px;position:relative;line-height:19px;cursor:pointer;}
 .filetit-one input{position:absolute;top:0;left:0;width:100%;height:100%;font-size:0;cursor: pointer;opacity: 0}
@@ -51,7 +51,7 @@
 .filetit-one:after{content:'';width:1px;height:10px;background:#e5e5e5;position:absolute;top:5px;right:-21px;}
 .filetit-one i{font-size:18px;margin-right:5px;}
 .filetit-two i{font-size:12px;margin-right:5px;}
-.filelist{width:100%;max-height:156px;overflow-y: auto;}
+.filelist{width:100%;max-height:156px;overflow-y: auto;border-top:1px solid #d8d8d8;}
 .filelist li{width:100%;zoom:1;line-height:50px;border-bottom:1px dashed #d8d8d8;}
 .filename{float:left;}
 .filename i{color:#ffa41f;float:left;margin-top: 1px;margin-right:5px;}
@@ -214,3 +214,8 @@
 .tocreat input.layui-btn-disabled{opacity: 1;background:#3c6dc7;}
 
 .layui-select-disabled .layui-disabled{border-color:#d8d8d8!important;}
+
+
+/* view */
+.gb-viewfile input,.gb-viewfile textarea{color:#7c8491;}
+.gb-viewfile .gb-tree .ztree li>a:after{border-bottom:0;}

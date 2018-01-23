@@ -1,7 +1,7 @@
 /*树*/
 .gb-tree{max-height: 250px;min-height: 150px; overflow-y: auto;}
 .gb-tree.gb-tree-noHeight{min-height: auto;max-height: none;}
-.gb-tree-box{width: 48%;}
+.gb-tree-box{width: 48.5%;}
 .gb-tree-box.left{float: left;}
 .gb-tree-box.right{float: right;}
 .gb-tree-box .systit{font-size: 12px;margin-bottom: 5px;display: block;}
