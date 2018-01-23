@@ -122,9 +122,9 @@ Router.route('/newTaskMsgEdit', function() {
   gbMainContent('components/newTaskMsgEdit.html', RoundaboutSet);
 });
 //查看任务消息
-/*Router.route('/viewTaskMsg', function() {
+Router.route('/viewTaskMsg', function() {
   gbMainContent('components/viewTaskMsg.html', RoundaboutSet);
-});*/
+});
 //发布策略
 Router.route('/releasePolicy', function() {
   gbMainContent('components/releasePolicy.html', RoundaboutSet);
