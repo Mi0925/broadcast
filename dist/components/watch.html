@@ -326,6 +326,7 @@ $(document).ready(function() {
 					shadeClose:true,
 					closeBtn: 0,
 					content: dialog_html,
+					skin: 'gb-watch-dialog',
 					success: function(layero, index){
 						if(calEvent.title!=""){
 							var name=calEvent.title.split('、');
@@ -382,7 +383,7 @@ $(document).ready(function() {
 						}
 						form.render('select');
 					},
-					btn: ['确定创建'],
+					btn: ['保存','删除'],
 					yes: function(index, layero){
 						var eventData,people="";
 						$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
@@ -404,6 +405,10 @@ $(document).ready(function() {
 							calEvent.end=endDate;
 						}
 						$('.gb-calendar').fullCalendar('updateEvent',calEvent); // 重新渲染编辑过的日程
+						layer.closeAll();
+					},
+					btn2: function(index, layero){
+						$('.gb-calendar').fullCalendar('removeEvents',calEvent._id); // 重新渲染编辑过的日程
 						layer.closeAll();
 					}
 

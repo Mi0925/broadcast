@@ -58,7 +58,7 @@ table.dataTable,table.dataTable th,table.dataTable td{box-sizing:border-box;}
 table.dataTable thead th,.gb-table  table.dataTable thead td{border:0;}
 table.dataTable thead th{height:36px;line-height:36px;padding-top:0;padding-bottom:0;font-weight: 500;position:relative;}
 /* th span.addselect{background:transparent; overflow: visible;position:absolute;top:0;left:-10px;width:20px;margin:0;text-align: left;color:#7c8491;font-size:15px;margin-left: 78px;cursor: pointer;} */.view-cont:hover{color:#4579d8;cursor:pointer;}
-th span.addselect{display:inline-block;position:relative;height:36px;margin-left:2px;}
+th span.addselect{display:inline-block;position:absolute;height:36px;margin-left:2px;}
 th .dataTables_sizing{display: none} 
 th .dataTables_sizing .addselect{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"}
 .addselect select{position: absolute;top: 0px;left: 0px;z-index: 1;height:36px;color:#7c8491;line-height:36px;border-radius:5px;cursor: pointer;opacity: 0;display:block;font-size:12px;width:20px;}
