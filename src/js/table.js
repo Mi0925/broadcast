@@ -274,7 +274,7 @@ $(document).on('click','.un-confirm',function(){
 })
 
 
-//停发、续发、重发、删除
+//停发、续发、重发、删除、注销
 $(function() {
     $(document).on('click','.isstop',function(event) {
         showDiv();
@@ -329,6 +329,20 @@ $(function() {
         });
         event.stopPropagation();
     });
+    $(document).on('click','.logout',function(event) {
+        showDiv();
+        //$('.choword').html('确定注销吗？');
+        //$('.chopri').val('注销');
+        //$('.chopri').addClass('cho-logout');
+        $(this).parents('tr').addClass('trlogout');
+        //$(myDiv).toggle();
+        $(document).one("click",
+        function() { 
+            $(".choose").hide();
+            $('table.dataTable tbody tr').removeClass('trlogout');
+        });
+        event.stopPropagation();
+    });
     $(".choose").click(function(event) {
         event.stopPropagation(); 
     });
@@ -341,14 +355,21 @@ function showDiv() {
 
 $('.cho-stop').click(function(){
     $(this).parents('.choose').hide();
+    $('tr').removeClass('trstop');
 })
 
 $('.cho-continue').click(function(){
     $(this).parents('.choose').hide();
+    $('tr').removeClass('trcont');
 })
 
 $('.cho-again').click(function(){
     $(this).parents('.choose').hide();
+    $('tr').removeClass('traga');
+})
+$('.cho-logout').click(function(){
+    $(this).parents('.choose').hide();
+    $('tr').removeClass('trlogout');
 })
 $('.cho-cancel').click(function(){
     //console.log('chocancel');
@@ -374,16 +395,16 @@ $(document).on('click','.catonew',function(){
 $(function() {
     //查看详情
     $(document).on('click','.view-cont',function(event) {
-        $('.viewdetail').css('height','100%');
+        $('.viewdetail').css({'height':'100%','padding-top':'130px'});
         $('.detadiv').animate({
-            'right':'0'
+            'margin-right':'0'
         },500);
         $(document).one("click",
         function() { 
             $('.detadiv').animate({
-                'right':'-516px'
+                'margin-right':'-516px'
             },500,function(){
-                $('.viewdetail').css('height','0');
+                $('.viewdetail').css({'height':'0','padding-top':'0'});
             });
         });
         event.stopPropagation(); 
@@ -393,9 +414,9 @@ $(function() {
     });
     $('.viewclose').click(function(){
         $('.detadiv').animate({
-            'right':'-516px'
+            'margin-right':'-516px'
         },500,function(){
-            $('.viewdetail').css('height','0');
+            $('.viewdetail').css({'height':'0','padding-top':'0'});
         });
     })
 });

@@ -85,7 +85,7 @@
 							        	<tr>
 							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_1' /><label for='check_1'></label></div></td>
 							        		<td><span class='tabnumb'>1</span></td>
-							        		<td><span class='rankimg' vel='5'><img src='src/images/rank-red.png'/></span></td>
+							        		<td><span class='rankimg' vel='红色'><img src='src/images/rank-red.png'/></span></td>
 							        		<td><a class='view-cont'>杭州西湖区2017年09月09日晚台...</a></td>
 							        		<td>杭州市西湖区应急广播中心</td>
 							        		<td>橙子</td>
@@ -97,7 +97,7 @@
 							        	<tr>
 							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_2' /><label for='check_2'></label></div></td>
 							        		<td><span class='tabnumb'>2</span></td>
-							        		<td><span class='rankimg' vel='3'><img src='src/images/rank-yellow.png'/></span></td>
+							        		<td><span class='rankimg' vel='黄色'><img src='src/images/rank-yellow.png'/></span></td>
 							        		<td><a class='view-cont'>杭州西湖区2017年09月09日晚台...</a></td>
 							        		<td>杭州市西湖区应急广播中心</td>
 							        		<td>橙子</td>
@@ -109,7 +109,7 @@
 							        	<tr>
 							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_3' /><label for='check_3'></label></div></td>
 							        		<td><span class='tabnumb'>3</span></td>
-							        		<td><span class='rankimg' vel='1'><img src='src/images/rank-green.png'/></span></td>
+							        		<td><span class='rankimg' vel='绿色'><img src='src/images/rank-green.png'/></span></td>
 							        		<td><a class='view-cont'>杭州西湖区2017年09月09日晚台...</a></td>
 							        		<td>浙江省应急办</td>
 							        		<td>橙子</td>
@@ -121,7 +121,7 @@
 							        	<tr>
 							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_4' /><label for='check_4'></label></div></td>
 							        		<td><span class='tabnumb'>4</span></td>
-							        		<td><span class='rankimg' vel='1'><img src='src/images/rank-green.png'/></span></td>
+							        		<td><span class='rankimg' vel='绿色'><img src='src/images/rank-green.png'/></span></td>
 							        		<td><a class='view-cont'>杭州西湖区2017年09月09日晚台...</a></td>
 							        		<td>浙江省应急办</td>
 							        		<td>橙子</td>
@@ -133,7 +133,7 @@
 							        	<tr>
 							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_5' /><label for='check_5'></label></div></td>
 							        		<td><span class='tabnumb'>5</span></td>
-							        		<td><span class='rankimg' vel='4'><img src='src/images/rank-orange.png'/></span></td>
+							        		<td><span class='rankimg' vel='橙色'><img src='src/images/rank-orange.png'/></span></td>
 							        		<td><a class='view-cont'>杭州西湖区2017年09月09日晚台...</a></td>
 							        		<td>浙江省应急办</td>
 							        		<td>橙子</td>
@@ -145,7 +145,7 @@
 							        	<tr>
 							        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_6' /><label for='check_6'></label></div></td>
 							        		<td><span class='tabnumb'>6</span></td>
-							        		<td><span class='rankimg' vel='2'><img src='src/images/rank-blue.png'/></span></td>
+							        		<td><span class='rankimg' vel='蓝色'><img src='src/images/rank-blue.png'/></span></td>
 							        		<td><a class='view-cont'>杭州西湖区2017年09月09日晚台...</a></td>
 							        		<td>杭州市西湖区应急广播中心</td>
 							        		<td>橙子</td>
@@ -215,6 +215,8 @@
 		/*table*/
 		$(function () {
            var table = $('#table-mainfiv table').DataTable({
+           	   "scrollY": "calc(100% - 50px)",
+			   "scrollX": true,
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
                "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
@@ -228,7 +230,7 @@
                "columnDefs": [
                		{
 	                   orderable: false,
-	                   targets: [0,3,4,5,7,8,9] //禁止排序
+	                   targets: [0,2,3,4,5,7,8,9] //禁止排序
 	               },{ 
 	                	"sType": "html-percent", 
                        "aTargets": [2]  //指定列号使用自定义排序
@@ -240,10 +242,12 @@
                initComplete: function () {//列筛选
                    var api = this.api();
                    api.columns().indexes().flatten().each(function (i) {
-                       if (i == 4 || i == 5) { //对第i列进行筛选
-                            var column = api.column(i);
+                       var column = api.column(i);
+                        if (i == 4 || i == 5) { //对第i列进行筛选
  							rowScreen(column);
-                       }
+                        }else if (i == 2) { //对第i列进行筛选
+ 							rowLevScreen(column);
+                        }
                    });
                }
 			})

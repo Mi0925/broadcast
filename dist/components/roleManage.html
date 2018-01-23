@@ -51,11 +51,15 @@
 			        			</div>
 			        		</td>
 			        		<td><span class='tabnumb'>1</span></td>
-			        		<td>审核员</td>
-			        		<td>角色说明角色说明角色说明角色说明</td>
-			        		<td>2016-09-08  18:10:20</td>
 			        		<td>
-								<a href="#/editRole" url="components/editRole.html" class="editbtn add_tab" name="编辑任务消息"> 
+								<a href="#/viewRole" url="components/viewRole.html" class="view-cont add_tab" name="查看角色">审核员</a>
+			        		</td>
+			        		<td>角色说明角色说明角色说明角色说明</td>
+			        		<td>
+								<a href="#/viewRole" url="components/viewRole.html" class="view-cont add_tab" name="查看角色">2016-09-08  18:10:20</a>
+			        		</td>
+			        		<td>
+								<a href="#/editRole" url="components/editRole.html" class="editbtn add_tab" name="编辑角色"> 
 									<i class="iconfont icon-bianji"></i>
 									编辑
 								</a>
@@ -71,11 +75,15 @@
 			        			</div>
 			        		</td>
 			        		<td><span class='tabnumb'>2</span></td>
-			        		<td>审核员</td>
-			        		<td>角色说明角色说明角色说明角色说明2</td>
-			        		<td>2016-09-08  18:10:20</td>
 			        		<td>
-								<a href="#/editRole" url="components/editRole.html" class="editbtn add_tab" name="编辑任务消息"> 
+								<a href="#/viewRole" url="components/viewRole.html" class="view-cont add_tab" name="查看角色">审核员</a>
+			        		</td>
+			        		<td>角色说明角色说明角色说明角色说明2</td>
+			        		<td>
+								<a href="#/viewRole" url="components/viewRole.html" class="view-cont add_tab" name="查看角色">2016-09-08  18:10:20</a>
+			        		</td>
+			        		<td>
+								<a href="#/editRole" url="components/editRole.html" class="editbtn add_tab" name="编辑角色"> 
 									<i class="iconfont icon-bianji"></i>
 									编辑
 								</a>
@@ -112,6 +120,8 @@ $(document).ready(function(){
 	/*table*/
 	$(function () {
        var table = $('#table-mainfou table').DataTable({
+            "scrollY": "calc(100% - 50px)",
+		   "scrollX": true,
            "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
            "dom": 'tiprl',//自定义显示项
            "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置

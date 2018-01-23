@@ -39,28 +39,28 @@
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_1' /><label for='check_1'></label></div></td>
 			        		<td><span class='tabnumb'>1</span></td>
 			        		<td>上级平台</td>
-			        		<td>数据联动内容</td>
+			        		<td><a class='view-cont'>数据联动内容</a></td>
 			        		<td>2017-09-08  18:10:20</td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_2' /><label for='check_2'></label></div></td>
 			        		<td><span class='tabnumb'>2</span></td>
 			        		<td>接口</td>
-			        		<td>数据联动内容</td>
+			        		<td><a class='view-cont'>数据联动内容</a></td>
 			        		<td>2017-09-08  18:10:20</td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_3' /><label for='check_3'></label></div></td>
 			        		<td><span class='tabnumb'>3</span></td>
 			        		<td>上级平台</td>
-			        		<td>数据联动内容</td>
+			        		<td><a class='view-cont'>数据联动内容</a></td>
 			        		<td>2017-10-08  18:10:20</td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_4' /><label for='check_4'></label></div></td>
 			        		<td><span class='tabnumb'>4</span></td>
 			        		<td>上级平台</td>
-			        		<td>数据联动内容</td>
+			        		<td><a class='view-cont'>数据联动内容</a></td>
 			        		<td>2017-09-11  18:10:20</td>
 			        		
 			        	</tr>
@@ -68,14 +68,14 @@
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_5' /><label for='check_5'></label></div></td>
 			        		<td><span class='tabnumb'>5</span></td>
 			        		<td>上级平台</td>
-			        		<td>数据联动内容</td>
+			        		<td><a class='view-cont'>数据联动内容</a></td>
 			        		<td>2017-09-08  18:10:20</td>
 			        	</tr>
 			        	<tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_6' /><label for='check_6'></label></div></td>
 			        		<td><span class='tabnumb'>6</span></td>
 			        		<td>上级平台</td>
-			        		<td>数据联动内容</td>
+			        		<td><a class='view-cont'>数据联动内容</a></td>
 			        		<td>2017-09-08  18:10:20</td>
 			        	</tr>
 			        </tbody>
@@ -92,29 +92,31 @@
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 	</div>
 </div>
-	
+<div class="viewdetail">
+	<div class="detadiv">
+		<p class="poptit">数据联动详情</p>
+		<span class="viewclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="uncont">
+			<p class="oneitem-tit">来源</p>
+			<p class="unword">上级平台</p>
+			<p class="oneitem-tit">数据联动内容</p>
+			<p class="unword">数据联动内容数据联动内容数据联动内容数据联动内容数据联动内容数据联动内容数据联动内容数据联动内容数据联动内容数据联动内容数据联动内容</p>
+			<p class="oneitem-tit">数据联动时间</p>
+			<p class="unword">2017-11-09 12:00</p>
+		</div>
+	</div>
+</div>	
 
 
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		/*calendar*/
-		layui.use('laydate', function(){
-			var laydate = layui.laydate;
-			laydate.render({
-			    elem: '#daterg',
-			    eventElem: '#tochobtn',
-			    trigger: 'click',
-			    type:'datetime',
-			    range: true
-			});
-		})
-
-
 		/*table*/
 		$(function () {
 
            var table = $('#table-mainfiv table').DataTable({
+               "scrollY": "calc(100% - 50px)",
+			   "scrollX": true,
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
                "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置

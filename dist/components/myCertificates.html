@@ -89,6 +89,14 @@
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 	</div>
+	<div class="choose">
+		<p class="choword">确定注销吗？</p>
+		<div class="chobtn">
+			<input type="button" value="注销" class="chopri cho-logout" />
+			<input type="button" value="取消" class="cho-cancel" />
+		</div>
+		<span class="triangle"><em></em></span>
+	</div>
 </div>
 	
 
@@ -97,6 +105,8 @@
 		/*table*/
 		$(function () {
            var table = $('#table-mainfou table').DataTable({
+               "scrollY": "calc(100% - 50px)",
+			   "scrollX": true,
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
                "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置

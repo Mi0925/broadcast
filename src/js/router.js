@@ -122,9 +122,9 @@ Router.route('/newTaskMsgEdit', function() {
   gbMainContent('components/newTaskMsgEdit.html', RoundaboutSet);
 });
 //查看任务消息
-/*Router.route('/viewTaskMsg', function() {
+Router.route('/viewTaskMsg', function() {
   gbMainContent('components/viewTaskMsg.html', RoundaboutSet);
-});*/
+});
 //发布策略
 Router.route('/releasePolicy', function() {
   gbMainContent('components/releasePolicy.html', RoundaboutSet);
@@ -183,6 +183,10 @@ Router.route('/newPlatResoInfo', function() {
 Router.route('/editPlatResoInfo', function() {
   gbMainContent('components/editPlatResoInfo.html', RoundaboutSet);
 });
+//查看平台资源信息
+Router.route('/viewPlatResoInfo', function() {
+  gbMainContent('components/viewPlatResoInfo.html', RoundaboutSet);
+});
 //新建下级终端
 Router.route('/newJuniorTerminal', function() {
   gbMainContent('components/newJuniorTerminal.html', RoundaboutSet);
@@ -190,6 +194,10 @@ Router.route('/newJuniorTerminal', function() {
 //编辑下级终端
 Router.route('/editJuniorTerminal', function() {
   gbMainContent('components/editJuniorTerminal.html', RoundaboutSet);
+});
+//查看下级终端
+Router.route('/viewJuniorTerminal', function() {
+  gbMainContent('components/viewJuniorTerminal.html', RoundaboutSet);
 });
 //新建台站资源信息
 Router.route('/newStationResoInfo', function() {
@@ -207,6 +215,10 @@ Router.route('/programResources', function() {
 Router.route('/newProgResources', function() {
   gbMainContent('components/newProgResources.html', RoundaboutSet);
 });
+//查看节目资源
+Router.route('/viewProgResources', function() {
+  gbMainContent('components/viewProgResources.html', RoundaboutSet);
+});
 //文字语音管理
 Router.route('/characterVoice', function() {
   gbMainContent('components/characterVoice.html', RoundaboutSet);
@@ -218,6 +230,10 @@ Router.route('/uploadingCharVoice', function() {
 //编辑文字语音
 Router.route('/editCharVoice', function() {
   gbMainContent('components/editCharVoice.html', RoundaboutSet);
+});
+//查看文字语音
+Router.route('/viewCharVoice', function() {
+  gbMainContent('components/viewCharVoice.html', RoundaboutSet);
 });
 /*资源管理模块 end*/
 
@@ -269,6 +285,10 @@ Router.route('/newOperLog', function() {
 Router.route('/editOperLog', function() {
   gbMainContent('components/editOperLog.html', RoundaboutSet);
 });
+//查看运维日志
+Router.route('/viewOperLog', function() {
+  gbMainContent('components/viewOperLog.html', RoundaboutSet);
+});
 //数据联动日志
 Router.route('/dataLinkageLog', function() {
   gbMainContent('components/dataLinkageLog.html', RoundaboutSet);
@@ -296,12 +316,24 @@ Router.route('/editRole', function() {
 Router.route('/addRole', function() {
   gbMainContent('components/addRole.html', RoundaboutSet);
 });
+//查看角色
+Router.route('/viewRole', function() {
+  gbMainContent('components/viewRole.html', RoundaboutSet);
+});
 //用户管理
 Router.route('/userManage', function() {
   gbMainContent('components/userManage.html', RoundaboutSet);
 });
-//用户新建
+//新建用户
 Router.route('/addUser', function() {
   gbMainContent('components/addUser.html', RoundaboutSet);
+});
+//编辑用户
+Router.route('/editUser', function() {
+  gbMainContent('components/editUser.html', RoundaboutSet);
+});
+//查看用户
+Router.route('/viewUser', function() {
+  gbMainContent('components/viewUser.html', RoundaboutSet);
 });
 /*系统管理模块 end*/

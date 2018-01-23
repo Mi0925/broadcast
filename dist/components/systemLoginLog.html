@@ -143,23 +143,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		/*calendar*/
-		layui.use('laydate', function(){
-			var laydate = layui.laydate;
-			laydate.render({
-			    elem: '#daterg',
-			    eventElem: '#tochobtn',
-			    trigger: 'click',
-			    type:'datetime',
-			    range: true
-			});
-		})
-
-
 		/*table*/
 		$(function () {
-
            var table = $('#table-mainfou table').DataTable({
+               "scrollY": "calc(100% - 50px)",
+			   "scrollX": true,
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
                "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置

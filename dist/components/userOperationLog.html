@@ -42,7 +42,7 @@
 			        		<td><span class='tabnumb'>1</span></td>
 			        		<td>橙子</td>
 			        		<td>122.234.60.113</td>
-			        		<td>登录</td>
+			        		<td><a class='view-cont'>操作内容操作内容操作内容</a></td>
 			        		<td>2017-09-08  18:10:20</td>
 			        	</tr>
 			        	<tr>
@@ -50,7 +50,7 @@
 			        		<td><span class='tabnumb'>2</span></td>
 			        		<td>橙子</td>
 			        		<td>122.234.60.123</td>
-			        		<td>登出</td>
+			        		<td><a class='view-cont'>操作内容操作内容操作内容</a></td>
 			        		<td>2016-09-08  18:10:20</td>
 			        	</tr>
 			        	<tr>
@@ -58,7 +58,7 @@
 			        		<td><span class='tabnumb'>3</span></td>
 			        		<td>橙子</td>
 			        		<td>122.234.60.123</td>
-			        		<td>登录</td>
+			        		<td><a class='view-cont'>操作内容操作内容操作内容</a></td>
 			        		<td>2016-09-08  18:10:20</td>
 			        	</tr>
 			        	<tr>
@@ -66,7 +66,7 @@
 			        		<td><span class='tabnumb'>4</span></td>
 			        		<td>橙子</td>
 			        		<td>122.234.60.113</td>
-			        		<td>登出</td>
+			        		<td><a class='view-cont'>操作内容操作内容操作内容</a></td>
 			        		<td>2017-11-08  18:10:20</td>
 			        		
 			        	</tr>
@@ -75,7 +75,7 @@
 			        		<td><span class='tabnumb'>5</span></td>
 			        		<td>橙子</td>
 			        		<td>122.234.60.123</td>
-			        		<td>登录</td>
+			        		<td><a class='view-cont'>操作内容操作内容操作内容</a></td>
 			        		<td>2016-09-08  18:10:20</td>
 			        	</tr>
 			        	<tr>
@@ -83,7 +83,7 @@
 			        		<td><span class='tabnumb'>6</span></td>
 			        		<td>橙子</td>
 			        		<td>122.234.60.123</td>
-			        		<td>登录</td>
+			        		<td><a class='view-cont'>操作内容操作内容操作内容</a></td>
 			        		<td>2016-09-08  18:10:20</td>
 			        	</tr>
 			        </tbody>
@@ -141,7 +141,20 @@
 		<span class="triangle"><em></em></span>
 	</div>
 </div>
-	
+<div class="viewdetail">
+	<div class="detadiv">
+		<p class="poptit">操作日志详情</p>
+		<span class="viewclose"><i class="iconfont icon-guanbi"></i></span>
+		<div class="uncont">
+			<p class="oneitem-tit">操作账号</p>
+			<p class="unword">橙子</p>
+			<p class="oneitem-tit">操作内容</p>
+			<p class="unword">操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容操作内容</p>
+			<p class="oneitem-tit">操作时间</p>
+			<p class="unword">2017-11-09 12:00</p>
+		</div>
+	</div>
+</div>	
 
 
 
@@ -150,6 +163,8 @@
 		/*table*/
 		$(function () {
            var table = $('#table-mainfiv table').DataTable({
+               "scrollY": "calc(100% - 50px)",
+			   "scrollX": true,
                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
                "dom": 'tiprl',//自定义显示项
                "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
