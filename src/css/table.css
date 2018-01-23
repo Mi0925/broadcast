@@ -98,6 +98,8 @@ table.dataTable.display tbody tr.odd > .sorting_1,table.dataTable.order-column.s
 table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_1,table.dataTable.display tbody tr.even.selected > .sorting_1,table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_1{background:transparent;}
 /* */ table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1,table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1{background:transparent;}
 
+.gb-table .table-main tr td:nth-child(1n){width: 10px;}
+
 
 .gb-table .operbtn ,.gb-table .editbtn ,.gb-table .issue ,.gb-table .check ,.gb-table .del ,.gb-table .convert,.gb-table .syncbtn,.gb-table .portbtn,.gb-table .transbtn,.gb-table .logout{cursor: pointer;}
 .gb-table .operbtn:hover,.gb-table .editbtn:hover,.gb-table .issue:hover,.gb-table .check:hover,.gb-table .del:hover,.gb-table .convert:hover,.gb-table .syncbtn:hover,.gb-table .portbtn:hover,.gb-table .transbtn:hover,.gb-table .logout:hover{color:#4579d8;}
