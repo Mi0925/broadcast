@@ -105,6 +105,10 @@ Router.route('/newSchedulingPlan', function() {
 Router.route('/editSchedulingPlan', function() {
   gbMainContent('components/editSchedulingPlan.html', RoundaboutSet);
 });
+//查看调度方案
+Router.route('/viewSchedulingPlan', function() {
+  gbMainContent('components/viewSchedulingPlan.html', RoundaboutSet);
+});
 //任务消息
 Router.route('/taskMsg', function() {
   gbMainContent('components/taskMsg.html', RoundaboutSet);
@@ -117,6 +121,10 @@ Router.route('/newTaskMsg', function() {
 Router.route('/newTaskMsgEdit', function() {
   gbMainContent('components/newTaskMsgEdit.html', RoundaboutSet);
 });
+//查看任务消息
+/*Router.route('/viewTaskMsg', function() {
+  gbMainContent('components/viewTaskMsg.html', RoundaboutSet);
+});*/
 //发布策略
 Router.route('/releasePolicy', function() {
   gbMainContent('components/releasePolicy.html', RoundaboutSet);
@@ -132,6 +140,10 @@ Router.route('/newWarningMsg', function() {
 //编辑预警消息
 Router.route('/editWarningMsg', function() {
   gbMainContent('components/editWarningMsg.html', RoundaboutSet);
+});
+//查看预警消息
+Router.route('/viewWarningMsg', function() {
+  gbMainContent('components/viewWarningMsg.html', RoundaboutSet);
 });
 //报表导出
 Router.route('/exportAReport', function() {
@@ -151,6 +163,10 @@ Router.route('/newInterface', function() {
 //编辑接口
 Router.route('/editInterface', function() {
   gbMainContent('components/editInterface.html', RoundaboutSet);
+});
+//查看接口
+Router.route('/viewInterface', function() {
+  gbMainContent('components/viewInterface.html', RoundaboutSet);
 });
 /*消息接入模块 end*/
 
