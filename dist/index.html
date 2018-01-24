@@ -371,6 +371,8 @@ layui.use(['layer','laydate','form'], function() {
 		}
 	});
 	$(".gb-tab").on("click",".swiper-slide",function(e){
+		sessionStorage.setItem('tab_default_name',$(this).find("a").attr("name"));
+		sessionStorage.setItem('tab_default_url',$(this).find("a").attr("url"));
 		tabActive=$(this).index();
 		$(this).addClass('cur').siblings(".swiper-slide").removeClass('cur');
 		var nav_text=$(this).find('span').text();
@@ -471,7 +473,8 @@ layui.use(['layer','laydate','form'], function() {
 
 
 
-
+	// 默认打开指定页面
+	add_tab(sessionStorage.getItem('tab_default_name'),sessionStorage.getItem('tab_default_url'));
 
 </script>
 </body>

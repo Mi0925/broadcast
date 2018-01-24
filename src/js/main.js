@@ -58,8 +58,9 @@ if (!Function.prototype.bind) {
 // 点击链接加载对应页面
 $("body").on("click",".add_tab",function(){
 	// gbMainContent($(this).attr("url"),RoundaboutSet);
+	sessionStorage.setItem('tab_default_name',$(this).attr("name"));
+	sessionStorage.setItem('tab_default_url',$(this).attr("url"));
 	var nav_text=$(this).attr("name");
-	console.log(nav_text)
 	var url=$(this).attr("url")
 	add_tab(nav_text,url);
 })
@@ -77,7 +78,7 @@ function add_tab(nav_text,url) {
 	if(blo==true){
 		return;
 	}
-	var tabSlideHtml='<a href="#'+url.slice(10,-5)+'" url="'+url+'"><span>'+nav_text+
+	var tabSlideHtml='<a href="#'+url.slice(10,-5)+'" url="'+url+'" name="'+nav_text+'"><span>'+nav_text+
 						'</span>' +
 					'</a><i class="iconfont icon-guanbi close-tab"></i>';
 	tabSwiper.appendSlide(tabSlideHtml);

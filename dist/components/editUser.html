@@ -22,7 +22,7 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>手机号</p>
 						<div class="tnoneimp">
-							<input type="number" class="imptxt" />
+							<input type="text" class="imptxt"  onkeyup="value=value.replace(/[^\d]/g,'')" ng-pattern="/[^a-zA-Z]/" />
 						</div>
 					</div>
 					<div class="settingone">
