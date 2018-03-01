@@ -88,7 +88,7 @@ table.dataTable tbody th,table.dataTable tbody td{padding:0 20px;line-height:40p
 
 th,td {white-space: nowrap;}
 
-.gb-table th span{color:#7c8491;font-size:12px;}
+.gb-table th span{color:#7c8491;font-size:12px;min-height: 600px;}
 .gb-table td span,.gb-table div,.gb-ctab div,.gb-ctab td,.gb-ctab th{color:#7c8491;}
 table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd{background:#fff;}
 table.dataTable.display tbody tr.odd:hover,table.dataTable.stripe tbody tr.odd:hover,table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover{background-color: #eff5ff;}

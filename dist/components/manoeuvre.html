@@ -39,10 +39,70 @@
 							<div class="gb-chart gb-bar" id="bar-task-num"></div>
 						</div>
 					</div>
-					<div class="gb-chart-incident-bar">
-						<div class="gb-chart-item">
-							<div class="gb-chart gb-bar" id="bar-incident-type"></div>
-						</div>
+					<div class="gb-charts-table">
+					 	<h4>
+						 	<span class="j-table-chart-tab">
+						 		<em class="list"><i class="iconfont icon-liebiao"></i>列表</em>
+						 		<em class="cur chart"><i class="iconfont icon-zhexian"></i>折线图</em>
+						 	</span>
+					 	</h4>
+					 	<div class="gb-table-chart-tab">
+					 		<div class="gb-ctab" id="table-main3" style="display: none;">
+								<div class="tablecont">
+								    <table class="table-main display" cellspacing="0" width="100%">
+								        <thead>
+									        <tr>
+									            <th>状态监测</th>
+									            <th>消息等级</th>
+									            <th>事件名称</th>
+									            <th>覆盖区域</th>
+									            <th>覆盖人口</th>
+									            <th>部门</th>
+									            <th>负责人</th>
+									            <th>发布时间</th>
+									        </tr>
+								        </thead>
+								        <tfoot>
+									        <tr>
+									            <th></th>
+									            <th></th>
+									            <th></th>
+									            <th></th>
+									            <th></th>
+									            <th></th>
+									        </tr>
+								        </tfoot>
+								        <tbody>
+								        	<tr>
+								        		<td>发布中</td>
+								        		<td><span class='rankimg' vel='红色'><img src='src/images/rank-red.png'/></span></td>
+								        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
+								        		<td>72万kem2</td>
+								        		<td>110万</td>
+								        		<td>杭州市西湖区应急广播中心</td>
+								        		<td>橙子</td>
+								        		<td>2017-11-09 12:0:0</td>
+								        	</tr>
+								        	<tr>
+								        		<td>发布中</td>
+								        		<td><span class='rankimg' vel='绿色'><img src='src/images/rank-green.png'/></span></td>
+								        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
+								        		<td>72万kem2</td>
+								        		<td>110万</td>
+								        		<td>杭州市西湖区应急广播中心</td>
+								        		<td>橙子</td>
+								        		<td>2017-11-09 12:0:0</td>
+								        	</tr>
+								        </tbody>
+								    </table>
+								</div>
+							</div>
+							<div class="gb-chart-incident-bar gb-chart-incident">
+								<div class="gb-chart-item">
+									<div class="gb-chart gb-bar" id="bar-incident-type"></div>
+								</div>
+							</div>
+					 	</div>
 					</div>
 				</div>
 				<!-- 地图 -->
@@ -150,7 +210,10 @@
 					<div class="gb-charts-table">
 					 	<h4>
 						 	<button class="layui-btn layui-btn-danger">杭州西湖区雷暴红色警报消息播发统计</button>
-						 	<span class="j-table-chart-tab"><i class="iconfont icon-liebiao"></i>列表</span>
+						 	<span class="j-table-chart-tab">
+						 		<em class="list"><i class="iconfont icon-liebiao"></i>列表</em>
+						 		<em class="cur chart"><i class="iconfont icon-zhexian"></i>折线图</em>
+						 	</span>
 					 	</h4>
 					 	<div class="gb-table-chart-tab">
 					 		<div class="gb-ctab" id="table-main2" style="display: none;">
@@ -221,7 +284,7 @@
 								    </table>
 								</div>
 							</div>
-						 	<div class="gb-chart-incident-line">
+						 	<div class="gb-chart-incident-line gb-chart-incident">
 								<div class="gb-chart-item">
 									<div class="gb-chart gb-line" id="line-population"></div>
 								</div>
@@ -1383,7 +1446,7 @@ function addIncident() {
 			            period: 6,
 			            trailLength: 0,
 			            symbol: planePath,
-			            symbolSize: 15
+			            symbolSize: 35
 			        },
 			        lineStyle: {
 			            normal: {
@@ -1759,7 +1822,7 @@ $(function () {
 		fnDrawCallback: function(table) {  
 			jumpPage($("#table-main1"))
         }
-	})
+	});
 
 	var table2 = $('#table-main2 table').DataTable({
 		"scrollY": "calc(100% - 50px)",
@@ -1793,7 +1856,47 @@ $(function () {
 		fnDrawCallback: function(table) {
 			jumpPage($("#table-main2"))
         }
-	})
+	});
+
+	var table3 = $('#table-main3 table').DataTable({
+		"scrollY": "calc(100% - 50px)",
+	    "scrollX": true,
+        "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+		"dom": 'tiprl', //自定义显示项
+		"lengthMenu": [20,30,40,50], //每页显示条数设置
+		"lengthChange": true, //是否允许用户自定义显示数量
+		"bPaginate": true, //翻页功能
+		"bFilter": true, //列筛序功能
+		"searching": true, //本地搜索
+		//"ordering": true, //排序功能
+		"order": [4, "asc"], //desc降序
+		"Info": true, //页脚信息
+		"oLanguage": oLanguage, //国际语言转化
+		"columnDefs": [
+			{
+				orderable: false,
+				targets: [0,1,2,5,6]//设置某列禁止排序
+			}, {
+				"sType": "html-percent",
+				"aTargets": [1] //指定列号使用自定义排序
+			}
+		], 
+		initComplete: function() { //列筛选
+			var api = this.api();
+			api.columns().indexes().flatten().each(function(i) {
+				var column = api.column(i);
+                if (i == 0 || i==5 || i==6) { //对第i列进行筛选
+					rowScreen(column);
+                }else if (i==1) { //对第i列进行筛选
+					rowLevScreen(column);
+                }
+			});
+		},
+		fnDrawCallback: function(table) {
+			jumpPage($("#table-main3"))
+        }
+	});
+
 
 	userDef(table1);//table配置--显示数量 搜索 全选 删除  
 	$(".gb-main-item").on("click",".gb-unity-incident",function(){
@@ -1801,16 +1904,19 @@ $(function () {
 			table1.draw();
 	    },10)
 	})
-	$("body").on("click",".j-table-chart-tab",function(event) {
-	    if($(".j-table-chart-tab").text()=="折线"){
+	$("body").on("click",".j-table-chart-tab em",function(event) {
+		incidentTypeChart.resize();
+	    if($(this).hasClass("list")){
 	        setTimeout(function(){
 				table2.draw();
+				table3.draw();
 		    },10)
 	    }
 	});
 	$(".gb-packUp-leftNav").click(function(){
         setTimeout(function(){
             table2.draw();
+            table3.draw();
         },500)
     });//重绘
 	$(document).on('click','.tomonitoring',function(){

@@ -42,7 +42,8 @@ a:hover{color: inherit;}
 .gb-marquee a{display: inline-block;line-height: 40px;min-width:50%;text-align: center;}
 
 /*图表box*/
-.gb-chart-box{border: 1px solid #d8d8d8;border-radius: 3px;background: #fff;font-size: 0;padding-bottom: 50px;}
+.gb-chart-box{border: 1px solid #d8d8d8;border-radius: 3px;background: #fff;font-size: 0;padding-bottom: 50px;padding: 35px 35px 0;}
+/*.gb-unity-incident-item .gb-chart-box{padding: 35px 35px 0;}*/
 
 /*gb-incident-count*/
 .gb-incident-count{text-align: center;margin: 30px 0;}
@@ -128,10 +129,12 @@ a:hover{color: inherit;}
 
 
 /*图表表格切换*/
-.gb-unity-incident-item .gb-chart-box{padding: 35px 35px 0;}
 .gb-charts-table{text-align: center;}
-.gb-charts-table h4{overflow: hidden;position: relative;margin:47px 0 40px;}
-.gb-charts-table h4 span{font-size: 14px;position: absolute;right: 0px;bottom: 0px;cursor: pointer;color: #7c8491;}
+.gb-all-incident-item .gb-charts-table h4 span{position: relative;float: right;}
+.gb-charts-table h4{position: relative;margin:47px 0 0;overflow: hidden;}
+.gb-charts-table h4 span{font-size: 14px;position: absolute;right: 0px;bottom: 0px;cursor: pointer;color: #7c8491;border-radius: 3px;overflow: hidden;}
+.gb-charts-table h4 span em{float: left;width: 80px;text-align: center;padding: 7px 0;border: 1px solid #dadada;}
+.gb-charts-table h4 span em.cur{background: #4478d8;color: #fff;border: 1px solid #4478d8;}
 .gb-table-chart-tab .gb-ctab{margin-bottom:50px; }
 
 
