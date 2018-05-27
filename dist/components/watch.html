@@ -178,250 +178,215 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var date = new Date(),d = date.getDate(),m = date.getMonth(),y = date.getFullYear();
-	var eventsData=[
-		{
-			title: '橙子、苹果',
-			start: new Date(y, m, 9,1),//(a,b,c,d,e) a年，b月，c日，d时，e分
-			end: new Date(y, m, 9,2)
-		},
-		{
-			title: '橙子、苹果',
-			start: new Date(y, m, 9,2),
-			end: new Date(y, m, 9,3)
-		},
-		{
-			title: '橙子、苹果',
-			start: new Date(y, m, 9,3),
-			end: new Date(y, m, 9,4)
-		},
-		{
-			title: '橙子、苹果',
-			start: new Date(y, m, 9,4),
-			end: new Date(y, m, 9,5)
-		},
-		{
-			title: '橙子、苹果',
-			start: new Date(y, m, 9,5),
-			end: new Date(y, m, 9,6)
-		},
-		{
-			title: '橙子、苹果',
-			start: new Date(y, m, 9,7),
-			end: new Date(y, m, 9,8)
-		},
-		{
-			title: '橙子、苹果',
-			start: new Date(y, m, 9,9),
-			end: new Date(y, m, 9,10)
-		},
-		{
-			allDay:true,
-			title: '橙子、苹果',
-			start: "2018/01/10"
-		},
-		{
-			title: '橙子、苹果',
-			start: "2018/01/11 3:00",
-			end: "2018/01/11 4:00"
-		},
-	];//初始日历数据
-	var startDate ="";//起始日期
-	var endDate ="";//结束日期
-	var allDay=false;//全天
-    layui.use(['layer','laydate','form'], function() {
-		var layer = layui.layer,laydate = layui.laydate,form = layui.form;
-	    // 页面加载完毕，初始化Canlendar
-	    $('.gb-calendar').fullCalendar({
-			header: {
-				left: 'agendaWeek,month, today',
-				center: 'prev,title,next',
-				right:false
-			},
-			buttonText:{
-				today:'今天'
-			},
-			editable: true,
-			defaultView:'agendaWeek',
-			scrollTime : "06:00:00",
-			slotLabelFormat : "aH(:mm)点", //日期视图左边那一列显示的每一格日期时间格式  
-			slotDuration : "00:30:00",//一格时间槽代表多长时间，默认00:30:00（30分钟）
-			slotLabelInterval : "00:30:00",//日期视图左边那一列多长间隔显示一条日期文字(默认跟着slotDuration走的，可自定义)  
-			events: eventsData,
-			height :$(".gb-watch").innerHeight(),  
-		    windowResize: function(view) {  
-		        $('#calendar').fullCalendar('option', 'height',$(".gb-watch").innerHeight());  
-		    },
-		    locale:"zh-cn",
-			selectable: true,
-			select: function(start, end) {//点击日期空白格子弹出框
-				startDate =start;
-				endDate =end;
-				fun_dialog_html();
-				allDay=false;
-				// 弹出框
-				layer.open({
-					type: 1, 
-					title:false,
-					shadeClose:true,
-					closeBtn: 0,
-					content: dialog_html,
-					btn: ['确定创建'],
-					skin: 'gb-watch-dialog',
-					yes: function(index, layero){
-						var eventData,people="";
-						$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
-							people=people+$(this).text()+"、";
-						})
-						//去掉最后一个、(如果不需要去掉，就不用写)
-						if (people.length > 0) {
-					        people = people.substr(0, people.length - 1);
-					    }else if(people==""){
-					    	people="无";
-					    }
-						if(allDay){//点击全天设置全天
-							endDate=null;
-						}
-						eventData = {
-							allDay:allDay,
-							title: people,
-							start:startDate,
-							end: endDate
-						};
-						$('.gb-calendar').fullCalendar('renderEvent', eventData, true); // 渲染一个新的日程到日程表上
-						layer.closeAll();
+	// 模拟数据
+	$.ajax({
+	    url: portsrc+'/calendar',
+	    token:token,
+	    type: 'GET',
+	    dataType: 'json',
+	    success: function(data) {
+	    	console.log(data)
+	    	var eventsData=data.body;//初始日历数据
+			var startDate ="";//起始日期
+			var endDate ="";//结束日期
+			var allDay=false;//全天
+		    layui.use(['layer','laydate','form'], function() {
+				var layer = layui.layer,laydate = layui.laydate,form = layui.form;
+			    // 页面加载完毕，初始化Canlendar
+			    $('.gb-calendar').fullCalendar({
+					header: {
+						left: 'agendaWeek,month, today',
+						center: 'prev,title,next',
+						right:false
 					},
-					success: function(layero, index){
-						// 时间范围选择
-						laydate.render({
-						    elem: '#daterg',
-						    eventElem: '#tochobtn',
-						    trigger: 'click',
-						    type:'datetime',
-						    range: true,
-						    format:"M月d日 HH:mm",
-						    value:$.fullCalendar.formatDate(start,'M月D日 HH:mm')+' - '+$.fullCalendar.formatDate(end,'M月D日 HH:mm'),
-						    done: function(value, startD, endD){
-						    	startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
-						    	endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
-							}
-						});
-						form.render('select');
-					}
-				});
-				$(".gb-people-list li").remove();
-				// $(".gb-dialog").show();
-			},
-			eventClick: function(calEvent, jsEvent, view) {//日程区块，单击时触发
-				// event 是 Event Object 对象，包含了日程的信息（例如日期，标题等）
-				// jsEvent 是原生的 javascript 事件，包含“点击坐标”之类的信息。
-				// view 是当前的 View Object 。
-				// calEvent.source.rawEventDefs=[]
-				console.log(calEvent)
-				var html="";
-				fun_dialog_html();
-				// 弹出框
-				layer.open({
-					type: 1, 
-					title:false,
-					shadeClose:true,
-					closeBtn: 0,
-					content: dialog_html,
-					skin: 'gb-watch-dialog',
-					success: function(layero, index){
-						if(calEvent.title!=""){
-							var name=calEvent.title.split('、');
-							$(".gb-people-list li").remove();
-							for (var i = 0; i < name.length; i++) {
-								if(name[i]!="无"){
-									html="<li name='"+name[i]+"'>"+name[i]+"</li>";
+					buttonText:{
+						today:'今天'
+					},
+					editable: true,
+					defaultView:'agendaWeek',
+					scrollTime : "06:00:00",
+					slotLabelFormat : "aH(:mm)点", //日期视图左边那一列显示的每一格日期时间格式  
+					slotDuration : "00:30:00",//一格时间槽代表多长时间，默认00:30:00（30分钟）
+					slotLabelInterval : "00:30:00",//日期视图左边那一列多长间隔显示一条日期文字(默认跟着slotDuration走的，可自定义)  
+					events: eventsData,
+					height :$(".gb-watch").innerHeight(),  
+				    windowResize: function(view) {  
+				        $('#calendar').fullCalendar('option', 'height',$(".gb-watch").innerHeight());  
+				    },
+				    locale:"zh-cn",
+					selectable: true,
+					select: function(start, end) {//点击日期空白格子弹出框
+						startDate =start;
+						endDate =end;
+						fun_dialog_html();
+						allDay=false;
+						// 弹出框
+						layer.open({
+							type: 1, 
+							title:false,
+							shadeClose:true,
+							closeBtn: 0,
+							content: dialog_html,
+							btn: ['确定创建'],
+							skin: 'gb-watch-dialog',
+							yes: function(index, layero){
+								var eventData,people="";
+								$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
+									people=people+$(this).text()+"、";
+								})
+								//去掉最后一个、(如果不需要去掉，就不用写)
+								if (people.length > 0) {
+							        people = people.substr(0, people.length - 1);
+							    }else if(people==""){
+							    	people="无";
+							    }
+								if(allDay){//点击全天设置全天
+									endDate=null;
 								}
-								$(".gb-people-list").append(html);
-								$(".gb-dialog-watch-list li input").each(function(index, el) {
-									if($(this).attr("name")==name[i]){
-										$(this).attr('checked', true);
+								eventData = {
+									allDay:allDay,
+									title: people,
+									start:startDate,
+									end: endDate
+								};
+								console.log(eventData)
+								$('.gb-calendar').fullCalendar('renderEvent', eventData, true); // 渲染一个新的日程到日程表上
+								layer.closeAll();
+							},
+							success: function(layero, index){
+								// 时间范围选择
+								laydate.render({
+								    elem: '#daterg',
+								    eventElem: '#tochobtn',
+								    trigger: 'click',
+								    type:'datetime',
+								    range: true,
+								    format:"M月d日 HH:mm",
+								    value:$.fullCalendar.formatDate(start,'M月D日 HH:mm')+' - '+$.fullCalendar.formatDate(end,'M月D日 HH:mm'),
+								    done: function(value, startD, endD){
+								    	startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
+								    	endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
 									}
 								});
+								form.render('select');
 							}
-						}
-						if(!calEvent.allDay){
-							$('#daterg').prop('disabled', false);
-							$(".gb-dialog-laydate").css("opacity","1");
-							// 时间范围选择
-							laydate.render({
-							    elem: '#daterg',
-							    eventElem: '#tochobtn',
-							    trigger: 'click',
-							    type:'datetime',
-							    range: true,
-							    format:"M月d日 HH:mm",
-							    value:$.fullCalendar.formatDate(calEvent.start,'M月D日 HH:mm')+' - '+$.fullCalendar.formatDate(calEvent.end,'M月D日 HH:mm'),
-							    done: function(value, startD, endD){
-							    	startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
-							    	endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
-							    	calEvent.start=startDate;
-							    	calEvent.end=endDate;
-								}
-							});
-						}else{// 全天
-							$("#day").attr('checked', true)
-							$('#daterg').prop('disabled', true);
-							$(".gb-dialog-laydate").css("opacity","0.4");
-							// 时间范围选择
-							laydate.render({
-							    elem: '#daterg',
-							    eventElem: '#tochobtn',
-							    trigger: 'click',
-							    type:'datetime',
-							    range: true,
-							    format:"M月d日 HH:mm",
-							    value:$.fullCalendar.formatDate(calEvent.start,'M月D日 HH:mm')+' - '+$.fullCalendar.formatDate(calEvent.start,'M月D日 23:59'),
-							    done: function(value, startD, endD){
-							    	startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
-							    	endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
-								}
-							});
-						}
-						form.render('select');
+						});
+						$(".gb-people-list li").remove();
+						// $(".gb-dialog").show();
 					},
-					btn: ['保存','删除'],
-					yes: function(index, layero){
-						var eventData,people="";
-						$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
-							people=people+$(this).text()+"、";
-						})
-						//去掉最后一个、(如果不需要去掉，就不用写)
-						if (people.length > 0) {
-					        people = people.substr(0, people.length - 1);
-					    }else if(people==""){
-					    	people="无";
-					    }
-					    calEvent.title=people;
-					    if(allDay){//点击全天设置全天
-							calEvent.allDay=true;
-							calEvent.end=null;
-						}else{
-							calEvent.allDay=false;
-							calEvent.start=startDate;
-							calEvent.end=endDate;
-						}
-						$('.gb-calendar').fullCalendar('updateEvent',calEvent); // 重新渲染编辑过的日程
-						layer.closeAll();
-					},
-					btn2: function(index, layero){
-						$('.gb-calendar').fullCalendar('removeEvents',calEvent._id); // 重新渲染编辑过的日程
-						layer.closeAll();
-					}
+					eventClick: function(calEvent, jsEvent, view) {//日程区块，单击时触发
+						// event 是 Event Object 对象，包含了日程的信息（例如日期，标题等）
+						// jsEvent 是原生的 javascript 事件，包含“点击坐标”之类的信息。
+						// view 是当前的 View Object 。
+						// calEvent.source.rawEventDefs=[]
+						console.log(calEvent)
+						var html="";
+						fun_dialog_html();
+						// 弹出框
+						layer.open({
+							type: 1, 
+							title:false,
+							shadeClose:true,
+							closeBtn: 0,
+							content: dialog_html,
+							skin: 'gb-watch-dialog',
+							success: function(layero, index){
+								if(calEvent.title!=""){
+									var name=calEvent.title.split('、');
+									$(".gb-people-list li").remove();
+									for (var i = 0; i < name.length; i++) {
+										if(name[i]!="无"){
+											html="<li name='"+name[i]+"'>"+name[i]+"</li>";
+										}
+										$(".gb-people-list").append(html);
+										$(".gb-dialog-watch-list li input").each(function(index, el) {
+											if($(this).attr("name")==name[i]){
+												$(this).attr('checked', true);
+											}
+										});
+									}
+								}
+								if(!calEvent.allDay){
+									$('#daterg').prop('disabled', false);
+									$(".gb-dialog-laydate").css("opacity","1");
+									// 时间范围选择
+									laydate.render({
+									    elem: '#daterg',
+									    eventElem: '#tochobtn',
+									    trigger: 'click',
+									    type:'datetime',
+									    range: true,
+									    format:"M月d日 HH:mm",
+									    value:$.fullCalendar.formatDate(calEvent.start,'M月D日 HH:mm')+' - '+$.fullCalendar.formatDate(calEvent.end,'M月D日 HH:mm'),
+									    done: function(value, startD, endD){
+									    	startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
+									    	endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
+									    	calEvent.start=startDate;
+									    	calEvent.end=endDate;
+										}
+									});
+								}else{// 全天
+									$("#day").attr('checked', true)
+									$('#daterg').prop('disabled', true);
+									$(".gb-dialog-laydate").css("opacity","0.4");
+									// 时间范围选择
+									laydate.render({
+									    elem: '#daterg',
+									    eventElem: '#tochobtn',
+									    trigger: 'click',
+									    type:'datetime',
+									    range: true,
+									    format:"M月d日 HH:mm",
+									    value:$.fullCalendar.formatDate(calEvent.start,'M月D日 HH:mm')+' - '+$.fullCalendar.formatDate(calEvent.start,'M月D日 23:59'),
+									    done: function(value, startD, endD){
+									    	startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
+									    	endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
+										}
+									});
+								}
+								form.render('select');
+							},
+							btn: ['保存','删除'],
+							yes: function(index, layero){
+								var eventData,people="";
+								$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
+									people=people+$(this).text()+"、";
+								})
+								//去掉最后一个、(如果不需要去掉，就不用写)
+								if (people.length > 0) {
+							        people = people.substr(0, people.length - 1);
+							    }else if(people==""){
+							    	people="无";
+							    }
+							    calEvent.title=people;
+							    if(allDay){//点击全天设置全天
+									calEvent.allDay=true;
+									calEvent.end=null;
+								}else{
+									calEvent.allDay=false;
+									calEvent.start=startDate;
+									calEvent.end=endDate;
+								}
+								$('.gb-calendar').fullCalendar('updateEvent',calEvent); // 重新渲染编辑过的日程
+								layer.closeAll();
+							},
+							btn2: function(index, layero){
+								$('.gb-calendar').fullCalendar('removeEvents',calEvent._id); // 重新渲染编辑过的日程
+								layer.closeAll();
+							}
 
+						});
+		                return false;  //return false可以阻止点击后续事件发生（比如event中的url跳转事件）  
+		            }
+					// 必须遵循下述格式：
+					// M月d日 HH:mm - M月d日 HH:mm
 				});
-                return false;  //return false可以阻止点击后续事件发生（比如event中的url跳转事件）  
-            }
-			// 必须遵循下述格式：
-			// M月d日 HH:mm - M月d日 HH:mm
-		});
-	    // 弹出框关闭
-		$("body").on('click','.j-close-dialog',function() {
-			layer.closeAll();
-		});
+			    // 弹出框关闭
+				$("body").on('click','.j-close-dialog',function() {
+					layer.closeAll();
+				});
+			});
+	    }
 	});
 
 

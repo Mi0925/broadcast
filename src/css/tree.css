@@ -15,7 +15,8 @@
 .gb-tree .ztree .tree-icon:hover{color: #4579d8;}
 .gb-tree .ztree li ul{margin-top: 6px;}
 .gb-tree .ztree li>a{width: 96%;position: relative;}
-.gb-tree .ztree li>a:after{content: "";height: 1px;border-bottom: 1px dashed #ced5e0;right: 30px;top: 8px;position: absolute;left: 66px;}
+/*.gb-tree .ztree li>a:after{content: "";height: 1px;border-bottom: 1px dashed #ced5e0;right: 30px;top: 8px;position: absolute;left: 66px;}*/
+.ztree-check.ztree li>a:after{content: "";height: 1px;border-bottom: 1px dashed #ced5e0;right: 30px;top: 8px;position: absolute;left: 66px;}
 .gb-tree .ztree.ztree-resource li>a:after{left: 66px;}
 .gb-tree .ztree li span.button.noline_close{background-position: 2px -81px;}
 .gb-tree .ztree li span.button.noline_open{background-position: -11px -81px;}

@@ -43,7 +43,7 @@
 					 	<h4>
 						 	<span class="j-table-chart-tab">
 						 		<em class="list"><i class="iconfont icon-liebiao"></i>列表</em>
-						 		<em class="cur chart"><i class="iconfont icon-zhexian"></i>折线图</em>
+						 		<em class="cur chart"><i class="iconfont icon-zhexian"></i>柱状图</em>
 						 	</span>
 					 	</h4>
 					 	<div class="gb-table-chart-tab">
@@ -705,105 +705,81 @@ function addIncident() {
 	    incidentTypeChart = echarts.init(document.getElementById('bar-incident-type'));
 
 
-	    // 事件发布 
-	    incidentOption = {
- 		    title: {
-		        text: '事件发布',
-		        bottom: '0',
-		        left:'center',
-		        textStyle: { 
-		            color: '#585c65'
-		        }
-		    },
-		    tooltip : {
-		        formatter: "{b} : {c} ({d}%)"
-		    },
-		    legend: {
-		        // orient: 'vertical',
-		        x: 'center',
-		        bottom: '10%',
-		        itemWidth:'10',
-		        itemHeight:'10',
-		        data:['气象局','水利','国家应急广播平台','应急办'],
-		        align:"right"
-		    },
-		    series : [
-		        {
-		            type:'pie',
-		            radius : '60%',
-		            center: ['50%', '43%'],
-		            data:[
-			            {
-		                	value:25, 
-		                	name:'气象局',
-		                	itemStyle: {
-								normal: {
-									color: "#6e6fe6"
-								}
-					         }
-		                },{
-		                	value:30, 
-		                	name:'水利',
-		                	itemStyle: {
-								normal: {
-									color: "#9ca6ff"
-								}
-					         }
-		                },{
-		                	value:15, 
-		                	name:'国家应急广播平台',
-		                	itemStyle: {
-								normal: {
-									color: "#1ba5dd"
-								}
-					         }
-		                },{
-		                	value:25, 
-		                	name:'应急办',
-		                	itemStyle: {
-								normal: {
-									color: "#41cefb"
-								}
-					         }
-		                }
-		            ].sort(function (a, b) { return a.value - b.value; }),
-		            roseType: 'radius',
-		            label: {
-		                normal: {
-		                    textStyle: {
-		                        color: '#7c8491'
-		                    }
-		                }
-		            },
-		            labelLine: {
-		                normal: {
-		                    lineStyle: {
-		                        color: '#d8d8d8'
-		                    },
-		                    smooth: 0.2,
-		                    length: 0,
-		                    length2: 20
-		                }
-		            },
-		            itemStyle: {
-			             normal: {
-			                shadowBlur: 15,
-			                shadowColor: 'rgba(0, 0, 0, 0.4)',
-			                label:{
-			                	formatter:'{d}%',
-					        },
-			             }
-			         },
+		// 模拟数据
+		$.ajax({
+		    url: portsrc+'/incidentChartData',
+		    token:token,
+		    type: 'GET',
+		    dataType: 'json',
+		    success: function(data) {
+		    	console.log(data)
+			    // 事件发布 
+			    incidentOption = {
+		 		    title: {
+				        text: '事件发布',
+				        bottom: '0',
+				        left:'center',
+				        textStyle: { 
+				            color: '#585c65'
+				        }
+				    },
+				    tooltip : {
+				        formatter: "{b} : {c} ({d}%)"
+				    },
+				    legend: {
+				        // orient: 'vertical',
+				        x: 'center',
+				        bottom: '10%',
+				        itemWidth:'10',
+				        itemHeight:'10',
+				        data:['气象局','水利','国家应急广播平台','应急办'],
+				        align:"right"
+				    },
+				    series : [
+				        {
+				            type:'pie',
+				            radius : '60%',
+				            center: ['50%', '43%'],
+				            data:data.body.sort(function (a, b) { return a.value - b.value; }),
+				            roseType: 'radius',
+				            label: {
+				                normal: {
+				                    textStyle: {
+				                        color: '#7c8491'
+				                    }
+				                }
+				            },
+				            labelLine: {
+				                normal: {
+				                    lineStyle: {
+				                        color: '#d8d8d8'
+				                    },
+				                    smooth: 0.2,
+				                    length: 0,
+				                    length2: 20
+				                }
+				            },
+				            itemStyle: {
+					             normal: {
+					                shadowBlur: 15,
+					                shadowColor: 'rgba(0, 0, 0, 0.4)',
+					                label:{
+					                	formatter:'{d}%',
+							        },
+					             }
+					         },
 
-		            animationType: 'scale',
-		            animationEasing: 'elasticOut',
-		            animationDelay: function (idx) {
-		                return Math.random() * 200;
-		            }
-		        }
-		    ]
-		};
-		incidentChart.setOption(incidentOption);
+				            animationType: 'scale',
+				            animationEasing: 'elasticOut',
+				            animationDelay: function (idx) {
+				                return Math.random() * 200;
+				            }
+				        }
+				    ]
+				};
+				incidentChart.setOption(incidentOption);
+		    }
+		});
 
 		// 事件级别发布
 		incidentRankOption = {
@@ -950,10 +926,11 @@ function addIncident() {
 		    tooltip : {
 		    	// formatter:"{b}<br />{c}个",
 		    	formatter: '<div class="gb-bar-formatter">{b}<br /><em>{c}</em></div>',
-		    	position: function (point, params, dom, rect, size) {
-				    // 固定在顶部
-				    return {left: rect.x-($(dom).width()-rect.width)/1.5, top: rect.y-$(dom).height()-10};
-				},
+		  //   	position: function (point, params, dom, rect, size) {
+				//     // 固定在顶部
+				//     return {left: rect.x-($(dom).width()-rect.width)/1.5, top: rect.y-$(dom).height()-10};
+				// },
+            	position: "top",
 		        backgroundColor: 'rgba(255,255,255,0)',
 		        // borderColor:"#d8d8d8",
 		        // borderWidth:1,
@@ -1057,7 +1034,6 @@ function addIncident() {
 		taskNumChart.setOption(taskNumOption);
 
 
-		// 事件类型统计
 		// 事件类型统计数据
 		var incidentTypeData = [
 			{
@@ -1166,10 +1142,11 @@ function addIncident() {
 		    ],
 		    tooltip : {
 		    	formatter: '<div class="gb-bar-formatter">{b}<br /><em>{c}</em></div>',
-		    	position: function (point, params, dom, rect, size) {
-				    // 固定在顶部
-				    return {left: rect.x-($(dom).width()/2)+(rect.width/2.2), top: rect.y-$(dom).height()-10};
-				},
+		  //   	position: function (point, params, dom, rect, size) {
+				//     // 固定在顶部
+				//     return {left: rect.x-($(dom).width()/2)+(rect.width/2.2), top: rect.y-$(dom).height()-10};
+				// },
+				position: "top",
 		        backgroundColor: 'rgba(255,255,255,0)',
 		        // borderColor:"#d8d8d8",
 		        // borderWidth:1,

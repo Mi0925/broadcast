@@ -48,10 +48,69 @@ $('.gb-main-item').scroll(function(){
 })
 
 
+// 本地上传
+// $("body").on("change",".j-file",function(file) {
+// 	var el = document.createElement('li');
+// 	el.innerHTML = '<div class="filename"><i class="iconfont icon-1"></i><span class="thename">'+file.target.files[0].name+'</span></div>'+
+// 				'<div class="filebtn">'+
+// 				'	<input type="button" value="删除" class="filedel-btn"/>'+
+// 				'	<input type="button" value="转换" class="fileconv-btn"/>'+
+// 				'</div>';
+// 	// $(".j-disabled").before(el);
+// 	$(".filelist").append(el);
+// });
+// 文字转音频
 $(document).on('click','.toswitch',function(){
-	$('.popwindow').show();
-	$('.toshift').show();
-	$('.matlist li ').eq(0).find('input').prop('checked',true);
+	// $('.popwindow').show();
+	// $('.toshift').show();
+	// $('.matlist li ').eq(0).find('input').prop('checked',true);
+	if($("#impcontent").val()!=""){
+		if($("#imparea").val()!="请输入消息文本"){
+			$.ajax({
+			    url: portsrc+'/convertText',
+			    type: 'post',
+			    dataType: 'json',
+			    data:{
+			    	token:token,
+			    	data:JSON.stringify({
+			    		name:$("#impcontent").val(),text:$("#imparea").val()
+			    	})
+			    },
+			    success: function(data) {
+			    	if($('li.msg_audio').length==0){
+				    	var el = document.createElement('li');
+				    	el.classList.add('msg_audio');
+				    	el.style.color="#5fb878";
+						el.innerHTML = '<div class="filename"><i class="iconfont icon-1"></i><span class="thename">'+data.body.name+'</span></div>'+
+									'<div class="filebtn">'+
+									'	<input type="button" value="删除" class="filedel-btn"/>'+
+									// '	<input type="button" value="转换" class="fileconv-btn"/>'+
+									'</div>';
+						// $(".j-disabled").before(el);
+						$(".filelist").append(el);
+					}
+					layer.open({
+			            title: '提示',
+			            shadeClose:true,
+			            content: '成功转换为：'+data.body.name
+			        });
+
+			    }
+			});
+		}else{
+			layer.open({
+	            title: '提示',
+			    shadeClose:true,
+	            content: '请输入消息文本'
+	        });
+		}
+	}else{
+		layer.open({
+            title: '提示',
+			shadeClose:true,
+            content: '请输入事件名称'
+        });
+	}
 })
 
 $(document).on('click','.filepre-btn',function(){
@@ -60,7 +119,7 @@ $(document).on('click','.filepre-btn',function(){
 	$('.unreason').show();
 })
 
-$(document).on('click','.fileconv-btn',function(){
+$(document).on('click','.fileconv-btn,.filetit-one',function(){
 	$('.popwindow').show();
 	$('.toshift').show();
 	$('.matlist li ').eq(0).find('input').prop('checked',true);

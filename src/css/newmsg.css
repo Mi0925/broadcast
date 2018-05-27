@@ -62,8 +62,10 @@
 .filedel-btn:hover,.filepre-btn:hover,.todel-btn:hover{box-shadow:0px -10px 10px #ddd inset;}
 .fileconv-btn:hover,.foconv-btn:hover,.wordconv-btn:hover{background:#3c6dc7;}
 .gb-form .un-confirm{margin-top:30px;}
-.gb-table .toshift,.gb-form .toshift{height:390px;}
-.toshift .uncont{height:345px;}
+.gb-table .toshift{height:390px;}
+.gb-form .toshift{height: 260px;}
+/*.toshift .uncont{height:345px;}*/
+.toshift .uncont{height:216px;}
 .format{zoom:1;margin-bottom:20px;}
 .format:after,.matlist li:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
 .matit{color:#565d67;float:left;margin-right:5px;}

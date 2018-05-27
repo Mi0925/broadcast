@@ -33,15 +33,15 @@
 				<div class="fracent">
 					<div class="fraone">
 						<span class="icone"><i class="iconfont icon-yonghu"></i></span>
-						<input type="text" value="用户名" onfocus="if(this.value==defaultValue){this.value = '';this.style.borderColor='#999';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}this.style.borderColor='#d8d8d8';"/>
-						<span class="iconfont icon-11 itok "></span>
-						<span class=" iconfont icon-iconfontjinggao itwarn"></span>
+						<input type="text" value="用户名" class="j-name" onfocus="if(this.value==defaultValue){this.value = '';this.style.borderColor='#999';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}this.style.borderColor='#d8d8d8';"/>
+						<!-- <span class="iconfont icon-11 itok "></span> -->
+						<!-- <span class=" iconfont icon-iconfontjinggao itwarn"></span> -->
 					</div>
 					<div class="fratwo">
 						<span class="ictwo"><i class="iconfont icon-mima"></i></span>
-						<input type="text" value="密码" onfocus="if(this.value==defaultValue){this.value = '';this.type='password';this.style.color='#333';this.style.borderColor='#999';}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';this.type='text';}this.style.borderColor='#d8d8d8';"/>
-						<span class="iconfont icon-11 itok "></span>
-						<span class=" iconfont icon-iconfontjinggao itwarn"></span>
+						<input type="text" value="密码" class="j-pwd" onfocus="if(this.value==defaultValue){this.value = '';this.type='password';this.style.color='#333';this.style.borderColor='#999';}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';this.type='text';}this.style.borderColor='#d8d8d8';"/>
+						<!-- <span class="iconfont icon-11 itok "></span> -->
+						<!-- <span class=" iconfont icon-iconfontjinggao itwarn"></span> -->
 					</div>
 					<div class="frathr">
 						<div class="fracode">
@@ -60,13 +60,14 @@
 </div>
 
 <script src="plugins/DataTables-1.10.12/media/js/jquery.js"></script>
-<!--<script src="plugins/jquery.roundabout2.js"></script>
+<!-- <script src="plugins/jquery.roundabout2.js"></script>
 <script src="plugins/layui/layui.js"></script>
-<script src="src/js/main.min.js"></script>  -->
+<script src="src/js/main.min.js"></script>   -->
+<!-- 模拟随机数据 -->
+<script src="data/mock.js"></script>
+<script src="data/list.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-
 		$('.fracode input').bind('input propertychange',function(){
 			if($('.fracode input').val() != '' && $('.fracode input').val() != '验证码' && $('.fraone input').val() != '' && $('.fraone input').val() != '用户名' && $('.fratwo input').val() != '' && $('.fratwo input').val() != '密码'){
 				$('.disablebtn').addClass('loginbtn');
@@ -95,7 +96,22 @@
 			}
 		})
 		$(document).on('click','.loginbtn',function(){
-			//console.log(1);
+			// 模拟数据
+			$.ajax({
+			    url: 'http://127.0.0.1/login/user',
+			    type: 'post',
+				dataType: 'json',
+				data: {
+					userName: $(".j-name").val(),
+					pwd: $(".j-pwd").val()
+				},
+			    success: function(data) {
+			    	console.log(data.body);
+					sessionStorage.setItem('name',data.body.name);
+					sessionStorage.setItem('token',data.body.token);
+					document.location.href="index.html#/index";
+			    }
+			});
 		})
 	})
 </script>

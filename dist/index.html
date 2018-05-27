@@ -17,9 +17,9 @@
 	<!-- 加载百度地图 -->
 	<!-- <script src="http://api.map.baidu.com/api?v=2.0&ak=Pg78EjHlM1Ma0Bs5gZwkmgrQ"></script> -->
 	<!-- 图标本地链接 -->
-	<!-- <link rel="stylesheet" href="./iconfont/iconfont.css"> -->
+	<link rel="stylesheet" href="./iconfont/iconfont.css">
 	<!-- 图标在线链接 -->
-	<link rel="stylesheet" href="https://at.alicdn.com/t/font_484596_vpfl45i5u24ndn29.css">
+	<!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_484596_vpfl45i5u24ndn29.css"> -->
 </head>
 <body>
 <div class="gb-wrap">
@@ -185,7 +185,7 @@
 							<button class="layui-btn layui-btn-xs layui-btn-primary iT j-work j-dialog-work" attr="上班">上 班</button>
 						</label>
 					</div>
-					<span class="name i">橙子，欢迎您333！</span>
+					<span class="name i" id="name"></span>
 					<a href="#/personalSetting" url="components/personalSetting.html" class="add_tab succession i" name="个人设置">
 						<i class="iconfont icon-gerenxinxi i"></i>
 						<em class="i">个人设置</em>
@@ -287,74 +287,100 @@
 <script src="plugins/fullcalendar-3.8.0/locale/zh-cn.js"></script>
 <!-- 打包过的主要js -->
 <script src="src/js/main.min.js"></script>
+<!-- 模拟随机数据 -->
+<script src="data/mock.js"></script>
+<script src="data/list.js"></script>
 <script>
-/* 倒计时 */
-var worksetInterval=null;
-function timer(intDiff) {
-	worksetInterval=window.setInterval(function() {
-		var day = 0,
-			hour = 0,
-			minute = 0,
-			second = 0; //时间默认值    
-		if (intDiff > 0) {
-			day = Math.floor(intDiff / (60 * 60 * 24));
-			hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
-			minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
-			second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+	// 登录判断
+	if(sessionStorage.getItem('token')=='' || sessionStorage.getItem('token')==null){
+		alert('请先登录');
+		document.location.href="sign.html";
+	}else{
+		$(".gb-header-operation .name").html(user_name+"，欢迎您");
+		if(sessionStorage.getItem('tab_default_name')=='' || sessionStorage.getItem('tab_default_name')==null){
+			sessionStorage.setItem('tab_default_name','首页');
+			sessionStorage.setItem('tab_default_url','components/index.html');
 		}
-		if (minute <= 9) minute = '0' + minute;
-		if (second <= 9) second = '0' + second;
-		$('#day_show').html(day);
-		$('#hour_show').html('<s id="h"></s>' + hour);
-		$('#minute_show').html('<s></s>' + minute);
-		$('#second_show').html('<s></s>' + second);
-		intDiff--;
-	}, 1000);
-}
-$(".j-ok-work").click(function() {
-	clearInterval(worksetInterval);
-	timer(parseInt(1000));
-})
-layui.use(['layer','laydate','form'], function() {
-	var layer = layui.layer,laydate = layui.laydate,form = layui.form;
-    $("body").on('click','.j-work',function() {
-		if($(this).attr("attr")=="上班"){
-			clearInterval(worksetInterval);
-			timer(parseInt(1000));//倒计时总秒数量
-			$(this).attr("attr","下班");
-			$(this).html("下 班");
-			$(".gb-dialog-word p").html("上班前请填写交接班记录");
-			$(this).siblings(".name").show().html("8：00上班");
-			$(".gb-work-countdown").show();
-		}else{
-			$(this).attr("attr","上班");
-			$(this).html("上 班");
-			$(".gb-dialog-word p").html("下班前请填写交接班记录");
-			$(this).siblings(".name").html("18：00下班");
-			$(".gb-work-countdown").hide();
-		}
-		// 上班弹出框
-		layer.open({
-			type: 1, 
-			title:false,
-			shadeClose:true,
-			closeBtn: 0,
-			content: $(".gb-dialog-work"),
-			btn: ['新建交接班记录','取 消'],
-			yes: function(index, layero){
-				window.location.href="#/newHandoverRecord";
-				add_tab("新建交接班记录",'components/newHandoverRecord.html');
-				layer.closeAll();
-			},
-			success: function(layero, index){
-				
+	};
+	// 退出登录，清空用户名，token等值
+	$(".exit").click(function() {
+		sessionStorage.setItem('name','');//用户名
+		sessionStorage.setItem('token','');//token
+		sessionStorage.setItem('tab_default_name','');//默认tag切换
+		sessionStorage.setItem('tab_default_url','');//默认tag切换url
+	});
+
+
+
+	
+
+	/* 倒计时 */
+	var worksetInterval=null;
+	function timer(intDiff) {
+		worksetInterval=window.setInterval(function() {
+			var day = 0,
+				hour = 0,
+				minute = 0,
+				second = 0; //时间默认值    
+			if (intDiff > 0) {
+				day = Math.floor(intDiff / (60 * 60 * 24));
+				hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+				minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+				second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
 			}
-		});
-    });
-});
+			if (minute <= 9) minute = '0' + minute;
+			if (second <= 9) second = '0' + second;
+			$('#day_show').html(day);
+			$('#hour_show').html('<s id="h"></s>' + hour);
+			$('#minute_show').html('<s></s>' + minute);
+			$('#second_show').html('<s></s>' + second);
+			intDiff--;
+		}, 1000);
+	}
+	$(".j-ok-work").click(function() {
+		clearInterval(worksetInterval);
+		timer(parseInt(1000));
+	})
+	layui.use(['layer','laydate','form'], function() {
+		var layer = layui.layer,laydate = layui.laydate,form = layui.form;
+	    $("body").on('click','.j-work',function() {
+			if($(this).attr("attr")=="上班"){
+				clearInterval(worksetInterval);
+				timer(parseInt(1000));//倒计时总秒数量
+				$(this).attr("attr","下班");
+				$(this).html("下 班");
+				$(".gb-dialog-word p").html("上班前请填写交接班记录");
+				$(this).siblings(".name").show().html("8：00上班");
+				$(".gb-work-countdown").show();
+			}else{
+				$(this).attr("attr","上班");
+				$(this).html("上 班");
+				$(".gb-dialog-word p").html("下班前请填写交接班记录");
+				$(this).siblings(".name").html("18：00下班");
+				$(".gb-work-countdown").hide();
+			}
+			// 上班弹出框
+			layer.open({
+				type: 1, 
+				title:false,
+				shadeClose:true,
+				closeBtn: 0,
+				content: $(".gb-dialog-work"),
+				btn: ['新建交接班记录','取 消'],
+				yes: function(index, layero){
+					window.location.href="#/newHandoverRecord";
+					add_tab("新建交接班记录",'components/newHandoverRecord.html');
+					layer.closeAll();
+				},
+				success: function(layero, index){
+					
+				}
+			});
+	    });
+	});
 
 
- 	var RoundaboutSet=null;//首页轮播定时器
+	var RoundaboutSet=null;//首页轮播定时器
 	var tabActive=0;//当前活动tab
 	// 刷新页面清除url参数
 	// var shortURL=top.location.href.substring(0,top.location.href.indexOf('#'));
@@ -475,7 +501,6 @@ layui.use(['layer','laydate','form'], function() {
 
 	// 默认打开指定页面
 	add_tab(sessionStorage.getItem('tab_default_name'),sessionStorage.getItem('tab_default_url'));
-
 </script>
 </body>
 </html>

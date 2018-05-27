@@ -24,7 +24,12 @@ function body_load() {
                 eventElem: '#tochobtn',
                 trigger: 'click',
                 type:'datetime',
-                range: true
+                range: true,
+                change: function(value, date, endDate){
+                    console.log(value)
+                    console.log(date)
+                    console.log(endDate)
+                }
             });
         })
     },500)
@@ -86,7 +91,7 @@ function tabot($this) {
 // 跳转page
 function jumpPage($this) {
     $this.find(".dataTables_paginate").append("<div class='jump-page'>前往第 <input class='changePage' type='text'> 页  <a class='dataTable-btn' href='javascript:void(0);'>确认</a></div>");  
-    var oTable = $this.find("table").dataTable();  
+    var oTable = $this.find('.dataTables_scrollBody').find('table').dataTable();
     $this.find('.dataTable-btn').click(function(e) { 
         if($this.find(".changePage").val() && $this.find(".changePage").val() > 0) {  
             var redirectpage = $this.find(".changePage").val() - 1;
@@ -145,6 +150,7 @@ function rowLevScreen(column){
 }
 
 //table配置
+var deleteId=[];//存放删除id
 function userDef(table){
     $(".gb-packUp-leftNav").click(function(){
         setTimeout(function(){
@@ -185,15 +191,53 @@ function userDef(table){
 
    });
 
-   $('.chedel').click(function () {
-       table.rows('tr.selected').remove().draw(false);
-       $('#checkAll').attr('checked',false);
-   });
+    $('.chedel').click(function() {
+        $('tr.selected').each(function() {
+            deleteId.push($(this).find('.checkone').find('input').attr('id'))
+        });
+        console.log(deleteId.sort())
+        // 模拟数据
+        $.ajax({
+            url: portsrc + '/schedule/deleteItem',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                token:token,
+                id: deleteId.sort()
+            },
+            success: function(data) {
+                console.log(data);
+                table.rows('tr.selected').remove().draw(false);
+                $('#checkAll').attr('checked', false);
+                layer.open({
+                    title: '提示',
+                    content: '删除成功'
+                });
+                deleteId=[];
+            }
+        });
+    });
 
     $('.cho-delete').click(function(){
-        table.row('.trdel').remove().draw(false);
-        $(this).parents('.choose').hide();
-   })
+        // 模拟数据
+        $.ajax({
+            url: portsrc + '/schedule/deleteItem',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                token:token,
+                id: $('tr.trdel').find('input').attr('id')
+            },
+            success: function(data) {
+                table.row('.trdel').remove().draw(false);
+                $(this).parents('.choose').hide();
+                layer.open({
+                    title: '提示',
+                    content: '删除成功'
+                });
+            }
+        });
+    })
 
     $('.dataTables_wrapper').on('scroll',function(){
         if($('.choose').is(':visible')){
@@ -308,8 +352,7 @@ $(function() {
         $('.chopri').val('重发');
         $('.chopri').removeClass('cho-delete cho-continue cho-stop').addClass('cho-again');
         $(this).parents('tr').addClass('traga');
-        $(document).one("click",
-        function() { 
+        $(document).one("click",function() { 
             $(".choose").hide();
             $('table.dataTable tbody tr').removeClass('traga');
         });
@@ -322,11 +365,11 @@ $(function() {
         $('.chopri').removeClass('cho-again cho-continue cho-stop').addClass('cho-delete');
         $(this).parents('tr').addClass('trdel');
         //$(myDiv).toggle();
-        $(document).one("click",
-        function() { 
-            $(".choose").hide();
-            $('table.dataTable tbody tr').removeClass('trdel');
-        });
+        // $(document).one("click",function() {
+        //     alert(1)
+        //     $(".choose").hide();
+        //     $('table.dataTable tbody tr').removeClass('trdel');
+        // });
         event.stopPropagation();
     });
     $(document).on('click','.logout',function(event) {
@@ -371,10 +414,15 @@ $('.cho-logout').click(function(){
     $(this).parents('.choose').hide();
     $('tr').removeClass('trlogout');
 })
-$('.cho-cancel').click(function(){
+$('body').on('click','.cho-cancel',function(){
     //console.log('chocancel');
     $(this).parents('.choose').hide();
     $('tr').removeClass('trstop trcont traga trdel');
+});
+
+// 编辑按钮
+$('body').on('click','.editbtn',function(){
+    sessionStorage.setItem('editTableItem',$(this).parents('tr').find('.checkone').find('input').attr('id'));
 })
 
 /*popwindow*/

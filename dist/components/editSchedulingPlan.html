@@ -1,5 +1,5 @@
 <div class="gb-form">
-	<form class="layui-form" action="">
+	<form class="layui-form" lay-filter="formTest" action="">
 		<div class="newform">
 			<p class="newform-tit"><i class="iconfont icon-bianji1"></i>编辑调度方案</p>
 			<div class="form-oneitem">
@@ -9,21 +9,8 @@
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>选择事件类别</p>
 					<div class="layui-input-inline">
-						<select name="dispatch" lay-search=""> 
+						<select name="type" lay-search=""> 
 							<option value="">请选择事件类别</option>
-							<option value="1">10000 突发事件</option>
-							<option value="2">11A00 水旱灾害</option>
-							<option value="3">11A01 洪水</option>
-							<option value="4">11A02 内涝</option>
-							<option value="5">11A03 水库重大险情</option>
-							<option value="6">11A04 堤防重大险情</option>
-							<option value="7">11A05 凌汛灾害</option>
-							<option value="8">11A51 山洪灾害事件</option>
-							<option value="9">11A52 农业干旱</option>
-							<option value="10">11A53 城镇缺水</option>
-							<option value="11">11A54 生态干旱</option>
-							<option value="12">11A53 农村人畜饮水困难</option>
-							<option value="13">11A54 其他干旱</option>
 						</select>
 					</div>
 				</div>
@@ -35,7 +22,7 @@
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>事件名称</p>
 					<div class="oneimp">
-						<input type="text"  id="impcontent" class="imptxt" maxlength="20"/>
+						<input type="text" name="name" id="impcontent" class="imptxt" maxlength="20"/>
 						<span class="oneimp-count"><span class="countnew">0</span>/20</span>
 					</div>
 				</div>
@@ -46,25 +33,25 @@
 				</div>
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>消息级别</p>
-					<ul class="msgrank">
+					<ul class="msgrank lev-radio">
 						<li>
-							<input type="radio" name="checkone" id="radone" />
+							<input type="radio" name="lev" id="radone" value='红色' />
 							<label for="radone"><img src="src/images/rank-red.png">红色</label>
 						</li>
 						<li>
-							<input type="radio" name="checkone" id="radtwo" />
+							<input type="radio" name="lev" id="radtwo"  value='橙色'/>
 							<label for="radtwo"><img src="src/images/rank-orange.png">橙色</label>
 						</li>
 						<li>
-							<input type="radio" name="checkone" id="radthr" />
+							<input type="radio" name="lev" id="radthr"  value='黄色'/>
 							<label for="radthr"><img src="src/images/rank-yellow.png">黄色</label>
 						</li>
 						<li>
-							<input type="radio" name="checkone" id="radfou" />
+							<input type="radio" name="lev" id="radfou"  value='蓝色'/>
 							<label for="radfou"><img src="src/images/rank-blue.png">蓝色</label>
 						</li>
 						<li>
-							<input type="radio" name="checkone" id="radfiv" />
+							<input type="radio" name="lev" id="radfiv"  value='绿色'/>
 							<label for="radfiv"><img src="src/images/rank-green.png">绿色</label>
 						</li>
 					</ul>
@@ -78,7 +65,7 @@
 					<p class="oneitem-tit"><small>*</small>消息内容</p>
 					<div class="msgcont">
 						<div class="txtimp">
-							<textarea id="imparea" class="imparea" maxlength="200" onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#ccc'}">请输入消息文本</textarea>
+							<textarea id="imparea" name="msgTxt" class="imparea" maxlength="200" style="color: #000;">请输入消息文本</textarea>
 							<span class="area-count"><span class="countnew">0</span>/200</span>
 						</div>
 						<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>文本内容可以直接转换成音频</p>
@@ -90,20 +77,6 @@
 							<span class="filetit-two"><i class="iconfont icon-kucun"></i>在应急音频资源库中选择</span>
 						</div>
 						<ul class="filelist">
-							<li>
-								<div class="filename"><i class="iconfont icon-1"></i><span class="thename">视频.mp4</span></div>
-								<div class="filebtn">
-									<input type="button" value="删除" class="filedel-btn"/>
-									<input type="button" value="转换" class="fileconv-btn"/>
-								</div>
-							</li>
-							<li>
-								<div class="filename"><i class="iconfont icon-1"></i><span class="thename">文本.txt</span></div>
-								<div class="filebtn">
-									<input type="button" value="删除" class="filedel-btn"/>
-									<input type="button" value="转换" class="fileconv-btn"/>
-								</div>
-							</li>
 						</ul>
 					</div>
 				</div>
@@ -117,13 +90,13 @@
 					<div class="covarea-sel gb-tree-box left">
 						<span class="systit"><i class="iconfont icon-xuanze"></i>已选择地区</span>
 						<div class="gb-tree scroll">
-							<ul id="gb_tree_sel1" class="ztree ztree-close"></ul>
+							<ul id="gb_tree_areaSel" class="ztree ztree-close"></ul>
 						</div>
 					</div>
 					<div class="covarea-all gb-tree-box right">
 						<span class="systit"><i class="iconfont icon-quanbu"></i>全部地区</span>
 						<div class="gb-tree scroll">
-							<ul id="gb_tree_all1" class="ztree ztree-check"></ul>
+							<ul id="gb_tree_area" class="ztree ztree-check"></ul>
 						</div>
 					</div>
 				</div>
@@ -137,13 +110,13 @@
 					<div class="sysreso-sel gb-tree-box left">
 						<span class="systit"><i class="iconfont icon-xuanze"></i>已选择资源</span>
 						<div class="gb-tree scroll">
-							<ul id="gb_tree_sel2" class="ztree ztree-close"></ul>
+							<ul id="gb_tree_resourceSel" class="ztree ztree-close"></ul>
 						</div>
 					</div>
 					<div class="sysreso-all gb-tree-box right">
 						<span class="systit"><i class="iconfont icon-quanbu"></i>全部资源</span>
 						<div class="gb-tree scroll">
-							<ul id="gb_tree_all2" class="ztree ztree-check"></ul>
+							<ul id="gb_tree_resource" class="ztree ztree-check"></ul>
 						</div>
 					</div>
 				</div>
@@ -155,11 +128,11 @@
 				<div class="oneitem-cont">
 					<div class="predictone">
 						<p class="oneitem-tit">预覆盖人数</p>
-						<p class="precount">1000万人</p>
+						<p class="precount j-population">1000万人</p>
 					</div>
 					<div class="predictwo">
 						<p class="oneitem-tit">预覆盖面积</p>
-						<p class="precount">120万平方公里</p>
+						<p class="precount j-area">120万平方公里</p>
 					</div>
 				</div>
 			</div>
@@ -170,11 +143,11 @@
 				<div class="oneitem-cont">
 					<div class="predictone">
 						<p class="oneitem-tit">发布部门</p>
-						<p class="precount">杭州市广播中心</p>
+						<p class="precount j-department">杭州市广播中心</p>
 					</div>
 					<div class="predictwo">
 						<p class="oneitem-tit">负责人</p>
-						<p class="precount">橙子</p>
+						<p class="precount j-popName">橙子</p>
 					</div>
 				</div>
 			</div>
@@ -184,20 +157,31 @@
 				</div>
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>直接发布</p>
-					<ul class="msgrank">
+					<ul class="msgrank release-radio">
 						<li>
-							<input type="radio" name="cheyesno" id="cheone" />
+							<input type="radio" name="release" id="cheone" value='yes' />
 							<label for="cheone">是</label>
 						</li>
 						<li>
-							<input type="radio" name="cheyesno" id="chetwo" />
+							<input type="radio" name="release" id="chetwo" value='no' />
 							<label for="chetwo">否</label>
 						</li>
 					</ul>
 				</div>
 			</div>
+			<div class="form-oneitem">
+				<div class="fortit">
+					<p class="oneitem-tit"><span class="onenumb">10</span><small>*</small>时间范围</p>
+				</div>
+				<div class="oneitem-cont">
+					<div class="layui-input-inline">
+			        <input type="text" class="layui-input" name="time" id="datergs" placeholder="选择时间范围" lay-verify="required">
+			        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
+		    	</div>
+				</div>
+			</div>
 			<div class="tocreat">
-				<input type="button" value="确定" class="tocreatbtn" />
+				<input type="button" value="确定" class="tocreatbtn" lay-submit lay-filter="*" />
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 		</div>
@@ -218,55 +202,7 @@
 					<span class="matit">当前格式：</span>
 					<span class="themat">mp3</span>
 				</div>
-				<div class="format">
-					<span class="matit">目标格式：</span>
-					<div class="matchoose">
-						<ul class="matlist">
-							<li>
-								<span class="matype">格式一</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="matone" checked="checked" />
-									<label for="matone"></label>
-								</div>
-							</li>
-							<li>
-								<span class="matype">格式二</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="matwo" />
-									<label for="matwo"></label>
-								</div>
-							</li>
-							<li>
-								<span class="matype">格式三</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="mathr" />
-									<label for="mathr"></label>
-								</div>
-							</li>
-							<li>
-								<span class="matype">格式四</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="matfou" />
-									<label for="matfou"></label>
-								</div>
-							</li>
-							<li>
-								<span class="matype">格式五</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="matfiv" />
-									<label for="matfiv"></label>
-								</div>
-							</li>
-							<li>
-								<span class="matype">格式六</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="matsix" />
-									<label for="matsix"></label>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<input type="file" accept="text/*" class="file_text" />
 				<div class="tomat">
 					<div class="layui-progress layui-progress-big" lay-filter="demo"><!--  lay-showpercent="true" -->
 					  <div class="layui-progress-bar" lay-percent="0%"></div><!--   layui-bg-red -->
@@ -285,57 +221,8 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		layui.use(['form', 'element'], function(){
-			var element = layui.element,form = layui.form;
-			form.render();
-
-			var itbtn = $('<span class="itbtn"></span>');
-			$('.layui-select-title').append(itbtn);
-			$('.gb-form .layui-form-radio').remove();
-
-		  
-			//触发事件
-			var active = {
-			    loading: function(othis){
-			      var DISABLED = 'layui-btn-disabled';
-			      if(othis.hasClass(DISABLED)) return;
-			      
-			      //模拟loading
-			      var n = 0,timer = setInterval(function(){
-			        n = n + Math.random()*10|0;  
-			        if(n>100){
-			          n = 100;
-			          clearInterval(timer);
-			          othis.removeClass(DISABLED);
-			          $('.uncont .tomat').hide();
-			          $('.uncont .succmat').show();
-			        }
-			        element.progress('demo', n+'%');
-			      }, 300+Math.random()*1000);
-			      
-			      othis.addClass(DISABLED);
-			    }
-			};
-		  
-			$('.site-demo-active').on('click', function(){
-				$('.uncont .tomat').show();
-				$('.uncont .succmat').hide();
-				var othis = $(this), type = $(this).data('type');
-				active[type] ? active[type].call(this, othis) : '';
-			});
-		});
-	})
-
-	
 	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-	var selSetting = {
-		view:{
-			showLine:false,//去掉连接线
-			addDiyDom:addDiyDom
-		}
-	};
-	var allSetting = {
+	var areaSetting = {//地区配置
 		view:{
 			showLine:false,//去掉连接线
 		},
@@ -343,130 +230,314 @@
 			enable:true,
 		},
 		callback: {
-			onCheck: zTreeOnCheck
+			onCheck: areaZTreeOnCheck
 		}
 	};
-
-
-	function zTreeOnCheck(event, treeId, treeNode) {
-		// 勾选复选框将触发这个方法，在这里调用ajax获取已选数据
-	    console.log(treeNode)
-		// 	selData=treeNode;//ajax获取的数据赋值给已选数据
-	 //    if(treeNode.checked){
-		//  //    var treeObj = $.fn.zTree.getZTreeObj("gb_tree_all1");//获取全部数据的树的对象
-		// 	// var nodes = treeObj.getChangeCheckedNodes();//获取勾选的数据
-	 //    }
-		// 	$.fn.zTree.init($(this), selSetting, selData);//初始化已选数据的树
+	var resourceSetting = {//资源配置
+		view:{
+			showLine:false,//去掉连接线
+		},
+		check:{//添加复选框
+			enable:true,
+		},
+		callback: {
+			onCheck: resourceZTreeOnCheck
+		}
 	};
-	// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-	// 全部数据
-	var allData = [{
-	    name: "浙江省",
-	    open: true,
-	    checked:true,
-	    children: [{
-	        name: "杭州市",
-	    	checked:true,
-	        children: [{
-		        name: "上城区",
-		        children: [{
-			        name: "湖滨街道"
-			    }]
-		    }]
-	    },{
-	        name: "宁波市",
-	    	checked:true,
-	        children: [{
-		        name: "上城区",
-		        children: [{
-			        name: "湖滨街道"
-			    }]
-		    }]
-	    },{
-	        name: "温州市",
-	    	checked:true,
-	        children: [{
-		        name: "上城区",
-		        children: [{
-			        name: "湖滨街道"
-			    }]
-		    }]
-	    }]
-	},{
-	    name: "浙江省1",
-	    open: true,
-	    children: [{
-	        name: "杭州市",
-	        children: [{
-		        name: "上城区",
-		        children: [{
-			        name: "湖滨街道"
-			    }]
-		    }]
-	    },{
-	        name: "宁波市",
-	        children: [{
-		        name: "上城区",
-		        children: [{
-			        name: "湖滨街道"
-			    }]
-		    }]
-	    },{
-	        name: "温州市",
-	        children: [{
-		        name: "上城区",
-		        children: [{
-			        name: "湖滨街道"
-			    }]
-		    }]
-	    }]
-	}];
-	// 已选数据
-	var selData=[{
-	    name: "浙江省",
-	    open: true,
-	    children: [{
-	        name: "杭州市",
-	        children: [{
-		        name: "上城区",
-		        children: [{
-			        name: "湖滨街道"
-			    }]
-		    }]
-	    },{
-	        name: "宁波市",
-	        children: [{
-		        name: "上城区",
-		        children: [{
-			        name: "湖滨街道"
-			    }]
-		    }]
-	    },{
-	        name: "温州市",
-	        children: [{
-		        name: "上城区",
-		        children: [{
-			        name: "湖滨街道"
-			    }]
-		    }]
-	    }]
-	}];
+	var selSetting = {
+		view:{
+			showLine:false,//去掉连接线
+			// addDiyDom:addDiyDom
+		}
+	};
+	var precount_num=0,//覆盖人口,
+		area_num=0,//覆盖面积
+		resourceGather=[],//全部资源
+		areaData=[],// 全部地区数据
+		areaSelData=[];// 已选地区数据
 
-	$(document).ready(function() {
-		// 初始化树
-		ztree_Initialize();
-		// $.fn.zTree.init($("#gb_tree_all1"), allSetting, zNodes);
-		// $.fn.zTree.init($("#gb_tree_all2"), allSetting, zNodes);
+	// 获取编辑数据
+	$.ajax({
+	    url: portsrc+'/schedule/editItem',
+	    type: 'post',
+	    dataType: 'json',
+	    data:{
+	    	token:token,
+	    	id:sessionStorage.getItem('editTableItem'),
+	    },
+	    success: function(data) {
+	    	console.log(data)
+	    	var data=data.body;
+	    	for (var i = 0; i < data.type.length; i++) {
+	    		var name=data.type[i].num+data.type[i].name;
+	    		if(data.type[i].selected){
+	    			$(".layui-input-inline select").append('<option value='+name+' selected>'+name+'</option>');
+	    		}else{
+	    			$(".layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
+	    		}
+	    	};
+	    	$("#impcontent").val(data.name);//默认事件名
+	    	$(".lev-radio li").each(function(index, el) {
+	    		if($(this).find('input').val()==data.level){
+	    			console.log($(this).find('input').val())
+	    			$(this).find('input').attr('checked','checked')
+	    		}
+	    	});//默认等级
+	    	$(".imparea").val(data.msgTxt);//默认消息文本
+	    	$(".j-population").text(data.population+'人')
+	    	$(".j-area").text(data.area+'万平方公里')
+	    	$(".j-department").text(data.department)
+	    	$(".j-popName").text(data.popName)
+	    	
+	    	$(".release-radio li").each(function(index, el) {
+	    		if($(this).find('input').val()==data.release){
+	    			$(this).find('input').attr('checked','checked')
+	    		}
+	    	});//默认是否发布
+			layui.use(['form', 'element'], function(){
+				var element = layui.element,form = layui.form,laydate = layui.laydate;
+				form.render();
+				var itbtn = $('<span class="itbtn"></span>');
+				$('.layui-select-title').append(itbtn);
+				$('.gb-form .layui-form-radio').remove();
+				laydate.render({ 
+					elem: '#datergs',
+	                eventElem: '#tochobtn',
+	                trigger: 'click',
+	                type:'datetime',
+	                range: true,
+					value: data.time
+				});
+
+				//触发事件
+				var timer,timeNum=0,DISABLED = 'layui-btn-disabled';
+				var active = {
+				    loading: function(othis,time,name){
+						//模拟loading
+						timer = setInterval(function() {
+						    timeNum = timeNum + Math.random() * 10 | 0;
+						    if (timeNum > 100) {
+						        timeNum = 0;
+						        clearInterval(timer);
+						        othis.removeClass(DISABLED);
+						        $('.uncont .tomat').hide();
+						        $('.uncont .succmat').show();
+
+						        var el = document.createElement('li');
+								el.innerHTML = '<div class="filename"><i class="iconfont icon-1"></i><span class="thename">'+name+'</span></div>'+
+											'<div class="filebtn">'+
+											'	<input type="button" value="删除" class="filedel-btn"/>'+
+											// '	<input type="button" value="转换" class="fileconv-btn"/>'+
+											'</div>';
+								// $(".j-disabled").before(el);
+								$(".filelist").append(el);
+
+								$('.file_text').after($('.file_text').clone().val(""));   
+    							$('.file_text').eq(0).remove();
+						    }
+						    element.progress('demo', timeNum + '%');
+						}, time==0 ? (1000 + Math.random() * 500) : time);
+						  	
+				    }
+				};
+				$('.site-demo-active').on('click', function(){
+					if($('.file_text')[0].files[0]!=undefined){
+						var formData = new FormData(),$this=$(this), type = $this.data('type');
+						if ($this.hasClass(DISABLED)) return false;
+						$this.addClass(DISABLED);
+						formData.append('file', $('.file_text')[0].files[0]);
+						$.ajax({
+						    url: portsrc+'/convertFile',
+						    type: 'post',
+						    cache: false,
+						    data:{
+						    	token:token,
+						    	data:formData
+						    },
+						    processData: false,
+						    contentType: false,
+		    				dataType: 'json',
+							beforeSend: function () {
+								$('.uncont .tomat').show();
+								$('.uncont .succmat').hide();
+								active[type] ? active[type].call(this, $this,0) : '';
+						    },
+						    success: function(data) {
+						    	console.log(data);
+						    	clearInterval(timer);
+								active[type] ? active[type].call(this, $this,70,data.body.name) : '';
+						    }
+						});
+					}else{
+						layer.open({
+				            title: '提示',
+				            content: '请先上传一个文本'
+				        });
+					}
+				});
+
+				form.on('submit(*)', function(data){
+					var listMP3=[];
+					$(".filelist li").each(function() {
+						listMP3.push($(this).find(".thename").text());
+					})
+					console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+					data.field.precount_num=precount_num;
+					data.field.area_num=area_num;
+					data.field.listMP3=listMP3;
+					console.log(data.field)
+					$.ajax({
+					    url: portsrc+"/schedule/addItem",
+					    type: 'post',
+					    dataType: 'json',
+					    data:{
+					    	token:token,
+					    	id:'',//空为创建
+					    	data:JSON.stringify(data.field)
+					    },
+					    success: function(data) {
+							layer.open({
+					            title: '提示',
+			            		shadeClose:true,
+					            content: data.body.name
+					        });
+					    }
+					});
+					return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+				});
+			});
+			$.fn.zTree.init($('#gb_tree_area'), areaSetting, data.areaData);
+			$.fn.zTree.init($('#gb_tree_resource'), areaSetting, data.resourceData);
+			$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.areaSelData);
+			$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.resourceSelData);
+	    }
 	});
-	function ztree_Initialize(argument) {
-		//带关闭按钮的树
-		$(".ztree-close").each(function() {
-			$.fn.zTree.init($(this), selSetting, selData);
+
+	function areaZTreeOnCheck(event, treeId, treeNode) {//地区：勾选复选框将触发这个方法，在这里调用ajax获取已选数据
+	    // console.log(event)
+		// 获取地区接口
+		$.ajax({
+		    url: portsrc+'/areaSelect',
+		    type: 'post',
+		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    	data:JSON.stringify($("#"+treeNode.parentTId+">a").text()==""?treeNode.name:$("#"+treeNode.parentTId+">a").text()+'-'+treeNode.name)//传给后台省份：浙江省-杭州市
+		    },
+		    success: function(data) {
+		    	var data=data.body;
+				var selTree=[];//存放树选择的数据
+				$.fn.zTree.init($('#gb_tree_areaSel'), selSetting);//初始化已选地区树
+	    		var treeArea = $.fn.zTree.getZTreeObj("gb_tree_area");//获取全部地区树
+	    		var treeAreaSel = $.fn.zTree.getZTreeObj("gb_tree_areaSel");//获取已选地区的树
+		    	var treeparent=treeArea.getCheckedNodes(true);//获取全部地区勾选的数据
+			    if(treeNode.checked){//勾选地区计算
+		    		precount_num=precount_num+data.areaStruct[0].population;//勾选地区计算人口
+		    		area_num=area_num+data.areaStruct[0].area;//勾选地区计算面积
+		    		for (var i = 0; i < treeparent.length; i++) {
+		    			if(treeparent[i].level==0){//只添加1级的树
+		    				selTree.push(treeparent[i]);
+		    			};
+		    		};
+					$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, selTree);//初始化已选地区的树
+					var nodes = treeAreaSel.getCheckedNodes(false);//获取已选地区未勾选的数据
+						console.log(selTree)
+					for (var i=0, l=nodes.length; i < l; i++) {
+						treeAreaSel.removeNode(nodes[i]);//删除已选地区未勾选的数据
+					};
+
+
+					if(resourceGather.length==0){//判断全部资源是否为空，空就添加一条
+						resourceGather.push(data.areaStruct[0]);
+					}else{//全部资源不为空判断是否添加过该地区资源
+						var boolean=true;
+						for (var i = 0; i < resourceGather.length; i++) {
+							if(resourceGather[i].name==data.areaStruct[0].name){//循环资源，如果出现相同名字就判断为添加过该地区
+								boolean=false;
+							};
+						};
+						if(boolean){
+							resourceGather.push(data.areaStruct[0]);
+						};
+					}
+					$.fn.zTree.init($('#gb_tree_resource'),resourceSetting,resourceGather);//初始全部资源树
+			    }else{
+			    	for (var i = 0; i < resourceGather.length; i++) {
+			    		if(resourceGather[i].name==data.areaStruct[0].name){
+			    			resourceGather.splice(i,1)
+							$.fn.zTree.init($('#gb_tree_resource'),resourceSetting,resourceGather);//初始全部资源树
+			    		}
+			    	}
+			    	console.log(resourceGather)
+	    			// var treeResource = $.fn.zTree.getZTreeObj("gb_tree_resource");//获取已选地区的树
+		    		precount_num=precount_num-data.areaStruct[0].population;
+		    		area_num=precount_num-data.areaStruct[0].area;
+		    		for (var i = 0; i < treeparent.length; i++) {
+		    			if(treeparent[i].level==0){
+		    				selTree.push(treeparent[i]);
+		    			}
+		    		}
+					$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, selTree);//初始化已选数据的树
+					var nodes = treeAreaSel.getCheckedNodes(false);//获取勾选的数据
+					for (var i=0, l=nodes.length; i < l; i++) {
+						treeAreaSel.removeNode(nodes[i]);
+					}
+			    };
+		    	data.areaStruct[0].population=precount_num;
+		    	data.areaStruct[0].area=area_num;
+		    	layui.use('laytpl', function(){//覆盖人数面积dom渲染
+					var laytpl = layui.laytpl;
+					var getTpl = laytpl_html.innerHTML,
+					    laytplH = document.getElementById('laytpl_dom');
+					laytpl(getTpl).render(data, function(html) {
+					    laytplH.innerHTML = html;
+					});
+				});
+		    }
 		});
-		//带复选框的树
-		$(".ztree-check").each(function() {
-			$.fn.zTree.init($(this), allSetting, allData);
+	};
+	function resourceZTreeOnCheck(event, treeId, treeNode) {//资源：勾选复选框将触发这个方法，在这里调用ajax获取已选数据
+	    // console.log(event)
+		// 获取地区接口
+		$.ajax({
+		    url: portsrc+'/areaSelect',
+		    type: 'post',
+		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    	data:JSON.stringify($("#"+treeNode.parentTId+">a").text()==""?treeNode.name:$("#"+treeNode.parentTId+">a").text()+'-'+treeNode.name)//传给后台省份：浙江省-杭州市
+		    },
+		    success: function(data) {
+		    	var data=data.body;
+				var selTree=[];//存放树选择的数据
+				$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting);//初始化已选资源树
+	    		var treeArea = $.fn.zTree.getZTreeObj("gb_tree_resource");//获取全部资源树
+	    		var treeAreaSel = $.fn.zTree.getZTreeObj("gb_tree_resourceSel");//获取已选资源树
+		    	var treeparent=treeArea.getCheckedNodes(true);//获取全部资源勾选的数据
+			    if(treeNode.checked){//勾选资源计算
+		    		for (var i = 0; i < treeparent.length; i++) {
+		    			if(treeparent[i].level==0){
+		    				selTree.push(treeparent[i]);
+		    			}
+		    		}
+					$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, selTree);//初始化已选资源树
+					var nodes = treeAreaSel.getCheckedNodes(false);//获取已选资源未勾选的数据
+					for (var i=0, l=nodes.length; i < l; i++) {
+						treeAreaSel.removeNode(nodes[i]);//删除已选资源未勾选的数据
+					}
+			    }else{
+		    		for (var i = 0; i < treeparent.length; i++) {
+		    			if(treeparent[i].level==0){
+		    				selTree.push(treeparent[i]);
+		    			}
+		    		}
+					$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, selTree);//初始化已选数据的树
+					var nodes = treeAreaSel.getCheckedNodes(false);//获取勾选的数据
+					for (var i=0, l=nodes.length; i < l; i++) {
+						treeAreaSel.removeNode(nodes[i]);
+					}
+			    };
+		    }
 		});
-	}
-	
+	};
 </script>
