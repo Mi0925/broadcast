@@ -326,7 +326,7 @@
 	// 获取事件类别接口
 	$.ajax({
 	    url: portsrc+'/eventType',
-	    type: 'get',
+	    type: 'post',
 	    dataType: 'json',
 	    data:{
 	    	token:token,
@@ -435,7 +435,7 @@
 							layer.open({
 					            title: '提示',
 			            		shadeClose:true,
-					            content: '成功转换为：'+data.body.name
+					            content: data.body.name
 					        });
 					    }
 					});
