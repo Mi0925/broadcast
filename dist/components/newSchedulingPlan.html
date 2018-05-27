@@ -335,7 +335,7 @@
 	    	console.log(data)
 	    	var data=data.body;
 	    	for (var i = 0; i < data.length; i++) {
-	    		var name=data[i].num+data[i].name;
+	    		var name=data[i].code+data[i].name;
 	    		$(".layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
 	    	};
 			layui.use(['form', 'element'], function(){
