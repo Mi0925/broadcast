@@ -59,8 +59,50 @@ Mock.mock('http://127.0.0.1/schedule/deleteItem',function(options){
 
 // 事件类别接口
 var eventTypeData;
-Mock.mock('http://127.0.0.1/schedule/eventType',function(options){
+Mock.mock('http://127.0.0.1/eventType',function(options){
+    console.log(options)
     eventTypeData=Mock.mock({
+        'body':[
+            {
+                num:'10000',
+                name:'突发事件'
+            },
+            {
+                num:'11A00',
+                name:'水旱灾害'
+            },
+            {
+                num:'11A02',
+                name:'洪水'
+            },
+            {
+                num:'10000',
+                name:'内涝'
+            },
+            {
+                num:'11A03',
+                name:'水库重大险情'
+            },
+            {
+                num:'11A04',
+                name:'堤防重大险情'
+            },
+            {
+                num:'11A05',
+                name:'凌汛灾害'
+            },
+            {
+                num:'11A51',
+                name:'山洪灾害事件'
+            }
+        ]
+    });
+    return eventTypeData
+});
+
+// 所有地区
+Mock.mock('http://127.0.0.1/schedule/area',function(options){
+    return Mock.mock({
         'body':{
             "type": [
                 {
@@ -133,7 +175,6 @@ Mock.mock('http://127.0.0.1/schedule/eventType',function(options){
             }]
         }
     });
-    return eventTypeData
 });
 
 // 创建调度方案

@@ -325,8 +325,8 @@
 	});
 	// 获取事件类别接口
 	$.ajax({
-	    url: portsrc+'/schedule/eventType',
-	    type: 'GET',
+	    url: portsrc+'/eventType',
+	    type: 'get',
 	    dataType: 'json',
 	    data:{
 	    	token:token,
@@ -334,8 +334,8 @@
 	    success: function(data) {
 	    	console.log(data)
 	    	var data=data.body;
-	    	for (var i = 0; i < data.type.length; i++) {
-	    		var name=data.type[i].num+data.type[i].name;
+	    	for (var i = 0; i < data.length; i++) {
+	    		var name=data[i].num+data[i].name;
 	    		$(".layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
 	    	};
 			layui.use(['form', 'element'], function(){
@@ -446,7 +446,21 @@
 			$.fn.zTree.init($('#gb_tree_area'), areaSetting, areaData);
 	    }
 	});
-
+	// 获取全部地区
+	// $.ajax({
+	//     url: portsrc+'/area',
+	//     type: 'post',
+	//     dataType: 'json',
+	//     data:{
+	//     	token:token,
+	//     },
+	//     success: function(data) {
+	//     	console.log(data)
+	//     	var data=data.body;
+	// 		areaData=data;
+	// 		$.fn.zTree.init($('#gb_tree_area'), areaSetting, areaData);
+	//     }
+	// });
 	
 	function areaZTreeOnCheck(event, treeId, treeNode) {//地区：勾选复选框将触发这个方法，在这里调用ajax获取已选数据
 	    // console.log(event)
@@ -476,10 +490,10 @@
 		    		};
 					$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, selTree);//初始化已选地区的树
 					var nodes = treeAreaSel.getCheckedNodes(false);//获取已选地区未勾选的数据
-						console.log(selTree)
 					for (var i=0, l=nodes.length; i < l; i++) {
 						treeAreaSel.removeNode(nodes[i]);//删除已选地区未勾选的数据
 					};
+						console.log(treeAreaSel.getNodes())
 
 
 					if(resourceGather.length==0){//判断全部资源是否为空，空就添加一条
