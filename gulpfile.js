@@ -24,7 +24,7 @@ var gulp     = require('gulp'),
   
 //删除dist下的所有文件  
 gulp.task('delete',function(cb){  
-    return del(['./dist/src/*'],cb);  
+    return del(['./dist/src/css','./dist/src/js','./dist/src/images'],cb);  
 })  
   
 //压缩html  

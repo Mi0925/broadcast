@@ -71,7 +71,7 @@
 					<input type="checkbox" name="checkall" id="checkAll" />
 					<label for="checkAll">全选</label>
 				</div>
-				<span class="chedel"><i class="iconfont icon-shanchu"></i>删除</span>
+				<span class="chedel j-del-tr"><i class="iconfont icon-shanchu"></i>删除</span>
 			</div>
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
@@ -107,7 +107,7 @@
 			<p class="revword">通过的任务消息将进入发布队列，您没有权限进行停止等操作。</p>
 			<div class="revbtn">
 				<input type="button" value="否" class="revno"/>
-				<input type="button" value="是" class="revyes"/>
+				<input type="button" value="是" class="revyes j-audit-yes"/>
 			</div>
 		</div>
 	</div>
@@ -118,7 +118,7 @@
 			<script type="text/plain" id="myEditor" style="width:100%;height:164px;"></script>
 			<div class="revbtn">
 				<input type="button" value="取消" class="rev-cancel"/>
-				<input type="button" value="确定" class="revyes"/>
+				<input type="button" value="确定" class="revyes j-audit-no"/>
 			</div>
 		</div>
 	</div>
@@ -133,7 +133,7 @@
 	<div class="choose">
 		<p class="choword">确定删除此任务消息吗？</p>
 		<div class="chobtn">
-			<input type="button" value="删除" class="chopri cho-delete" />
+			<input type="button" value="删除" class="chopri j-del-tr" />
 			<input type="button" value="取消" class="cho-cancel" />
 		</div>
 		<span class="triangle"><em></em></span>
@@ -146,153 +146,230 @@
 <script type="text/javascript">
 var table;
 	$(document).ready(function(){
-		// 模拟数据
-		$.ajax({
-		    url: portsrc+'/msg/allMsg',
-		    type: 'get',
-		    dataType: 'json',
-		    data:{
-		    	token:token,
-		    	type:'task'
-		    },
-		    success: function(data) {
-		    	console.log(data)
-				layui.use('laytpl', function(){
-					var laytpl = layui.laytpl;
-					var getTpl = tableHtml.innerHTML,
-					    tableH = document.getElementById('table-html');
-					laytpl(getTpl).render(data, function(html) {
-					    tableH.innerHTML = html;
-					    table_fun()
-					});
-				});
-		    }
-		});
-		function table_fun() {
-			//富文本框
-			var editorOption = {
-			    scaleEnabled:true
-			};
-			var editor_a = new baidu.editor.ui.Editor(editorOption);
-			editor_a.render('myEditor');
-			/*table*/
-			table = $('#table-main table').DataTable({
-				"scrollY": "calc(100% - 50px)",
-				"scrollX": true,
-				"dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
-				"dom": 'tiprl',//自定义显示项
-				"lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
-				"lengthChange": true,//是否允许用户自定义显示数量
-				"bPaginate": true, //翻页功能
-				"bFilter": true, //列筛序功能
-				"searching": true,//本地搜索
-				"order": [ 1, "asc" ],//desc降序
-				"Info": true,//页脚信息
-				/*"processing": true,//引用json文件
-				"ajax": "data/table.json",
-				"columns": [
-				    { "data": "checkbox" },
-				    { "data": "sernumb" },
-				    { "data": "condmon" },
-				    { "data": "rank" },
-				    { "data": "msgname" },
-				    { "data": "pubdep" },
-				    { "data": "principal" },
-				    { "data": "reletime" },
-				    { "data": "operate" },
-				    { "data": "edit" },
-				    { "data": "issue" },
-				    { "data": "check" },
-				    { "data": "del" }
-				],*/
-				"oLanguage": oLanguage,
-				"columnDefs": [
-						{
-				       orderable: false,
-				       targets: [0,3,4,5,8,9,10,11,12,13,14,15] //禁止排序
-				    },{ 
-				    	"sType": "html-percent", 
-				       "aTargets": [3] //指定列号使用自定义排序
-				    } 
-				],
-				fnDrawCallback: function(table) {  
-					jumpPage($("#table-main"))
-				},
-				initComplete: function () {//列筛选
-				   var api = this.api();
-				   api.columns().indexes().flatten().each(function (i) {
-						var column = api.column(i);
-				        if (i == 5) { //对第i列进行筛选
-								rowScreen(column);
-				        }else if (i==3) { //对第i列进行筛选
-								rowLevScreen(column);
-				        }
-				   });
-				}
-			})
-			userDef(table);//table配置--显示数量 搜索 全选 删除  
+		//富文本框
+		var editorOption = {
+		    scaleEnabled:true
 		};
+		var editor_a = new baidu.editor.ui.Editor(editorOption);
+		editor_a.render('myEditor');
+		/*table*/
+		table = $('#table-main table').DataTable({
+			"scrollY": "calc(100% - 50px)",
+			"scrollX": true,
+			"dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+			"dom": 'tiprl',//自定义显示项
+			"lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
+			"lengthChange": true,//是否允许用户自定义显示数量
+			"bPaginate": true, //翻页功能
+			"bFilter": true, //列筛序功能
+			"searching": true,//本地搜索
+			"order": [ 1, "asc" ],//desc降序
+			"Info": true,//页脚信息
+			"oLanguage": oLanguage,
+            "ajax": {
+			    url: portsrc+'/msg/allMsg',
+			    type: 'post',
+			    data:{
+			    	token:token,
+			    	type:'task'//task为任务消息，alert为预警消息
+			    },
+	            dataSrc: function ( data ) {
+	                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+	                	var d=data.body[i];
+	                	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
+	                	data.body[i].tabnumb=d.id+1;//序号
+
+	                	var level="";
+						if(d.level=="红色"){
+							level="<img src='src/images/rank-red.png'/>";
+						} else if(d.level=="蓝色"){
+							level="<img src='src/images/rank-blue.png'/>";
+						} else if(d.level=="绿色"){
+							level="<img src='src/images/rank-green.png'/>";
+						} else if(d.level=="橙色"){
+							level="<img src='src/images/rank-orange.png'/>";
+						} else if(d.level=="黄色"){
+							level="<img src='src/images/rank-yellow.png'/>";
+						}
+	                	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
+	                	data.body[i].name="<a href='#/viewTaskMsg' url='components/viewTaskMsg.html' class='view-cont add_tab' name='查看任务消息'>"+d.name+"</a>";
+	                	data.body[i].yulan="<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>";
+	                	data.body[i].edit="<a href='#/newTaskMsgEdit' url='components/newTaskMsgEdit.html' class='editbtn add_tab' name='编辑任务消息'><i class='iconfont icon-bianji'></i>编辑</a>";
+	                	data.body[i].release="<a href='#/releasePolicy' class='issue isstr add_tab' url='components/releasePolicy.html' name='发布策略'><i class='iconfont icon-fabu'></i>发布策略</a>";
+
+	                	var audit="";
+						if(d.audit.boolean==true){
+							if(d.audit.state=='审核'){
+								audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
+							}else if(d.audit.state=='未通过'){
+								audit="<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
+							}
+						};
+	                	data.body[i].audit=audit;
+
+	                	var send="";
+						if(d.send.boolean==true){
+							if(d.send.state=='续发'){
+								send="<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>";
+							}else if(d.send.state=='停发'){
+								send='<a href="javascript:void(0);" class="issue isstop"><i class="iconfont icon-zanting"></i>停发</a>';
+							}
+						};
+	                	data.body[i].send=send;
+	                	data.body[i].chretry="<span class='check chretry'><i class='iconfont icon-zhongbo'></i>重播</span>";
+	                	data.body[i].decancel="<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>";
+	                	data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+	                }
+	                
+	                return data.body;
+	            }
+	        },
+			"columns": [
+			    { "data": "checkbox" },
+			    { "data": "tabnumb" },
+			    { "data": "state" },
+			    { "data": "level" },
+			    { "data": "name" },
+			    { "data": "department" },
+			    { "data": "people" },
+			    { "data": "time" },
+			    { "data": "yulan" },
+			    { "data": "edit" },
+			    { "data": "release" },
+			    { "data": "audit" },
+			    { "data": "send" },
+			    { "data": "chretry" },
+			    { "data": "decancel" },
+			    { "data": "delete" }
+			],
+			"columnDefs": [
+				{
+			       orderable: false,
+			       targets: [0,3,4,5,8,9,10,11,12,13,14,15] //禁止排序
+			    },{ 
+			    	"sType": "html-percent", 
+			       "aTargets": [3] //指定列号使用自定义排序
+			    }
+			],
+			fnDrawCallback: function(table) {  
+				jumpPage($("#table-main"))
+			},
+			initComplete: function () {//列筛选
+			   var api = this.api();
+			   api.columns().indexes().flatten().each(function (i) {
+					var column = api.column(i);
+			        if (i == 5) { //对第i列进行筛选
+							rowScreen(column);
+			        }else if (i==3) { //对第i列进行筛选
+							rowLevScreen(column);
+			        }
+			   });
+			}
+		})
+		userDef(table);//table配置--显示数量 搜索 全选 删除  
+
+		// 删除
+	    $('body').on('click','.j-del-tr',function() {
+			var deleteId=[];//存放删除id
+	        $('tr.selected').each(function() {
+	            deleteId.push($(this).find('.checkone').find('input').attr('id'));
+	        });
+	        // 模拟数据
+	        $.ajax({
+	            url: portsrc + '/msg/deleteMsg',
+	            type: 'POST',
+	            dataType: 'json',
+	            data: {
+	                token:token,
+	                type:'task',
+	                id: deleteId.sort()
+	            },
+	            success: function(data) {
+	                tr_del(table);
+	                deleteId=[];
+	            }
+	        });
+	    });
+
+	    // 重播
+	    $('body').on('click','.cho-again',function(){
+	        // 模拟数据
+	        $.ajax({
+	            url: portsrc + '/msg/taskMsg/reSend',
+	            type: 'POST',
+	            dataType: 'json',
+	            data: {
+	                token:token,
+	                id: sessionStorage.getItem('chretry')
+	            },
+	            success: function(data) {
+	                layer.open({
+	                    title: '提示',
+	                    content: '重播成功'
+	                });
+	            }
+	        });
+	    });
+
+	    // 审核未通过
+	    $('body').on('click','.notpass',function(){
+	        // 模拟数据
+	        $.ajax({
+	            url: portsrc + '/unpassreason',
+	            type: 'get',
+	            dataType: 'json',
+	            data: {
+	                token:token,
+			    	type:'task',//task为任务消息，alert为预警消息
+	                id:$(this).find('.checkone').find('input').attr('id')
+	            },
+	            success: function(data) {
+	                $(".unword").text(data.body);
+	            }
+	        });
+	    });
+
+	    // 审核通过
+	    $('body').on('click','.j-audit-yes',function(){
+	        $.ajax({
+	            url: portsrc + '/messageAudit',
+	            type: 'get',
+	            dataType: 'json',
+	            data: {
+	                token:token,
+			    	type:'task',//task为任务消息，alert为预警消息
+			    	pass:true,//是否通过
+	            },
+	            success: function(data) {
+	                layer.open({
+	                    title: '提示',
+	                    content: '审核通过'
+	                });
+	            }
+	        });
+	    });
+
+	    // 审核不通过
+	    $('body').on('click','.j-audit-no',function(){
+	        $.ajax({
+	            url: portsrc + '/messageAudit',
+	            type: 'get',
+	            dataType: 'json',
+	            data: {
+	                token:token,
+			    	type:'task',//task为任务消息，alert为预警消息
+			    	pass:false,//是否通过
+			    	require:editor_a.getPlainTxt()//未通过理由
+	            },
+	            success: function(data) {
+	                layer.open({
+	                    title: '提示',
+	                    content: '审核通过'
+	                });
+	            }
+	        });
+	    });
 	})
 
 	
-</script>
-<!-- js模板引擎 -->
-<script id="tableHtml" type="text/html">
-  {{#  layui.each(d.body, function(index, item){ }}
-  	<tr>
-		<td><div class='checkone'><input type='checkbox' name='checkone' id={{item.id}} /><label for={{item.id}}></label></div></td>
-		<td><span class='tabnumb'>{{item.id+1}}</span></td>
-		<td>{{item.state}}</td>
-		<td>
-			<span class='rankimg' vel={{item.level}}>
-				{{#  if(item.level=="红色"){ }}
-					<img src='src/images/rank-red.png'/>
-				{{#  } else if(item.level=="蓝色"){ }}
-					<img src='src/images/rank-blue.png'/>
-				{{#  } else if(item.level=="绿色"){ }}
-					<img src='src/images/rank-green.png'/>
-				{{#  } else if(item.level=="橙色"){ }}
-					<img src='src/images/rank-orange.png'/>
-				{{#  } else if(item.level=="黄色"){ }}
-					<img src='src/images/rank-yellow.png'/>
-				{{#  } }}
-			</span>
-		</td>
-		<td><a href='#/viewTaskMsg' url='components/viewTaskMsg.html' class='view-cont add_tab' name='查看任务消息'>{{item.name}}</a></td>
-		<td>{{item.department}}</td>
-		<td>{{item.people}}</td>
-		<td>{{item.time}}</td>
-		<td><span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span></td>
-		<td><a href='#/newTaskMsgEdit' url='components/newTaskMsgEdit.html' class='editbtn add_tab' name='编辑任务消息'><i class='iconfont icon-bianji'></i>编辑</a></td>
-		<td><a href='#/releasePolicy' class='issue isstr add_tab' url='components/releasePolicy.html' name='发布策略'><i class='iconfont icon-fabu'></i>发布策略</a></td>
-		<td>
-			{{#  if(item.audit.boolean==true){ }}
-				{{# if(item.audit.state=='审核'){ }}
-					<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>
-				{{#  } else if(item.audit.state=='未通过'){ }}
-					<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>
-				{{#  } }}
-			{{#  } else if(item.audit.boolean==false){ }}
-				
-			{{#  } }}
-		</td>
-		<td>
-			{{#  if(item.send.boolean==true){ }}
-				{{# if(item.send.state=='续发'){ }}
-					<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>
-				{{#  } else if(item.send.state=='停发'){ }}
-					<a href="javascript:void(0);" class="issue isstop"><i class="iconfont icon-zanting"></i>停发</a>
-				{{#  } }}
-			{{#  } else if(item.send.boolean==false){ }}
-				
-			{{#  } }}
-		</td>
-		<td><span class='check chretry'><i class='iconfont icon-zhongbo'></i>重发</span></td>
-		<td><span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span></td>
-		<td><span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span></td>
-	</tr>
-  {{#  }); }}
-  {{#  if(d.body === 0){ }}
-    无数据
-  {{#  } }}
 </script>

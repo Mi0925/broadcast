@@ -150,7 +150,6 @@ function rowLevScreen(column){
 }
 
 //table配置
-var deleteId=[];//存放删除id
 function userDef(table){
     $(".gb-packUp-leftNav").click(function(){
         setTimeout(function(){
@@ -188,56 +187,8 @@ function userDef(table){
        $tr.toggleClass('selected');
        var $tmp = $('[name=checkone]:checkbox');
        $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
-
    });
 
-    $('.chedel').click(function() {
-        $('tr.selected').each(function() {
-            deleteId.push($(this).find('.checkone').find('input').attr('id'))
-        });
-        console.log(deleteId.sort())
-        // 模拟数据
-        $.ajax({
-            url: portsrc + '/schedule/deleteItem',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                token:token,
-                id: deleteId.sort()
-            },
-            success: function(data) {
-                console.log(data);
-                table.rows('tr.selected').remove().draw(false);
-                $('#checkAll').attr('checked', false);
-                layer.open({
-                    title: '提示',
-                    content: '删除成功'
-                });
-                deleteId=[];
-            }
-        });
-    });
-
-    $('.cho-delete').click(function(){
-        // 模拟数据
-        $.ajax({
-            url: portsrc + '/schedule/deleteItem',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                token:token,
-                id: $('tr.trdel').find('input').attr('id')
-            },
-            success: function(data) {
-                table.row('.trdel').remove().draw(false);
-                $(this).parents('.choose').hide();
-                layer.open({
-                    title: '提示',
-                    content: '删除成功'
-                });
-            }
-        });
-    })
 
     $('.dataTables_wrapper').on('scroll',function(){
         if($('.choose').is(':visible')){
@@ -251,6 +202,20 @@ function userDef(table){
             $('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
         }
     })
+};
+function tr_del(table) {//表格删除
+    table.rows('tr.selected').remove().draw(false);
+    $('#checkAll').attr('checked',false);
+    $(this).parents('.choose').hide();
+    layer.open({
+        title: '提示',
+        content: '删除成功'
+    });
+
+   //  $('.j-del-tr').click(function(){
+   //      table.row('.trdel').remove().draw(false);
+   //      $(this).parents('.choose').hide();
+   // });
 }
 
 
@@ -324,7 +289,7 @@ $(function() {
         showDiv();
         $('.choword').html('确定停发此任务消息吗？');
         $('.chopri').val('停发');
-        $('.chopri').removeClass('cho-delete cho-again cho-continue').addClass('cho-stop');
+        $('.chopri').removeClass('j-del-tr cho-again cho-continue').addClass('cho-stop');
         $(this).parents('tr').addClass('trstop');
         $(document).one("click",
         function() { 
@@ -337,7 +302,7 @@ $(function() {
         showDiv();
         $('.choword').html('确定续发此任务消息吗？');
         $('.chopri').val('续发');
-        $('.chopri').removeClass('cho-delete cho-again cho-stop').addClass('cho-continue');
+        $('.chopri').removeClass('j-del-tr cho-again cho-stop').addClass('cho-continue');
         $(this).parents('tr').addClass('trcont');
         $(document).one("click",
         function() { 
@@ -347,10 +312,11 @@ $(function() {
         event.stopPropagation();
     });
     $(document).on('click','.chretry',function(event) {
+        sessionStorage.setItem('chretry',$(this).parents('tr').find(".checkone").find("input").attr('id'));
         showDiv();
         $('.choword').html('确定重发此任务消息吗？');
         $('.chopri').val('重发');
-        $('.chopri').removeClass('cho-delete cho-continue cho-stop').addClass('cho-again');
+        $('.chopri').removeClass('j-del-tr cho-continue cho-stop').addClass('cho-again');
         $(this).parents('tr').addClass('traga');
         $(document).one("click",function() { 
             $(".choose").hide();
@@ -362,8 +328,9 @@ $(function() {
         showDiv();
         $('.choword').html('确定删除此任务消息吗？');
         $('.chopri').val('删除');
-        $('.chopri').removeClass('cho-again cho-continue cho-stop').addClass('cho-delete');
-        $(this).parents('tr').addClass('trdel');
+        $('.chopri').removeClass('cho-again cho-continue cho-stop').addClass('j-del-tr');
+        // $(this).parents('tr').addClass('trdel');
+        $(this).parents('tr').addClass('selected');
         //$(myDiv).toggle();
         // $(document).one("click",function() {
         //     alert(1)
@@ -417,11 +384,11 @@ $('.cho-logout').click(function(){
 $('body').on('click','.cho-cancel',function(){
     //console.log('chocancel');
     $(this).parents('.choose').hide();
-    $('tr').removeClass('trstop trcont traga trdel');
+    $('tr').removeClass('trstop trcont traga trdel selected');
 });
 
 // 编辑按钮
-$('body').on('click','.editbtn',function(){
+$('body').on('click','.editbtn,.view-cont',function(){
     sessionStorage.setItem('editTableItem',$(this).parents('tr').find('.checkone').find('input').attr('id'));
 })
 

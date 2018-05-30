@@ -29,23 +29,23 @@ function fileShow() {
 	var x = event.clientX - event.offsetX;
 	var y = event.clientY - event.offsetY;
 	$('.choose').css({'display':'block','top':y-90,'left':x-130});
-}
+};
 
 $(document).on('click','.cho-delete',function(){
 	$('.choose').hide();
 	$('.filelist li.todel').remove();
-})
+});
 $(document).on('click','.cho-cancel',function(){
 	$('.choose').hide();
 	$('.filelist li').removeClass('todel');
-})
+});
 
 $('.gb-main-item').scroll(function(){
 	if($('.choose').is(':visible')){
 		$('.choose').hide();
 		$('.filelist li').removeClass('todel');
 	}
-})
+});
 
 
 // 本地上传
@@ -64,54 +64,114 @@ $(document).on('click','.toswitch',function(){
 	// $('.popwindow').show();
 	// $('.toshift').show();
 	// $('.matlist li ').eq(0).find('input').prop('checked',true);
-	if($("#impcontent").val()!=""){
-		if($("#imparea").val()!="请输入消息文本"){
+	if($("#imparea").val()!="请输入消息文本"){
+		$.ajax({
+		    url: portsrc+'/convertText',
+		    type: 'get',
+		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    	text:$("#imparea").val()
+		    },
+		    success: function(data) {
+		    	if($('li.msg_audio').length==0){
+			    	var el = document.createElement('li');
+			    	el.classList.add('msg_audio');
+			    	el.style.color="#5fb878";
+					el.innerHTML = '<div class="filename"><i class="iconfont icon-1"></i><span class="thename">'+data.body.name+'</span></div>'+
+								'<div class="filebtn">'+
+								'	<input type="button" value="删除" class="filedel-btn"/>'+
+								// '	<input type="button" value="转换" class="fileconv-btn"/>'+
+								'</div>';
+					// $(".j-disabled").before(el);
+					$(".filelist").append(el);
+				}
+				layer.open({
+		            title: '提示',
+		            shadeClose:true,
+		            content: '成功转换为：'+data.body.name
+		        });
+		    },
+		    error:function() {
+		    	alert("请求出错")
+		    }
+		});
+	}else{
+		layer.open({
+            title: '提示',
+		    shadeClose:true,
+            content: '请输入消息文本'
+        });
+	}
+})
+//文件转语音
+layui.use(['element'], function(){
+	var element = layui.element;
+	var timer,timeNum=0,DISABLED = 'layui-btn-disabled';
+	var active = {
+	    loading: function(othis,time,name){
+			//模拟loading
+			timer = setInterval(function() {
+			    timeNum = timeNum + Math.random() * 10 | 0;
+			    if (timeNum > 100) {
+			        timeNum = 0;
+			        clearInterval(timer);
+			        othis.removeClass(DISABLED);
+			        $('.uncont .tomat').hide();
+			        $('.uncont .succmat').show();
+			        audio_add_html(name);//添加一条音频数据
+					$('.file_text').after($('.file_text').clone().val(""));   
+					$('.file_text').eq(0).remove();
+			    }
+			    element.progress('demo', timeNum + '%');
+			}, time==0 ? (2000 + Math.random() * 2000) : time);
+			  	
+	    }
+	};
+	$('body').on('click','.site-demo-active', function(){
+		if($('.file_text')[0].files[0]!=undefined){
+			var formData = new FormData(),$this=$(this), type = $this.data('type');
+			if ($this.hasClass(DISABLED)) return false;
+			$this.addClass(DISABLED);
+			formData.append('file', $('.file_text')[0].files[0]);
 			$.ajax({
-			    url: portsrc+'/convertText',
+			    url: portsrc+'/convertFile',
 			    type: 'post',
-			    dataType: 'json',
-			    data:{
-			    	token:token,
-			    	data:JSON.stringify({
-			    		name:$("#impcontent").val(),text:$("#imparea").val()
-			    	})
+			    cache: false,
+			    data:formData,
+			    processData: false,
+			    contentType: false,
+				dataType: 'json',
+				beforeSend: function () {
+					$('.uncont .tomat').show();
+					$('.uncont .succmat').hide();
+					active[type] ? active[type].call(this, $this,0) : '';
 			    },
 			    success: function(data) {
-			    	if($('li.msg_audio').length==0){
-				    	var el = document.createElement('li');
-				    	el.classList.add('msg_audio');
-				    	el.style.color="#5fb878";
-						el.innerHTML = '<div class="filename"><i class="iconfont icon-1"></i><span class="thename">'+data.body.name+'</span></div>'+
-									'<div class="filebtn">'+
-									'	<input type="button" value="删除" class="filedel-btn"/>'+
-									// '	<input type="button" value="转换" class="fileconv-btn"/>'+
-									'</div>';
-						// $(".j-disabled").before(el);
-						$(".filelist").append(el);
-					}
-					layer.open({
-			            title: '提示',
-			            shadeClose:true,
-			            content: '成功转换为：'+data.body.name
-			        });
-
+			    	console.log(data);
+			    	clearInterval(timer);
+					active[type] ? active[type].call(this, $this,70,data.body.name) : '';
 			    }
 			});
 		}else{
 			layer.open({
 	            title: '提示',
-			    shadeClose:true,
-	            content: '请输入消息文本'
+	            content: '请先上传一个文本'
 	        });
 		}
-	}else{
-		layer.open({
-            title: '提示',
-			shadeClose:true,
-            content: '请输入事件名称'
-        });
-	}
-})
+	});
+});
+//添加一条音频数据方法
+var audio_add_html=function(name) {
+	var el = document.createElement('li');
+	el.innerHTML = '<div class="filename"><i class="iconfont icon-1"></i><span class="thename">'+name+'</span></div>'+
+				'<div class="filebtn">'+
+				'	<input type="button" value="删除" class="filedel-btn"/>'+
+				// '	<input type="button" value="转换" class="fileconv-btn"/>'+
+				'</div>';
+	// $(".j-disabled").before(el);
+	$(".filelist").append(el);
+}
 
 $(document).on('click','.filepre-btn',function(){
 	$('.popwindow').show();

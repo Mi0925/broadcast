@@ -1,8 +1,8 @@
 // 调度方案
 var scheduleTable;
-Mock.mock('http://127.0.0.1/schedule/allItem', function(optins){
+Mock.mock('http://192.168.3.130/schedule/allItem', function(optins){
     scheduleTable=Mock.mock({
-        'body|100':[{
+        'body|10':[{
             "id|+1": 0,
             // "num|0-5": 0,
             "type|1": [
@@ -20,18 +20,14 @@ Mock.mock('http://127.0.0.1/schedule/allItem', function(optins){
                 "黄色"
             ],
             "name|1": [
-                "杭州市4级地震",
-                "杭州市5级地震",
-                "杭州市6级地震",
-                "杭州市7级地震",
-                "杭州市8级地震"
+                '@cname()方案'
             ],
             "department|1": [
                 "杭州市西湖区应急广播中心",
                 "温州市应急广播中心",
                 "上海市应急广播中心"
             ],
-            "people|1": [
+            "dutyPerson|1": [
                 '@cname'
             ],
             "time": '@datetime("yyyy-MM-dd HH:mm:ss")'
@@ -41,7 +37,7 @@ Mock.mock('http://127.0.0.1/schedule/allItem', function(optins){
 });
 
 // 调度方案删除接口
-Mock.mock('http://127.0.0.1/schedule/deleteItem',function(options){
+Mock.mock('http://192.168.3.130/schedule/deleteItem',function(options){
     var index;
     scheduleTableB=scheduleTable.body;
     for (var i = 0; i < options.body.split("&").length; i++) {
@@ -55,11 +51,16 @@ Mock.mock('http://127.0.0.1/schedule/deleteItem',function(options){
         scheduleTableB.splice(index,1)//把这个id对应的对象从数组里删除
     }
     return scheduleTableB;//返回这个数组,也就是返回处理后的假数据
-})
-
+});
+// 任务消息删除接口
+Mock.mock('http://192.168.3.130/msg/deleteMsg',function(options){
+});
+// 重播接口
+Mock.mock('http://192.168.3.130/msg/taskMsg/reSend',function(options){
+});
 // 事件类别接口
 var eventTypeData;
-Mock.mock('http://127.0.0.1/eventType',function(options){
+Mock.mock('http://192.168.3.130/eventType',function(options){
     console.log(options)
     eventTypeData=Mock.mock({
         'body':[
@@ -101,44 +102,10 @@ Mock.mock('http://127.0.0.1/eventType',function(options){
 });
 
 // 所有地区
-Mock.mock('http://127.0.0.1/schedule/area',function(options){
+Mock.mock('http://192.168.3.130/allArea',function(options){
     return Mock.mock({
-        'body':{
-            "type": [
-                {
-                    code:'10000',
-                    name:'突发事件'
-                },
-                {
-                    code:'11A00',
-                    name:'水旱灾害'
-                },
-                {
-                    code:'11A02',
-                    name:'洪水'
-                },
-                {
-                    code:'10000',
-                    name:'内涝'
-                },
-                {
-                    code:'11A03',
-                    name:'水库重大险情'
-                },
-                {
-                    code:'11A04',
-                    name:'堤防重大险情'
-                },
-                {
-                    code:'11A05',
-                    name:'凌汛灾害'
-                },
-                {
-                    code:'11A51',
-                    name:'山洪灾害事件'
-                }
-            ],
-            areaData:[{
+        'body':[
+            {
                 name: "浙江省",
                 open: true,
                 population: 100,
@@ -172,13 +139,74 @@ Mock.mock('http://127.0.0.1/schedule/area',function(options){
                 children: [{
                     name: "成都市"
                 }]
-            }]
-        }
+            }
+        ]
     });
+});
+// 地区
+var areaStruct;
+Mock.mock('http://192.168.3.130/areaSelect',function(options){
+    areaStruct=Mock.mock({
+        'body':[{
+            areaStruct:{
+                areaName:"浙江省-杭州市", //地区名
+                'population|1-100': 100, //人口
+                'area|1-100':120//面积
+            },
+            resourceData:[{
+                'name|1': [
+                    "浙江省",
+                ],
+                open: true,
+                children: [{
+                    name: "杭州市资源",
+                }]
+            }]
+        },{
+            areaStruct:{
+                areaName:"安徽省-温州市", //地区名
+                'population|1-100': 100, //人口
+                'area|1-100':120//面积
+            },
+            resourceData:[{
+                'name|1': [
+                    "安徽省"
+                ],
+                open: true,
+                children: [{
+                    name: "合肥市资源",
+                }]
+            }]
+        }]
+            // areaStruct:[{
+            //     'name|1': [
+            //         "四川省",
+            //         "浙江省",
+            //         "安徽省"
+            //     ],
+            //     open: true,
+            //     'population|1-100': 100,
+            //     'area|1-100': 100,
+            //     children: [{
+            //         name: "杭州市资源",
+            //         population: 100,
+            //         area: 100,
+            //     },{
+            //         name: "宁波市资源",
+            //         population: 100,
+            //         area: 100,
+            //     },{
+            //         name: "温州市资源",
+            //         population: 100,
+            //         area: 100,
+            //     }]
+            // }]
+    });
+    return areaStruct;
 });
 
 // 创建调度方案
-Mock.mock('http://127.0.0.1/schedule/addItem', function(optins){
+Mock.mock('http://192.168.3.130/schedule/addItem', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{
@@ -186,9 +214,8 @@ Mock.mock('http://127.0.0.1/schedule/addItem', function(optins){
         }
     });
 });
-
 // 编辑调度方案
-Mock.mock('http://127.0.0.1/schedule/editItem', function(optins){
+Mock.mock('http://192.168.3.130/schedule/getItem', function(optins){
     return Mock.mock({
         'body':{
             "type": [
@@ -226,17 +253,17 @@ Mock.mock('http://127.0.0.1/schedule/editItem', function(optins){
                     name:'山洪灾害事件'
                 }
             ],
-            name:'xiaoxu',
             level:'橙色',
-            msgTxt:'我是一段消息',
-            audio:['audio1.mp3','audio2.mp3','audio3.mp3'],
-            release:'yes',
-            population:1000,
-            area:100,
+            name:'xiaoxu',
             department:'杭州市广播中心',
-            popName:'橙子',
+            dutyPerson:'橙子',
             time:'2018-05-14 00:00:00 - 2018-05-23 00:00:00',
-            areaData:[
+            message:'我是一段消息',
+            peopleAffect:1000,
+            direct:'yes',
+            coverArea:100,
+            listMP3:['audio1.mp3','audio2.mp3','audio3.mp3'],
+            area:[
                 {
                     name: "浙江省",
                     open: true,
@@ -274,7 +301,7 @@ Mock.mock('http://127.0.0.1/schedule/editItem', function(optins){
                     }]
                 }
             ],//全部地区
-            areaSelData:[{
+            areaSel:[{
                 name: "浙江省",
                 open: true,
                 checked:true,
@@ -294,7 +321,7 @@ Mock.mock('http://127.0.0.1/schedule/editItem', function(optins){
                     area: 100,
                 }]
             }],//选择地区
-            resourceData:[{
+            resource:[{
                 'name|1': [
                     "四川省",
                     "浙江省",
@@ -317,7 +344,7 @@ Mock.mock('http://127.0.0.1/schedule/editItem', function(optins){
                     area: 100,
                 }]
             }],//全部资源
-            resourceSelData:[{
+            resourceSel:[{
                 'name|1': [
                     "四川省",
                     "浙江省",
@@ -344,57 +371,28 @@ Mock.mock('http://127.0.0.1/schedule/editItem', function(optins){
     });
 });
 
-// 地区
-var areaStruct;
-Mock.mock('http://127.0.0.1/areaSelect',function(options){
-    areaStruct=Mock.mock({
+// 创建任务消息
+Mock.mock('http://192.168.3.130/msg/addMsg', function(optins){
+    console.log(optins)
+    return Mock.mock({
         'body':{
-            areaStruct:[{
-                'name|1': [
-                    "四川省",
-                    "浙江省",
-                    "安徽省"
-                ],
-                open: true,
-                'population|1-100': 100,
-                'area|1-100': 100,
-                children: [{
-                    name: "杭州市资源",
-                    population: 100,
-                    area: 100,
-                },{
-                    name: "宁波市资源",
-                    population: 100,
-                    area: 100,
-                },{
-                    name: "温州市资源",
-                    population: 100,
-                    area: 100,
-                }]
-            }]
-            // areaStruct:{
-            //     areaName:"浙江省-杭州市", //地区名
-            //     'population|1-100': 100, //人口
-            //     'area|1-100':120//面积
-            // },
-            // resourceData:[{
-            //     name: "浙江省资源",
-            //     open: true,
-            //     children: [{
-            //         name: "杭州市资源",
-            //     },{
-            //         name: "宁波市资源",
-            //     },{
-            //         name: "温州市资源",
-            //     }]
-            // }]
+            "name": '创建成功',
         }
     });
-    return areaStruct;
+});
+// 编辑任务消息
+Mock.mock('http://192.168.3.130/msg/getMsg', function(optins){
+    return Mock.mock({
+        'body':{
+            'name':'任务',
+            'schedule_id':'2'
+        }
+    });
 });
 
+
 // 登录
-Mock.mock('http://127.0.0.1/login/user', function(options) {
+Mock.mock('http://192.168.3.130/login/user', function(options) {
     // alert(options.body.split("&")[0].split("=")[1]);
     return Mock.mock({
         "body":{
@@ -406,7 +404,7 @@ Mock.mock('http://127.0.0.1/login/user', function(options) {
 
 // 值班管理--日历
 var calendarData;
-Mock.mock('http://127.0.0.1/calendar', function(optins){
+Mock.mock('http://192.168.3.130/calendar', function(optins){
     calendarData=Mock.mock({
         'body|10':[{
             'id|+1':1,
@@ -431,7 +429,7 @@ Mock.mock('http://127.0.0.1/calendar', function(optins){
 });
 
 // 效果评估-事件发布
-Mock.mock('http://127.0.0.1/incidentChartData', {
+Mock.mock('http://192.168.3.130/incidentChartData', {
     'body':[{
         "value|10-30": 0,
         "name":'气象局',
@@ -471,9 +469,9 @@ Mock.mock('http://127.0.0.1/incidentChartData', {
 
 // 任务消息
 var taskTable;
-Mock.mock('http://127.0.0.1/msg/allMsg', function(optins){
+Mock.mock('http://192.168.3.130/msg/allMsg', function(optins){
     taskTable=Mock.mock({
-        'body|10':[{
+        'body|100':[{
             "id|+1": 0,
             "state|1": [
                 "排队中",
@@ -524,11 +522,41 @@ Mock.mock('http://127.0.0.1/msg/allMsg', function(optins){
     });
     return taskTable
 });
-
+// 预警消息
+Mock.mock('http://192.168.3.130/msg/allMsgs', function(optins){
+    return Mock.mock({
+        'body|100':[{
+            "id|+1": 0,
+            "level|1": [
+                "红色",
+                "橙色",
+                "绿色",
+                "蓝色",
+                "黄色"
+            ],
+            "name|1": [
+                "杭州西湖区2017年09月09日晚台",
+                "杭州西湖区2017年09月09日晚台",
+                "杭州西湖区2017年09月09日晚台",
+                "杭州西湖区2017年09月09日晚台",
+                "杭州西湖区2017年09月09日晚台"
+            ],
+            "department|1": [
+                "杭州市西湖区应急广播中心",
+                "温州市应急广播中心",
+                "上海市应急广播中心"
+            ],
+            "people|1": [
+                '@cname'
+            ],
+            "time": '@datetime("yyyy-MM-dd HH:mm:ss")',
+        }]
+    });
+});
 
 // 消息接入
 var msgTable;
-Mock.mock('http://127.0.0.1/msg/Platform/all', function(optins){
+Mock.mock('http://192.168.3.130/msg/Platform/all', function(optins){
     msgTable=Mock.mock({
         'body|1000':[{
             "id|+1": 0,
@@ -574,7 +602,7 @@ Mock.mock('http://127.0.0.1/msg/Platform/all', function(optins){
 
 
 // 文字转音频
-Mock.mock('http://127.0.0.1/convertText', function(optins){
+Mock.mock('http://192.168.3.130/convertText', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{
@@ -584,7 +612,7 @@ Mock.mock('http://127.0.0.1/convertText', function(optins){
 });
 
 // 文件转音频
-Mock.mock('http://127.0.0.1/convertFile', function(optins){
+Mock.mock('http://192.168.3.130/convertFile', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{

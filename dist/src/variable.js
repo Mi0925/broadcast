@@ -2,7 +2,8 @@
 var user_name=sessionStorage.getItem('name');//用户名
 var token=sessionStorage.getItem('token');//token，接口必传值
 
-var portsrc="http://127.0.0.1";
+var portsrc="http://47.104.84.17";
+// var portsrc="http://192.168.3.130";
 var blist = [];
 var districtLoading = 0;
 var drawBoundary=null;
