@@ -61,9 +61,9 @@ $("body").on("click",".add_tab",function(){
 	sessionStorage.setItem('tab_default_name',$(this).attr("name"));
 	sessionStorage.setItem('tab_default_url',$(this).attr("url"));
 	var nav_text=$(this).attr("name");
-	var url=$(this).attr("url")
+	var url=$(this).attr("url");
 	add_tab(nav_text,url);
-})
+});
 function add_tab(nav_text,url) {
 	$(".gb-tab .swiper-slide").removeClass('cur');
 	var blo=false;
@@ -85,7 +85,7 @@ function add_tab(nav_text,url) {
 	tabActive=$(".gb-tab .swiper-slide").length-1;
 	tabSwiper.swipeTo(tabActive);
 	$(".gb-tab .swiper-slide:last-child").addClass("cur");
-}
+};
 
 
 

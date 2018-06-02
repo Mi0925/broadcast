@@ -35,23 +35,23 @@
 					<p class="oneitem-tit"><small>*</small>消息级别</p>
 					<ul class="msgrank lev-radio">
 						<li>
-							<input type="radio" name="level" id="radone" value='红色' />
+							<input type="radio" name="level" id="radone" value='RED' checked />
 							<label for="radone"><img src="src/images/rank-red.png">红色</label>
 						</li>
 						<li>
-							<input type="radio" name="level" id="radtwo" value='橙色'/>
+							<input type="radio" name="level" id="radtwo" value='ORANGE' />
 							<label for="radtwo"><img src="src/images/rank-orange.png">橙色</label>
 						</li>
 						<li>
-							<input type="radio" name="level" id="radthr" value='黄色'/>
+							<input type="radio" name="level" id="radthr" value='YELLOW' />
 							<label for="radthr"><img src="src/images/rank-yellow.png">黄色</label>
 						</li>
 						<li>
-							<input type="radio" name="level" id="radfou" value='蓝色'/>
+							<input type="radio" name="level" id="radfou" value='BLUE' />
 							<label for="radfou"><img src="src/images/rank-blue.png">蓝色</label>
 						</li>
 						<li>
-							<input type="radio" name="level" id="radfiv" value='绿色'/>
+							<input type="radio" name="level" id="radfiv" value='GREEN' />
 							<label for="radfiv"><img src="src/images/rank-green.png">绿色</label>
 						</li>
 					</ul>
@@ -223,86 +223,97 @@
 <script type="text/javascript">
 	// 获取编辑数据
 	$.ajax({
-	    url: portsrc+'/schedule/getItem',
+	    url: portsrc+'/eventType',
 	    type: 'post',
 	    dataType: 'json',
 	    data:{
 	    	token:token,
-	    	id:sessionStorage.getItem('editTableItem'),
 	    },
 	    success: function(data) {
-	    	console.log(data)
 	    	var data=data.body;
-	    	for (var i = 0; i < data.type.length; i++) {
-	    		var name=data.type[i].num+data.type[i].name;
-	    		if(data.type[i].selected){
-	    			$(".layui-input-inline select").append('<option value='+name+' selected>'+name+'</option>');
-	    		}else{
-	    			$(".layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
-	    		}
+	    	console.log(data)
+	    	for (var i = 0; i < data.length; i++) {
+	    		var name=data[i].code+data[i].name;
+	    		$(".layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
 	    	};
-	    	$("#impcontent").val(data.name);//默认事件名
-	    	$(".lev-radio li").each(function(index, el) {
-	    		if($(this).find('input').val()==data.level){
-	    			console.log($(this).find('input').val())
-	    			$(this).find('input').attr('checked','checked')
-	    		}
-	    	});//默认等级
-	    	for (var i = 0; i < data.listMP3.length; i++) {
-	    		audio_add_html(data.listMP3[i]);//添加一条音频数据
-	    	};
-	    	$(".imparea").val(data.message);//默认消息文本
-	    	$(".j-peopleAffect").text(data.peopleAffect);//覆盖人数
-	    	$(".j-coverArea").text(data.coverArea);//覆盖面积
-	    	$(".j-department").text(data.department);//部门
-	    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
-	    	
-	    	$(".release-radio li").each(function(index, el) {
-	    		if($(this).find('input').val()==data.direct){
-	    			$(this).find('input').attr('checked','checked')
-	    		}
-	    	});//默认是否发布
-			layui.use(['form', 'element'], function(){
-				var element = layui.element,form = layui.form,laydate = layui.laydate;
-				form.render();
-				var itbtn = $('<span class="itbtn"></span>');
-				$('.layui-select-title').append(itbtn);
-				$('.gb-form .layui-form-radio').remove();
-				laydate.render({ 
-					elem: '#datergs',
-	                eventElem: '#tochobtn',
-	                trigger: 'click',
-	                type:'datetime',
-	                range: true,
-					value: data.time
-				});
-				form.on('submit(*)', function(data){
-					schedulingForm(data);
-					console.log(data)
-					$.ajax({
-					    url: portsrc+"/schedule/addItem",
-					    type: 'get',
-					    dataType: 'json',
-					    data:{
-					    	token:token,
-					    	id:sessionStorage.getItem('editTableItem'),
-					    	data:JSON.stringify(data.field)
-					    },
-					    success: function(data) {
-							layer.open({
-					            title: '提示',
-				        		shadeClose:true,
-					            content: data.body.name
-					        });
-					    }
+			$.ajax({
+			    url: portsrc+'/schedule/getItem',
+			    type: 'post',
+			    dataType: 'json',
+			    data:{
+			    	token:token,
+			    	id:sessionStorage.getItem('editTableItem'),
+			    },
+			    success: function(data) {
+			    	console.log(data)
+			    	var data=data.body;
+			    	$(".layui-input-inline select").val(data.type);//默认类别
+			    	$("#impcontent").val(data.name);//默认事件名
+			    	$(".lev-radio li").each(function(index, el) {
+			    		if($(this).find('input').val()==data.level){
+			    			console.log($(this).find('input').val())
+			    			$(this).find('input').attr('checked','checked')
+			    		}
+			    	});//默认等级
+			    	for (var i = 0; i < data.listMP3.length; i++) {
+			    		audio_add_html(data.listMP3[i]);//添加一条音频数据
+			    	};
+			    	$(".imparea").val(data.message);//默认消息文本
+			    	$(".j-peopleAffect").text(data.peopleAffect);//覆盖人数
+			    	$(".j-coverArea").text(data.coverArea.area);//覆盖面积
+			    	$(".j-department").text(data.department);//部门
+			    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
+			    	
+			    	$(".release-radio li").each(function(index, el) {
+			    		if($(this).find('input').val()){
+			    			$('#cheone').attr('checked','checked')
+			    		}else{
+			    			$('#chetwo').attr('checked','checked')
+			    		}
+			    	});//默认是否发布
+					layui.use(['form', 'element'], function(){
+						var element = layui.element,form = layui.form,laydate = layui.laydate;
+						form.render();
+						var itbtn = $('<span class="itbtn"></span>');
+						$('.layui-select-title').append(itbtn);
+						$('.gb-form .layui-form-radio').remove();
+						laydate.render({ 
+							elem: '#datergs',
+			                eventElem: '#tochobtn',
+			                trigger: 'click',
+			                type:'datetime',
+			                range: true,
+							value: data.startTime+" - "+data.endTime
+						});
+						form.on('submit(*)', function(data){
+							schedulingForm(data);
+							console.log(data)
+							$.ajax({
+							    url: portsrc+"/schedule/addItem",
+							    type: 'get',
+							    dataType: 'json',
+							    data:{
+							    	token:token,
+							    	id:sessionStorage.getItem('editTableItem'),
+							    	data:JSON.stringify(data.field)
+							    },
+							    success: function(data) {
+									layer.open({
+							            title: '提示',
+						        		shadeClose:true,
+							            content: '编辑成功'
+							        });
+							    }
+							});
+							return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+						});
 					});
-					return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-				});
+					$.fn.zTree.init($('#gb_tree_area'), areaSetting, data.area);
+					$.fn.zTree.init($('#gb_tree_resource'), resourceSetting, data.resource);
+					$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.areaSel);
+					$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.resourceSel);
+			    }
 			});
-			$.fn.zTree.init($('#gb_tree_area'), areaSetting, data.area);
-			$.fn.zTree.init($('#gb_tree_resource'), resourceSetting, data.resource);
-			$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.areaSel);
-			$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.resourceSel);
 	    }
 	});
 </script>

@@ -31,7 +31,7 @@
 			<div class="form-oneitem-box" style="display: none;">
 				<div class="form-oneitem">
 					<div class="fortit">
-						<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>事件类型</p>
+						<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>事件类别</p>
 					</div>
 					<div class="oneitem-cont">
 						<p class="oneitem-tit"><small>*</small>事件类别</p>
@@ -165,19 +165,13 @@
 						    dataType: 'json',
 						    data:{
 						    	token:token,
-						    	schedulePlanId:data.value,
+						    	id:data.value,
 						    },
 						    success: function(data) {
 						    	console.log(data)
 						    	var data=data.body;
-						    	for (var i = 0; i < data.type.length; i++) {
-						    		var name=data.type[i].num+data.type[i].name;
-						    		if(data.type[i].selected){
-						    			$(".j-type").val(name);//默认事件名
-						    		}
-						    	};
-						    	$(".j-name").val(data.name);//默认事件名
-						    	$(".j-level").val(data.level);//默认事件名
+						    	$(".j-type").val(data.type);//默认事件类别
+						    	$(".j-level").val(data.level);//默认级别
 						    	$(".filelist li").remove();
 						    	for (var i = 0; i < data.listMP3.length; i++) {
 						    		audio_add_html(data.listMP3[i]);//添加一条音频数据

@@ -6,6 +6,8 @@ var schedulingForm=function(data) {
 	});
 	console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
 	data.field.peopleAffect=$(".j-peopleAffect").text();
+	data.field.startTime=data.field.time.split(' - ')[0];
+	data.field.endTime=data.field.time.split(' - ')[1];
 	data.field.coverArea=$(".j-coverArea").text();
 	data.field.department=$(".j-department").text();
 	data.field.dutyPerson=$(".j-dutyPerson").text();

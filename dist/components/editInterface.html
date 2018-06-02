@@ -10,61 +10,54 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>接口名称</p>
 						<div class="oneimp">
-							<input type="text"  id="impcontent" class="imptxt" maxlength="20"/>
+							<input type="text" name="name" id="impcontent" class="imptxt" maxlength="20"/>
 							<span class="oneimp-count"><span class="countnew">0</span>/20</span>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>接口类型</p>
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+							<select name="type" id="type" lay-search="">
 								<option value="">请选择接口所属部门类型</option>
-								<option value="1">上级平台</option>
-								<option value="2">国家应急广播平台</option>
-								<option value="3">下级平台</option>
-								<option value="4">其它部门</option>
+								<option value="上级平台">上级平台</option>
+								<option value="国家应急广播平台">国家应急广播平台</option>
+								<option value="下级平台">下级平台</option>
+								<option value="其它部门">其它部门</option>
 							</select>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>接入端口</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt impcol" value="请输入本平台服务端口"  onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#ccc'}"/>
+							<input type="text" name="localPort" id="localPort" class="imptxt impcol" placeholder="请输入本平台服务端口" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>接入端口</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt impcol" value="请输入对方平台服务端口"  onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#ccc'}"/>
+							<input type="text" name="peerPort" id="peerPort" class="imptxt impcol" placeholder="请输入对方平台服务端口" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>协议</p>
-						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+						<div class="layui-input-inline j-protocol-sel">
+							<select name="protocol" id="protocol" lay-search="" lay-verify="required">
 								<option value="">请选择协议</option>
-								<option value="1">协议一</option>
-								<option value="2">协议二</option>
 							</select>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>密钥</p>
 						<div class="oneimp">
-							<input type="text"  id="secretkey" class="imptxt" maxlength="20"/>
+							<input type="text" name="privateKey"  id="privateKey" class="imptxt" maxlength="20"/>
 							<span class="oneimp-count"><span class="countser">0</span>/20</span>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>所属地区</p>
-						<div class="layui-input-inline">
-							<select name="dispatch" lay-search=""> 
+						<div class="layui-input-inline j-protocol-area">
+							<select name="area" id="area" lay-search="" lay-verify="required"> 
 								<option value="">请选择所属地区</option>
-								<option value="1">地区一</option>
-								<option value="2">地区二</option>
-								<option value="3">地区三</option>
-								<option value="4">地区四</option>
-								<option value="5">地区五</option>
 							</select>
 						</div>
 					</div>
@@ -72,8 +65,7 @@
 			</div>
 			<div class="tocreat">
 				<div class="progcreat">
-					<input type="button" value="清空" class="toemptybtn" />
-					<input type="button" value="确定" class="tocreatbtn" />
+					<input type="button" value="确定" class="tocreatbtn" lay-submit lay-filter="*" />
 				</div>
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
@@ -87,22 +79,83 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#secretkey').on('keyup', function() { 
-		    $('.oneimp-count .countser').html($('#secretkey').val().length);  
+		$('#privateKey').on('keyup', function() { 
+		    $('.oneimp-count .countser').html($('#privateKey').val().length);  
 		});
 
-		layui.use('form', function(){
-			var form = layui.form;
-			form.render();
-
-			var itbtn = $('<span class="itbtn"></span>');
-			$('.layui-select-title').append(itbtn);
-			$('.gb-form .layui-form-radio').remove();
-			
+		// 获取协议
+		$.ajax({
+		    url: portsrc+'/protocol',
+		    type: 'post',
+		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    },
+		    success: function(data) {
+				for (var i = 0; i < data.body.length; i++) {
+		    		$(".j-protocol-sel select").append('<option value='+data.body[i]+'>'+data.body[i]+'</option>');
+		    	};
+				// 获取地区
+				$.ajax({
+				    url: portsrc+'/area',
+				    type: 'post',
+				    dataType: 'json',
+				    data:{
+				    	token:token,
+				    },
+				    success: function(data) {
+						for (var i = 0; i < data.body.length; i++) {
+				    		$(".j-protocol-area select").append('<option value='+data.body[i]+'>'+data.body[i]+'</option>');
+				    	};
+				    	// 获取接口数据
+						$.ajax({
+						    url: portsrc+'/msg/Platform/get',
+						    type: 'post',
+						    dataType: 'json',
+						    data:{
+						    	token:token,
+						    },
+						    success: function(data) {
+						    	console.log(data);
+						    	var data=data.body;
+						    	$("#impcontent").val(data.name);
+						    	$("#type").val(data.type);
+						    	$("#localPort").val(data.localPort);
+						    	$("#peerPort").val(data.peerPort);
+						    	$("#protocol").val(data.protocol);
+						    	$("#privateKey").val(data.privateKey);
+						    	$("#area").val(data.area);
+						    	layui.use('form', function(){
+									var form = layui.form;
+									form.render();
+									var itbtn = $('<span class="itbtn"></span>');
+									$('.layui-select-title').append(itbtn);
+									$('.gb-form .layui-form-radio').remove();
+									form.on('submit(*)', function(data){
+										$.ajax({
+										    url: portsrc+"/msg/Platform/add",
+										    type: 'get',
+										    dataType: 'json',
+										    data:{
+										    	token:token,
+										    	data:JSON.stringify(data.field)
+										    },
+										    success: function(data) {
+												layer.open({
+										            title: '提示',
+									        		shadeClose:true,
+										            content: data.body.name
+										        });
+										    }
+										});
+										return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+									});
+								});
+						    }
+						});
+				    }
+				});
+		    }
 		});
-		
-		$('.toemptybtn').click(function(){
-			$('.countser').html('0');
-		})
 	})
 </script>

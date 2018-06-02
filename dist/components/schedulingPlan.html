@@ -63,7 +63,7 @@
 	<div class="choose">
 		<p class="choword">确定删除此任务消息吗？</p>
 		<div class="chobtn">
-			<input type="button" value="删除" class="chopri cho-delete j-del-tr" />
+			<input type="button" value="删除" class="chopri j-del-tr" />
 			<input type="button" value="取消" class="cho-cancel" />
 		</div>
 		<span class="triangle"><em></em></span>
@@ -73,7 +73,11 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
+	portVar={
+		ajaxUrlDelete:portsrc + '/schedule/deleteItem',
+		type:'',
+	}
+	// $(document).ready(function(){
 		// 模拟数据
 		// $.ajax({
 		//     url: portsrc+'/schedule/allItem',
@@ -128,7 +132,7 @@
 				],*/
                 "ajax": {
 		            url: portsrc+'/schedule/allItem',
-	    			type: 'post',
+	    			type: 'get',
 	    			data:{
 	                	token:token,
 	    			},
@@ -148,15 +152,15 @@
 		                	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
 		                	var level="";
-							if(d.level=="红色"){
+							if(d.level=="RED"){
 								level="<img src='src/images/rank-red.png'/>";
-							} else if(d.level=="蓝色"){
+							} else if(d.level=="BLUE"){
 								level="<img src='src/images/rank-blue.png'/>";
-							} else if(d.level=="绿色"){
+							} else if(d.level=="GREEN"){
 								level="<img src='src/images/rank-green.png'/>";
-							} else if(d.level=="橙色"){
+							} else if(d.level=="ORANGE"){
 								level="<img src='src/images/rank-orange.png'/>";
-							} else if(d.level=="黄色"){
+							} else if(d.level=="YELLOW"){
 								level="<img src='src/images/rank-yellow.png'/>";
 							}
 		                	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
@@ -207,28 +211,7 @@
 			userDef(table);//table配置--显示数量 搜索 全选 删除  
         // };
 
-	    $('body').on('click','.j-del-tr',function() {
-    		var deleteId=[];//存放删除id
-	        $('tr.selected').each(function() {
-	            deleteId.push($(this).find('.checkone').find('input').attr('id'))
-	        });
-	        // 模拟数据
-	        $.ajax({
-	            url: portsrc + '/schedule/deleteItem',
-	            type: 'POST',
-	            dataType: 'json',
-	            data: {
-	                token:token,
-	                id: deleteId.sort()
-	            },
-	            success: function(data) {
-	                tr_del(table);
-	                deleteId=[];
-	            }
-	        });
-	    });
-
-	});
+	// });
 
 	
 </script>

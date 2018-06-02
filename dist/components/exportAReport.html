@@ -126,201 +126,196 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		/*calendar*/
-		layui.use('laydate', function(){
-			var laydate = layui.laydate;
-			laydate.render({
-			    elem: '#soledate',
-			    eventElem: '#solebtn',
-			    trigger: 'click',
-			    type:'datetime',
-			    range: true
-			});
-		})
+	/*calendar*/
+	layui.use('laydate', function(){
+		var laydate = layui.laydate;
+		laydate.render({
+		    elem: '#soledate',
+		    eventElem: '#solebtn',
+		    trigger: 'click',
+		    type:'datetime',
+		    range: true
+		});
+	});
 
+	/*table*/
+    var table = $('#table-mainfiv table').DataTable({
+   	   "scrollY": "calc(100% - 50px)",
+	   "scrollX": true,
+       "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+       "dom": 'tiprl',//自定义显示项
+       "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
+       "lengthChange": true,//是否允许用户自定义显示数量
+       "bPaginate": true, //翻页功能
+       "bFilter": true, //列筛序功能
+       "searching": true,//本地搜索
+       "order": [ 1, "asc" ],//desc降序
+       "Info": true,//页脚信息
+       "oLanguage": oLanguage,
+        "ajax": {
+		    url: portsrc+'/msg/allMsg',
+		    type: 'post',
+		    data:{
+		    	token:token,
+		    	defaulrValue:0,
+		    	type:'task'//task为任务消息，alert为预警消息
+		    },
+            dataSrc: function ( data ) {
+                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+                	var d=data.body[i];
+                	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
+                	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
-		/*table*/
-		$(function () {
-           var table = $('#table-mainfiv table').DataTable({
-           	   "scrollY": "calc(100% - 50px)",
-			   "scrollX": true,
-               "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
-               "dom": 'tiprl',//自定义显示项
-               "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
-               "lengthChange": true,//是否允许用户自定义显示数量
-               "bPaginate": true, //翻页功能
-               "bFilter": true, //列筛序功能
-               "searching": true,//本地搜索
-               "order": [ 1, "asc" ],//desc降序
-               "Info": true,//页脚信息
-               "oLanguage": oLanguage,
-	            "ajax": {
-				    url: portsrc+'/msg/allMsg',
-				    type: 'post',
-				    data:{
-				    	token:token,
-				    	defaulrValue:0,
-				    	type:'task'//task为任务消息，alert为预警消息
-				    },
-		            dataSrc: function ( data ) {
-		                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
-		                	var d=data.body[i];
-		                	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
-		                	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
+                	var level="";
+					if(d.level=="红色"){
+						level="<img src='src/images/rank-red.png'/>";
+					} else if(d.level=="蓝色"){
+						level="<img src='src/images/rank-blue.png'/>";
+					} else if(d.level=="绿色"){
+						level="<img src='src/images/rank-green.png'/>";
+					} else if(d.level=="橙色"){
+						level="<img src='src/images/rank-orange.png'/>";
+					} else if(d.level=="黄色"){
+						level="<img src='src/images/rank-yellow.png'/>";
+					}
+                	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
 
-		                	var level="";
-							if(d.level=="红色"){
-								level="<img src='src/images/rank-red.png'/>";
-							} else if(d.level=="蓝色"){
-								level="<img src='src/images/rank-blue.png'/>";
-							} else if(d.level=="绿色"){
-								level="<img src='src/images/rank-green.png'/>";
-							} else if(d.level=="橙色"){
-								level="<img src='src/images/rank-orange.png'/>";
-							} else if(d.level=="黄色"){
-								level="<img src='src/images/rank-yellow.png'/>";
-							}
-		                	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
+                	data.body[i].name="<a href='#/viewTaskMsg' url='components/viewTaskMsg.html' class='view-cont add_tab' name='查看任务消息'>"+d.name+"</a>";
 
-		                	data.body[i].name="<a href='#/viewTaskMsg' url='components/viewTaskMsg.html' class='view-cont add_tab' name='查看任务消息'>"+d.name+"</a>";
-
-		                	data.body[i].coverpop="<div class='checkone'><input type='checkbox' name='coverpop' id='cover_"+d.id+"' /><label for='cover_"+d.id+"'>覆盖人口</label></div>";
-		                	data.body[i].areacrea="<div class='checkone'><input type='checkbox' name='areacrea' id='arcrea_"+d.id+"' /><label for='arcrea_"+d.id+"'>覆盖区域面积</label></div>";
-		                	data.body[i].areaname="<div class='checkone'><input type='checkbox' name='areaname' id='arname_"+d.id+"' /><label for='arname_"+d.id+"'>覆盖区域名称</label></div>";
-		                }
-		                return data.body;
-		            }
-		        },
-				"columns": [
-				    { "data": "checkbox" },
-				    { "data": "tabnumb" },
-				    { "data": "level" },
-				    { "data": "name" },
-				    { "data": "department" },
-				    { "data": "people" },
-				    { "data": "time" },
-				    { "data": "coverpop" },
-				    { "data": "areacrea" },
-				    { "data": "areaname" }
-				],
-               "columnDefs": [
-               		{
-	                   orderable: false,
-	                   targets: [0,2,3,4,5,7,8,9] //禁止排序
-	               },{ 
-	                	"sType": "html-percent", 
-                       "aTargets": [2]  //指定列号使用自定义排序
-                   	}  
-               ],
-               fnDrawCallback: function(table) {  
-               		jumpPage($("#table-mainfiv"))
-	           },
-               initComplete: function () {//列筛选
-                   var api = this.api();
-                   api.columns().indexes().flatten().each(function (i) {
-                       var column = api.column(i);
-                        if (i == 4 || i == 5) { //对第i列进行筛选
- 							rowScreen(column);
-                        }else if (i == 2) { //对第i列进行筛选
- 							rowLevScreen(column);
-                        }
-                   });
-               }
-			})
-			
-			
-			$(".gb-packUp-leftNav").click(function(){
-		        setTimeout(function(){
-		            table.draw();
-		        },500)
-		    });//重绘
-
-			//自定义显示数量
-			$('.taskmsg').each(function(){
-		    	tabot($(this))
-		    })
- 
-			//自定义搜索
-           $('.dsearch').on('keyup click', function () {
-               var tsval = $(".dsearch").val()
-               table.search(tsval, false, false).draw();
+                	data.body[i].coverpop="<div class='checkone'><input type='checkbox' name='coverpop' id='cover_"+d.id+"' /><label for='cover_"+d.id+"'>覆盖人口</label></div>";
+                	data.body[i].areacrea="<div class='checkone'><input type='checkbox' name='areacrea' id='arcrea_"+d.id+"' /><label for='arcrea_"+d.id+"'>覆盖区域面积</label></div>";
+                	data.body[i].areaname="<div class='checkone'><input type='checkbox' name='areaname' id='arname_"+d.id+"' /><label for='arname_"+d.id+"'>覆盖区域名称</label></div>";
+                }
+                return data.body;
+            }
+        },
+		"columns": [
+		    { "data": "checkbox" },
+		    { "data": "tabnumb" },
+		    { "data": "level" },
+		    { "data": "name" },
+		    { "data": "department" },
+		    { "data": "people" },
+		    { "data": "time" },
+		    { "data": "coverpop" },
+		    { "data": "areacrea" },
+		    { "data": "areaname" }
+		],
+       "columnDefs": [
+       		{
+               orderable: false,
+               targets: [0,2,3,4,5,7,8,9] //禁止排序
+           },{ 
+            	"sType": "html-percent", 
+               "aTargets": [2]  //指定列号使用自定义排序
+           	}  
+       ],
+       fnDrawCallback: function(table) {  
+       		jumpPage($("#table-mainfiv"))
+       },
+       initComplete: function () {//列筛选
+           var api = this.api();
+           api.columns().indexes().flatten().each(function (i) {
+               var column = api.column(i);
+                if (i == 4 || i == 5) { //对第i列进行筛选
+						rowScreen(column);
+                }else if (i == 2) { //对第i列进行筛选
+						rowLevScreen(column);
+                }
            });
-
- 			//checkbox全选
-           $("#checkAll").on("click", function () {
-               if ($(this).prop("checked") === true) {
-               		$('#invert').attr('checked',false);
-                   $('.dataTables_wrapper tbody tr').find("input").prop("checked", $(this).prop("checked"));
-                   $('.dataTables_wrapper tbody tr').addClass('selected');
-               } else {
-                   $('.dataTables_wrapper tbody tr').find("input").prop("checked", false);
-                   $('.dataTables_wrapper tbody tr').removeClass('selected');
-               }    
-           });
-
-           //反选
-           $('#invert').on("click", function () {
-           	   var $tmp = $('[name=checkone]:checkbox');
-           	   /*$('#checkAll').prop('checked', );*/
-           	   //console.log($tmp.length);
-           	   //console.log($tmp.filter(':checked').length);
-           	   if($tmp.filter(':checked').length == 0){
-           	   	$('#checkAll').prop('checked', true);
-           	   }else{
-           	   	$('#checkAll').prop('checked', false);
-           	   }
-           	   $('.dataTables_wrapper tbody tr').each(function(){
-           	   		if($(this).hasClass('selected')){
-           	   			if($(this).find("input[name='coverpop']").prop("checked") === true && $(this).find("input[name='areacrea']").prop("checked") === true && $(this).find("input[name='areaname']").prop("checked") === true){
-							$(this).removeClass('selected');
-               	   			$(this).find("input").prop("checked", false);
-           	   			}else{
-           	   				$(this).find("input").not("input[name='checkone']").each(function(){
-           	   					if($(this).prop("checked") === true){
-           	   						$(this).prop("checked", false);
-           	   					}else{
-           	   						$(this).prop("checked", true);
-           	   					}
-           	   				})
-           	   			}
-           	   		}else{
-           	   			$(this).addClass('selected');
-           	   			$(this).find("input").prop("checked", true);
-           	   		}
-           	   })
-           });
- 
-           //删除选中行
-           $('.dataTables_wrapper tbody').on('click', 'tr input[name="checkone"]', function () {
-               var $tr = $(this).parents('tr');
-               $tr.toggleClass('selected');
-               var $tmp = $('[name=checkone]:checkbox');
-               $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
-               if($tr.hasClass('selected')){
-               		$tr.find("input").prop("checked", $(this).prop("checked"));
-               }else{
-               		$tr.find("input").prop("checked", false);
-               }
- 				$('#invert').attr('checked',false);
-           });
- 			
- 			//选择数据
- 		  $('.dataTables_wrapper tbody').find("input").not("input[name='checkone']"). on('click', function () {
-               var $tr = $(this).parents('tr');
-	           if($tr.find("input[name='coverpop']").prop("checked") === false && $tr.find("input[name='areacrea']").prop("checked") === false && $tr.find("input[name='areaname']").prop("checked") === false){
-					$tr.removeClass('selected');
-       	   			$tr.find("input[name='checkone']").prop("checked", false);
-   	   			}else{
-   	   				$tr.addClass('selected');
-       	   			$tr.find("input[name='checkone']").prop("checked", true);
-   	   			}
-               var $tmp = $('.dataTables_wrapper tbody').find("input:checkbox").not("input[name='checkone']");
-               $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
-               //console.log($tmp);
- 			   $('#invert').attr('checked',false);
-           });
-       })
+       }
 	})
+	
+	
+	$(".gb-packUp-leftNav").click(function(){
+        setTimeout(function(){
+            table.draw();
+        },500)
+    });//重绘
+
+	//自定义显示数量
+	$('.taskmsg').each(function(){
+    	tabot($(this))
+    })
+
+	//自定义搜索
+	$('.dsearch').on('keyup click', function () {
+	   var tsval = $(".dsearch").val()
+	   table.search(tsval, false, false).draw();
+	});
+
+	//checkbox全选
+	$("#checkAll").on("click", function () {
+	   if ($(this).prop("checked") === true) {
+	   		$('#invert').attr('checked',false);
+	       $('.dataTables_wrapper tbody tr').find("input").prop("checked", $(this).prop("checked"));
+	       $('.dataTables_wrapper tbody tr').addClass('selected');
+	   } else {
+	       $('.dataTables_wrapper tbody tr').find("input").prop("checked", false);
+	       $('.dataTables_wrapper tbody tr').removeClass('selected');
+	   }    
+	});
+
+	//反选
+	$('#invert').on("click", function () {
+		   var $tmp = $('[name=checkone]:checkbox');
+		   /*$('#checkAll').prop('checked', );*/
+		   //console.log($tmp.length);
+		   //console.log($tmp.filter(':checked').length);
+		   if($tmp.filter(':checked').length == 0){
+		   	$('#checkAll').prop('checked', true);
+		   }else{
+		   	$('#checkAll').prop('checked', false);
+		   }
+		   $('.dataTables_wrapper tbody tr').each(function(){
+		   		if($(this).hasClass('selected')){
+		   			if($(this).find("input[name='coverpop']").prop("checked") === true && $(this).find("input[name='areacrea']").prop("checked") === true && $(this).find("input[name='areaname']").prop("checked") === true){
+					$(this).removeClass('selected');
+	   	   			$(this).find("input").prop("checked", false);
+		   			}else{
+		   				$(this).find("input").not("input[name='checkone']").each(function(){
+		   					if($(this).prop("checked") === true){
+		   						$(this).prop("checked", false);
+		   					}else{
+		   						$(this).prop("checked", true);
+		   					}
+		   				})
+		   			}
+		   		}else{
+		   			$(this).addClass('selected');
+		   			$(this).find("input").prop("checked", true);
+		   		}
+		   })
+	});
+
+	//删除选中行
+	$('.dataTables_wrapper tbody').on('click', 'tr input[name="checkone"]', function () {
+	   var $tr = $(this).parents('tr');
+	   $tr.toggleClass('selected');
+	   var $tmp = $('[name=checkone]:checkbox');
+	   $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
+	   if($tr.hasClass('selected')){
+	   		$tr.find("input").prop("checked", $(this).prop("checked"));
+	   }else{
+	   		$tr.find("input").prop("checked", false);
+	   }
+			$('#invert').attr('checked',false);
+	});
+		
+		//选择数据
+	$('.dataTables_wrapper tbody').find("input").not("input[name='checkone']"). on('click', function () {
+	   var $tr = $(this).parents('tr');
+	   if($tr.find("input[name='coverpop']").prop("checked") === false && $tr.find("input[name='areacrea']").prop("checked") === false && $tr.find("input[name='areaname']").prop("checked") === false){
+			$tr.removeClass('selected');
+	   			$tr.find("input[name='checkone']").prop("checked", false);
+				}else{
+					$tr.addClass('selected');
+	   			$tr.find("input[name='checkone']").prop("checked", true);
+				}
+	   var $tmp = $('.dataTables_wrapper tbody').find("input:checkbox").not("input[name='checkone']");
+	   $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
+	   //console.log($tmp);
+		   $('#invert').attr('checked',false);
+	});
 
 </script>

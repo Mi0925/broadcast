@@ -57,7 +57,7 @@
 					<input type="checkbox" name="checkall" id="checkAll" />
 					<label for="checkAll">全选</label>
 				</div>
-				<span class="chedel"><i class="iconfont icon-shanchu"></i>删除</span>
+				<span class="chedel j-del-tr"><i class="iconfont icon-shanchu"></i>删除</span>
 			</div>
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
@@ -65,7 +65,7 @@
 	<div class="choose">
 		<p class="choword">确定删除此任务消息吗？</p>
 		<div class="chobtn">
-			<input type="button" value="删除" class="chopri cho-delete" />
+			<input type="button" value="删除" class="chopri j-del-tr" />
 			<input type="button" value="取消" class="cho-cancel" />
 		</div>
 		<span class="triangle"><em></em></span>
@@ -76,109 +76,77 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		// $.ajax({
-		//     url: portsrc+'/msg/Platform/all',
-		//     token:token,
-		//     type: 'get',
-		//     dataType: 'json',
-		//     success: function(data) {
-		//     	console.log(data)
-		// 		layui.use('laytpl', function(){
-		// 			var laytpl = layui.laytpl;
-		// 			var getTpl = tableHtml.innerHTML,
-		// 			    tableH = document.getElementById('table-html');
-		// 			laytpl(getTpl).render(data, function(html) {
-		// 			    tableH.innerHTML = html;
-		// 			    table_fun()
-		// 			});
-		// 		});
-		//     }
-		// });
-		// function table_fun() {
-			/*table*/
-			// $(function () {
-	           var table = $('#table-mainfou table').DataTable({
-	                "scrollY": "calc(100% - 50px)",
-				    "scrollX": true,
-	                "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
-	                "dom": 'tiprl',//自定义显示项
-	                "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
-	                "lengthChange": true,//是否允许用户自定义显示数量
-	                "bPaginate": true, //翻页功能
-	                "bFilter": true, //列筛序功能
-	                "searching": true,//本地搜索
-	                "order": [ 1, "asc" ],//desc降序
-	                "Info": true,//页脚信息
-	                "oLanguage": oLanguage,
-	                "ajax": {
-			            url: portsrc+'/msg/Platform/all',
-			            type:'post',
-			            data:{
-					    	token:token,
-					    },
-			            dataSrc: function ( data ) {
-			                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
-			                	var d=data.body[i];
-			                	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";
-			                	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
-			                	data.body[i].interfacesName="<a href='#/viewInterface' url='components/viewInterface.html' class='view-cont add_tab' name='查看接口'>"+d.interfacesName+"</a>";
-			                	data.body[i].number="<a href='#/taskMsg' url='components/taskMsg.html' class='editbtn add_tab' name='任务消息'>"+d.number+"</a>";
-			                	data.body[i].edit="<a href='#/editInterface' url='components/editInterface.html' class='editbtn add_tab' name='编辑接口'><i class='iconfont icon-bianji'></i>编辑</a>";
-			                	data.body[i].close="<span class='portbtn porclose'><i class='iconfont icon-guanbi2'></i>关闭</span>";
-			                	data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
-			                }
-			                
-			                return data.body;
-			            }
-			        },
-					"columns": [
-					    { "data": "checkbox" },
-					    { "data": "tabnumb" },
-					    { "data": "interfacesType" },
-					    { "data": "interfacesName" },
-					    { "data": "prot" },
-					    { "data": "prot2" },
-					    { "data": "protocol" },
-					    { "data": "key" },
-					    { "data": "area" },
-					    { "data": "time" },
-					    { "data": "number" },
-					    { "data": "edit" },
-					    { "data": "close" },
-					    { "data": "delete" }
-					],
-	                "columnDefs": [
-	               		{
-		                   orderable: false,
-		                   targets: [0,2,3,4,5,6,7,8,10,11,12,13] //禁止排序
-		               }
-	                ],
-	                fnDrawCallback: function(table) {  
-	               		jumpPage($("#table-mainfou"))
-		            },
-	                initComplete: function () {//列筛选
-	                   var api = this.api();
-	                   api.columns().indexes().flatten().each(function (i) {
-	                       if (i == 2 || i == 8) { //对第i列进行筛选
-	                          var column = api.column(i);
-	                          rowScreen(column);
-	                       }
-	                   });
-	                }
-				})
-				userDef(table);//table配置--显示数量 搜索 全选 删除  
-	       // })
-		// };
-
-        $('body').on('click','.portbtn',function(){
-        	if($(this).hasClass('porclose')){
-        		$(this).html("<i class='iconfont icon-qiyong'></i>启用");
-	        	$(this).removeClass('porclose').addClass('porusing');
-        	}else{
-        		$(this).html("<i class='iconfont icon-guanbi2'></i>关闭");
-	        	$(this).removeClass('porusing').addClass('porclose');
-        	}
-        })
+	portVar={
+		ajaxUrlDelete:portsrc + '/msg/Platform/delete',//删除
+	};
+	var table = $('#table-mainfou table').DataTable({
+	    "scrollY": "calc(100% - 50px)",
+	    "scrollX": true,
+	    "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+	    "dom": 'tiprl',//自定义显示项
+	    "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
+	    "lengthChange": true,//是否允许用户自定义显示数量
+	    "bPaginate": true, //翻页功能
+	    "bFilter": true, //列筛序功能
+	    "searching": true,//本地搜索
+	    "order": [ 1, "asc" ],//desc降序
+	    "Info": true,//页脚信息
+	    "oLanguage": oLanguage,
+	    "ajax": {
+	        url: portsrc+'/msg/Platform/all',
+	        type:'post',
+	        data:{
+		    	token:token,
+		    },
+	        dataSrc: function ( data ) {
+	            for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+	            	var d=data.body[i];
+	            	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";
+	            	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
+	            	data.body[i].interfacesName="<a href='#/viewInterface' url='components/viewInterface.html' class='view-cont add_tab' name='查看接口'>"+d.interfacesName+"</a>";
+	            	data.body[i].number="<a href='#/taskMsg' url='components/taskMsg.html' class='editbtn add_tab' name='任务消息'>"+d.number+"</a>";
+	            	data.body[i].edit="<a href='#/editInterface' url='components/editInterface.html' class='editbtn add_tab' name='编辑接口'><i class='iconfont icon-bianji'></i>编辑</a>";
+	            	data.body[i].close="<span class='portbtn porclose'><i class='iconfont icon-guanbi2'></i>关闭</span>";
+	            	data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+	            }
+	            
+	            return data.body;
+	        }
+	    },
+		"columns": [
+		    { "data": "checkbox" },
+		    { "data": "tabnumb" },
+		    { "data": "interfacesType" },
+		    { "data": "interfacesName" },
+		    { "data": "prot" },
+		    { "data": "prot2" },
+		    { "data": "protocol" },
+		    { "data": "key" },
+		    { "data": "area" },
+		    { "data": "time" },
+		    { "data": "number" },
+		    { "data": "edit" },
+		    { "data": "close" },
+		    { "data": "delete" }
+		],
+	    "columnDefs": [
+	   		{
+	           orderable: false,
+	           targets: [0,2,3,4,5,6,7,8,10,11,12,13] //禁止排序
+	       }
+	    ],
+	    fnDrawCallback: function(table) {  
+	   		jumpPage($("#table-mainfou"))
+	    },
+	    initComplete: function () {//列筛选
+	       var api = this.api();
+	       api.columns().indexes().flatten().each(function (i) {
+	           if (i == 2 || i == 8) { //对第i列进行筛选
+	              var column = api.column(i);
+	              rowScreen(column);
+	           }
+	       });
+	    }
 	})
+	userDef(table);//table配置--显示数量 搜索 全选 删除
 </script>

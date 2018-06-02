@@ -35,23 +35,23 @@
 					<p class="oneitem-tit"><small>*</small>消息级别</p>
 					<ul class="msgrank">
 						<li>
-							<input type="radio" name="level" id="radone" value='红色' checked />
+							<input type="radio" name="level" id="radone" value='RED' checked />
 							<label for="radone"><img src="src/images/rank-red.png">红色</label>
 						</li>
 						<li>
-							<input type="radio" name="level" id="radtwo" value='橙色' />
+							<input type="radio" name="level" id="radtwo" value='ORANGE' />
 							<label for="radtwo"><img src="src/images/rank-orange.png">橙色</label>
 						</li>
 						<li>
-							<input type="radio" name="level" id="radthr" value='黄色' />
+							<input type="radio" name="level" id="radthr" value='YELLOW' />
 							<label for="radthr"><img src="src/images/rank-yellow.png">黄色</label>
 						</li>
 						<li>
-							<input type="radio" name="level" id="radfou" value='蓝色' />
+							<input type="radio" name="level" id="radfou" value='BLUE' />
 							<label for="radfou"><img src="src/images/rank-blue.png">蓝色</label>
 						</li>
 						<li>
-							<input type="radio" name="level" id="radfiv" value='绿色' />
+							<input type="radio" name="level" id="radfiv" value='GREEN' />
 							<label for="radfiv"><img src="src/images/rank-green.png">绿色</label>
 						</li>
 					</ul>
@@ -308,27 +308,29 @@
 				$('.layui-select-title').append(itbtn);
 				$('.gb-form .layui-form-radio').remove();
 				form.on('submit(*)', function(data){
+					console.log()
 					schedulingForm(data);
+					delete data.time;
 					$.ajax({
 					    url: portsrc+"/schedule/addItem",
-					    type: 'get',
+					    type: 'post',
 					    dataType: 'json',
 					    data:{
 					    	token:token,
-					    	data:JSON.stringify(data.field)
+					    	planSchedule:JSON.stringify(data.field)
+					    	// planSchedule: JSON.stringify({"type":"11A01洪水","name":"xiao_cs","level":4,"message":"text","direct":true,"startTime":"2018-05-22 00:00:00","endTime": "2018-05-25 00:00:00", "peopleAffect":"0","coverArea":{},"department":"","dutyPerson":"","listMP3":[],"areaSel":[],"resourceSel":[]})
 					    },
-					    success: function(data) {
+					    success: function(data){
 							layer.open({
 					            title: '提示',
 				        		shadeClose:true,
-					            content: data.body.name
+					            content: '新建成功'
 					        });
 					    }
 					});
 					return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 				});
 			});
-			$.fn.zTree.init($('#gb_tree_area'), areaSetting, data.areaData);//初始化全部地区树
 	    }
 	});
 	// 获取全部地区

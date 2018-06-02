@@ -1,20 +1,4 @@
 /*type*/
-$(document).on('click','.msgtype li',function(){
-    $('.msgtype li').removeClass('msgact');
-    $(this).addClass('msgact');
-})
-
-/*calendar*/
-// layui.use('laydate', function(){
-//     var laydate = layui.laydate;
-//     laydate.render({
-//         elem: '#daterg',
-//         eventElem: '#tochobtn',
-//         trigger: 'click',
-//         type:'datetime',
-//         range: true
-//     });
-// })
 function body_load() {
     setTimeout(function(argument) {
         layui.use('laydate', function(){
@@ -236,7 +220,7 @@ $(document).on('click','.notpass',function(){
     $('.unreason').show();//.css({'z-index':'101','opacity':1,'-ms-filter':"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"});
 })
 
-/**/$(document).on('click','.popwindow',function(){
+$(document).on('click','.popwindow',function(){
     /*if($(this).hasClass('popnone')){
         return;
     }else{*/
@@ -434,4 +418,199 @@ $(function() {
             $('.viewdetail').css({'height':'0','padding-top':'0'});
         });
     })
+});
+
+// 表格删除
+$('body').on('click','.j-del-tr',function() {
+    if(!$(this).hasClass("j-exercise")){
+        var deleteId=[];//存放删除id
+        $('tr.selected').each(function() {
+            deleteId.push($(this).find('.checkone').find('input').attr('id'))
+        });
+        // 模拟数据
+        $.ajax({
+            url: portVar.ajaxUrlDelete,
+            type: 'get',
+            dataType: 'json',
+            data: {
+                token:token,
+                ids: deleteId.sort(),
+                type:portVar.type
+            },
+            success: function(data) {
+                tr_del(table);
+                deleteId=[];
+            }
+        });
+    }else{
+        // 演练计划删除
+        var cycleDeleteId=[];//存放删除周期id
+        var manualDeleteId=[];//存放删除手动id
+        $('tr.selected').each(function() {
+            if($(this).find('td').eq(3).text()=='周期'){
+                cycleDeleteId.push($(this).find('.checkone').find('input').attr('id'));
+            }else{
+                manualDeleteId.push($(this).find('.checkone').find('input').attr('id'));
+            }
+        });
+        // 删除周期
+        $.ajax({
+            url: portVar.ajaxUrlDelete,
+            type: 'get',
+            dataType: 'json',
+            data: {
+                token:token,
+                type:'cycle',
+                id: cycleDeleteId.sort()
+            },
+            success: function(data) {
+                tr_del(table);
+                cycleDeleteId=[];
+            }
+        });
+        // 删除手动
+        $.ajax({
+            url: portVar.ajaxUrlDelete,
+            type: 'get',
+            dataType: 'json',
+            data: {
+                token:token,
+                type:'manual',
+                id: manualDeleteId.sort()
+            },
+            success: function(data) {
+                tr_del(table);
+                manualDeleteId=[];
+            }
+        });
+    }
+});
+
+
+// 已查阅,未查阅，新编辑
+$('body').on('click','.msgtype li',function() {
+    $('.msgtype li').removeClass('msgact');
+    $(this).addClass('msgact');
+    var defaulrValue=0;
+    if($(this).text()=='已查阅'){
+        defaulrValue=0;
+    }else if($(this).text()=='未查阅'){
+        defaulrValue=1;
+    }else if($(this).text()=='新编辑'){
+        defaulrValue=2;
+    }
+    var param={
+            token:token,
+            defaulrValue:defaulrValue,
+            type:portVar.type,//task为任务消息，alert为预警消息
+        };
+    table.settings()[0].ajax.data = param;
+    table.ajax.reload();
+});
+
+// 重播
+$('body').on('click','.j-resend-manual',function() {
+    portVar.type='manualPractice';//演练类型修改
+});
+$('body').on('click','.j-resend-cycle',function() {
+    portVar.type='cyclePractice';//演练类型修改
+});
+$('body').on('click','.cho-again',function(){
+    console.log(portVar)
+    // 模拟数据
+    $.ajax({
+        url: portVar.ajaxUrlReSend,
+        type: 'get',
+        dataType: 'json',
+        data: {
+            token:token,
+            id: sessionStorage.getItem('chretry'),
+            type:portVar.type,
+        },
+        success: function(data) {
+            layer.open({
+                title: '提示',
+                content: '重播成功'
+            });
+        }
+    });
+});
+
+// 审核未通过
+$('body').on('click','.notpass',function(){
+    // 模拟数据
+    $.ajax({
+        url: portVar.ajaxUrlUnpassreason,
+        type: 'get',
+        dataType: 'json',
+        data: {
+            token:token,
+            type:portVar.type,//task为任务消息，alert为预警消息
+            id:$(this).find('.checkone').find('input').attr('id')
+        },
+        success: function(data) {
+            $(".unword").text(data.body);
+        }
+    });
+});
+
+// 审核通过
+$('body').on('click','.j-audit-yes',function(){
+    $.ajax({
+        url: portVar.ajaxUrlMessageAudit,
+        type: 'get',
+        dataType: 'json',
+        data: {
+            token:token,
+            type:portVar.type,//task为任务消息，alert为预警消息
+            pass:true,//是否通过
+        },
+        success: function(data) {
+            layer.open({
+                title: '提示',
+                content: '审核通过'
+            });
+        }
+    });
+});
+
+// 审核不通过
+$('body').on('click','.j-audit-no',function(){
+    $.ajax({
+        url: portVar.ajaxUrlMessageAudit,
+        type: 'get',
+        dataType: 'json',
+        data: {
+            token:token,
+            type:portVar.type,//task为任务消息，alert为预警消息
+            pass:false,//是否通过
+            require:editor_a.getPlainTxt()//未通过理由
+        },
+        success: function(data) {
+            layer.open({
+                title: '提示',
+                content: '审核通过'
+            });
+        }
+    });
+});
+
+
+// 消息接入启用关闭
+$('body').on('click', '.portbtn', function() {
+    if ($(this).hasClass('porclose')) {
+        $(this).html("<i class='iconfont icon-qiyong'></i>启用");
+        $(this).removeClass('porclose').addClass('porusing');
+    } else {
+        $(this).html("<i class='iconfont icon-guanbi2'></i>关闭");
+        $(this).removeClass('porusing').addClass('porclose');
+    }
+});
+
+// 文字语音转换按钮
+$(document).on('click','.convert',function(){
+    $('.popwindow').show();
+    $('.toshift').show();
+    $('.matlist li ').eq(0).find('input').prop('checked',true);
+    //$('.succmat').hide();
 });
