@@ -4,6 +4,7 @@ var token=sessionStorage.getItem('token');//token，接口必传值
 
 var portsrc="http://47.104.84.17";
 // var portsrc="http://192.168.3.130";
+var portVar={};
 var blist = [];
 var districtLoading = 0;
 var drawBoundary=null;

@@ -48,11 +48,11 @@ function areaZTreeOnCheck(event, treeId, treeNode) {
 	// 获取地区接口
 	$.ajax({
 	    url: portsrc+'/areaSelect',
-	    type: 'post',
+	    type: 'get',
 	    dataType: 'json',
 	    data:{
 	    	token:token,
-	    	data:JSON.stringify(areaSel)
+	    	area:JSON.stringify(areaSel)
 	    },
 	    success: function(data) {
 	    	var data=data.body,

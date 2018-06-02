@@ -58,7 +58,7 @@
 					<input type="checkbox" name="checkall" id="checkAll" />
 					<label for="checkAll">全选</label>
 				</div>
-				<span class="chedel"><i class="iconfont icon-shanchu"></i>删除</span>
+				<span class="chedel j-del-tr"><i class="iconfont icon-shanchu"></i>删除</span>
 			</div>
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
@@ -166,7 +166,7 @@
 	<div class="choose">
 		<p class="choword">确定删除此任务消息吗？</p>
 		<div class="chobtn">
-			<input type="button" value="删除" class="chopri cho-delete" />
+			<input type="button" value="删除" class="chopri j-del-tr" />
 			<input type="button" value="取消" class="cho-cancel" />
 		</div>
 		<span class="triangle"><em></em></span>
@@ -177,103 +177,95 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		var editorOption = {
-	        scaleEnabled:true
-	    };
-	    var editor_a = new baidu.editor.ui.Editor(editorOption);
-	    editor_a.render('myEditor');
+	portVar={
+		ajaxUrlDelete:portsrc + '/res/audio/delete',//删除
+		type:'task',//类型
+	};
+	var editorOption = {
+	scaleEnabled:true
+	};
+	var editor_a = new baidu.editor.ui.Editor(editorOption);
+	editor_a.render('myEditor');
+	var table = $('#table-mainthr table').DataTable({
+	   "scrollY": "calc(100% - 50px)",
+	   "scrollX": true,
+	   "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+	   "dom": 'tiprl',//自定义显示项
+	   "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
+	   "lengthChange": true,//是否允许用户自定义显示数量
+	   "bPaginate": true, //翻页功能
+	   "bFilter": true, //列筛序功能
+	   "searching": true,//本地搜索
+	   "order": [ 1, "asc" ],//desc降序
+	   "Info": true,//页脚信息
+	   "oLanguage": oLanguage,
+	    "ajax": {
+		    url: portsrc+'/res/textAudio/all',
+		    type: 'post',
+		    data:{
+		    	token:token,
+		    },
+	        dataSrc: function ( data ) {
+	            for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+	            	var d=data.body[i];
+	            	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
+	            	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
+	            	data.body[i].name="<a href='#/viewCharVoice' url='components/viewCharVoice.html' class='view-cont add_tab' name='查看文字语音'>"+d.name+"</a>";
 
-		/*table*/
-		$(function () {
-           var table = $('#table-mainthr table').DataTable({
-               "scrollY": "calc(100% - 50px)",
-			   "scrollX": true,
-               "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
-               "dom": 'tiprl',//自定义显示项
-               "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
-               "lengthChange": true,//是否允许用户自定义显示数量
-               "bPaginate": true, //翻页功能
-               "bFilter": true, //列筛序功能
-               "searching": true,//本地搜索
-               "order": [ 1, "asc" ],//desc降序
-               "Info": true,//页脚信息
-               "oLanguage": oLanguage,
-	            "ajax": {
-				    url: portsrc+'/res/textAudio/all',
-				    type: 'post',
-				    data:{
-				    	token:token,
-				    },
-		            dataSrc: function ( data ) {
-		                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
-		                	var d=data.body[i];
-		                	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
-		                	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
+	            	var audit="";
+					if(d.audit.boolean==true){
+						if(d.audit.state=='审核'){
+							audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
+						}else if(d.audit.state=='未通过'){
+							audit="<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
+						}
+					}else {
+						audit="<a href='##' class='check' lay-event='nopass'><i class='iconfont icon-download'></i>下载</a>";
+					};
+	            	data.body[i].audit=audit;
 
-		                	data.body[i].name="<a href='#/viewCharVoice' url='components/viewCharVoice.html' class='view-cont add_tab' name='查看文字语音'>"+d.name+"</a>";
-
-		                	var audit="";
-							if(d.audit.boolean==true){
-								if(d.audit.state=='审核'){
-									audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
-								}else if(d.audit.state=='未通过'){
-									audit="<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
-								}
-							};
-		                	data.body[i].audit=audit;
-
-		                	data.body[i].convert="<span class='convert'><i class='iconfont icon-zhuanhuan1'></i>转换</span>";
-		                	data.body[i].edit="<a href='#/editCharVoice' url='components/editCharVoice.html' class='editbtn add_tab' name='编辑文字语音'><i class='iconfont icon-bianji'></i>编辑</a>";
-		                	data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
-		                }
-		                
-		                return data.body;
-		            }
-		        },
-				"columns": [
-				    { "data": "checkbox" },
-				    { "data": "tabnumb" },
-				    { "data": "state" },
-				    { "data": "type" },
-				    { "data": "name" },
-				    { "data": "department" },
-				    { "data": "people" },
-				    { "data": "time" },
-				    { "data": "audit" },
-				    { "data": "convert" },
-				    { "data": "edit" },
-				    { "data": "delete" }
-				],
-               "columnDefs": [
-               		{
-	                   orderable: false,
-	                   targets: [0,2,3,4,5,6,8,9,10,11] //禁止排序
-	               }
-               ],
-               fnDrawCallback: function(table) {  
-               		jumpPage($("#table-mainthr"))
-	           },
-               initComplete: function () {//列筛选
-                   var api = this.api();
-                   api.columns().indexes().flatten().each(function (i) {
-                       if (i == 2 || i == 3 || i == 5 || i == 6) { //对第i列进行筛选
-                           var column = api.column(i);
- 							rowScreen(column);
-                       }
-                   });
-               }
-			})
-			userDef(table);//table配置--显示数量 搜索 全选 删除 
-       })
-			
-		$(document).on('click','.convert',function(){
-			$('.popwindow').show();
-			$('.toshift').show();
-			$('.matlist li ').eq(0).find('input').prop('checked',true);
-			//$('.succmat').hide();
-		})
-		
+	            	data.body[i].convert="<span class='convert'><i class='iconfont icon-zhuanhuan1'></i>转换</span>";
+	            	data.body[i].edit="<a href='#/editCharVoice' url='components/editCharVoice.html' class='editbtn add_tab' name='编辑文字语音'><i class='iconfont icon-bianji'></i>编辑</a>";
+	            	data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+	            }
+	            
+	            return data.body;
+	        }
+	    },
+		"columns": [
+		    { "data": "checkbox" },
+		    { "data": "tabnumb" },
+		    { "data": "state" },
+		    { "data": "type" },
+		    { "data": "name" },
+		    { "data": "department" },
+		    { "data": "people" },
+		    { "data": "time" },
+		    { "data": "audit" },
+		    { "data": "convert" },
+		    { "data": "edit" },
+		    { "data": "delete" }
+		],
+	   "columnDefs": [
+	   		{
+	           orderable: false,
+	           targets: [0,2,3,4,5,6,8,9,10,11] //禁止排序
+	       }
+	   ],
+	   fnDrawCallback: function(table) {  
+	   		jumpPage($("#table-mainthr"))
+	   },
+	   initComplete: function () {//列筛选
+	       var api = this.api();
+	       api.columns().indexes().flatten().each(function (i) {
+	           if (i == 2 || i == 3 || i == 5 || i == 6) { //对第i列进行筛选
+	               var column = api.column(i);
+						rowScreen(column);
+	           }
+	       });
+	   }
 	})
+	userDef(table);//table配置--显示数量 搜索 全选 删除 
+		
 </script>

@@ -726,8 +726,32 @@ Mock.mock('http://47.104.84.17/msg/Platform/all', function(optins){
     });
     return msgTable
 });
-
-
+// 消息接入协议
+Mock.mock('http://47.104.84.17/protocol', function(optins){
+    return Mock.mock({
+        'body':['协议1','协议2','协议3']
+    });
+});
+// 消息接入地区
+Mock.mock('http://47.104.84.17/area', function(optins){
+    return Mock.mock({
+        'body':['地区1','地区2','地区3']
+    });
+});
+// 获取消息接入
+Mock.mock('http://47.104.84.17/msg/Platform/get', function(optins){
+    return Mock.mock({
+        'body':{
+            "name":'@word()',
+            "type":'上级平台',
+            "localPort":'1.1.1.1',
+            "peerPort":'2.2.2.2',
+            "protocol":'协议2',
+            "privateKey":'dgasjdgasd',
+            "area":'地区2',
+        }
+    });
+});
 // 文字转音频
 Mock.mock('http://47.104.84.17/convertText', function(optins){
     console.log(optins)
