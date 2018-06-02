@@ -9,7 +9,7 @@
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>任务消息</p>
 					<div class="oneimp">
-						<input type="text" id="impcontent" class="imptxt" maxlength="20" lay-verify="required"/>
+						<input type="text" name="name" id="impcontent" class="imptxt" maxlength="20" lay-verify="required"/>
 						<span class="oneimp-count"><span class="countnew">0</span>/20</span>
 					</div>
 				</div>
@@ -22,7 +22,7 @@
 					<p class="oneitem-tit">选择调度方案</p>
 					
 						<div class="layui-input-inline j-scheduling-sel">
-							<select name="dispatch" lay-search="" lay-filter="scheduling_sel" lay-verify="required"> <!-- lay-verify="required" lay-search="" -->
+							<select name="schedulePlanId" lay-search="" lay-filter="scheduling_sel" lay-verify="required"> <!-- lay-verify="required" lay-search="" -->
 								<option value="">请选择调度方案</option>
 							</select>
 						</div>
@@ -179,7 +179,7 @@
 						    dataType: 'json',
 						    data:{
 						    	token:token,
-						    	id:schedule_id,
+						    	schedulePlanId:schedule_id,
 						    },
 						    success: function(data) {
 						    	console.log(data)
@@ -230,7 +230,7 @@
 								    dataType: 'json',
 								    data:{
 								    	token:token,
-								    	id:data.value,
+								    	schedulePlanId:data.value,
 								    },
 								    success: function(data) {
 								    	console.log(data)
@@ -276,6 +276,7 @@
 						});
 						// 提交表单
 						form.on('submit(*)', function(data){
+							console.log(data.field)
 							$.ajax({
 							    url: portsrc+"/msg/addMsg",
 							    type: 'get',
@@ -283,7 +284,7 @@
 							    data:{
 							    	token:token,
 							    	type:'task',//task为任务消息，alert为预警消息
-							    	id:$(".j-scheduling-sel select").val(),
+							    	id:sessionStorage.getItem('editTableItem'),
 							    	data:JSON.stringify(data.field)
 							    },
 							    success: function(data) {

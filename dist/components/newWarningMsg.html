@@ -10,7 +10,7 @@
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>消息名称</p>
 					<div class="oneimp">
-						<input type="text"  id="impcontent" class="imptxt" maxlength="20"/>
+						<input type="text" name="name" id="impcontent" class="imptxt" maxlength="20" lay-verify="required"/>
 						<span class="oneimp-count"><span class="countnew">0</span>/20</span>
 					</div>
 				</div>
@@ -23,7 +23,7 @@
 					<p class="oneitem-tit"><small>*</small>消息内容</p>
 					<div class="msgcont">
 						<div class="txtimp">
-							<textarea id="imparea" class="imparea" maxlength="200" onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#ccc'}">请输入消息文本</textarea>
+							<textarea id="imparea" name="message" class="imparea" maxlength="200" placeholder="请输入消息文本"></textarea>
 							<span class="area-count"><span class="countnew">0</span>/200</span>
 						</div>
 						<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>文本内容可以直接转换成音频</p>
@@ -32,26 +32,11 @@
 					<div class="filecont">
 						<div class="filetit">
 							<div class="filetit-one">
-								<input type="file" accept="audio/*,video/*" />
 								<i class="iconfont icon-wushanguanwangziti-"></i>本地上传
 							</div>
 							<span class="filetit-two"><i class="iconfont icon-kucun"></i>在应急音频资源库中选择</span>
 						</div>
 						<ul class="filelist">
-							<li>
-								<div class="filename"><i class="iconfont icon-1"></i><span class="thename">视频.mp4</span></div>
-								<div class="filebtn">
-									<input type="button" value="删除" class="filedel-btn"/>
-									<input type="button" value="转换" class="fileconv-btn"/>
-								</div>
-							</li>
-							<li>
-								<div class="filename"><i class="iconfont icon-1"></i><span class="thename">文本.txt</span></div>
-								<div class="filebtn">
-									<input type="button" value="删除" class="filedel-btn"/>
-									<input type="button" value="转换" class="fileconv-btn"/>
-								</div>
-							</li>
 						</ul>
 					</div>
 				</div>
@@ -63,13 +48,13 @@
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>选择消息级别</p>
 					<div class="layui-input-inline">
-						<select name="dispatch" lay-search=""> 
+						<select name="level" lay-search="" lay-verify="required"> 
 							<option value="">请选择消息级别</option>
-							<option value="1">红色</option>
-							<option value="2">橙色</option>
-							<option value="3">黄色</option>
-							<option value="4">蓝色</option>
-							<option value="5">绿色</option>
+							<option value="红色">红色</option>
+							<option value="橙色">橙色</option>
+							<option value="黄色">黄色</option>
+							<option value="蓝色">蓝色</option>
+							<option value="绿色">绿色</option>
 						</select>
 					</div>
 				</div>
@@ -81,16 +66,16 @@
 				<div class="oneitem-cont">
 					<div class="predictone">
 						<p class="oneitem-tit">发布部门</p>
-						<p class="precount">杭州市广播中心</p>
+						<p class="precount j-department"></p>
 					</div>
 					<div class="predictwo">
 						<p class="oneitem-tit">负责人</p>
-						<p class="precount">橙子</p>
+						<p class="precount j-dutyPerson"></p>
 					</div>
 				</div>
 			</div>
 			<div class="tocreat">
-				<input type="button" value="确认创建" class="tocreatbtn" />
+				<input type="button" value="确认创建" class="tocreatbtn" lay-submit lay-filter="*" />
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 		</div>
@@ -111,55 +96,7 @@
 					<span class="matit">当前格式：</span>
 					<span class="themat">mp3</span>
 				</div>
-				<div class="format">
-					<span class="matit">目标格式：</span>
-					<div class="matchoose">
-						<ul class="matlist">
-							<li>
-								<span class="matype">格式一</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="matone" checked="checked" />
-									<label for="matone"></label>
-								</div>
-							</li>
-							<li>
-								<span class="matype">格式二</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="matwo" />
-									<label for="matwo"></label>
-								</div>
-							</li>
-							<li>
-								<span class="matype">格式三</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="mathr" />
-									<label for="mathr"></label>
-								</div>
-							</li>
-							<li>
-								<span class="matype">格式四</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="matfou" />
-									<label for="matfou"></label>
-								</div>
-							</li>
-							<li>
-								<span class="matype">格式五</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="matfiv" />
-									<label for="matfiv"></label>
-								</div>
-							</li>
-							<li>
-								<span class="matype">格式六</span>
-								<div class="matcheck">
-									<input type="radio" name="matcho" id="matsix" />
-									<label for="matsix"></label>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<input type="file" accept="text/*" class="file_text" />
 				<div class="tomat">
 					<div class="layui-progress layui-progress-big" lay-filter="demo">
 					  <div class="layui-progress-bar" lay-percent="0%"></div>
@@ -184,35 +121,27 @@
 			$('.layui-select-title').append(itbtn);
 			$('.gb-form .layui-form-radio').remove();
 
-		  
-			//触发事件
-			var active = {
-			    loading: function(othis){
-			      var DISABLED = 'layui-btn-disabled';
-			      if(othis.hasClass(DISABLED)) return;
-			      
-			      //模拟loading
-			      var n = 0,timer = setInterval(function(){
-			        n = n + Math.random()*10|0;  
-			        if(n>100){
-			          n = 100;
-			          clearInterval(timer);
-			          othis.removeClass(DISABLED);
-			          $('.uncont .tomat').hide();
-			          $('.uncont .succmat').show();
-			        }
-			        element.progress('demo', n+'%');
-			      }, 300+Math.random()*1000);
-			      
-			      othis.addClass(DISABLED);
-			    }
-			};
-		  
-			$('.site-demo-active').on('click', function(){
-				$('.uncont .tomat').show();
-				$('.uncont .succmat').hide();
-				var othis = $(this), type = $(this).data('type');
-				active[type] ? active[type].call(this, othis) : '';
+			form.on('submit(*)', function(data){
+				warnMsgForm(data);
+				console.log(data.field);
+				$.ajax({
+				    url: portsrc+"/msg/addMsg",
+				    type: 'get',
+				    dataType: 'json',
+				    data:{
+				    	token:token,
+				    	type:'alert',//task为任务消息，alert为预警消息
+				    	data:JSON.stringify(data.field)
+				    },
+				    success: function(data) {
+						layer.open({
+				            title: '提示',
+			        		shadeClose:true,
+				            content: '新建成功'
+				        });
+				    }
+				});
+				return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 			});
 		});
 	});

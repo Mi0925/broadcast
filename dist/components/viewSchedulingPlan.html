@@ -82,11 +82,11 @@
 				<div class="oneitem-cont">
 					<div class="predictone">
 						<p class="oneitem-tit">预覆盖人数</p>
-						<p class="precount j-peopleAffect"></p>
+						<p class="precount"><i class="j-peopleAffect">0</i>万人</p>
 					</div>
 					<div class="predictwo">
 						<p class="oneitem-tit">预覆盖面积</p>
-						<p class="precount j-coverArea"></p>
+						<p class="precount"><i class="j-coverArea">0</i>平方公里</p>
 					</div>
 				</div>
 			</div>
@@ -157,8 +157,8 @@
 	    		audio_add_html(data.listMP3[i]);//添加一条音频数据
 	    		$(".filedel-btn").remove();
 	    	};
-	    	$(".j-peopleAffect").text(data.peopleAffect+'人');//覆盖人数
-	    	$(".j-coverArea").text(data.coverArea+'万平方公里');//覆盖面积
+	    	$(".j-peopleAffect").text(data.peopleAffect);//覆盖人数
+	    	$(".j-coverArea").text(data.coverArea);//覆盖面积
 	    	$(".j-department").text(data.department);//部门
 	    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
 	    	

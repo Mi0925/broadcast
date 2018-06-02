@@ -1,6 +1,6 @@
 // 调度方案
 var scheduleTable;
-Mock.mock('http://192.168.3.130/schedule/allItem', function(optins){
+Mock.mock('http://47.104.84.17/schedule/allItem', function(optins){
     scheduleTable=Mock.mock({
         'body|10':[{
             "id|+1": 0,
@@ -37,7 +37,7 @@ Mock.mock('http://192.168.3.130/schedule/allItem', function(optins){
 });
 
 // 调度方案删除接口
-Mock.mock('http://192.168.3.130/schedule/deleteItem',function(options){
+Mock.mock('http://47.104.84.17/schedule/deleteItem',function(options){
     var index;
     scheduleTableB=scheduleTable.body;
     for (var i = 0; i < options.body.split("&").length; i++) {
@@ -53,14 +53,14 @@ Mock.mock('http://192.168.3.130/schedule/deleteItem',function(options){
     return scheduleTableB;//返回这个数组,也就是返回处理后的假数据
 });
 // 任务消息删除接口
-Mock.mock('http://192.168.3.130/msg/deleteMsg',function(options){
+Mock.mock('http://47.104.84.17/msg/deleteMsg',function(options){
 });
 // 重播接口
-Mock.mock('http://192.168.3.130/msg/taskMsg/reSend',function(options){
+Mock.mock('http://47.104.84.17/msg/taskMsg/reSend',function(options){
 });
 // 事件类别接口
 var eventTypeData;
-Mock.mock('http://192.168.3.130/eventType',function(options){
+Mock.mock('http://47.104.84.17/eventType',function(options){
     console.log(options)
     eventTypeData=Mock.mock({
         'body':[
@@ -102,7 +102,7 @@ Mock.mock('http://192.168.3.130/eventType',function(options){
 });
 
 // 所有地区
-Mock.mock('http://192.168.3.130/allArea',function(options){
+Mock.mock('http://47.104.84.17/allArea',function(options){
     return Mock.mock({
         'body':[
             {
@@ -143,9 +143,9 @@ Mock.mock('http://192.168.3.130/allArea',function(options){
         ]
     });
 });
-// 地区
+// 选择地区
 var areaStruct;
-Mock.mock('http://192.168.3.130/areaSelect',function(options){
+Mock.mock('http://47.104.84.17/areaSelect',function(options){
     areaStruct=Mock.mock({
         'body':[{
             areaStruct:{
@@ -206,7 +206,7 @@ Mock.mock('http://192.168.3.130/areaSelect',function(options){
 });
 
 // 创建调度方案
-Mock.mock('http://192.168.3.130/schedule/addItem', function(optins){
+Mock.mock('http://47.104.84.17/schedule/addItem', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{
@@ -215,7 +215,7 @@ Mock.mock('http://192.168.3.130/schedule/addItem', function(optins){
     });
 });
 // 编辑调度方案
-Mock.mock('http://192.168.3.130/schedule/getItem', function(optins){
+Mock.mock('http://47.104.84.17/schedule/getItem', function(optins){
     return Mock.mock({
         'body':{
             "type": [
@@ -372,7 +372,7 @@ Mock.mock('http://192.168.3.130/schedule/getItem', function(optins){
 });
 
 // 创建任务消息
-Mock.mock('http://192.168.3.130/msg/addMsg', function(optins){
+Mock.mock('http://47.104.84.17/msg/addMsg', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{
@@ -381,7 +381,7 @@ Mock.mock('http://192.168.3.130/msg/addMsg', function(optins){
     });
 });
 // 编辑任务消息
-Mock.mock('http://192.168.3.130/msg/getMsg', function(optins){
+Mock.mock('http://47.104.84.17/msg/getMsg', function(optins){
     return Mock.mock({
         'body':{
             'name':'任务',
@@ -392,7 +392,7 @@ Mock.mock('http://192.168.3.130/msg/getMsg', function(optins){
 
 
 // 登录
-Mock.mock('http://192.168.3.130/login/user', function(options) {
+Mock.mock('http://47.104.84.17/login/user', function(options) {
     // alert(options.body.split("&")[0].split("=")[1]);
     return Mock.mock({
         "body":{
@@ -404,7 +404,7 @@ Mock.mock('http://192.168.3.130/login/user', function(options) {
 
 // 值班管理--日历
 var calendarData;
-Mock.mock('http://192.168.3.130/calendar', function(optins){
+Mock.mock('http://47.104.84.17/calendar', function(optins){
     calendarData=Mock.mock({
         'body|10':[{
             'id|+1':1,
@@ -429,7 +429,7 @@ Mock.mock('http://192.168.3.130/calendar', function(optins){
 });
 
 // 效果评估-事件发布
-Mock.mock('http://192.168.3.130/incidentChartData', {
+Mock.mock('http://47.104.84.17/incidentChartData', {
     'body':[{
         "value|10-30": 0,
         "name":'气象局',
@@ -469,7 +469,7 @@ Mock.mock('http://192.168.3.130/incidentChartData', {
 
 // 任务消息
 var taskTable;
-Mock.mock('http://192.168.3.130/msg/allMsg', function(optins){
+Mock.mock('http://47.104.84.17/msg/allMsg', function(optins){
     taskTable=Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -523,7 +523,7 @@ Mock.mock('http://192.168.3.130/msg/allMsg', function(optins){
     return taskTable
 });
 // 预警消息
-Mock.mock('http://192.168.3.130/msg/allMsgs', function(optins){
+Mock.mock('http://47.104.84.17/msg/allMsgs', function(optins){
     return Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -553,10 +553,137 @@ Mock.mock('http://192.168.3.130/msg/allMsgs', function(optins){
         }]
     });
 });
+// 节目资源
+Mock.mock('http://47.104.84.17/res/program/all', function(optins){
+    return Mock.mock({
+        'body|100':[{
+            "id|+1": 0,
+            "auditState|1": [
+                "排队中",
+                "审核未通过",
+                "审核中",
+                "发布中",
+                "创建中",
+                "停发中"
+            ],
+            "lineState|1": [
+                "在线",
+                "不在线",
+            ],
+            "name|1": [
+                "节目资源名称",
+            ],
+            "remarks|1": [
+                "备注内容备注内容备注内容",
+            ],
+            "people|1": [
+                '@cname'
+            ],
+            "time": '@datetime("yyyy-MM-dd HH:mm:ss")',
+            audit:{
+                'boolean|1-2':true,
+                'state|1': [
+                    "审核",
+                    "未通过"
+                ]
+            }
+        }]
+    });
+});
+// 文字语音
+Mock.mock('http://47.104.84.17/res/textAudio/all', function(optins){
+    return Mock.mock({
+        'body|100':[{
+            "id|+1": 0,
+            "state|1": [
+                "排队中",
+                "审核未通过",
+                "审核中",
+                "发布中",
+                "创建中",
+                "停发中"
+            ],
+            "type|1": [
+                "音频",
+            ],
+            "name|1": [
+                "节目资源名称",
+            ],
+            "department|1": [
+                "备注内容备注内容备注内容",
+            ],
+            "people|1": [
+                '@cname'
+            ],
+            "time": '@datetime("yyyy-MM-dd HH:mm:ss")',
+            audit:{
+                'boolean|1-2':true,
+                'state|1': [
+                    "审核",
+                    "未通过"
+                ]
+            }
+        }]
+    });
+});
+// 任务消息
+Mock.mock('http://47.104.84.17/practice/all', function(optins){
+    return Mock.mock({
+        'body|100':[{
+            "id|+1": 0,
+            "state|1": [
+                "播放中",
+                "审核未通过",
+                "审核中",
+                "发布中",
+                "创建中",
+                "停发中"
+            ],
+            "type|1": [
+                "周期",
+                "手动"
+            ],
+            "level|1": [
+                "红色",
+                "橙色",
+                "绿色",
+                "蓝色",
+                "黄色"
+            ],
+            "name|1": [
+                "西湖区演练计划",
+                "滨江区演练计划"
+            ],
+            "department|1": [
+                "杭州市应急广播中心",
+                "温州市应急广播中心",
+                "上海市应急广播中心"
+            ],
+            "people|1": [
+                '@cname'
+            ],
+            "time": '@datetime("yyyy-MM-dd HH:mm:ss")',
+            audit:{
+                'boolean|1-2':true,
+                'state|1': [
+                    "审核",
+                    "未通过"
+                ]
+            },
+            send:{
+                'boolean|1-2':true,
+                'state|1': [
+                    "续发",
+                    "停发"
+                ]
+            }
+        }]
+    });
+});
 
 // 消息接入
 var msgTable;
-Mock.mock('http://192.168.3.130/msg/Platform/all', function(optins){
+Mock.mock('http://47.104.84.17/msg/Platform/all', function(optins){
     msgTable=Mock.mock({
         'body|1000':[{
             "id|+1": 0,
@@ -602,7 +729,7 @@ Mock.mock('http://192.168.3.130/msg/Platform/all', function(optins){
 
 
 // 文字转音频
-Mock.mock('http://192.168.3.130/convertText', function(optins){
+Mock.mock('http://47.104.84.17/convertText', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{
@@ -612,7 +739,7 @@ Mock.mock('http://192.168.3.130/convertText', function(optins){
 });
 
 // 文件转音频
-Mock.mock('http://192.168.3.130/convertFile', function(optins){
+Mock.mock('http://47.104.84.17/convertFile', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{

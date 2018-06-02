@@ -81,8 +81,8 @@ function areaZTreeOnCheck(event, treeId, treeNode) {
 	    		resourceGather.push(data[i].resourceData[0]);//全部资源数据
 	    	};
 			$.fn.zTree.init($('#gb_tree_resource'),resourceSetting,resourceGather);//初始全部资源树
-	    	$("#precount_num").text(precount_num);
-	    	$("#area_num").text(area_num);
+	    	$(".j-peopleAffect").text(precount_num);
+	    	$(".j-coverArea").text(area_num);
 	    }
 	});
 };

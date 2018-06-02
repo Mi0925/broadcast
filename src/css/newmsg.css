@@ -38,7 +38,7 @@
 .msgrank li label img{margin-right:7px;}
 .msgcont{float:left;width:48.5%;}
 .txtimp{width:100%;position:relative;}
-.imparea{width:100%;height:130px;border:1px solid #d8d8d8;border-radius:5px;padding:10px 10px 30px 15px;font-size:14px;color:#ccc;resize:none}
+.imparea{width:100%;height:130px;border:1px solid #d8d8d8;border-radius:5px;padding:10px 10px 30px 15px;font-size:14px;color:#000;resize:none}
 .area-count{position:absolute;right:20px;bottom:15px;color:#ccc;}
 .toswitch,.uplbtn{width:100px;height:30px;line-height:30px;cursor:pointer;font-size:12px;color:#fff;background:#4579d8;border:0;border-radius:5px;margin-top:12px;}
 .toswitch:hover{background:#3c6dc7;}
@@ -179,7 +179,7 @@
 }
 
 /* newInterface */
-.impcol{color:#ccc;}
+/*.impcol{color:#ccc;}*/
 
 /* newManualExerProg */
 .crepad{padding-top:40px;}

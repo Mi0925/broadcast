@@ -10,38 +10,38 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>接口名称</p>
 						<div class="oneimp">
-							<input type="text"  id="impcontent" class="imptxt" maxlength="20"/>
+							<input type="text" name="name" id="impcontent" class="imptxt" maxlength="20"/>
 							<span class="oneimp-count"><span class="countnew">0</span>/20</span>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>接口类型</p>
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+							<select name="type" lay-search="">
 								<option value="">请选择接口所属部门类型</option>
-								<option value="1">上级平台</option>
-								<option value="2">国家应急广播平台</option>
-								<option value="3">下级平台</option>
-								<option value="4">其它部门</option>
+								<option value="0">上级平台</option>
+								<option value="1">国家应急广播平台</option>
+								<option value="2">下级平台</option>
+								<option value="3">其它部门</option>
 							</select>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>接入端口</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt impcol" value="请输入本平台服务端口"  onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#ccc'}"/>
+							<input type="text" name="port_up1" class="imptxt impcol" placeholder="请输入本平台服务端口" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>接入端口</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt impcol" value="请输入对方平台服务端口"  onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#ccc'}"/>
+							<input type="text" name="port_up2" class="imptxt impcol" placeholder="请输入对方平台服务端口" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>协议</p>
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+							<select name="protocol" lay-search="">
 								<option value="">请选择协议</option>
 								<option value="1">协议一</option>
 								<option value="2">协议二</option>

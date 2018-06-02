@@ -65,7 +65,7 @@
 					<p class="oneitem-tit"><small>*</small>消息内容</p>
 					<div class="msgcont">
 						<div class="txtimp">
-							<textarea id="imparea" name="message" class="imparea" maxlength="200" style="color: #000;">请输入消息文本</textarea>
+							<textarea id="imparea" name="message" class="imparea" maxlength="200" placeholder="请输入消息文本"></textarea>
 							<span class="area-count"><span class="countnew">0</span>/200</span>
 						</div>
 						<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>文本内容可以直接转换成音频</p>
@@ -128,11 +128,11 @@
 				<div class="oneitem-cont">
 					<div class="predictone">
 						<p class="oneitem-tit">预覆盖人数</p>
-						<p class="precount"><i id="j-peopleAffect">0</i>万人</p>
+						<p class="precount"><i class="j-peopleAffect">0</i>万人</p>
 					</div>
 					<div class="predictwo">
 						<p class="oneitem-tit">预覆盖面积</p>
-						<p class="precount"><i id="j-coverArea">0</i>平方公里</p>
+						<p class="precount"><i class="j-coverArea">0</i>平方公里</p>
 					</div>
 				</div>
 			</div>
@@ -143,11 +143,11 @@
 				<div class="oneitem-cont">
 					<div class="predictone">
 						<p class="oneitem-tit">发布部门</p>
-						<p class="precount j-department">杭州市广播中心</p>
+						<p class="precount j-department"></p>
 					</div>
 					<div class="predictwo">
 						<p class="oneitem-tit">负责人</p>
-						<p class="precount j-dutyPerson">橙子</p>
+						<p class="precount j-dutyPerson"></p>
 					</div>
 				</div>
 			</div>
@@ -252,8 +252,8 @@
 	    		audio_add_html(data.listMP3[i]);//添加一条音频数据
 	    	};
 	    	$(".imparea").val(data.message);//默认消息文本
-	    	$(".j-peopleAffect").text(data.peopleAffect+'人');//覆盖人数
-	    	$(".j-coverArea").text(data.coverArea+'万平方公里');//覆盖面积
+	    	$(".j-peopleAffect").text(data.peopleAffect);//覆盖人数
+	    	$(".j-coverArea").text(data.coverArea);//覆盖面积
 	    	$(".j-department").text(data.department);//部门
 	    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
 	    	

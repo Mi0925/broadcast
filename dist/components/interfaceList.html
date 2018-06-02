@@ -114,11 +114,14 @@
 	                "ajax": {
 			            url: portsrc+'/msg/Platform/all',
 			            type:'post',
+			            data:{
+					    	token:token,
+					    },
 			            dataSrc: function ( data ) {
 			                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
 			                	var d=data.body[i];
 			                	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";
-			                	data.body[i].tabnumb=d.id+1;
+			                	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 			                	data.body[i].interfacesName="<a href='#/viewInterface' url='components/viewInterface.html' class='view-cont add_tab' name='查看接口'>"+d.interfacesName+"</a>";
 			                	data.body[i].number="<a href='#/taskMsg' url='components/taskMsg.html' class='editbtn add_tab' name='任务消息'>"+d.number+"</a>";
 			                	data.body[i].edit="<a href='#/editInterface' url='components/editInterface.html' class='editbtn add_tab' name='编辑接口'><i class='iconfont icon-bianji'></i>编辑</a>";

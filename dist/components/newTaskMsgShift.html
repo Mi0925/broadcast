@@ -1,15 +1,16 @@
-<div class="gb-form gb-viewfile">
+<div class="gb-form">
 	<form class="layui-form" action="">
 		<div class="newform">
-			<p class="newform-tit"><i class="iconfont icon-chakan"></i>查看手动演练计划</p>
+			<p class="newform-tit"><i class="iconfont icon-iconfontxinjianwenjian"></i>新建任务消息</p>
 			<div class="form-oneitem">
 				<div class="fortit">
-					<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>演练计划名称</p>
+					<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>任务/事件名称</p>
 				</div>
 				<div class="oneitem-cont">
-					<p class="oneitem-tit"><small>*</small>演练计划名称</p>
-					<div class="tnoneimp">
-						<input type="text" id="impcontent" class="imptxt" readonly="readonly"/>
+					<p class="oneitem-tit"><small>*</small>任务消息</p>
+					<div class="oneimp">
+						<input type="text" name="name" id="impcontent" class="imptxt" maxlength="20" lay-verify="required"/>
+						<span class="oneimp-count"><span class="countnew">0</span>/20</span>
 					</div>
 				</div>
 			</div>
@@ -18,15 +19,16 @@
 					<p class="oneitem-tit"><span class="onenumb">02</span><small>*</small>调度方案</p>
 				</div>
 				<div class="oneitem-cont">
-					<p class="oneitem-tit">调度方案</p>
+					<p class="oneitem-tit">选择调度方案</p>
 					<div class="layui-input-inline j-scheduling-sel">
-						<select name="dispatch" disabled> <!-- lay-verify="required" lay-search="" -->
+						<select name="schedulePlanId" lay-search="" lay-filter="scheduling_sel" lay-verify="required"> <!-- lay-verify="required" lay-search="" -->
 							<option value="">请选择调度方案</option>
 						</select>
 					</div>
+			    	<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>选择调度方案后，后面的信息将自动匹配为预设的事件信息并且不能修改</p>
 				</div>
 			</div>
-			<div class="form-oneitem-box">
+			<div class="form-oneitem-box" style="display: none;">
 				<div class="form-oneitem">
 					<div class="fortit">
 						<p class="oneitem-tit"><span class="onenumb">03</span><small>*</small>事件类型</p>
@@ -120,6 +122,10 @@
 					</div>
 				</div>
 			</div>
+			<div class="tocreat">
+				<input type="button" value="确认创建" class="tocreatbtn" lay-submit lay-filter="*" />
+				<p class="warnword"><i class="iconfont icon-iconfontjinggao"></i>成功创建后，需编写对应的发布策略后，方能提交审核</p>
+			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 		</div>
 	</form>
@@ -129,48 +135,38 @@
 
 <script type="text/javascript">
 	$.ajax({
-	    url: portsrc+'/practice/get/ManualPractice',
+	    url: portsrc+'/schedule/allItem',
 	    type: 'post',
 	    dataType: 'json',
 	    data:{
 	    	token:token,
-	    	id:sessionStorage.getItem('editTableItem'),
 	    },
 	    success: function(data) {
-	    	$("#impcontent").val(data.body.name);
-	    	var schedule_id=data.body.schedule_id;
-	    	$.ajax({
-			    url: portsrc+'/schedule/allItem',
-			    type: 'post',
-			    dataType: 'json',
-			    data:{
-			    	token:token,
-			    },
-			    success: function(data) {
-			    	console.log(data)
-			    	var data=data.body;
-			    	for (var i = 0; i < data.length; i++) {
-			    		if(schedule_id==data[i].id){
-			    			$(".j-scheduling-sel select").append('<option value='+data[i].id+' selected>'+data[i].name+'</option>');
-			    		}else{
-			    			$(".j-scheduling-sel select").append('<option value='+data[i].id+'>'+data[i].name+'</option>');
-			    		}
-			    	};
-			    	layui.use(['form', 'element'], function(){
-						var element = layui.element,form = layui.form,laydate = layui.laydate;
-						form.render();
-						var itbtn = $('<span class="itbtn"></span>');
-						$('.layui-select-title').append(itbtn);
-						$('.gb-form .layui-form-radio').remove();
+	    	console.log(data)
+	    	$("#impcontent").val(sessionStorage.getItem('shift_name'));
+	    	var data=data.body;
+	    	for (var i = 0; i < data.length; i++) {
+	    		$(".j-scheduling-sel select").append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+	    	};
+	    	layui.use(['form', 'element'], function(){
+				var element = layui.element,form = layui.form,laydate = layui.laydate;
+				form.render();
+				var itbtn = $('<span class="itbtn"></span>');
+				$('.layui-select-title').append(itbtn);
+				$('.gb-form .layui-form-radio').remove();
 
-						// 默认值
+				// 选择调度方案
+				form.on('select(scheduling_sel)', function(data){
+					if(data.value!=""){
+						$(".form-oneitem-box").show();
+						// 获取编辑数据
 						$.ajax({
 						    url: portsrc+'/schedule/getItem',
 						    type: 'post',
 						    dataType: 'json',
 						    data:{
 						    	token:token,
-						    	schedulePlanId:schedule_id,
+						    	schedulePlanId:data.value,
 						    },
 						    success: function(data) {
 						    	console.log(data)
@@ -210,8 +206,31 @@
 								$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.resourceSel);
 						    }
 						});
+					}else{
+						$(".form-oneitem-box").hide();
+					}
+				});
+				form.on('submit(*)', function(data){
+					console.log(data.field)
+					$.ajax({
+					    url: portsrc+"/msg/addMsg",
+					    type: 'get',
+					    dataType: 'json',
+					    data:{
+					    	token:token,
+					    	type:'task',//task为任务消息，alert为预警消息
+					    	data:JSON.stringify(data.field)
+					    },
+					    success: function(data) {
+							layer.open({
+					            title: '提示',
+				        		shadeClose:true,
+					            content: '新建成功'
+					        });
+					    }
 					});
-			    }
+					return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+				});
 			});
 	    }
 	});

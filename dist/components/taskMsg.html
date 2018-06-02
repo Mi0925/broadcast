@@ -171,13 +171,14 @@ var table;
 			    type: 'post',
 			    data:{
 			    	token:token,
+			    	defaulrValue:0,
 			    	type:'task'//task为任务消息，alert为预警消息
 			    },
 	            dataSrc: function ( data ) {
 	                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
 	                	var d=data.body[i];
 	                	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
-	                	data.body[i].tabnumb=d.id+1;//序号
+	                	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
 	                	var level="";
 						if(d.level=="红色"){
@@ -265,8 +266,27 @@ var table;
 			        }
 			   });
 			}
-		})
+		});
 		userDef(table);//table配置--显示数量 搜索 全选 删除  
+
+		// 已查阅,未查阅，新编辑
+	    $('body').on('click','.msgtype li',function() {
+	    	var defaulrValue=0;
+	    	if($(this).text()=='已查阅'){
+	    		defaulrValue=0;
+	    	}else if($(this).text()=='未查阅'){
+	    		defaulrValue=1;
+	    	}else if($(this).text()=='新编辑'){
+	    		defaulrValue=2;
+	    	}
+	    	var param={
+			    	token:token,
+			    	defaulrValue:defaulrValue,
+			    	type:'task'//task为任务消息，alert为预警消息
+			    };
+			table.settings()[0].ajax.data = param;
+			table.ajax.reload();
+	    });
 
 		// 删除
 	    $('body').on('click','.j-del-tr',function() {
@@ -277,7 +297,7 @@ var table;
 	        // 模拟数据
 	        $.ajax({
 	            url: portsrc + '/msg/deleteMsg',
-	            type: 'POST',
+	            type: 'get',
 	            dataType: 'json',
 	            data: {
 	                token:token,
@@ -296,7 +316,7 @@ var table;
 	        // 模拟数据
 	        $.ajax({
 	            url: portsrc + '/msg/taskMsg/reSend',
-	            type: 'POST',
+	            type: 'get',
 	            dataType: 'json',
 	            data: {
 	                token:token,

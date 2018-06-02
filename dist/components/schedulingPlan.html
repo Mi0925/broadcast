@@ -128,7 +128,7 @@
 				],*/
                 "ajax": {
 		            url: portsrc+'/schedule/allItem',
-	    			type: 'get',
+	    			type: 'post',
 	    			data:{
 	                	token:token,
 	    			},
@@ -145,7 +145,7 @@
 		                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
 		                	var d=data.body[i];
 		                	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
-		                	data.body[i].tabnumb=d.id+1;//序号
+		                	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
 		                	var level="";
 							if(d.level=="红色"){

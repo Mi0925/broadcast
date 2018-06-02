@@ -121,6 +121,10 @@ Router.route('/newTaskMsg', function() {
 Router.route('/newTaskMsgEdit', function() {
   gbMainContent('components/newTaskMsgEdit.html', RoundaboutSet);
 });
+//预警消息转任务消息
+Router.route('/newTaskMsgShift', function() {
+  gbMainContent('components/newTaskMsgShift.html', RoundaboutSet);
+});
 //查看任务消息
 Router.route('/viewTaskMsg', function() {
   gbMainContent('components/viewTaskMsg.html', RoundaboutSet);

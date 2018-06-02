@@ -119,7 +119,8 @@ layui.use(['element'], function(){
 			        othis.removeClass(DISABLED);
 			        $('.uncont .tomat').hide();
 			        $('.uncont .succmat').show();
-			        audio_add_html(name);//添加一条音频数据
+					var names=name.split(".")[0]+'.mp3';
+			        audio_add_html(names);//添加一条音频数据
 					$('.file_text').after($('.file_text').clone().val(""));   
 					$('.file_text').eq(0).remove();
 			    }
@@ -150,7 +151,7 @@ layui.use(['element'], function(){
 			    success: function(data) {
 			    	console.log(data);
 			    	clearInterval(timer);
-					active[type] ? active[type].call(this, $this,70,data.body.name) : '';
+					active[type] ? active[type].call(this, $this,70,$('.file_text')[0].files[0].name) : '';
 			    }
 			});
 		}else{
@@ -236,3 +237,4 @@ $(document).on('click','.tocreatbtn',function(){
 	$('.settingone .tnoneimp input').attr('readonly',true);
 	$('.settingone .tnoneimp input').css('color','#d8d8d8');
 })
+
