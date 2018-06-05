@@ -37,13 +37,32 @@ function areaZTreeOnCheck(event, treeId, treeNode) {
     var checked=treeNode.checked;
     var areaSelItem=$("#"+treeNode.parentTId+">a").text()==""?treeNode.name:$("#"+treeNode.parentTId+">a").text()+'-'+treeNode.name;
     if(checked){
-    	areaSel.push(areaSelItem);
+    	if (treeNode.parentTId != null) {
+    		areaSel.push(areaSelItem);
+		}else{
+			for (var i = 0; i < treeNode.children.length; i++) {
+	    		areaSel.push(treeNode.name+'-'+treeNode.children[i].name)
+	    	}
+		}
+    	
     }else{
-    	for (var i = 0; i < areaSel.length; i++) {
-    		if(areaSel[i]==areaSelItem){
-    			areaSel.splice(i,1)
-    		}
-    	}
+		if (treeNode.parentTId != null) {
+			for (var i = 0; i < areaSel.length; i++) {
+				if (areaSel[i] == areaSelItem) {
+					areaSel.splice(i, 1)
+				}
+			}
+		}else{
+			var areaSels=areaSel;
+			for (var i = 0; i < areaSels.length; i++){
+				console.log(areaSel[i])
+				if (areaSels[i].split("-")[0] == treeNode.name) {
+					areaSel.splice(i, 1)
+				}
+			}
+    		console.log(areaSel)
+    		console.log(areaSels)
+		}
     };
 	// 获取地区接口
 	$.ajax({
