@@ -110,6 +110,7 @@ Mock.mock('http://47.104.84.17/allArea',function(options){
                 open: true,
                 population: 100,
                 area: 100,
+                checked:true,
                 children: [{
                     name: "杭州市",
                     population: 100,
@@ -147,7 +148,8 @@ Mock.mock('http://47.104.84.17/allArea',function(options){
 var areaStruct;
 Mock.mock('http://47.104.84.17/areaSelect',function(options){
     areaStruct=Mock.mock({
-        'body':[{
+        'body':
+        [{
             areaStruct:{
                 areaName:"浙江省-杭州市", //地区名
                 'population|1-100': 100, //人口
@@ -427,46 +429,6 @@ Mock.mock('http://47.104.84.17/calendar', function(optins){
     });
     return calendarData
 });
-
-// 效果评估-事件发布
-Mock.mock('http://47.104.84.17/incidentChartData', {
-    'body':[{
-        "value|10-30": 0,
-        "name":'气象局',
-        itemStyle: {
-            normal: {
-                color: "#6e6fe6"
-            }
-         }
-    },{
-        "value|10-30": 0,
-        "name":'水利',
-        itemStyle: {
-            normal: {
-                color: "#9ca6ff"
-            }
-        }
-    },{
-        "value|10-30": 0,
-        "name":'国家应急广播平台',
-        itemStyle: {
-            normal: {
-                color: "#1ba5dd"
-            }
-        }
-    },{
-        "value|10-30": 0,
-        "name":'应急办',
-        itemStyle: {
-            normal: {
-                color: "#41cefb"
-            }
-        }
-    }]
-});
-
-
-
 // 任务消息
 var taskTable;
 Mock.mock('http://47.104.84.17/msg/allMsg', function(optins){
@@ -550,6 +512,84 @@ Mock.mock('http://47.104.84.17/msg/allMsgs', function(optins){
                 '@cname'
             ],
             "time": '@datetime("yyyy-MM-dd HH:mm:ss")',
+        }]
+    });
+});
+// 资源信息--平台资源
+Mock.mock('http://47.104.84.17/res/platform/all', function(optins){
+    return Mock.mock({
+        'body|100':[{
+            "id|+1": 0,
+            'code':'000A',
+            "state|1": [
+                "正常",
+                "不在线",
+            ],
+            'platformType':'上级平台',
+            'systemType':'系统类型',
+            "name|1": [
+                "节目资源名称",
+            ],
+            "src|1": [
+                "211.98.45.255",
+            ],
+            "area|1": [
+                '地区'
+            ],
+            "time": '@datetime("yyyy-MM-dd HH:mm:ss")',
+        }]
+    });
+});
+// 资源信息--下级终端
+Mock.mock('http://47.104.84.17/res/sub/all', function(optins){
+    return Mock.mock({
+        'body|100':[{
+            "id|+1": 0,
+            'code':'000A',
+            "state|1": [
+                "正常",
+                "不在线",
+            ],
+            "name|1": [
+                "设备类型设备类型",
+            ],
+            'model':'型号',
+            'port':'终端物理地址',
+            "src|1": [
+                "211.98.45.255",
+            ],
+            "area|1": [
+                '地区'
+            ],
+            "msg|1": [
+                '在线信息'
+            ],
+        }]
+    });
+});
+// 资源信息--发射台
+Mock.mock('http://47.104.84.17/res/station/all', function(optins){
+    return Mock.mock({
+        'body|100':[{
+            "id|+1": 0,
+            'code':'000A',
+            "state|1": [
+                "正常",
+                "不在线",
+            ],
+            "name|1": [
+                "设备类型设备类型",
+            ],
+            'port':'物理地址',
+            "src|1": [
+                "211.98.45.255",
+            ],
+            "area|1": [
+                '地区'
+            ],
+            "msg|1": [
+                '在线信息'
+            ],
         }]
     });
 });
@@ -771,3 +811,526 @@ Mock.mock('http://47.104.84.17/convertFile', function(optins){
         }
     });
 }).setup({ timeout: '10' });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 效果评估-事件发布
+Mock.mock('http://47.104.84.17/incidentChart', {
+    'body':[{
+        "value|10-30": 0,
+        "name":'气象局',
+        itemStyle: {
+            normal: {
+                color: "#6e6fe6"
+            }
+         }
+    },{
+        "value|10-30": 0,
+        "name":'水利',
+        itemStyle: {
+            normal: {
+                color: "#9ca6ff"
+            }
+        }
+    },{
+        "value|10-30": 0,
+        "name":'国家应急广播平台',
+        itemStyle: {
+            normal: {
+                color: "#1ba5dd"
+            }
+        }
+    },{
+        "value|10-30": 0,
+        "name":'应急办',
+        itemStyle: {
+            normal: {
+                color: "#41cefb"
+            }
+        }
+    }]
+});
+// 事件级别发布
+Mock.mock('http://47.104.84.17/incidentRankChart', {
+    'body':[
+        {
+            value: 20,
+            name: '红色事件',
+            itemStyle: {
+                normal: {
+                    color: "#f75c53"
+                }
+            },
+        }, {
+            value: 25,
+            name: '橙色事件',
+            itemStyle: {
+                normal: {
+                    color: "#fea41e"
+                }
+            },
+        }, {
+            value: 27,
+            name: '黄色事件',
+            itemStyle: {
+                normal: {
+                    color: "#fada00"
+                }
+            },
+        }, {
+            value: 30,
+            name: '蓝色事件',
+            itemStyle: {
+                normal: {
+                    color: "#4579d8"
+                }
+            },
+        }, {
+            value: 33,
+            name: '绿色事件',
+            itemStyle: {
+                normal: {
+                    color: "#14ae8f"
+                }
+            },
+        }
+    ]
+});
+// 任务数量
+Mock.mock('http://47.104.84.17/taskNumChart', {
+    'body':[
+        {
+            value: 20,
+            itemStyle: {
+                normal: {
+                    color: "#41cefb"
+                }
+            },
+        }, {
+            value: 50,
+            itemStyle: {
+                normal: {
+                    color: "#00aaff"
+                }
+            },
+        }, {
+            value: 40,
+            itemStyle: {
+                normal: {
+                    color: "#1ba5dd"
+                }
+            },
+        }, {
+            value: 150,
+            itemStyle: {
+                normal: {
+                    color: "#4579d8"
+                }
+            },
+        }
+    ]
+});
+// 事件类型统计数据
+Mock.mock('http://47.104.84.17/incidentTypeChart', {
+    'body': {
+        incidentTypeData: [{
+            value: 20,
+            itemStyle: {
+                normal: {
+                    color: "#949eff"
+                }
+            },
+        }, {
+            value: 230,
+            itemStyle: {
+                normal: {
+                    color: "#9b7fe2"
+                }
+            },
+        }, {
+            value: 90,
+            itemStyle: {
+                normal: {
+                    color: "#6b65df"
+                }
+            },
+        }, {
+            value: 20,
+            itemStyle: {
+                normal: {
+                    color: "#949eff"
+                }
+            },
+        }, {
+            value: 45,
+            itemStyle: {
+                normal: {
+                    color: "#9b7fe2"
+                }
+            },
+        }, {
+            value: 70,
+            itemStyle: {
+                normal: {
+                    color: "#6b65df"
+                }
+            },
+        }, {
+            value: 80,
+            itemStyle: {
+                normal: {
+                    color: "#949eff"
+                }
+            },
+        }, {
+            value: 90,
+            itemStyle: {
+                normal: {
+                    color: "#9b7fe2"
+                }
+            },
+        }, {
+            value: 90,
+            itemStyle: {
+                normal: {
+                    color: "#6b65df"
+                }
+            },
+        }, {
+            value: 80,
+            itemStyle: {
+                normal: {
+                    color: "#949eff"
+                }
+            },
+        }, {
+            value: 90,
+            itemStyle: {
+                normal: {
+                    color: "#9b7fe2"
+                }
+            },
+        }, {
+            value: 90,
+            itemStyle: {
+                normal: {
+                    color: "#6b65df"
+                }
+            },
+        }, {
+            value: 80,
+            itemStyle: {
+                normal: {
+                    color: "#949eff"
+                }
+            },
+        }, {
+            value: 90,
+            itemStyle: {
+                normal: {
+                    color: "#9b7fe2"
+                }
+            },
+        }, {
+            value: 90,
+            itemStyle: {
+                normal: {
+                    color: "#6b65df"
+                }
+            },
+        }, {
+            value: 80,
+            itemStyle: {
+                normal: {
+                    color: "#949eff"
+                }
+            },
+        }, {
+            value: 90,
+            itemStyle: {
+                normal: {
+                    color: "#9b7fe2"
+                }
+            },
+        }, {
+            value: 90,
+            itemStyle: {
+                normal: {
+                    color: "#6b65df"
+                }
+            },
+        }],
+        incidentTypexAxis: [
+            "金属与非金属矿金属与非金属矿1", "金属与非金属矿金属与非金属矿2", "金属与非金属矿金属与非金属矿3", "金属与非金属矿金属与非金属矿4", "金属与非金属矿金属与非金属矿5", "金属与非金属矿金属与非金属矿6", "金属与非金属矿金属与非金属矿7", "金属与非金属矿金属与非金属矿8", "金属与非金属矿金属与非金属矿9", "金属与非金属矿金属与非金属矿10", "金属与非金属矿金属与非金属矿11", "金属与非金属矿金属与非金属矿12", "金属与非金属矿金属与非金属矿13", "金属与非金属矿金属与非金属矿14"
+        ]
+    }
+});
+// 全部事件-地图
+Mock.mock('http://47.104.84.17/mapAllChart', {
+    'body': {
+        out:'杭州',//出发点
+        center:[120.166085,30.279006],//地图中心
+        divideMap:["杭州","平阳县","宁波","嘉兴","绍兴","台州","温州"],//地图划分区域地点
+        geoCoordMap: { //迁徙终点
+            '杭州': [120.166085, 30.279006],
+            '宁波': [121.558386, 29.884993],
+            '嘉兴': [120.762703, 30.750911],
+            '湖州': [120.105, 30.905714],
+            '淳安': [119.022147, 29.622863],
+            '临安': [119.723544, 30.245816],
+            '余杭': [120.301046, 30.4266],
+            '上海': [121.4648, 31.2891],
+        },
+        addDistrict: [ //地图需要高亮的省份
+            '杭州',
+            '平阳县',
+            '宁波',
+            '嘉兴',
+            '绍兴',
+            '台州',
+            '温州'
+        ],
+        BJData: [ //迁徙数据
+            [{
+                name: '杭州' //出发点
+            }, {
+                name: '宁波', //到达点
+                incident: 'red', //事件颜色
+                incident_data: [{
+                        color: "red",
+                        incident_name: "宁波雷暴事件"
+                    }, {
+                        color: "orange",
+                        incident_name: "宁波雾霾事件"
+                    }, {
+                        color: "yellow",
+                        incident_name: "宁波暴雨事件"
+                    }, {
+                        color: "blue",
+                        incident_name: "宁波台风事件"
+                    }, {
+                        color: "green",
+                        incident_name: "宁波龙卷风事件"
+                    }, ] //具体事件
+            }],
+            [{
+                name: '杭州'
+            }, {
+                name: '嘉兴',
+                incident: 'orange',
+                incident_data: [{
+                    color: "red",
+                    incident_name: "雷暴事件"
+                }, {
+                    color: "orange",
+                    incident_name: "雾霾事件"
+                }, {
+                    color: "yellow",
+                    incident_name: "暴雨事件"
+                }, {
+                    color: "blue",
+                    incident_name: "台风事件"
+                }, {
+                    color: "green",
+                    incident_name: "龙卷风事件"
+                }, ]
+            }]
+        ],
+        startData: [ //迁徙起点数据
+            {
+                color: "red",
+                incident_name: "雷暴事件"
+            }, {
+                color: "orange",
+                incident_name: "雾霾事件"
+            }, {
+                color: "yellow",
+                incident_name: "暴雨事件"
+            }, {
+                color: "blue",
+                incident_name: "台风事件"
+            }, {
+                color: "green",
+                incident_name: "龙卷风事件"
+            },
+        ]
+    }
+});
+// 全部事件-表格
+Mock.mock('http://47.104.84.17/allEvents', function(optins){
+    msgTable=Mock.mock({
+        'body|100':[{
+            "id|+1": 0,
+            "state|1": [
+                "发布中",
+            ],
+            "level|1": [
+                "RED",
+            ],
+            "name|1": [
+                "杭州西湖区雷暴红色警报消息",
+            ],
+            "area|1": [
+                "72万kem2",
+            ],
+            'population|1-100':0,
+            "department|1": [
+                "杭州市西湖区应急广播中心",
+                "温州市应急广播中心",
+                "上海市应急广播中心"
+            ],
+            'dutyPerson':'@cname',
+            "time": '@datetime("yyyy-MM-dd HH:mm:ss")',
+        }]
+    });
+    return msgTable
+});
+//覆盖人口
+Mock.mock('http://47.104.84.17/populationChart', {
+    'body':{
+        xAxis:['0', '5:00', '5:20', '5:40', '6:00', '6:20', '6:40', '6:45', '6:50', '6:55', '7:40', '8:40'],
+        data:[
+            {value:120,percent:15},
+            {value:130,percent:15},
+            {value:140,percent:15},
+            {value:150,percent:15},
+            {value:160,percent:15},
+            {value:160,percent:15},
+            {value:160,percent:15},
+            {value:160,percent:15},
+            {value:120,percent:15},
+            {value:180,percent:15},
+            {value:160,percent:15},
+            {value:260,percent:15},
+        ]
+    }
+});
+//覆盖区域
+Mock.mock('http://47.104.84.17/districtChart', {
+    'body':{
+        xAxis:['0', '5:00', '5:20', '5:40', '6:00', '6:20', '6:40', '6:45', '6:50', '6:55', '7:40', '8:40'],
+        data:[
+            {value:120,percent:15},
+            {value:130,percent:15},
+            {value:140,percent:15},
+            {value:150,percent:15},
+            {value:160,percent:15},
+            {value:160,percent:15},
+            {value:160,percent:15},
+            {value:160,percent:15},
+            {value:120,percent:15},
+            {value:180,percent:15},
+            {value:160,percent:15},
+            {value:260,percent:15},
+        ]
+    }
+});
+// 单一事件-地图
+Mock.mock('http://47.104.84.17/mapUnityChart', {
+    'body': {
+        center:[120.166085,30.279006],//地图中心
+        divideMap:[
+            {
+                name:'杭州',
+                color:'#ff5b57'
+            },
+            {
+                name:'龙游县',
+                color:'#ff5b57'
+            },
+            {
+                name:'宁波',
+                color:'#ff5b57'
+            },
+            {
+                name:'嘉兴',
+                color:'#fada00'
+            },
+            {
+                name:'绍兴',
+                color:'#14ae8f'
+            },
+            {
+                name:'台州',
+                color:'#14ae8f'
+            },
+            {
+                name:'温州',
+                color:'#ff5b57'
+            }
+        ],//地图划分区域地点,#ff5b57代表未覆盖，#14ae8f代表已覆盖，#fada00代表未完全覆盖
+    }
+});
+// 单一事件-表格
+Mock.mock('http://47.104.84.17/unityMonitoring', function(optins){
+    msgTable=Mock.mock({
+        'body|100':[{
+            "id|+1": 0,
+            "level|1": [
+                "RED",
+            ],
+            "name|1": [
+                "杭州西湖区雷暴红色警报消息",
+            ],
+            "department|1": [
+                "杭州市西湖区应急广播中心",
+                "温州市应急广播中心",
+                "上海市应急广播中心"
+            ],
+            'dutyPerson':'@cname',
+            "time": '@datetime("yyyy-MM-dd HH:mm:ss")',
+        }]
+    });
+    return msgTable
+});
+// 单一事件-表格
+Mock.mock('http://47.104.84.17/unityMessage', function(optins){
+    msgTable=Mock.mock({
+        'body|100':[{
+            "id|+1": 0,
+            'area':'区域名区域名1',
+            'conver':'区域名区域名1',
+            'receipts':'接受回执接受回执1',
+            'feedback':'播发反馈播发反馈1',
+            "receiptstime": '@datetime("yyyy-MM-dd HH:mm:ss")',
+            "feedbacktime": '@datetime("yyyy-MM-dd HH:mm:ss")',
+        }]
+    });
+    return msgTable
+});

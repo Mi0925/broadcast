@@ -260,7 +260,7 @@
 			    	};
 			    	$(".imparea").val(data.message);//默认消息文本
 			    	$(".j-peopleAffect").text(data.peopleAffect);//覆盖人数
-			    	$(".j-coverArea").text(data.coverArea.area);//覆盖面积
+			    	$(".j-coverArea").text(data.area);//覆盖面积
 			    	$(".j-department").text(data.department);//部门
 			    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
 			    	
@@ -290,12 +290,12 @@
 							console.log(data)
 							$.ajax({
 							    url: portsrc+"/schedule/addItem",
-							    type: 'get',
+							    type: 'post',
 							    dataType: 'json',
 							    data:{
 							    	token:token,
 							    	id:sessionStorage.getItem('editTableItem'),
-							    	data:JSON.stringify(data.field)
+							    	planSchedule:JSON.stringify(data.field)
 							    },
 							    success: function(data) {
 									layer.open({

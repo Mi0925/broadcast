@@ -168,11 +168,11 @@
 					<p class="oneitem-tit"><small>*</small>直接发布</p>
 					<ul class="msgrank">
 						<li>
-							<input type="radio" name="direct" id="cheone" value='yes' checked />
+							<input type="radio" name="direct" id="cheone" value='true' checked />
 							<label for="cheone">是</label>
 						</li>
 						<li>
-							<input type="radio" name="direct" id="chetwo" value='no' />
+							<input type="radio" name="direct" id="chetwo" value='false' />
 							<label for="chetwo">否</label>
 						</li>
 					</ul>
@@ -310,7 +310,6 @@
 				form.on('submit(*)', function(data){
 					console.log()
 					schedulingForm(data);
-					delete data.time;
 					$.ajax({
 					    url: portsrc+"/schedule/addItem",
 					    type: 'post',
@@ -318,7 +317,7 @@
 					    data:{
 					    	token:token,
 					    	planSchedule:JSON.stringify(data.field)
-					    	// planSchedule: JSON.stringify({"type":"11A01洪水","name":"xiao_cs","level":4,"message":"text","direct":true,"startTime":"2018-05-22 00:00:00","endTime": "2018-05-25 00:00:00", "peopleAffect":"0","coverArea":{},"department":"","dutyPerson":"","listMP3":[],"areaSel":[],"resourceSel":[]})
+					    	// planSchedule: JSON.stringify({"type":"11A01洪水","name":"xiao_cs","level":'BLUE',"message":"text","direct":true,"startTime":"2018-05-22 00:00:00","endTime": "2018-05-25 00:00:00", "peopleAffect":"0","coverArea":[],"department":"","dutyPerson":"","listMP3":[],"areaSel":[],"resourceSel":[]})
 					    },
 					    success: function(data){
 							layer.open({
@@ -346,4 +345,6 @@
 			$.fn.zTree.init($('#gb_tree_area'), areaSetting, data.body);
 	    }
 	});
+
+
 </script>

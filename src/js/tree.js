@@ -76,9 +76,9 @@ function areaZTreeOnCheck(event, treeId, treeNode) {
 				treeAreaSel.removeNode(nodes[i]);//删除已选地区未勾选的数据
 			};
 	    	for (var i = 0; i < data.length; i++) {
-	    		precount_num=precount_num+data[i].areaStruct.population;//勾选地区计算人口
-	    		area_num=area_num+data[i].areaStruct.area;//勾选地区计算面积
-	    		resourceGather.push(data[i].resourceData[0]);//全部资源数据
+	    		precount_num=precount_num+data[i].population;//勾选地区计算人口
+	    		area_num=area_num+data[i].area;//勾选地区计算面积
+	    		resourceGather.push(data[i]);//全部资源数据
 	    	};
 			$.fn.zTree.init($('#gb_tree_resource'),resourceSetting,resourceGather);//初始全部资源树
 	    	$(".j-peopleAffect").text(precount_num);

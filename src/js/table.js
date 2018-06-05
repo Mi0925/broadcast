@@ -154,15 +154,15 @@ function userDef(table){
     });
 
     //checkbox全选
-   $("#checkAll").on("click", function () {
-       if ($(this).prop("checked") === true) {
+    $("#checkAll").on("click", function () {
+        if ($(this).prop("checked") === true) {
            $("input[name='checkone']").prop("checked", $(this).prop("checked"));
            $('.dataTables_wrapper tbody tr').addClass('selected');
-       } else {
+        } else {
            $("input[name='checkone']").prop("checked", false);
            $('.dataTables_wrapper tbody tr').removeClass('selected');
-       }
-   });
+        }
+    });
 
 
    //删除选中行
@@ -427,6 +427,7 @@ $('body').on('click','.j-del-tr',function() {
         $('tr.selected').each(function() {
             deleteId.push($(this).find('.checkone').find('input').attr('id'))
         });
+        console.log(deleteId.sort())
         // 模拟数据
         $.ajax({
             url: portVar.ajaxUrlDelete,
@@ -434,8 +435,8 @@ $('body').on('click','.j-del-tr',function() {
             dataType: 'json',
             data: {
                 token:token,
-                ids: deleteId.sort(),
-                type:portVar.type
+                id:JSON.stringify(deleteId.sort()),
+                // type:portVar.type
             },
             success: function(data) {
                 tr_del(table);
@@ -613,4 +614,375 @@ $(document).on('click','.convert',function(){
     $('.toshift').show();
     $('.matlist li ').eq(0).find('input').prop('checked',true);
     //$('.succmat').hide();
+});
+
+
+// 资源信息
+$('body').on('click','.resnav',function(){
+    if($(this).hasClass('navtree')){
+        $(this).removeClass('navtree');
+        //表格切换
+        $('.thetab').hide();
+        $('.treediv').hide();
+        $('#table-main').show();
+    }else{
+        $(this).addClass('navtree');
+        //目录树切换
+        $('.thetab').hide();
+        $('.treediv').show();
+        $('#treea').show();
+    }
+});
+$('body').on('click','.resolist li',function(){
+    $(this).parent().find('li').removeClass('resact');
+    $(this).addClass('resact');
+    var param={
+        token:token,
+        confirm:$(".resolist-confirm li.resact").attr('resval')==="false" ? false : true,//true确认,false未确认
+        status:parseInt($(".resolist-status li.resact").attr('resval')),//可以0-全部，1-正常，2-异常
+    };
+    table.settings()[0].ajax.data = param;
+    table.ajax.reload();
+    // table.ajax.url( portsrc+$(".resolist-res li.resact").attr('resval') ).load();
+});
+// 平台资源信息
+$('body').on('click','.j-platform',function(){
+    portVar={
+        ajaxUrlDelete:portsrc + '/res/platform/delete',
+        type:'',
+    };
+    var html='<table class="table-main display" cellspacing="0" width="100%">'+
+        '   <thead>'+
+        '       <tr>'+
+        '           <th></th>'+
+        '           <th>序号</th>'+
+        '           <th>编码</th>'+
+        '           <th>工作状态</th>'+
+        '           <th>平台类别</th>'+
+        '           <th>系统类别</th>'+
+        '           <th>平台名称</th>'+
+        '           <th>服务器地址</th>'+
+        '           <th>所属地区</th>'+
+        '           <th>创建时间</th>'+
+        '           <th>操作</th>'+
+        '           <th></th>'+
+        '       </tr>'+
+        '   </thead>'+
+        '   <tfoot>'+
+        '       <tr>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '       </tr>'+
+        '   </tfoot>'+
+        '   <tbody></tbody>'+
+        '</table>';
+    $("#table-main .tablecont").html(html);
+    table = $('#table-main table').DataTable({
+        "scrollY": "calc(100% - 50px)",
+        "scrollX": true,
+        "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+        "dom": 'tiprl',//自定义显示项
+        "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
+        "lengthChange": true,//是否允许用户自定义显示数量
+        "bPaginate": true, //翻页功能
+        "bFilter": true, //列筛序功能
+        "searching": true,//本地搜索
+        "order": [ 1, "asc" ],//desc降序
+        "Info": true,//页脚信息
+        "oLanguage": oLanguage,
+        "ajax": {
+            url: portsrc+'/res/platform/all',
+            type: 'post',
+            data:{
+                token:token,
+                confirm:$(".resolist-confirm li.resact").attr('resval')==="false" ? false : true,//true确认,false未确认
+                status:parseInt($(".resolist-status li.resact").attr('resval')),//可以0-全部，1-正常，2-异常
+            },
+            dataSrc: function ( data ) {
+                console.log(data)
+                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+                    var d=data.body[i];
+                    data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
+                    data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
+
+                    data.body[i].state='<span class="statecol">'+d.state+'</span>';
+                    
+                    data.body[i].name="<a href='#/viewPlatResoInfo' url='components/viewPlatResoInfo.html' class='view-cont add_tab' name='查看平台资源信息'>"+d.name+"</a>";
+                    data.body[i].edit="<a href='#/editPlatResoInfo' url='components/editPlatResoInfo.html' class='editbtn add_tab' name='编辑平台资源信息'><i class='iconfont icon-bianji'></i>编辑</a>"
+                    data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+                }
+                
+                return data.body;
+            }
+        },
+        "columns": [
+            { "data": "checkbox" },
+            { "data": "tabnumb" },
+            { "data": "code" },
+            { "data": "state" },
+            { "data": "platformType" },
+            { "data": "systemType" },
+            { "data": "name" },
+            { "data": "src" },
+            { "data": "area" },
+            { "data": "time" },
+            { "data": "edit" },
+            { "data": "delete" }
+        ],
+        "columnDefs": [
+                {
+                orderable: false,
+                targets: [0,2,3,4,5,6,7,8,10,11] //禁止排序
+            }
+        ],
+        fnDrawCallback: function(table) {  
+            jumpPage($("#table-main"))
+        },
+        initComplete: function () {//列筛选
+            var api = this.api();
+            api.columns().indexes().flatten().each(function (i) {
+                if (i == 3 || i == 4 || i == 5 || i == 8) { // 对第i列进行筛选
+                    var column = api.column(i);
+                        rowScreen(column);
+                }
+            });
+        }
+    });
+    userDef(table);//table配置--显示数量 搜索 全选 删除 
+});
+// 下级终端
+$('body').on('click','.j-sub',function(){
+    portVar={
+        ajaxUrlDelete:portsrc + '/res/sub/delete',
+        type:'',
+    };
+    var html='<table class="table-main display" cellspacing="0" width="100%">'+
+        '   <thead>'+
+        '       <tr>'+
+        '           <th></th>'+
+        '           <th>序号</th>'+
+        '           <th>编码</th>'+
+        '           <th>工作状态</th>'+
+        '           <th>设备类型名称</th>'+
+        '           <th>型号</th>'+
+        '           <th>终端物理地址</th>'+
+        '           <th>IP地址</th>'+
+        '           <th>所属地区</th>'+
+        '           <th>在线信息</th>'+
+        '           <th>操作</th>'+
+        '           <th></th>'+
+        '       </tr>'+
+        '   </thead>'+
+        '   <tfoot>'+
+        '       <tr>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '       </tr>'+
+        '   </tfoot>'+
+        '   <tbody></tbody>'+
+        '</table>';
+    $("#table-main .tablecont").html(html);
+    table = $('#table-main table').DataTable({
+        "scrollY": "calc(100% - 50px)",
+        "scrollX": true,
+        "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+        "dom": 'tiprl',//自定义显示项
+        "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
+        "lengthChange": true,//是否允许用户自定义显示数量
+        "bPaginate": true, //翻页功能
+        "bFilter": true, //列筛序功能
+        "searching": true,//本地搜索
+        "order": [ 1, "asc" ],//desc降序
+        "Info": true,//页脚信息
+        "oLanguage": oLanguage,
+        "ajax": {
+            url: portsrc+'/res/sub/all',
+            type: 'post',
+            data:{
+                token:token,
+                confirm:$(".resolist-confirm li.resact").attr('resval')==="false" ? false : true,//true确认,false未确认
+                status:parseInt($(".resolist-status li.resact").attr('resval')),//可以0-全部，1-正常，2-异常
+            },
+            dataSrc: function ( data ) {
+                console.log(data)
+                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+                    var d=data.body[i];
+                    data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
+                    data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
+
+                    data.body[i].state='<span class="statecol">'+d.state+'</span>';
+                    
+                    data.body[i].name='<a href="#/viewJuniorTerminal" url="components/viewJuniorTerminal.html" class="view-cont add_tab" name="查看下级终端">'+d.name+'</a>';
+                    data.body[i].edit='<a href="#/editJuniorTerminal" url="components/editJuniorTerminal.html" class="editbtn add_tab" name="编辑下级终端"><i class="iconfont icon-bianji"></i>编辑</a>';
+                    data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+                }
+                
+                return data.body;
+            }
+        },
+        "columns": [
+            { "data": "checkbox" },
+            { "data": "tabnumb" },
+            { "data": "code" },
+            { "data": "state" },
+            { "data": "name" },
+            { "data": "model" },
+            { "data": "port" },
+            { "data": "src" },
+            { "data": "area" },
+            { "data": "msg" },
+            { "data": "edit" },
+            { "data": "delete" }
+        ],
+        "columnDefs": [
+            {
+                orderable: false,
+                targets: [0,2,3,4,5,6,7,8,9,10,11] //禁止排序
+            }
+        ],
+        fnDrawCallback: function(table) {  
+            jumpPage($("#table-main"))
+        },
+        initComplete: function () {//列筛选
+            var api = this.api();
+            api.columns().indexes().flatten().each(function (i) {
+                if (i == 3 || i == 4 || i == 5 || i == 8) { // 对第i列进行筛选
+                    var column = api.column(i);
+                        rowScreen(column);
+                }
+            });
+        }
+    });
+    userDef(table);//table配置--显示数量 搜索 全选 删除 
+});
+// 发射台
+$('body').on('click','.j-station',function(){
+    portVar={
+        ajaxUrlDelete:portsrc + '/res/station/delete',
+        type:'',
+    };
+    var html='<table class="table-main display" cellspacing="0" width="100%">'+
+        '   <thead>'+
+        '       <tr>'+
+        '           <th></th>'+
+        '           <th>序号</th>'+
+        '           <th>编码</th>'+
+        '           <th>工作状态</th>'+
+        '           <th>发射台名称</th>'+
+        '           <th>物理地址</th>'+
+        '           <th>IP地址</th>'+
+        '           <th>所属地区</th>'+
+        '           <th>在线信息</th>'+
+        '           <th>操作</th>'+
+        '           <th></th>'+
+        '       </tr>'+
+        '   </thead>'+
+        '   <tfoot>'+
+        '       <tr>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '           <th></th>'+
+        '       </tr>'+
+        '   </tfoot>'+
+        '   <tbody></tbody>'+
+        '</table>';
+    $("#table-main .tablecont").html(html);
+    table = $('#table-main table').DataTable({
+        "scrollY": "calc(100% - 50px)",
+        "scrollX": true,
+        "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+        "dom": 'tiprl',//自定义显示项
+        "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
+        "lengthChange": true,//是否允许用户自定义显示数量
+        "bPaginate": true, //翻页功能
+        "bFilter": true, //列筛序功能
+        "searching": true,//本地搜索
+        "order": [ 1, "asc" ],//desc降序
+        "Info": true,//页脚信息
+        "oLanguage": oLanguage,
+        "ajax": {
+            url: portsrc+'/res/station/all',
+            type: 'post',
+            data:{
+                token:token,
+                confirm:$(".resolist-confirm li.resact").attr('resval')==="false" ? false : true,//true确认,false未确认
+                status:parseInt($(".resolist-status li.resact").attr('resval')),//可以0-全部，1-正常，2-异常
+            },
+            dataSrc: function ( data ) {
+                console.log(data)
+                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+                    var d=data.body[i];
+                    data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
+                    data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
+
+                    data.body[i].state='<span class="statecol">'+d.state+'</span>';
+                    
+                    data.body[i].edit='<a href="#/editStationResoInfo" url="components/editStationResoInfo.html" class="editbtn add_tab" name="编辑台站资源信息"><i class="iconfont icon-bianji"></i>编辑</a>';
+                    data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+                }
+                
+                return data.body;
+            }
+        },
+        "columns": [
+            { "data": "checkbox" },
+            { "data": "tabnumb" },
+            { "data": "code" },
+            { "data": "state" },
+            { "data": "name" },
+            { "data": "port" },
+            { "data": "src" },
+            { "data": "area" },
+            { "data": "msg" },
+            { "data": "edit" },
+            { "data": "delete" }
+        ],
+        "columnDefs": [
+            {
+                orderable: false,
+                targets: [0,2,3,4,5,6,7,8,9,10] //禁止排序
+            }
+        ],
+        fnDrawCallback: function(table) {  
+            jumpPage($("#table-main"))
+        },
+        initComplete: function () {//列筛选
+            var api = this.api();
+            api.columns().indexes().flatten().each(function (i) {
+                if (i == 3 || i == 4 || i == 5 || i == 8) { // 对第i列进行筛选
+                    var column = api.column(i);
+                        rowScreen(column);
+                }
+            });
+        }
+    });
+    userDef(table);//table配置--显示数量 搜索 全选 删除 
 });

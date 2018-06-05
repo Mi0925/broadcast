@@ -145,28 +145,18 @@
 	    success: function(data) {
 	    	console.log(data)
 	    	var data=data.body;
-	    	for (var i = 0; i < data.type.length; i++) {
-	    		var name=data.type[i].num+data.type[i].name;
-	    		if(data.type[i].selected){
-	    			$(".j-type").val(name);//默认事件名
-	    		}
-	    	};
+	    	$(".j-type").val(data.type);//默认事件名
 	    	$(".j-name").val(data.name);//默认事件名
-	    	$(".j-level").val(data.level);//默认事件名
+	    	$(".j-level").val(data.level);//默认级别
 	    	for (var i = 0; i < data.listMP3.length; i++) {
 	    		audio_add_html(data.listMP3[i]);//添加一条音频数据
 	    		$(".filedel-btn").remove();
 	    	};
 	    	$(".j-peopleAffect").text(data.peopleAffect);//覆盖人数
-	    	$(".j-coverArea").text(data.coverArea);//覆盖面积
+	    	$(".j-coverArea").text(data.area);//覆盖面积
 	    	$(".j-department").text(data.department);//部门
 	    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
 	    	
-	    	$(".release-radio li").each(function(index, el) {
-	    		if($(this).find('input').val()==data.direct){
-	    			$(this).find('input').attr('checked','checked')
-	    		}
-	    	});//默认是否发布
 			layui.use(['form', 'element'], function(){
 				var element = layui.element,form = layui.form,laydate = layui.laydate;
 				form.render();
@@ -186,8 +176,8 @@
 					return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 				});
 			});
-			$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.areaSel);
-			$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.resourceSel);
+			$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.coverArea);
+			$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.coverArea.resourceData);
 	    }
 	});
 </script>
