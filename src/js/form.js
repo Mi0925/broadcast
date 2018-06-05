@@ -40,7 +40,7 @@ function render(arr,level){
         	checked:arr[i].checked
         });
         if(arr[i].children&&arr[i].children.length>0){
-            str[i].children.push(render(arr[i].children,level));
+            str[i].children=render(arr[i].children,level);
         }
     }
     return str;

@@ -32,6 +32,7 @@ var areaSel=[];//存储选择地区传给后台的省市
 
 //地区：勾选复选框将触发这个方法，在这里调用ajax获取已选数据
 function areaZTreeOnCheck(event, treeId, treeNode) {
+	console.log(treeNode)
 	$.fn.zTree.init($('#gb_tree_areaSel'), selSetting);//初始化已选地区树
     // 传给后台省份：浙江省-杭州市
     var checked=treeNode.checked;
@@ -53,15 +54,12 @@ function areaZTreeOnCheck(event, treeId, treeNode) {
 				}
 			}
 		}else{
-			var areaSels=areaSel;
-			for (var i = 0; i < areaSels.length; i++){
-				console.log(areaSel[i])
-				if (areaSels[i].split("-")[0] == treeNode.name) {
+			for (var i = 0; i < areaSel.length; i++){
+				if (areaSel[i].split("-")[0] == treeNode.name) {
 					areaSel.splice(i, 1)
 				}
+    			console.log(areaSel)
 			}
-    		console.log(areaSel)
-    		console.log(areaSels)
 		}
     };
 	// 获取地区接口
