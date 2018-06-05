@@ -308,10 +308,10 @@
 							return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 						});
 					});
-					$.fn.zTree.init($('#gb_tree_area'), areaSetting, data.area);
-					$.fn.zTree.init($('#gb_tree_resource'), resourceSetting, data.resource);
-					$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.areaSel);
-					$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.resourceSel);
+					$.fn.zTree.init($('#gb_tree_area'), areaSetting, data.allArea);
+					$.fn.zTree.init($('#gb_tree_resource'), resourceSetting, data.allSystemResource);
+					$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.coverArea);
+					$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.systemResource);
 			    }
 			});
 	    }

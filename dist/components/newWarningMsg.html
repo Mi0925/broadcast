@@ -131,7 +131,7 @@
 				    data:{
 				    	token:token,
 				    	type:'alert',//task为任务消息，alert为预警消息
-				    	data:JSON.stringify(data.field)
+				    	newMsg:JSON.stringify(data.field)
 				    },
 				    success: function(data) {
 						layer.open({

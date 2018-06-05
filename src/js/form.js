@@ -18,9 +18,9 @@ var schedulingForm=function(data) {
 
 	data.field.coverArea=render($.fn.zTree.getZTreeObj("gb_tree_areaSel")==null?[]:$.fn.zTree.getZTreeObj("gb_tree_areaSel").getNodes());//选择地区
 
-	data.field.allSystrmResource=render($.fn.zTree.getZTreeObj("gb_tree_resource")==null?[]:$.fn.zTree.getZTreeObj("gb_tree_resource").getNodes());//所有资源
+	data.field.allSystemResource=render($.fn.zTree.getZTreeObj("gb_tree_resource")==null?[]:$.fn.zTree.getZTreeObj("gb_tree_resource").getNodes());//所有资源
 	
-	data.field.systrmResource=render($.fn.zTree.getZTreeObj("gb_tree_resourceSel")==null?[]:$.fn.zTree.getZTreeObj("gb_tree_resourceSel").getNodes());//选择资源
+	data.field.systemResource=render($.fn.zTree.getZTreeObj("gb_tree_resourceSel")==null?[]:$.fn.zTree.getZTreeObj("gb_tree_resourceSel").getNodes());//选择资源
 	delete data.field.time;
 	return data;
 };

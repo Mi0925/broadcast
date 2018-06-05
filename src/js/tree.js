@@ -56,9 +56,8 @@ function areaZTreeOnCheck(event, treeId, treeNode) {
 		}else{
 			for (var i = 0; i < areaSel.length; i++){
 				if (areaSel[i].split("-")[0] == treeNode.name) {
-					areaSel.splice(i, 1)
+					areaSel.splice(i--, 1)
 				}
-    			console.log(areaSel)
 			}
 		}
     };
