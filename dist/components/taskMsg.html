@@ -186,42 +186,44 @@
                 	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
                 	var level="";
-					if(d.level=="红色"){
+					if(d.level=="RED"){
 						level="<img src='src/images/rank-red.png'/>";
-					} else if(d.level=="蓝色"){
+					} else if(d.level=="BLUE"){
 						level="<img src='src/images/rank-blue.png'/>";
-					} else if(d.level=="绿色"){
+					} else if(d.level=="GREEN"){
 						level="<img src='src/images/rank-green.png'/>";
-					} else if(d.level=="橙色"){
+					} else if(d.level=="ORANGE"){
 						level="<img src='src/images/rank-orange.png'/>";
-					} else if(d.level=="黄色"){
+					} else if(d.level=="YELLOW"){
 						level="<img src='src/images/rank-yellow.png'/>";
 					}
                 	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
+
                 	data.body[i].name="<a href='#/viewTaskMsg' url='components/viewTaskMsg.html' class='view-cont add_tab' name='查看任务消息'>"+d.name+"</a>";
                 	data.body[i].yulan="<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>";
                 	data.body[i].edit="<a href='#/newTaskMsgEdit' url='components/newTaskMsgEdit.html' class='editbtn add_tab' name='编辑任务消息'><i class='iconfont icon-bianji'></i>编辑</a>";
                 	data.body[i].release="<a href='#/releasePolicy' class='issue isstr add_tab' url='components/releasePolicy.html' name='发布策略'><i class='iconfont icon-fabu'></i>发布策略</a>";
 
                 	var audit="";
-					if(d.audit.boolean==true){
-						if(d.audit.state=='审核'){
-							audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
-						}else if(d.audit.state=='未通过'){
-							audit="<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
-						}
-					};
-                	data.body[i].audit=audit;
+					// if(d.audit.boolean==true){
+					// 	if(d.audit.state=='审核'){
+					// 		audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
+					// 	}else if(d.audit.state=='未通过'){
+					// 		audit="<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
+					// 	}
+					// };
+                	data.body[i].audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
 
                 	var send="";
-					if(d.send.boolean==true){
-						if(d.send.state=='续发'){
-							send="<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>";
-						}else if(d.send.state=='停发'){
-							send='<a href="javascript:void(0);" class="issue isstop"><i class="iconfont icon-zanting"></i>停发</a>';
-						}
-					};
-                	data.body[i].send=send;
+					// if(d.send.boolean==true){
+					// 	if(d.send.state=='续发'){
+					// 		send="<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>";
+					// 	}else if(d.send.state=='停发'){
+					// 		send='<a href="javascript:void(0);" class="issue isstop"><i class="iconfont icon-zanting"></i>停发</a>';
+					// 	}
+					// };
+                	data.body[i].send="<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>";
+
                 	data.body[i].chretry="<span class='check chretry'><i class='iconfont icon-zhongbo'></i>重播</span>";
                 	data.body[i].decancel="<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>";
                 	data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";

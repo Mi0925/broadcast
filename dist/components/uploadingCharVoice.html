@@ -9,7 +9,7 @@
 				<div class="oneitem-cont">
 					<p class="oneitem-tit">文本</p>
 					<div class="oneimp">
-						<textarea id="imparea" class="imparea" maxlength="3000" onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#ccc'}"></textarea>
+						<textarea id="imparea" name="message" class="imparea" maxlength="3000"></textarea>
 						<span class="area-count"><span class="countnew">0</span>/3000</span>
 					</div>
 					<input type="button" value="转成音频" class="toswitch" />
@@ -22,33 +22,15 @@
 				<div class="oneitem-cont">
 					<div class="locupload">
 						<div class="touploading">
-							<input type="file" class="fileup" accept="audio/*,video/*" data-type="loading"  id="fileup"/>
+							<input type="file" class="fileup" accept="text/*" data-type="loading" id="fileup"/>
 							<input type="button" value="本地上传" class="uplbtn" />
 						</div>
 						<span class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>音频大小不超过5M</span>
 					</div>
 					<p class="gb-linetw"></p>
-					<!--<div class="onearea">
-						 <div class="thefile">
-							<div class="filename"><i class="iconfont icon-1"></i><span class="thename">杭州台风预警杭州台风预警.mp3</span></div>
-							<div class="filebtn">
-								<input type="button" value="格式转换" class="foconv-btn"/>
-								<input type="button" value="转成文本" class="wordconv-btn" data-type="loading"/>
-								<input type="button" value="删除" class="todel-btn"/>
-							</div>
-						</div>
-						<div class="oneimp">
-							<div class="tomat theprog-bar">
-								<div class="layui-progress layui-progress-big" lay-filter="demo">lay-showpercent="true"
-								  <div class="layui-progress-bar" lay-percent="0%"></div>layui-bg-red
-								</div>
-								<p class="forword">转换中...</p>
-							</div>
-							<textarea id="imparea" class="imparea" onblur="if(!value){this.value = defaultValue;this.style.color = '#ccc'}">转换的文本转换的文本转换的文本转换的文本转换的文本转换的文本转换的文本转换的文本转换的文本转换的文本转换的文本转换的文本转换的文本转换的文本转换的文本</textarea>
-						</div>
-					</div> -->
+					<ul class="filelist" style="width: 48.5%;"></ul>
 					<div class="tomat" id="upthefile">
-						<p class="uplword"><span class="thename">杭州市台风预警音频.mp3</span>上传中</p>
+						<p class="uplword">上传中</p>
 						<div class="layui-progress layui-progress-big" lay-filter="demo" lay-showpercent="true">
 							<div class="layui-progress-bar" lay-percent="0%"></div>
 						</div>
@@ -153,8 +135,8 @@
 						'<div class="thefile">'+
 							'<div class="filename"><i class="iconfont icon-1"></i><span class="thename">杭州台风预警.mp3</span></div>'+
 							'<div class="filebtn">'+
-								'<input type="button" value="格式转换" class="foconv-btn"/>'+
-								'<input type="button" value="转成文本" class="wordconv-btn" data-type="loading"/>'+
+								// '<input type="button" value="格式转换" class="foconv-btn"/>'+
+								// '<input type="button" value="转成文本" class="wordconv-btn" data-type="loading"/>'+
 								'<input type="button" value="删除" class="todel-btn"/>'+
 							'</div>'+
 						'</div>'+
@@ -180,7 +162,6 @@
 			        fileObj = fileEle.files[0];
 			    }else{
 			        var fso = new ActiveXObject("Scripting.FileSystemObject");
-			
 			        fileEle.select();
 			        fileEle.blur();
 			        var filePath = document.selection.createRange().text;
@@ -244,12 +225,12 @@
 		})
 
 
-		$(document).on('click','.toswitch',function(){
-			$('.popwindow').show();
-			$('.toshift').show();
-			$('.matlist li ').eq(0).find('input').prop('checked',true);
-			$('.uncont .succmat').hide();
-		})
+		// $(document).on('click','.toswitch',function(){
+		// 	$('.popwindow').show();
+		// 	$('.toshift').show();
+		// 	$('.matlist li ').eq(0).find('input').prop('checked',true);
+		// 	$('.uncont .succmat').hide();
+		// })
 
 		$(document).on('click','.foconv-btn',function(){
 			$('.popwindow').show();
@@ -264,6 +245,7 @@
 		layui.use(['form', 'element'], function(){
 			var element = layui.element //Tab的切换功能，切换事件监听等，需要依赖element模块
 			,form = layui.form;
+			var timer,timeNum=0,DISABLED = 'layui-btn-disabled';
 			form.render();
 
 			var itbtn = $('<span class="itbtn"></span>');
@@ -273,25 +255,23 @@
 		  
 			//触发事件
 			var active = {
-			    loading: function(othis){
-			      var DISABLED = 'layui-btn-disabled';
-			      if(othis.hasClass(DISABLED)) return;
-			      
-			      //模拟loading
-			      var n = 0,timer = setInterval(function(){
-			        n = n + Math.random()*10|0;  
-			        if(n>100){
-			          n = 100;
+			    loading: function(othis,time,name){
+			    timer = setInterval(function(){
+			        timeNum = timeNum + Math.random()*10|0;  
+			        if(timeNum>100){
+			          timeNum = 0;
 			          clearInterval(timer);
 			          othis.removeClass(DISABLED);
 			          $('.wordconv-btn').removeClass(DISABLED);
 			          $('.Albeenconv').addClass(DISABLED);
 			          $('.uncont .tomat').hide();
 			          $('.uncont .succmat').show();
+			          var names=name.split(".")[0]+'.mp3';
+			          audio_add_html(names);//添加一条音频数据
 			         
-			          /**/if($('#upthefile').is(':visible')){
+			          if($('#upthefile').is(':visible')){
 						$('#upthefile').hide();
-			        	toUploading();
+			        	// toUploading();
 			          }
 
 			          $('.theload').find('.tomat.theprog-bar').hide();
@@ -299,8 +279,8 @@
 			          $('.theload').find('.imparea').show();
 			          $('.onearea').removeClass('theload');
 			        }
-			        element.progress('demo', n+'%');
-			      }, 300+Math.random()*1000);
+			        element.progress('demo', timeNum+'%');
+			      }, time==0 ? (2000 + Math.random() * 2000) : time);
 			      
 			      othis.addClass(DISABLED);
 			      $('.wordconv-btn').addClass(DISABLED);
@@ -326,14 +306,33 @@
 					active[type] ? active[type].call(this, othis) : '';
 				}
 				
-			});/**/
-			/**/$('.fileup').change(function(){
-				$('.gb-linetw').show();
-				$('#upthefile').show();
-				
-				var othis = $(this), type = $(this).data('type');
-				active[type] ? active[type].call(this, othis) : '';
-				theFile();
+			});
+			$('.fileup').change(function(e){
+				console.log(e.target.files[0]);
+				var formData = new FormData(),$this=$(this), type = $this.data('type');
+				if ($this.hasClass(DISABLED)) return false;
+				$this.addClass(DISABLED);
+				formData.append('file', e.target.files[0]);
+				$.ajax({
+				    url: portsrc+'/convertFile',
+				    type: 'post',
+				    cache: false,
+				    data:formData,
+				    processData: false,
+				    contentType: false,
+					dataType: 'json',
+					beforeSend: function () {
+						$('.gb-linetw').show();
+						$('#upthefile').show();
+						// theFile();
+						active[type] ? active[type].call(this, $this,0) : '';
+				    },
+				    success: function(data) {
+				    	console.log(data);
+				    	clearInterval(timer);
+						active[type] ? active[type].call(this, $this,70,e.target.files[0].name) : '';
+				    }
+				});
 			})
 		});
 	})
