@@ -205,24 +205,22 @@
                 	data.body[i].release="<a href='#/releasePolicy' class='issue isstr add_tab' url='components/releasePolicy.html' name='发布策略'><i class='iconfont icon-fabu'></i>发布策略</a>";
 
                 	var audit="";
-					// if(d.audit.boolean==true){
-					// 	if(d.audit.state=='审核'){
-					// 		audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
-					// 	}else if(d.audit.state=='未通过'){
-					// 		audit="<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
-					// 	}
-					// };
-                	data.body[i].audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
+                	if(d.audit){
+						if(d.audit.status=='UNAUDIT'){
+							audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
+						}else if(d.audit.status=='UNPASS'){
+							audit="<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
+						}
+					}
+                	data.body[i].audit=audit;
 
                 	var send="";
-					// if(d.send.boolean==true){
-					// 	if(d.send.state=='续发'){
-					// 		send="<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>";
-					// 	}else if(d.send.state=='停发'){
-					// 		send='<a href="javascript:void(0);" class="issue isstop"><i class="iconfont icon-zanting"></i>停发</a>';
-					// 	}
-					// };
-                	data.body[i].send="<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>";
+					if(d.send==0){
+						send="<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>";
+					}else if(d.send==1){
+						send='<a href="javascript:void(0);" class="issue isstop"><i class="iconfont icon-zanting"></i>停发</a>';
+					}
+                	data.body[i].send=send;
 
                 	data.body[i].chretry="<span class='check chretry'><i class='iconfont icon-zhongbo'></i>重播</span>";
                 	data.body[i].decancel="<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>";
@@ -235,12 +233,12 @@
 		"columns": [
 		    { "data": "checkbox" },
 		    { "data": "tabnumb" },
-		    { "data": "state" },
+		    { "data": "status" },
 		    { "data": "level" },
 		    { "data": "name" },
 		    { "data": "department" },
-		    { "data": "people" },
-		    { "data": "time" },
+		    { "data": "dutyPerson" },
+		    { "data": "pubTime" },
 		    { "data": "yulan" },
 		    { "data": "edit" },
 		    { "data": "release" },

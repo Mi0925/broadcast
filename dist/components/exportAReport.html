@@ -167,15 +167,15 @@
                 	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
                 	var level="";
-					if(d.level=="红色"){
+					if(d.level=="RED"){
 						level="<img src='src/images/rank-red.png'/>";
-					} else if(d.level=="蓝色"){
+					} else if(d.level=="BLUE"){
 						level="<img src='src/images/rank-blue.png'/>";
-					} else if(d.level=="绿色"){
+					} else if(d.level=="GREEN"){
 						level="<img src='src/images/rank-green.png'/>";
-					} else if(d.level=="橙色"){
+					} else if(d.level=="ORANGE"){
 						level="<img src='src/images/rank-orange.png'/>";
-					} else if(d.level=="黄色"){
+					} else if(d.level=="YELLOW"){
 						level="<img src='src/images/rank-yellow.png'/>";
 					}
                 	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';

@@ -40,10 +40,12 @@
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>协议</p>
-						<div class="layui-input-inline j-protocol-sel">
+						<div class="layui-input-inline">
 							<select name="protocol" lay-search="" lay-verify="required">
 								<option value="">请选择协议</option>
-								<option value="1">协议1</option>
+								<option value="HTTP">HTTP</option>
+								<option value="Webservice">Webservice</option>
+								<option value="TCP">TCP</option>
 							</select>
 						</div>
 					</div>
@@ -84,24 +86,6 @@
 		$('#secretkey').on('keyup', function() { 
 		    $('.oneimp-count .countser').html($('#secretkey').val().length);  
 		});
-
-		// 获取协议
-		// $.ajax({
-		//     url: portsrc+'/protocol',
-		//     type: 'post',
-		//     dataType: 'json',
-		//     data:{
-		//     	token:token,
-		//     },
-		//     success: function(data) {
-		//     	console.log(data)
-		// 		for (var i = 0; i < data.body.length; i++) {
-		//     		$(".j-protocol-sel select").append('<option value='+data.body[i]+'>'+data.body[i]+'</option>');
-		//     	};
-		//     }
-		// });
-    	
-		
 		// 获取地区
 		$.ajax({
 		    url: portsrc+'/allArea',

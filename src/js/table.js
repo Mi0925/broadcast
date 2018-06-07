@@ -214,6 +214,7 @@ $(document).on('click','.operbtn',function(){
 $(document).on('click','.audit',function(){
     $('.popwindow').show();
     $('.review').show();
+    sessionStorage.setItem('auditId',$(this).parents('tr').find(".checkone").find("input").attr('id'));
 })
 $(document).on('click','.notpass',function(){
     $('.popwindow').show();
@@ -461,7 +462,7 @@ $('body').on('click','.j-del-tr',function() {
             dataType: 'json',
             data: {
                 token:token,
-                type:'cycle',
+                type:'cyclePractice',
                 id: cycleDeleteId.sort()
             },
             success: function(data) {
@@ -476,7 +477,7 @@ $('body').on('click','.j-del-tr',function() {
             dataType: 'json',
             data: {
                 token:token,
-                type:'manual',
+                type:'manualPractice',
                 id: manualDeleteId.sort()
             },
             success: function(data) {
@@ -518,7 +519,6 @@ $('body').on('click','.j-resend-cycle',function() {
 });
 $('body').on('click','.cho-again',function(){
     console.log(portVar)
-    // 模拟数据
     $.ajax({
         url: portVar.ajaxUrlReSend,
         type: 'get',
@@ -539,7 +539,6 @@ $('body').on('click','.cho-again',function(){
 
 // 审核未通过
 $('body').on('click','.notpass',function(){
-    // 模拟数据
     $.ajax({
         url: portVar.ajaxUrlUnpassreason,
         type: 'get',
@@ -565,6 +564,7 @@ $('body').on('click','.j-audit-yes',function(){
             token:token,
             type:portVar.type,//task为任务消息，alert为预警消息
             pass:true,//是否通过
+            id: sessionStorage.getItem('auditId')
         },
         success: function(data) {
             layer.open({
@@ -585,12 +585,13 @@ $('body').on('click','.j-audit-no',function(){
             token:token,
             type:portVar.type,//task为任务消息，alert为预警消息
             pass:false,//是否通过
+            id: sessionStorage.getItem('auditId'),
             require:editor_a.getPlainTxt()//未通过理由
         },
         success: function(data) {
             layer.open({
                 title: '提示',
-                content: '审核通过'
+                content: '审核不通过'
             });
         }
     });

@@ -197,20 +197,20 @@
                 	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
                 	var level="";
-					if(d.level=="红色"){
+					if(d.level=="RED"){
 						level="<img src='src/images/rank-red.png'/>";
-					} else if(d.level=="蓝色"){
+					} else if(d.level=="BLUE"){
 						level="<img src='src/images/rank-blue.png'/>";
-					} else if(d.level=="绿色"){
+					} else if(d.level=="GREEN"){
 						level="<img src='src/images/rank-green.png'/>";
-					} else if(d.level=="橙色"){
+					} else if(d.level=="ORANGE"){
 						level="<img src='src/images/rank-orange.png'/>";
-					} else if(d.level=="黄色"){
+					} else if(d.level=="YELLOW"){
 						level="<img src='src/images/rank-yellow.png'/>";
 					}
                 	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
 
-                	if(d.type=='周期'){
+                	if(d.type==1){//MANNUAL 0  CYCLE 1
                 		data.body[i].name="<a href='#/viewCyclePlan' url='components/viewCyclePlan.html' class='view-cont add_tab' name='查看周期性计划'>"+d.name+"</a>";
                 	}else{
                 		data.body[i].name="<a href='#/viewManualExerProg' url='components/viewManualExerProg.html' class='view-cont add_tab' name='查看手动计划'>"+d.name+"</a>";
@@ -219,7 +219,7 @@
 
                 	data.body[i].yulan="<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>";
 
-                	if(d.type=='周期'){
+                	if(d.type==1){
                 		data.body[i].edit="<a href='#/editCyclePlan' url='components/editCyclePlan.html' class='editbtn add_tab' name='编辑周期性计划'><i class='iconfont icon-bianji'></i>编辑</a>";
                 	}else{
                 		data.body[i].edit="<a href='#/editManualExerProg' url='components/editManualExerProg.html' class='editbtn add_tab' name='编辑手动演练计划'><i class='iconfont icon-bianji'></i>编辑</a>";
@@ -228,34 +228,30 @@
                 	data.body[i].release="<a href='#/planReleasePolicy' class='issue isstr add_tab' url='components/PlanReleasePolicy.html' name='发布策略'><i class='iconfont icon-fabu'></i>发布策略</a>";
 
                 	var audit="";
-					if(d.audit.boolean==true){
-						if(d.audit.state=='审核'){
-							if(d.type=='周期'){
-		                		audit="<span class='check audit j-resend-cycle' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
-		                	}else{
-		                		audit="<span class='check audit j-resend-manual' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
-		                	}
-						}else if(d.audit.state=='未通过'){
-							if(d.type=='周期'){
-		                		audit="<span class='check notpass j-resend-cycle' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
-		                	}else{
-		                		audit="<span class='check notpass j-resend-manual' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
-		                	}
-						}
+					if(d.audit.status=='UNAUDIT'){
+						if(d.type==1){
+	                		audit="<span class='check audit j-resend-cycle' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
+	                	}else{
+	                		audit="<span class='check audit j-resend-manual' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
+	                	}
+					}else if(d.audit.status=='UNPASS'){
+						if(d.type==1){
+	                		audit="<span class='check notpass j-resend-cycle' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
+	                	}else{
+	                		audit="<span class='check notpass j-resend-manual' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
+	                	}
 					};
                 	data.body[i].audit=audit;
 
                 	var send="";
-					if(d.send.boolean==true){
-						if(d.send.state=='续发'){
-							send="<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>";
-						}else if(d.send.state=='停发'){
-							send='<a href="javascript:void(0);" class="issue isstop"><i class="iconfont icon-zanting"></i>停发</a>';
-						}
+					if(d.send==0){
+						send="<a href='javascript:void(0);' class='issue iscont'><i class='iconfont icon-bofang'></i>续发</a>";
+					}else if(d.send==1){
+						send='<a href="javascript:void(0);" class="issue isstop"><i class="iconfont icon-zanting"></i>停发</a>';
 					};
                 	data.body[i].send=send;
 
-                	if(d.type=='周期'){
+                	if(d.type==1){
                 		data.body[i].chretry="<span class='check chretry j-resend-cycle'><i class='iconfont icon-zhongbo'></i>重播</span>";
                 	}else{
                 		data.body[i].chretry="<span class='check chretry j-resend-manual'><i class='iconfont icon-zhongbo'></i>重播</span>";
@@ -263,7 +259,7 @@
                 	
                 	data.body[i].decancel="<span class='del decancel'><i class='iconfont icon-quxiao'></i>取消</span>";
 
-                	if(d.type=='周期'){
+                	if(d.type==1){
                 		data.body[i].delete="<span class='del delete j-resend-cycle'><i class='iconfont icon-shanchu'></i>删除</span>";
                 	}else{
                 		data.body[i].delete="<span class='del delete j-resend-manual'><i class='iconfont icon-shanchu'></i>删除</span>";
@@ -277,12 +273,12 @@
 		"columns": [
 		    { "data": "checkbox" },
 		    { "data": "tabnumb" },
-		    { "data": "state" },
+		    { "data": "status" },
 		    { "data": "type" },
 		    { "data": "level" },
 		    { "data": "name" },
 		    { "data": "department" },
-		    { "data": "people" },
+		    { "data": "dutyPerson" },
 		    { "data": "time" },
 		    { "data": "yulan" },
 		    { "data": "edit" },

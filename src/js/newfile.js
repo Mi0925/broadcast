@@ -78,7 +78,7 @@ $(document).on('click','.toswitch',function(){
 			    	var el = document.createElement('li');
 			    	el.classList.add('msg_audio');
 			    	el.style.color="#5fb878";
-					el.innerHTML = '<div class="filename"><i class="iconfont icon-1"></i><span class="thename">'+data.body.name+'</span></div>'+
+					el.innerHTML = '<div class="filename"><i class="iconfont icon-1"></i><span class="thename">'+data.body+'</span></div>'+
 								'<div class="filebtn">'+
 								'	<input type="button" value="删除" class="filedel-btn"/>'+
 								// '	<input type="button" value="转换" class="fileconv-btn"/>'+
@@ -89,7 +89,7 @@ $(document).on('click','.toswitch',function(){
 				layer.open({
 		            title: '提示',
 		            shadeClose:true,
-		            content: '成功转换为：'+data.body.name
+		            content: '成功转换为：'+data.body
 		        });
 		    },
 		    error:function() {
