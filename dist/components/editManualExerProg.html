@@ -195,8 +195,8 @@
 						    		audio_add_html(data.listMP3[i]);//添加一条音频数据
 						    		$(".filedel-btn").remove();
 						    	};
-						    	$(".j-peopleAffect").text(data.peopleAffect+'人');//覆盖人数
-						    	$(".j-coverArea").text(data.area+'万平方公里');//覆盖面积
+						    	$(".j-peopleAffect").text(data.peopleAffect);//覆盖人数
+						    	$(".j-coverArea").text(data.area);//覆盖面积
 						    	$(".j-department").text(data.department);//部门
 						    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
 						    	
@@ -228,12 +228,7 @@
 								    success: function(data) {
 								    	console.log(data)
 								    	var data=data.body;
-								    	for (var i = 0; i < data.type.length; i++) {
-								    		var name=data.type[i].num+data.type[i].name;
-								    		if(data.type[i].selected){
-								    			$(".j-type").val(name);//默认事件名
-								    		}
-								    	};
+						    			$(".j-type").val(data.type);//默认事件类别
 								    	$(".j-name").val(data.name);//默认事件名
 								    	$(".j-level").val(data.level);//默认事件名
 								    	$(".filelist li").remove();
@@ -241,16 +236,11 @@
 								    		audio_add_html(data.listMP3[i]);//添加一条音频数据
 								    		$(".filedel-btn").remove();
 								    	};
-								    	$(".j-peopleAffect").text(data.peopleAffect+'人');//覆盖人数
-								    	$(".j-coverArea").text(data.area+'万平方公里');//覆盖面积
+								    	$(".j-peopleAffect").text(data.peopleAffect);//覆盖人数
+								    	$(".j-coverArea").text(data.coverArea);//覆盖面积
 								    	$(".j-department").text(data.department);//部门
 								    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
 								    	
-								    	$(".release-radio li").each(function(index, el) {
-								    		if($(this).find('input').val()==data.direct){
-								    			$(this).find('input').attr('checked','checked')
-								    		}
-								    	});//默认是否发布
 										laydate.render({ 
 											elem: '#datergs',
 							                eventElem: '#tochobtn',
@@ -277,7 +267,7 @@
 							    data:{
 							    	token:token,
 							    	id:sessionStorage.getItem('editTableItem'),
-							    	newMsg:JSON.stringify(data.field)
+							    	manualPractice:JSON.stringify(data.field)
 							    },
 							    success: function(data) {
 									layer.open({

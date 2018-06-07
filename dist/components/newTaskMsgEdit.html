@@ -225,12 +225,7 @@
 								    success: function(data) {
 								    	console.log(data)
 								    	var data=data.body;
-								    	for (var i = 0; i < data.type.length; i++) {
-								    		var name=data.type[i].num+data.type[i].name;
-								    		if(data.type[i].selected){
-								    			$(".j-type").val(name);//默认事件名
-								    		}
-								    	};
+						    			$(".j-type").val(data.type);//默认事件类别
 								    	$(".j-name").val(data.name);//默认事件名
 								    	$(".j-level").val(data.level);//默认事件名
 								    	$(".filelist li").remove();
