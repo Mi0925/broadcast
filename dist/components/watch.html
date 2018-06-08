@@ -180,10 +180,12 @@ $(document).ready(function() {
 	var date = new Date(),d = date.getDate(),m = date.getMonth(),y = date.getFullYear();
 	// 模拟数据
 	$.ajax({
-	    url: portsrc+'/calendar',
-	    token:token,
+	    url: portsrc+'/peopleArrange/all',
 	    type: 'GET',
 	    dataType: 'json',
+	    data:{
+		    token:token,
+		},
 	    success: function(data) {
 	    	console.log(data)
 	    	var eventsData=data.body;//初始日历数据
@@ -229,30 +231,6 @@ $(document).ready(function() {
 							content: dialog_html,
 							btn: ['确定创建'],
 							skin: 'gb-watch-dialog',
-							yes: function(index, layero){
-								var eventData,people="";
-								$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
-									people=people+$(this).text()+"、";
-								})
-								//去掉最后一个、(如果不需要去掉，就不用写)
-								if (people.length > 0) {
-							        people = people.substr(0, people.length - 1);
-							    }else if(people==""){
-							    	people="无";
-							    }
-								if(allDay){//点击全天设置全天
-									endDate=null;
-								}
-								eventData = {
-									allDay:allDay,
-									title: people,
-									start:startDate,
-									end: endDate
-								};
-								console.log(eventData)
-								$('.gb-calendar').fullCalendar('renderEvent', eventData, true); // 渲染一个新的日程到日程表上
-								layer.closeAll();
-							},
 							success: function(layero, index){
 								// 时间范围选择
 								laydate.render({
@@ -269,6 +247,41 @@ $(document).ready(function() {
 									}
 								});
 								form.render('select');
+							},
+							yes: function(index, layero){
+								$.ajax({
+							        url: portsrc+'peopleArrange/add',
+							        type: 'post',
+							        dataType: 'json',
+							        data: {
+							            token:token,
+							        },
+							        success: function(data) {
+							        	console.log(data)
+										var eventData,people="";
+										$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
+											people=people+$(this).text()+"、";
+										})
+										//去掉最后一个、(如果不需要去掉，就不用写)
+										if (people.length > 0) {
+									        people = people.substr(0, people.length - 1);
+									    }else if(people==""){
+									    	people="无";
+									    }
+										if(allDay){//点击全天设置全天
+											endDate=null;
+										}
+										eventData = {
+											allDay:allDay,
+											title: people,
+											start:startDate,
+											end: endDate
+										};
+										console.log(eventData)
+										$('.gb-calendar').fullCalendar('renderEvent', eventData, true); // 渲染一个新的日程到日程表上
+										layer.closeAll();
+							        }
+							    });
 							}
 						});
 						$(".gb-people-list li").remove();
@@ -490,16 +503,16 @@ $(document).ready(function() {
 			'								<i class="iconfont icon-rili i"></i>'+
 			'						        <input type="text" class="layui-input i" id="daterg" placeholder="选择时间范围">'+
 			'					    	</div>'+
-			'					    	<div class="gb-dialog-checkbox i">'+
-			'					    		<div class="matcheck i">'+
-			'									<input type="radio" name="circulation" id="weeks" checked="checked" lay-ignore>'+
-			'									<label for="weeks">周循环</label>'+
-			'								</div>'+
-			'					    		<div class="matcheck i">'+
-			'									<input type="radio" name="circulation" id="month" lay-ignore>'+
-			'									<label for="month">月循环</label>'+
-			'								</div>'+
-			'					    	</div>'+
+			// '					    	<div class="gb-dialog-checkbox i">'+
+			// '					    		<div class="matcheck i">'+
+			// '									<input type="radio" name="circulation" id="weeks" checked="checked" lay-ignore>'+
+			// '									<label for="weeks">周循环</label>'+
+			// '								</div>'+
+			// '					    		<div class="matcheck i">'+
+			// '									<input type="radio" name="circulation" id="month" lay-ignore>'+
+			// '									<label for="month">月循环</label>'+
+			// '								</div>'+
+			// '					    	</div>'+
 			'						</div>'+
 			'						<div class="item">'+
 			'							<h4>确认超时时间</h4>'+

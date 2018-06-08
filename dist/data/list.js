@@ -406,7 +406,7 @@ Mock.mock('http://47.104.84.17/login/user', function(options) {
 
 // 值班管理--日历
 var calendarData;
-Mock.mock('http://47.104.84.17/calendar', function(optins){
+Mock.mock('http://47.104.84.17/peopleArrange/all', function(optins){
     calendarData=Mock.mock({
         'body|10':[{
             'id|+1':1,

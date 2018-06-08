@@ -546,7 +546,7 @@ $('body').on('click','.notpass',function(){
         data: {
             token:token,
             type:portVar.type,//task为任务消息，alert为预警消息
-            id:$(this).find('.checkone').find('input').attr('id')
+            id:$(this).parents('tr').find('.checkone').find('input').attr('id')
         },
         success: function(data) {
             $(".unword").text(data.body);
@@ -586,7 +586,7 @@ $('body').on('click','.j-audit-no',function(){
             type:portVar.type,//task为任务消息，alert为预警消息
             pass:false,//是否通过
             id: sessionStorage.getItem('auditId'),
-            require:editor_a.getPlainTxt()//未通过理由
+            reason:editor_a.getPlainTxt()//未通过理由
         },
         success: function(data) {
             layer.open({

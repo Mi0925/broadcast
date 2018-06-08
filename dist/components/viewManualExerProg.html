@@ -96,11 +96,11 @@
 					<div class="oneitem-cont">
 						<div class="predictone">
 							<p class="oneitem-tit">预覆盖人数</p>
-							<p class="precount j-peopleAffect"></p>
+							<p class="precount"><i class="j-peopleAffect">0</i>万人</p>
 						</div>
 						<div class="predictwo">
 							<p class="oneitem-tit">预覆盖面积</p>
-							<p class="precount j-coverArea"></p>
+							<p class="precount"><i class="j-coverArea">0</i>平方公里</p>
 						</div>
 					</div>
 				</div>
@@ -138,7 +138,7 @@
 	    },
 	    success: function(data) {
 	    	$("#impcontent").val(data.body.name);
-	    	var schedule_id=data.body.schedule_id;
+	    	var schedule_id=data.body.schedulePlanId;
 	    	$.ajax({
 			    url: portsrc+'/schedule/allItem',
 			    type: 'post',
@@ -170,34 +170,24 @@
 						    dataType: 'json',
 						    data:{
 						    	token:token,
-						    	schedulePlanId:schedule_id,
+						    	id:schedule_id,
 						    },
 						    success: function(data) {
 						    	console.log(data)
 						    	var data=data.body;
-						    	for (var i = 0; i < data.type.length; i++) {
-						    		var name=data.type[i].num+data.type[i].name;
-						    		if(data.type[i].selected){
-						    			$(".j-type").val(name);//默认事件名
-						    		}
-						    	};
+						    	$(".j-type").val(data.type);//默认事件类别
 						    	$(".j-name").val(data.name);//默认事件名
-						    	$(".j-level").val(data.level);//默认事件名
+						    	$(".j-level").val(data.level);//默认级别
 						    	$(".filelist li").remove();
 						    	for (var i = 0; i < data.listMP3.length; i++) {
 						    		audio_add_html(data.listMP3[i]);//添加一条音频数据
 						    		$(".filedel-btn").remove();
 						    	};
-						    	$(".j-peopleAffect").text(data.peopleAffect+'人');//覆盖人数
-						    	$(".j-coverArea").text(data.coverArea+'万平方公里');//覆盖面积
+						    	$(".j-peopleAffect").text(data.peopleAffect);//覆盖人数
+						    	$(".j-coverArea").text(data.area);//覆盖面积
 						    	$(".j-department").text(data.department);//部门
 						    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
 						    	
-						    	$(".release-radio li").each(function(index, el) {
-						    		if($(this).find('input').val()==data.direct){
-						    			$(this).find('input').attr('checked','checked')
-						    		}
-						    	});//默认是否发布
 								laydate.render({ 
 									elem: '#datergs',
 					                eventElem: '#tochobtn',
@@ -206,8 +196,8 @@
 					                range: true,
 									value: data.time
 								});
-								$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.areaSel);
-								$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.resourceSel);
+								$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.coverArea);
+								$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.systemResource);
 						    }
 						});
 					});
