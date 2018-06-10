@@ -128,3 +128,24 @@
 		</div>
 	</form>
 </div>
+<script>
+	$.ajax({
+	    url: portsrc+'/res/program/get',
+	    type: 'post',
+	    dataType: 'json',
+	    data:{
+	    	token:token,
+	    },
+	    success: function(data) {
+	    	console.log(data)
+	    	layui.use('form', function(){
+				var form = layui.form;
+				form.render();
+
+				var itbtn = $('<span class="itbtn"></span>');
+				$('.layui-select-title').append(itbtn);
+				$('.gb-form .layui-form-radio').remove();
+			});
+	    }
+	});
+</script>

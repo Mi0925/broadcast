@@ -200,7 +200,7 @@
 	   "Info": true,//页脚信息
 	   "oLanguage": oLanguage,
 	    "ajax": {
-		    url: portsrc+'/res/textAudio/all',
+		    url: portsrc+'/res/audio/all',
 		    type: 'post',
 		    data:{
 		    	token:token,
@@ -257,13 +257,13 @@
 	   		jumpPage($("#table-mainthr"))
 	   },
 	   initComplete: function () {//列筛选
-	       var api = this.api();
-	       api.columns().indexes().flatten().each(function (i) {
-	           if (i == 2 || i == 3 || i == 5 || i == 6) { //对第i列进行筛选
-	               var column = api.column(i);
-						rowScreen(column);
-	           }
-	       });
+	     //   var api = this.api();
+	     //   api.columns().indexes().flatten().each(function (i) {
+	     //       if (i == 2 || i == 3 || i == 5 || i == 6) { //对第i列进行筛选
+	     //           var column = api.column(i);
+						// rowScreen(column);
+	     //       }
+	     //   });
 	   }
 	})
 	userDef(table);//table配置--显示数量 搜索 全选 删除 

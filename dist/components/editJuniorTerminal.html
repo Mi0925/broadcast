@@ -10,99 +10,96 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>资源编码</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" name="resourceCode" id="resourceCode" class="imptxt" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>物理地址</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" name="macAddress" id="macAddress" class="imptxt" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>IP地址</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" name="ipAddress" id="ipAddress" class="imptxt" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>设备类型</p>
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+							<select name="deviceType" id="deviceType" lay-search="">
 								<option value="">请选择设备类型</option>
-								<option value="1">类型一</option>
-								<option value="2">类型二</option>
-								<option value="3">类型三</option>
+								<option value="1">室外音柱</option>
+								<option value="2">室外收扩机</option>
+								<option value="3">大喇叭适配器</option>
+								<option value="3">接收控制器</option>
+								<option value="3">室内收扩机</option>
 							</select>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>型号</p>
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+							<select name="version" id="version" lay-search="">
 								<option value="">请选择型号</option>
-								<option value="1">型号一</option>
-								<option value="2">型号二</option>
-								<option value="1">型号三</option>
-								<option value="2">型号四</option>
+								<option value="型号一">型号一</option>
+								<option value="型号二">型号二</option>
+								<option value="型号三">型号三</option>
+								<option value="型号四">型号四</option>
 							</select>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>制造商名称</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" name="manufacturer" id="manufacturer" class="imptxt" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>硬件版本号</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" name="hardwareVersion" id="hardwareVersion" class="imptxt" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>软件版本号</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" name="softwareVersion" id="softwareVersion" class="imptxt" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>电源</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" name="power" id="power" class="imptxt" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>功放</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" name="amplifier" id="amplifier" class="imptxt" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit">标准电平</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" name="standardLevel" id="standardLevel" class="imptxt" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>所属地区</p>
-						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
-								<option value="">请选择所属地区</option>
-								<option value="1">地区一</option>
-								<option value="2">地区二</option>
-								<option value="3">地区三</option>
-								<option value="4">地区四</option>
-								<option value="5">地区五</option>
-							</select>
+						<div class="oneimp">
+							<input type="text" readonly name="areaStruct" class="imptxt" id="citySel" lay-verify="required" onclick="showMenu();"/>
+							<div id="menuContent" class="gb-tree scroll" style="display:none;">
+								<ul id="treeDemo" class="ztree"></ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="tocreat">
 				<div class="progcreat">
-					<input type="button" value="清空" class="toemptybtn" />
-					<input type="button" value="确定" class="tocreatbtn" />
+					<input type="button" value="确定" class="tocreatbtn" lay-submit lay-filter="*"/>
 				</div>
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
@@ -115,15 +112,69 @@
 
 
 <script type="text/javascript">
+	
 	$(document).ready(function(){
-		layui.use('form', function(){
-			var form = layui.form;
-			form.render();
-
-			var itbtn = $('<span class="itbtn"></span>');
-			$('.layui-select-title').append(itbtn);
-			$('.gb-form .layui-form-radio').remove();
-			
+    	// 获取地区
+    	$.ajax({
+		    url: portsrc+'/allArea',
+		    type: 'post',
+		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    },
+		    success: function(data) {
+				$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
+		    }
+		});
+		// 获取编辑数据
+		$.ajax({
+		    url: portsrc+'/res/sub/get',
+		    type: 'get',
+		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    	id:sessionStorage.getItem('editTableItem')
+		    },
+		    success: function(data) {
+		    	console.log(data)
+		    	$("#resourceCode").val(data.body.resourceCode);
+		    	$("#macAddress").val(data.body.macAddress);
+		    	$("#ipAddress").val(data.body.ipAddress);
+		    	$("#deviceType").val(data.body.deviceType);
+		    	$("#version").val(data.body.version);
+		    	$("#manufacturer").val(data.body.manufacturer);
+		    	$("#hardwareVersion").val(data.body.hardwareVersion);
+		    	$("#power").val(data.body.power);
+		    	$("#amplifier").val(data.body.amplifier);
+		    	$("#standardLevel").val(data.body.standardLevel);
+				layui.use('form', function(){
+					var form = layui.form;
+					form.render();
+					var itbtn = $('<span class="itbtn"></span>');
+					$('.layui-select-title').append(itbtn);
+					$('.gb-form .layui-form-radio').remove();
+					form.on('submit(*)', function(data){
+						$.ajax({
+						    url: portsrc+"/res/sub/add",
+						    type: 'post',
+						    dataType: 'json',
+						    data:{
+						    	token:token,
+		    					id:sessionStorage.getItem('editTableItem'),
+						    	sub:JSON.stringify(data.field)
+						    },
+						    success: function(data) {
+								layer.open({
+						            title: '提示',
+					        		shadeClose:true,
+						            content: '编辑成功'
+						        });
+						    }
+						});
+						return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+					});
+				});
+		    }
 		});
 	})
 </script>

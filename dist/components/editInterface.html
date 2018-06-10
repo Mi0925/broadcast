@@ -19,10 +19,10 @@
 						<div class="layui-input-inline">
 							<select name="type" id="type" lay-search="">
 								<option value="">请选择接口所属部门类型</option>
-								<option value="上级平台">上级平台</option>
-								<option value="国家应急广播平台">国家应急广播平台</option>
-								<option value="下级平台">下级平台</option>
-								<option value="其它部门">其它部门</option>
+								<option value="0">上级平台</option>
+								<option value="1">下级平台</option>
+								<option value="2">国家应急广播平台</option>
+								<option value="3">其它部门</option>
 							</select>
 						</div>
 					</div>
@@ -43,6 +43,9 @@
 						<div class="layui-input-inline j-protocol-sel">
 							<select name="protocol" id="protocol" lay-search="" lay-verify="required">
 								<option value="">请选择协议</option>
+								<option value="HTTP">HTTP</option>
+								<option value="Webservice">Webservice</option>
+								<option value="TCP">TCP</option>
 							</select>
 						</div>
 					</div>
@@ -55,10 +58,11 @@
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>所属地区</p>
-						<div class="layui-input-inline j-protocol-area">
-							<select name="area" id="area" lay-search="" lay-verify="required"> 
-								<option value="">请选择所属地区</option>
-							</select>
+						<div class="oneimp">
+							<input type="text" readonly name="area" class="imptxt" id="citySel" lay-verify="required" onclick="showMenu();"/>
+							<div id="menuContent" class="gb-tree scroll" style="display:none;">
+								<ul id="treeDemo" class="ztree"></ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -83,78 +87,63 @@
 		    $('.oneimp-count .countser').html($('#privateKey').val().length);  
 		});
 
-		// 获取协议
+		// 获取地区
 		$.ajax({
-		    url: portsrc+'/protocol',
+		    url: portsrc+'/allArea',
 		    type: 'post',
 		    dataType: 'json',
 		    data:{
 		    	token:token,
 		    },
 		    success: function(data) {
-				for (var i = 0; i < data.body.length; i++) {
-		    		$(".j-protocol-sel select").append('<option value='+data.body[i]+'>'+data.body[i]+'</option>');
-		    	};
-				// 获取地区
+		    	// 获取接口数据
 				$.ajax({
-				    url: portsrc+'/area',
+				    url: portsrc+'/msg/Platform/get',
 				    type: 'post',
 				    dataType: 'json',
 				    data:{
 				    	token:token,
+		    			id:sessionStorage.getItem('editTableItem')
 				    },
 				    success: function(data) {
-						for (var i = 0; i < data.body.length; i++) {
-				    		$(".j-protocol-area select").append('<option value='+data.body[i]+'>'+data.body[i]+'</option>');
-				    	};
-				    	// 获取接口数据
-						$.ajax({
-						    url: portsrc+'/msg/Platform/get',
-						    type: 'post',
-						    dataType: 'json',
-						    data:{
-						    	token:token,
-						    },
-						    success: function(data) {
-						    	console.log(data);
-						    	var data=data.body;
-						    	$("#impcontent").val(data.name);
-						    	$("#type").val(data.type);
-						    	$("#localPort").val(data.localPort);
-						    	$("#peerPort").val(data.peerPort);
-						    	$("#protocol").val(data.protocol);
-						    	$("#privateKey").val(data.privateKey);
-						    	$("#area").val(data.area);
-						    	layui.use('form', function(){
-									var form = layui.form;
-									form.render();
-									var itbtn = $('<span class="itbtn"></span>');
-									$('.layui-select-title').append(itbtn);
-									$('.gb-form .layui-form-radio').remove();
-									form.on('submit(*)', function(data){
-										$.ajax({
-										    url: portsrc+"/msg/Platform/add",
-										    type: 'get',
-										    dataType: 'json',
-										    data:{
-										    	token:token,
-										    	data:JSON.stringify(data.field)
-										    },
-										    success: function(data) {
-												layer.open({
-										            title: '提示',
-									        		shadeClose:true,
-										            content: data.body.name
-										        });
-										    }
-										});
-										return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-									});
+				    	console.log(data);
+				    	var data=data.body;
+				    	$("#impcontent").val(data.name);
+				    	$("#type").val(data.type);
+				    	$("#localPort").val(data.localPort);
+				    	$("#peerPort").val(data.peerPort);
+				    	$("#protocol").val(data.protocol);
+				    	$("#privateKey").val(data.privateKey);
+				    	layui.use('form', function(){
+							var form = layui.form;
+							form.render();
+							var itbtn = $('<span class="itbtn"></span>');
+							$('.layui-select-title').append(itbtn);
+							$('.gb-form .layui-form-radio').remove();
+							form.on('submit(*)', function(data){
+								$.ajax({
+								    url: portsrc+"/msg/Platform/add",
+								    type: 'get',
+								    dataType: 'json',
+								    data:{
+								    	token:token,
+								    	msgPlatform:JSON.stringify(data.field),
+		    							id:sessionStorage.getItem('editTableItem')
+								    },
+								    success: function(data) {
+										layer.open({
+								            title: '提示',
+							        		shadeClose:true,
+								            content: '编辑成功'
+								        });
+								    }
 								});
-						    }
+								return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+							});
 						});
 				    }
 				});
+				$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
 		    }
 		});
 	})

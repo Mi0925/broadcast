@@ -16,7 +16,7 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>平台名称</p>
 						<div class="oneimp">
-							<input type="text" name="platformName" id="impcontent" class="imptxt" maxlength="20"/>
+							<input type="text" name="platformName" id="platformName" class="imptxt" maxlength="20"/>
 							<span class="oneimp-count"><span class="countnew">0</span>/20</span>
 						</div>
 					</div>
@@ -25,8 +25,8 @@
 						<div class="layui-input-inline">
 							<select name="platformType" lay-search="">
 								<option value="">请选择平台类型</option>
-								<option value="1">上级平台</option>
-								<option value="2">下级平台</option>
+								<option value="上级平台">上级平台</option>
+								<option value="下级平台">下级平台</option>
 							</select>
 						</div>
 					</div>
@@ -35,10 +35,10 @@
 						<div class="layui-input-inline">
 							<select name="systemType" lay-search="">
 								<option value="">请选择系统类别</option>
-								<option value="1">省（自治区）级应急广播平台</option>
-								<option value="2">市级应急广播平台</option>
-								<option value="3">县级应急广播平台</option>
-								<option value="4">应急广播大喇叭平台</option>
+								<option value="省（自治区）级应急广播平台">省（自治区）级应急广播平台</option>
+								<option value="市级应急广播平台">市级应急广播平台</option>
+								<option value="县级应急广播平台">县级应急广播平台</option>
+								<option value="应急广播大喇叭平台">应急广播大喇叭平台</option>
 							</select>
 						</div>
 					</div>
@@ -50,14 +50,9 @@
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>消息接入接口</p>
-						<div class="layui-input-inline">
+						<div class="layui-input-inline j-msgPlatform-sel">
 							<select name="msgPlatform" lay-search=""> 
 								<option value="">请选择消息接入接口</option>
-								<option value="1">接口一</option>
-								<option value="2">接口二</option>
-								<option value="3">接口三</option>
-								<option value="4">接口四</option>
-								<option value="5">接口五</option>
 							</select>
 						</div>
 					</div>
@@ -86,9 +81,8 @@
 
 
 <script type="text/javascript">
-	// 获取地区
 	$.ajax({
-	    url: portsrc+'/allArea',
+	    url: portsrc+'/msg/Platform/all',
 	    type: 'post',
 	    dataType: 'json',
 	    data:{
@@ -96,35 +90,51 @@
 	    },
 	    success: function(data) {
 	    	console.log(data)
-	    	layui.use('form', function(){
-				var form = layui.form;
-				form.render();
+	    	for (var i = 0; i < data.body.length; i++) {
+	    		$(".j-msgPlatform-sel select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
+	    	}
+			// 获取地区
+			$.ajax({
+			    url: portsrc+'/allArea',
+			    type: 'post',
+			    dataType: 'json',
+			    data:{
+			    	token:token,
+			    },
+			    success: function(data) {
+			    	console.log(data)
+			    	layui.use('form', function(){
+						var form = layui.form;
+						form.render();
 
-				var itbtn = $('<span class="itbtn"></span>');
-				$('.layui-select-title').append(itbtn);
-				$('.gb-form .layui-form-radio').remove();
-				form.on('submit(*)', function(data){
-					$.ajax({
-					    url: portsrc+"/res/platform/add",
-					    type: 'post',
-					    dataType: 'json',
-					    data:{
-					    	token:token,
-					    	platform:JSON.stringify(data.field)
-					    },
-					    success: function(data) {
-							layer.open({
-					            title: '提示',
-				        		shadeClose:true,
-					            content: '新建成功'
-					        });
-					    }
+						var itbtn = $('<span class="itbtn"></span>');
+						$('.layui-select-title').append(itbtn);
+						$('.gb-form .layui-form-radio').remove();
+						form.on('submit(*)', function(data){
+							data.field.msgPlatform=parseInt(data.field.msgPlatform);
+							$.ajax({
+							    url: portsrc+"/res/platform/add",
+							    type: 'post',
+							    dataType: 'json',
+							    data:{
+							    	token:token,
+							    	platform:JSON.stringify(data.field)
+							    },
+							    success: function(data) {
+									layer.open({
+							            title: '提示',
+						        		shadeClose:true,
+							            content: '新建成功'
+							        });
+							    }
+							});
+							return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+						});
 					});
-					return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-				});
+						
+					$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
+			    }
 			});
-				
-			$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
 	    }
 	});
 </script>

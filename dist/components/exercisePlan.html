@@ -139,7 +139,7 @@
 		<p class="poptit">未通过原因</p>
 		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
 		<div class="uncont">
-			<p class="unword">未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因</p>
+			<p class="unword"></p>
 			<input type="button" value="确定" class="un-confirm" />
 		</div>
 	</div>
@@ -240,6 +240,8 @@
 	                	}else{
 	                		audit="<span class='check notpass j-resend-manual' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
 	                	}
+					}else{
+						audit='<span>已通过</span>'
 					};
                 	data.body[i].audit=audit;
 
@@ -264,6 +266,19 @@
                 	}else{
                 		data.body[i].delete="<span class='del delete j-resend-manual'><i class='iconfont icon-shanchu'></i>删除</span>";
                 	}
+
+                	if(d.type=='MANNUAL'){
+                		data.body[i].type='手动';
+                	}else{
+                		data.body[i].type='周期';
+                	}
+
+                	if(d.status==null){
+                		data.body[i].status='无状态'
+                	}
+
+                	data.body[i].department="无";
+                	data.body[i].dutyPerson="无";
                 	
                 }
                 
@@ -305,7 +320,7 @@
            var api = this.api();
            api.columns().indexes().flatten().each(function (i) {
                var column = api.column(i);
-                if (i == 2 || i == 3 || i == 6 || i == 7) { //对第i列进行筛选
+                if (i == 3 || i == 6 || i == 7) { //对第i列进行筛选
 						rowScreen(column);
                 }else if (i==4) { //对第i列进行筛选
 						rowLevScreen(column);

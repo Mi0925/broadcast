@@ -236,6 +236,7 @@
 	    	id:sessionStorage.getItem('editTableItem'),
 	    },
 	    success: function(data) {
+	    	console.log(data)
 	    	$("#impcontent").val(data.body.name);
 	    	var schedule_id=data.body.schedulePlanId;
 	    	$.ajax({
@@ -246,7 +247,6 @@
 			    	token:token,
 			    },
 			    success: function(data) {
-			    	console.log(data)
 			    	var data=data.body;
 			    	for (var i = 0; i < data.length; i++) {
 			    		if(schedule_id==data[i].id){

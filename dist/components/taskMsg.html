@@ -210,6 +210,8 @@
 							audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
 						}else if(d.audit.status=='UNPASS'){
 							audit="<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
+						}else if(d.audit.status=='PASS'){
+							audit="<span class='check'>已通过</span>";
 						}
 					}
                 	data.body[i].audit=audit;

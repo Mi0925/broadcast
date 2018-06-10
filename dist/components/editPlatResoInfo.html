@@ -10,76 +10,66 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>资源编码</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" class="imptxt" name="resourceCode" id="resourceCode" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>平台名称</p>
 						<div class="oneimp">
-							<input type="text"  id="impcontent" class="imptxt" maxlength="20"/>
+							<input type="text" name="platformName" id="platformName" class="imptxt" maxlength="20"/>
 							<span class="oneimp-count"><span class="countnew">0</span>/20</span>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>平台类型</p>
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+							<select name="platformType" id="platformType" lay-search="">
 								<option value="">请选择平台类型</option>
-								<option value="1">上级平台</option>
-								<option value="2">下级平台</option>
+								<option value="上级平台">上级平台</option>
+								<option value="下级平台">下级平台</option>
 							</select>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>系统类别</p>
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+							<select name="systemType" id="systemType" lay-search="">
 								<option value="">请选择系统类别</option>
-								<option value="1">类别一</option>
-								<option value="2">类别二</option>
-								<option value="3">类别三</option>
-								<option value="4">类别四</option>
+								<option value="省（自治区）级应急广播平台">省（自治区）级应急广播平台</option>
+								<option value="市级应急广播平台">市级应急广播平台</option>
+								<option value="县级应急广播平台">县级应急广播平台</option>
+								<option value="应急广播大喇叭平台">应急广播大喇叭平台</option>
 							</select>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>服务器地址</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+							<input type="text" name="ipAddress" id="ipAddress" class="imptxt" />
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>消息接入接口</p>
-						<div class="layui-input-inline">
-							<select name="dispatch" lay-search=""> 
+						<div class="layui-input-inline j-msgPlatform-sel">
+							<select name="msgPlatform" id="msgPlatform" lay-search=""> 
 								<option value="">请选择消息接入接口</option>
-								<option value="1">接口一</option>
-								<option value="2">接口二</option>
-								<option value="3">接口三</option>
-								<option value="4">接口四</option>
-								<option value="5">接口五</option>
 							</select>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>所属地区</p>
-						<div class="layui-input-inline">
-							<select name="dispatch" lay-search=""> 
-								<option value="">请选择所属地区</option>
-								<option value="1">地区一</option>
-								<option value="2">地区二</option>
-								<option value="3">地区三</option>
-								<option value="4">地区四</option>
-								<option value="5">地区五</option>
-							</select>
+						<div class="oneimp">
+							<input type="text" readonly name="areaStruct" class="imptxt" id="citySel" lay-verify="required" onclick="showMenu();"/>
+							<div id="menuContent" class="gb-tree scroll" style="display:none;">
+								<ul id="treeDemo" class="ztree"></ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="tocreat">
 				<div class="progcreat">
-					<input type="button" value="清空" class="toemptybtn" />
-					<input type="button" value="确定" class="tocreatbtn" />
+					<input type="button" value="确定" class="tocreatbtn" lay-submit lay-filter="*"/>
 				</div>
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
@@ -90,14 +80,80 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		layui.use('form', function(){
-			var form = layui.form;
-			form.render();
-
-			var itbtn = $('<span class="itbtn"></span>');
-			$('.layui-select-title').append(itbtn);
-			$('.gb-form .layui-form-radio').remove();
-			
+		$.ajax({
+	    	url: portsrc+'/msg/Platform/all',
+		    type: 'post',
+		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    },
+	    	success: function(data) {
+		    	console.log(data)
+		    	for (var i = 0; i < data.body.length; i++) {
+		    		$(".j-msgPlatform-sel select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
+		    	}
+		    	// 获取地区
+		    	$.ajax({
+				    url: portsrc+'/allArea',
+				    type: 'post',
+				    dataType: 'json',
+				    data:{
+				    	token:token,
+				    },
+				    success: function(data) {
+						$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
+				    }
+				});
+				// 获取编辑数据
+				$.ajax({
+				    url: portsrc+'/res/platform/get',
+				    type: 'get',
+				    dataType: 'json',
+				    data:{
+				    	token:token,
+				    	id:sessionStorage.getItem('editTableItem')
+				    },
+				    success: function(data) {
+				    	$("#resourceCode").val(data.body.resourceCode);
+				    	$("#platformName").val(data.body.platformName);
+				    	$("#platformType").val(data.body.platformType);
+				    	$("#systemType").val(data.body.systemType);
+				    	$("#ipAddress").val(data.body.ipAddress);
+				    	$("#msgPlatform").val(data.body.msgPlatform);
+				    	// $("#citySel").val(data.body.areaStruct);
+						layui.use('form', function(){
+							var form = layui.form;
+							form.render();
+							var itbtn = $('<span class="itbtn"></span>');
+							$('.layui-select-title').append(itbtn);
+							$('.gb-form .layui-form-radio').remove();
+							form.on('submit(*)', function(data){
+								data.field.msgPlatform=parseInt(data.field.msgPlatform);
+								$.ajax({
+								    url: portsrc+"/res/platform/add",
+								    type: 'post',
+								    dataType: 'json',
+								    data:{
+								    	token:token,
+								    	platform:JSON.stringify(data.field),
+		    							id:sessionStorage.getItem('editTableItem')
+								    },
+								    success: function(data) {
+										layer.open({
+								            title: '提示',
+							        		shadeClose:true,
+								            content: '编辑成功'
+								        });
+								    }
+								});
+								return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+							});
+						});
+				    }
+				});
+			}
 		});
 	})
+
+	
 </script>

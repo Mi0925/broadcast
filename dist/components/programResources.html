@@ -88,7 +88,7 @@
 		<p class="poptit">未通过原因</p>
 		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
 		<div class="uncont">
-			<p class="unword">未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因未通过原因</p>
+			<p class="unword"></p>
 			<input type="button" value="确定" class="un-confirm" />
 		</div>
 	</div>
@@ -143,21 +143,26 @@
 					data.body[i].checkbox = "<div class='checkone'><input type='checkbox' name='checkone' id='" + d.id + "' /><label for='" + d.id + "'></label></div>"; //复选框
 					data.body[i].tabnumb ="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
-					data.body[i].name = "<a href='#/viewProgResources' url='components/viewProgResources.html' name='查看节目资源' class='view-cont add_tab'>"+d.name+"</a>";
-					data.body[i].remarks = "<a href='#/viewProgResources' url='components/viewProgResources.html' name='查看节目资源' class='view-cont add_tab'>"+d.remarks+"</a>";
-					data.body[i].release = "<a href='#/releasePolicy' class='issue isstr add_tab' url='components/releasePolicy.html' name='发布策略'><i class='iconfont icon-fabu'></i>发布策略</a>";
+					// data.body[i].name = "<a href='#/viewProgResources' url='components/viewProgResources.html' name='查看节目资源' class='view-cont add_tab'>"+d.name+"</a>";
+					// data.body[i].name = "<a href='#/viewProgResources' url='components/viewProgResources.html' name='查看节目资源' class='view-cont add_tab'>"+d.name+"</a>";
 
-					var audit = "";
-					if (d.audit.boolean == true) {
-						if (d.audit.state == '审核') {
-							audit = "<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
-						} else if (d.audit.state == '未通过') {
-							audit = "<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
+					var audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
+                	if(d.audit){
+						if(d.audit.status=='UNAUDIT'){
+							audit="<span class='check audit' lay-event='audit'><i class='iconfont icon-shenhe'></i>审核</span>";
+						}else if(d.audit.status=='UNPASS'){
+							audit="<span class='check notpass' lay-event='nopass'><i class='iconfont icon-weitongguo'></i>未通过</span>";
+						}else if(d.audit.status=='PASS'){
+							audit="<span class='check'>已通过</span>";
 						}
-					};
-					data.body[i].audit = audit;
+					}
+                	data.body[i].audit=audit;
 
 					data.body[i].delete = "<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+					data.body[i].remark = "无";
+					data.body[i].people = "无";
+					data.body[i].auditState = "无";
+					data.body[i].time = "无";
 				}
 
 				return data.body;
@@ -167,9 +172,9 @@
 			{ "data": "checkbox" },
 		    { "data": "tabnumb" },
 		    { "data": "auditState" },
-		    { "data": "lineState" },
+		    { "data": "status" },
 		    { "data": "name" },
-		    { "data": "remarks" },
+		    { "data": "remark" },
 		    { "data": "people" },
 		    { "data": "time" },
 		    { "data": "audit" },
@@ -185,7 +190,7 @@
 		initComplete: function() { //列筛选
 			var api = this.api();
 			api.columns().indexes().flatten().each(function(i) {
-				if (i == 2 || i == 3 || i == 6) { //对第i列进行筛选
+				if ( i == 6) { //对第i列进行筛选
 					var column = api.column(i);
 					rowScreen(column);
 				}

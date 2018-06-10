@@ -103,11 +103,25 @@
 	            	var d=data.body[i];
 	            	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";
 	            	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
-	            	data.body[i].interfacesName="<a href='#/viewInterface' url='components/viewInterface.html' class='view-cont add_tab' name='查看接口'>"+d.interfacesName+"</a>";
+
+	            	var type="无";
+					if(d.type=='SUPER'){
+						type='上级平台';
+					}else if(d.type=='SUB'){
+						type='下级平台';
+					}else if(d.type=='NATIONAL'){
+						type='国家平台';
+					}else if(d.type=='OTHER'){
+						type='其他部门';
+					}
+                	data.body[i].type=type;
+
+	            	data.body[i].name="<a href='#/viewInterface' url='components/viewInterface.html' class='view-cont add_tab' name='查看接口'>"+d.name+"</a>";
 	            	data.body[i].number="<a href='#/taskMsg' url='components/taskMsg.html' class='editbtn add_tab' name='任务消息'>"+d.number+"</a>";
 	            	data.body[i].edit="<a href='#/editInterface' url='components/editInterface.html' class='editbtn add_tab' name='编辑接口'><i class='iconfont icon-bianji'></i>编辑</a>";
 	            	data.body[i].close="<span class='portbtn porclose'><i class='iconfont icon-guanbi2'></i>关闭</span>";
 	            	data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+	            	data.body[i].number=0;
 	            }
 	            
 	            return data.body;
@@ -116,12 +130,12 @@
 		"columns": [
 		    { "data": "checkbox" },
 		    { "data": "tabnumb" },
-		    { "data": "interfacesType" },
-		    { "data": "interfacesName" },
-		    { "data": "prot" },
-		    { "data": "prot2" },
+		    { "data": "type" },
+		    { "data": "name" },
+		    { "data": "localPort" },
+		    { "data": "peerPort" },
 		    { "data": "protocol" },
-		    { "data": "key" },
+		    { "data": "privateKey" },
 		    { "data": "area" },
 		    { "data": "time" },
 		    { "data": "number" },
@@ -141,7 +155,7 @@
 	    initComplete: function () {//列筛选
 	       var api = this.api();
 	       api.columns().indexes().flatten().each(function (i) {
-	           if (i == 2 || i == 8) { //对第i列进行筛选
+	           if (i == 8) { //对第i列进行筛选
 	              var column = api.column(i);
 	              rowScreen(column);
 	           }

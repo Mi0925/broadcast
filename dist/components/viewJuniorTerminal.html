@@ -10,73 +10,73 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>资源编码</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="资源编码" readonly="readonly"/>
+							<input type="text" class="imptxt" id="resourceCode" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>物理地址</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="物理地址" readonly="readonly"/>
+							<input type="text" class="imptxt" id="macAddress" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>IP地址</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="IP地址" readonly="readonly"/>
+							<input type="text" class="imptxt" id="ipAddress" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>设备类型</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="类型二" readonly="readonly"/>
+							<input type="text" class="imptxt" id="deviceType" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>型号</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="型号一" readonly="readonly"/>
+							<input type="text" class="imptxt" id="version" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>制造商名称</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="制造商名称" readonly="readonly"/>
+							<input type="text" class="imptxt" id="manufacturer" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>硬件版本号</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="硬件版本号" readonly="readonly"/>
+							<input type="text" class="imptxt" id="hardwareVersion" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>软件版本号</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="软件版本号" readonly="readonly"/>
+							<input type="text" class="imptxt" id="softwareVersion" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>电源</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="电源" readonly="readonly"/>
+							<input type="text" class="imptxt" id="power" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>功放</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="功放" readonly="readonly"/>
+							<input type="text" class="imptxt" id="amplifier" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit">标准电平</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="标准电平" readonly="readonly"/>
+							<input type="text" class="imptxt" id="standardLevel" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>所属地区</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="地区一" readonly="readonly"/>
+							<input type="text" class="imptxt" id="areaStruct" readonly="readonly"/>
 						</div>
 					</div>
 				</div>
@@ -85,3 +85,39 @@
 		</div>
 	</form>
 </div>
+<script>
+	// 获取接口数据
+	$.ajax({
+	    url: portsrc+'/res/sub/get',
+	    type: 'post',
+	    dataType: 'json',
+	    data:{
+	    	token:token,
+	    	id:sessionStorage.getItem('editTableItem')
+	    },
+	    success: function(data) {
+	    	console.log(data);
+	    	var data=data.body;
+	    	$("#resourceCode").val(data.resourceCode);
+	    	$("#macAddress").val(data.macAddress);
+	    	$("#ipAddress").val(data.ipAddress);
+	    	$("#deviceType").val(data.deviceType);
+	    	$("#version").val(data.version);
+	    	$("#manufacturer").val(data.manufacturer);
+	    	$("#hardwareVersion").val(data.hardwareVersion);
+	    	$("#softwareVersion").val(data.softwareVersion);
+	    	$("#power").val(data.power);
+	    	$("#amplifier").val(data.amplifier);
+	    	$("#standardLevel").val(data.standardLevel);
+	    	$("#areaStruct").val(data.areaStruct);
+
+	    	layui.use('form', function(){
+				var form = layui.form;
+				form.render();
+				var itbtn = $('<span class="itbtn"></span>');
+				$('.layui-select-title').append(itbtn);
+				$('.gb-form .layui-form-radio').remove();
+			});
+	    }
+	});
+</script>

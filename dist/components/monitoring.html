@@ -685,6 +685,10 @@ function addIncident() {
 		    dataType: 'json',
 		    success: function(data) {
 		    	console.log(data)
+		    	legendData=[];
+		    	for (var i = 0; i < data.body.length; i++) {
+		    		legendData.push(data.body[i].name)
+		    	}
 				incidentRankOption = {
 				    title: {
 				        text: '事件级别发布',
@@ -703,7 +707,7 @@ function addIncident() {
 				        bottom: '10%',
 				        itemWidth:'10',
 				        itemHeight:'10',
-				        data:['红色事件','橙色事件','黄色事件','蓝色事件','绿色事件'],
+				        data:legendData,
 				        align:"right"
 				    },
 				    series : [
@@ -763,10 +767,15 @@ function addIncident() {
 		    success: function(data) {
 		    	console.log(data)
 				var taskNumData =data.body;
-				var yMax = 180;
+				var yMax = [];
 				var dataShadow = [];
+				var xAxisData=[];
 				for (var i = 0; i < taskNumData.length; i++) {
-				    dataShadow.push(yMax);
+					xAxisData.push(taskNumData[i].type);
+					yMax.push(taskNumData[i].value);
+				}
+				for (var i = 0; i < taskNumData.length; i++) {
+				    dataShadow.push(yMax.sort()[yMax.length-1]);
 				}
 				taskNumOption = {
 				    title: {
@@ -797,7 +806,8 @@ function addIncident() {
 				        containLabel: true
 				    },
 				    xAxis: {
-				        data: ['等待审核', '等待发布', '正在发布', '发布完成'],
+				        // data: ['等待审核', '等待发布', '正在发布', '发布完成'],
+				        data: xAxisData,
 				        //刻度横线
 				        axisTick: {
 				            show: false
@@ -898,24 +908,28 @@ function addIncident() {
 		    dataType: 'json',
 		    success: function(data) {
 		    	console.log(data)
-				var incidentTypeData =data.body.incidentTypeData;
+				var incidentTypeData =data.body;
+				var yMaxTwo = [];
 			    // x轴数据
-			    var incidentTypexAxis=data.body.incidentTypexAxis;
+			    var incidentTypexAxis=[];
+			    for (var i = 0; i < data.body.length; i++) {
+			    	incidentTypexAxis.push(data.body[i].type);
+			    	yMaxTwo.push(data.body[i].value)
+			    }
 			    // 对x轴数据换行处理，4个字换行
-				var incidentTypexAxisData=[]
+				var incidentTypexAxisData=[];
 			    for (var i = 0; i < incidentTypexAxis.length; i++) {
 			    	var strs = incidentTypexAxis[i].split(''); //字符串数组
 			        var str = ''
 			        for (var j = 0, s; s = strs[j++];) { //遍历字符串数组
 			            str += s;
-			            if (!(j % 4)) str += '\n';
+			            if (!(j % 5)) str += '\n';
 			        }
 			        incidentTypexAxisData.push(str)
 			    }
-				var yMaxTwo = 300;
 				var dataShadowTwo = [];
 				for (var i = 0; i < incidentTypeData.length; i++) {
-				    dataShadowTwo.push(yMaxTwo);
+				    dataShadowTwo.push(yMaxTwo.sort()[yMaxTwo.length-1]);
 				}
 				incidentTypeOption = {
 				    title: {
@@ -947,17 +961,8 @@ function addIncident() {
 				    ],
 				    tooltip : {
 				    	formatter: '<div class="gb-bar-formatter">{b}<br /><em>{c}</em></div>',
-				  //   	position: function (point, params, dom, rect, size) {
-						//     // 固定在顶部
-						//     return {left: rect.x-($(dom).width()/2)+(rect.width/2.2), top: rect.y-$(dom).height()-10};
-						// },
 						position: "top",
 				        backgroundColor: 'rgba(255,255,255,0)',
-				        // borderColor:"#d8d8d8",
-				        // borderWidth:1,
-				        // textStyle:{
-				        // 	color:"#000"
-				        // },
 				    },
 				    grid: {
 				        containLabel: true,
@@ -967,7 +972,6 @@ function addIncident() {
 				        bottom: '23%',
 				    },
 				    xAxis: {
-				        // data: ['金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿','金属与非\n金属矿金\n属与非金\n属矿'],
 				        data:incidentTypexAxisData,
 				        //刻度横线
 				        axisTick: {

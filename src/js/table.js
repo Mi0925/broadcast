@@ -637,6 +637,8 @@ $('body').on('click','.resnav',function(){
 $('body').on('click','.resolist li',function(){
     $(this).parent().find('li').removeClass('resact');
     $(this).addClass('resact');
+});
+$('body').on('click','.resolist-confirm li,.resolist-status li',function(){
     var param={
         token:token,
         confirm:$(".resolist-confirm li.resact").attr('resval')==="false" ? false : true,//true确认,false未确认
@@ -718,7 +720,8 @@ $('body').on('click','.j-platform',function(){
 
                     data.body[i].state='<span class="statecol">'+d.state+'</span>';
                     
-                    data.body[i].name="<a href='#/viewPlatResoInfo' url='components/viewPlatResoInfo.html' class='view-cont add_tab' name='查看平台资源信息'>"+d.name+"</a>";
+                    data.body[i].time="无";
+                    data.body[i].platformName="<a href='#/viewPlatResoInfo' url='components/viewPlatResoInfo.html' class='view-cont add_tab' name='查看平台资源信息'>"+d.platformName+"</a>";
                     data.body[i].edit="<a href='#/editPlatResoInfo' url='components/editPlatResoInfo.html' class='editbtn add_tab' name='编辑平台资源信息'><i class='iconfont icon-bianji'></i>编辑</a>"
                     data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
                 }
@@ -729,13 +732,13 @@ $('body').on('click','.j-platform',function(){
         "columns": [
             { "data": "checkbox" },
             { "data": "tabnumb" },
-            { "data": "code" },
-            { "data": "state" },
+            { "data": "resourceCode" },
+            { "data": "status" },
             { "data": "platformType" },
             { "data": "systemType" },
-            { "data": "name" },
-            { "data": "src" },
-            { "data": "area" },
+            { "data": "platformName" },
+            { "data": "ipAddress" },
+            { "data": "areaStruct" },
             { "data": "time" },
             { "data": "edit" },
             { "data": "delete" }
@@ -833,9 +836,24 @@ $('body').on('click','.j-sub',function(){
 
                     data.body[i].state='<span class="statecol">'+d.state+'</span>';
                     
-                    data.body[i].name='<a href="#/viewJuniorTerminal" url="components/viewJuniorTerminal.html" class="view-cont add_tab" name="查看下级终端">'+d.name+'</a>';
+                    if (data.body[i].deviceType=='1') {
+                        data.body[i].deviceType='室外音柱'
+                    }else if (data.body[i].deviceType=='2') {
+                        data.body[i].deviceType='室外收扩机'
+                    }if (data.body[i].deviceType=='3') {
+                        data.body[i].deviceType='大喇叭适配器'
+                    }if (data.body[i].deviceType=='4') {
+                        data.body[i].deviceType='接收控制器'
+                    }if (data.body[i].deviceType=='5') {
+                        data.body[i].deviceType='室内收扩机'
+                    }
+                    data.body[i].deviceType='<a href="#/viewJuniorTerminal" url="components/viewJuniorTerminal.html" class="view-cont add_tab" name="查看下级终端">'+data.body[i].deviceType+'</a>';
+
                     data.body[i].edit='<a href="#/editJuniorTerminal" url="components/editJuniorTerminal.html" class="editbtn add_tab" name="编辑下级终端"><i class="iconfont icon-bianji"></i>编辑</a>';
                     data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+                    data.body[i].msg="在线消息";
+
+                    
                 }
                 
                 return data.body;
@@ -844,13 +862,13 @@ $('body').on('click','.j-sub',function(){
         "columns": [
             { "data": "checkbox" },
             { "data": "tabnumb" },
-            { "data": "code" },
-            { "data": "state" },
-            { "data": "name" },
-            { "data": "model" },
-            { "data": "port" },
-            { "data": "src" },
-            { "data": "area" },
+            { "data": "resourceCode" },
+            { "data": "status" },
+            { "data": "deviceType" },
+            { "data": "version" },
+            { "data": "macAddress" },
+            { "data": "ipAddress" },
+            { "data": "areaStruct" },
             { "data": "msg" },
             { "data": "edit" },
             { "data": "delete" }
@@ -948,6 +966,7 @@ $('body').on('click','.j-station',function(){
                     
                     data.body[i].edit='<a href="#/editStationResoInfo" url="components/editStationResoInfo.html" class="editbtn add_tab" name="编辑台站资源信息"><i class="iconfont icon-bianji"></i>编辑</a>';
                     data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+                    data.body[i].msg="在线信息";
                 }
                 
                 return data.body;
@@ -956,12 +975,12 @@ $('body').on('click','.j-station',function(){
         "columns": [
             { "data": "checkbox" },
             { "data": "tabnumb" },
-            { "data": "code" },
-            { "data": "state" },
+            { "data": "resourceCode" },
+            { "data": "status" },
             { "data": "name" },
-            { "data": "port" },
-            { "data": "src" },
-            { "data": "area" },
+            { "data": "macNo" },
+            { "data": "ipAddress" },
+            { "data": "areaStruct" },
             { "data": "msg" },
             { "data": "edit" },
             { "data": "delete" }

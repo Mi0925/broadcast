@@ -10,43 +10,43 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>资源编码</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="资源编码" readonly="readonly"/>
+							<input type="text" class="imptxt" id="resourceCode" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>平台名称</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="平台名称" readonly="readonly"/>
+							<input type="text" class="imptxt" id="platformName" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>平台类型</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="下级平台" readonly="readonly"/>
+							<input type="text" class="imptxt" id="platformType" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>系统类别</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="类型二" readonly="readonly"/>
+							<input type="text" class="imptxt" id="systemType" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>服务器地址</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="服务器地址" readonly="readonly"/>
+							<input type="text" class="imptxt" id="ipAddress" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>消息接入接口</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="接口五" readonly="readonly"/>
+							<input type="text" class="imptxt" id="msgPlatform" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>所属地区</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="地区二" readonly="readonly"/>
+							<input type="text" class="imptxt" id="areaStruct" readonly="readonly"/>
 						</div>
 					</div>
 				</div>
@@ -55,3 +55,51 @@
 		</div>
 	</form>
 </div>
+<script>
+	// 获取接口数据
+	$.ajax({
+	    url: portsrc+'/res/platform/get',
+	    type: 'post',
+	    dataType: 'json',
+	    data:{
+	    	token:token,
+	    	id:sessionStorage.getItem('editTableItem')
+	    },
+	    success: function(data) {
+	    	console.log(data);
+	    	var data=data.body;
+	    	$("#resourceCode").val(data.resourceCode);
+	    	$("#platformName").val(data.platformName);
+	    	$("#platformType").val(data.platformType);
+	    	$("#systemType").val(data.systemType);
+	    	$("#ipAddress").val(data.ipAddress);
+	    	$("#areaStruct").val(data.areaStruct);
+
+	    	var msgPlatform=data.msgPlatform;
+	    	$.ajax({
+		    	url: portsrc+'/msg/Platform/all',
+			    type: 'post',
+			    dataType: 'json',
+			    data:{
+			    	token:token,
+			    },
+		    	success: function(data) {
+			    	console.log(data)
+			    	for (var i = 0; i < data.body.length; i++) {
+			    		console.log(data.body[i].id)
+			    		if(msgPlatform==data.body[i].id){
+			    			$("#msgPlatform").val(data.body[i].name);
+			    		}
+			    	}
+			    }
+			});
+	    	layui.use('form', function(){
+				var form = layui.form;
+				form.render();
+				var itbtn = $('<span class="itbtn"></span>');
+				$('.layui-select-title').append(itbtn);
+				$('.gb-form .layui-form-radio').remove();
+			});
+	    }
+	});
+</script>

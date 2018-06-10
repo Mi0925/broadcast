@@ -19,10 +19,10 @@
 						<div class="layui-input-inline">
 							<select name="type" lay-search="" lay-verify="required">
 								<option value="">请选择接口所属部门类型</option>
-								<option value="上级平台">上级平台</option>
-								<option value="国家应急广播平台">国家应急广播平台</option>
-								<option value="下级平台">下级平台</option>
-								<option value="其它部门">其它部门</option>
+								<option value="0">上级平台</option>
+								<option value="1">下级平台</option>
+								<option value="2">国家应急广播平台</option>
+								<option value="3">其它部门</option>
 							</select>
 						</div>
 					</div>
@@ -104,6 +104,7 @@
 					$('.layui-select-title').append(itbtn);
 					$('.gb-form .layui-form-radio').remove();
 					form.on('submit(*)', function(data){
+						data.field.type=parseInt(data.field.type)
 						$.ajax({
 						    url: portsrc+"/msg/Platform/add",
 						    type: 'post',
@@ -123,7 +124,6 @@
 						return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 					});
 				});
-					
 				$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
 		    }
 		});
