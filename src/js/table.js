@@ -15,7 +15,7 @@ function body_load() {
                     console.log(endDate)
                 }
             });
-        })
+        });
     },500)
 }
 
@@ -569,7 +569,10 @@ $('body').on('click','.j-audit-yes',function(){
         success: function(data) {
             layer.open({
                 title: '提示',
-                content: '审核通过'
+                content: '审核通过',
+                yes: function(index, layero){
+                    location.reload();
+                }
             });
         }
     });
@@ -591,7 +594,10 @@ $('body').on('click','.j-audit-no',function(){
         success: function(data) {
             layer.open({
                 title: '提示',
-                content: '审核不通过'
+                content: '审核不通过',
+                yes: function(index, layero){
+                    location.reload();
+                }
             });
         }
     });
