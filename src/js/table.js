@@ -435,7 +435,7 @@ $('body').on('click','.j-del-tr',function() {
             data: {
                 token:token,
                 id:JSON.stringify(deleteId.sort()),
-                // type:portVar.type
+                type:portVar.type
             },
             success: function(data) {
                 tr_del(table);
