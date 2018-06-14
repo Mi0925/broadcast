@@ -90,25 +90,23 @@ function jumpPage($this) {
 function rowScreen(column){
     var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
     var select = $('<select><option value="">全部</option></select>')
-           .appendTo($(column.header()))
-           .on('click', function (evt) {
-               evt.stopPropagation();
-               var val = $.fn.dataTable.util.escapeRegex(
-                       $(this).val()
-               );
-               column
-                       .search(val ? '^' + val + '$' : '', true, false)
-                       .draw();
-           });
-   column.data().unique().sort().each(function (d, j) {
-       function delHtmlTag(str) {
-           return str.replace(/<[^>]+>/g, "");//去掉html标签
-       }
+        .appendTo($(column.header()))
+        .on('click', function(evt) {
+            evt.stopPropagation();
+            var val = $.fn.dataTable.util.escapeRegex(
+                $(this).val()
+            );
+            column.search(val ? '^' + val + '$' : '', true, false).draw();
+        });
+    column.data().unique().sort().each(function(d, j) {
+        function delHtmlTag(str) {
+            return str.replace(/<[^>]+>/g, ""); //去掉html标签
+        }
 
-       d = delHtmlTag(d)
-       select.append('<option value="' + d + '">' + d + '</option>')
-       $span.append(select)
-   });
+        d = delHtmlTag(d)
+        select.append('<option value="' + d + '">' + d + '</option>')
+        $span.append(select)
+    });
 }
 //等级列筛选
 function rowLevScreen(column){

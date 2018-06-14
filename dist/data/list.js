@@ -1,6 +1,6 @@
 // 调度方案
 var scheduleTable;
-Mock.mock('http://47.104.84.17/schedule/allItem', function(optins){
+Mock.mock('http://47.104.84.17:8080/schedule/allItem', function(optins){
     scheduleTable=Mock.mock({
         'body|10':[{
             "id|+1": 0,
@@ -37,7 +37,7 @@ Mock.mock('http://47.104.84.17/schedule/allItem', function(optins){
 });
 
 // 调度方案删除接口
-Mock.mock('http://47.104.84.17/schedule/deleteItem',function(options){
+Mock.mock('http://47.104.84.17:8080/schedule/deleteItem',function(options){
     var index;
     scheduleTableB=scheduleTable.body;
     for (var i = 0; i < options.body.split("&").length; i++) {
@@ -53,14 +53,14 @@ Mock.mock('http://47.104.84.17/schedule/deleteItem',function(options){
     return scheduleTableB;//返回这个数组,也就是返回处理后的假数据
 });
 // 任务消息删除接口
-Mock.mock('http://47.104.84.17/msg/deleteMsg',function(options){
+Mock.mock('http://47.104.84.17:8080/msg/deleteMsg',function(options){
 });
 // 重播接口
-Mock.mock('http://47.104.84.17/msg/taskMsg/reSend',function(options){
+Mock.mock('http://47.104.84.17:8080/msg/taskMsg/reSend',function(options){
 });
 // 事件类别接口
 var eventTypeData;
-Mock.mock('http://47.104.84.17/eventType',function(options){
+Mock.mock('http://47.104.84.17:8080/eventType',function(options){
     console.log(options)
     eventTypeData=Mock.mock({
         'body':[
@@ -102,7 +102,7 @@ Mock.mock('http://47.104.84.17/eventType',function(options){
 });
 
 // 所有地区
-Mock.mock('http://47.104.84.17/allArea',function(options){
+Mock.mock('http://47.104.84.17:8080/allArea',function(options){
     return Mock.mock({
         'body':[
             {
@@ -146,7 +146,7 @@ Mock.mock('http://47.104.84.17/allArea',function(options){
 });
 // 选择地区
 var areaStruct;
-Mock.mock('http://47.104.84.17/areaSelect',function(options){
+Mock.mock('http://47.104.84.17:8080/areaSelect',function(options){
     areaStruct=Mock.mock({
         'body':
         [{
@@ -208,7 +208,7 @@ Mock.mock('http://47.104.84.17/areaSelect',function(options){
 });
 
 // 创建调度方案
-Mock.mock('http://47.104.84.17/schedule/addItem', function(optins){
+Mock.mock('http://47.104.84.17:8080/schedule/addItem', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{
@@ -217,7 +217,7 @@ Mock.mock('http://47.104.84.17/schedule/addItem', function(optins){
     });
 });
 // 编辑调度方案
-Mock.mock('http://47.104.84.17/schedule/getItem', function(optins){
+Mock.mock('http://47.104.84.17:8080/schedule/getItem', function(optins){
     return Mock.mock({
         'body':{
             "type": [
@@ -374,7 +374,7 @@ Mock.mock('http://47.104.84.17/schedule/getItem', function(optins){
 });
 
 // 创建任务消息
-Mock.mock('http://47.104.84.17/msg/addMsg', function(optins){
+Mock.mock('http://47.104.84.17:8080/msg/addMsg', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{
@@ -383,7 +383,7 @@ Mock.mock('http://47.104.84.17/msg/addMsg', function(optins){
     });
 });
 // 编辑任务消息
-Mock.mock('http://47.104.84.17/msg/getMsg', function(optins){
+Mock.mock('http://47.104.84.17:8080/msg/getMsg', function(optins){
     return Mock.mock({
         'body':{
             'name':'任务',
@@ -394,7 +394,7 @@ Mock.mock('http://47.104.84.17/msg/getMsg', function(optins){
 
 
 // 登录
-Mock.mock('http://47.104.84.17/login/user', function(options) {
+Mock.mock('http://47.104.84.17:8080/login/user', function(options) {
     // alert(options.body.split("&")[0].split("=")[1]);
     return Mock.mock({
         "body":{
@@ -406,7 +406,7 @@ Mock.mock('http://47.104.84.17/login/user', function(options) {
 
 // 值班管理--日历
 var calendarData;
-Mock.mock('http://47.104.84.17/peopleArrange/all', function(optins){
+Mock.mock('http://47.104.84.17:8080/peopleArrange/all', function(optins){
     calendarData=Mock.mock({
         'body|10':[{
             'id|+1':1,
@@ -431,7 +431,7 @@ Mock.mock('http://47.104.84.17/peopleArrange/all', function(optins){
 });
 // 任务消息
 var taskTable;
-Mock.mock('http://47.104.84.17/msg/allMsg', function(optins){
+Mock.mock('http://47.104.84.17:8080/msg/allMsg', function(optins){
     taskTable=Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -485,7 +485,7 @@ Mock.mock('http://47.104.84.17/msg/allMsg', function(optins){
     return taskTable
 });
 // 预警消息
-Mock.mock('http://47.104.84.17/msg/allMsgs', function(optins){
+Mock.mock('http://47.104.84.17:8080/msg/allMsgs', function(optins){
     return Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -516,7 +516,7 @@ Mock.mock('http://47.104.84.17/msg/allMsgs', function(optins){
     });
 });
 // 资源信息--平台资源
-Mock.mock('http://47.104.84.17/res/platform/all', function(optins){
+Mock.mock('http://47.104.84.17:8080/res/platform/all', function(optins){
     return Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -541,7 +541,7 @@ Mock.mock('http://47.104.84.17/res/platform/all', function(optins){
     });
 });
 // 资源信息--下级终端
-Mock.mock('http://47.104.84.17/res/sub/all', function(optins){
+Mock.mock('http://47.104.84.17:8080/res/sub/all', function(optins){
     return Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -568,7 +568,7 @@ Mock.mock('http://47.104.84.17/res/sub/all', function(optins){
     });
 });
 // 资源信息--发射台
-Mock.mock('http://47.104.84.17/res/station/all', function(optins){
+Mock.mock('http://47.104.84.17:8080/res/station/all', function(optins){
     return Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -594,7 +594,7 @@ Mock.mock('http://47.104.84.17/res/station/all', function(optins){
     });
 });
 // 节目资源
-Mock.mock('http://47.104.84.17/res/program/all', function(optins){
+Mock.mock('http://47.104.84.17:8080/res/program/all', function(optins){
     return Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -631,7 +631,7 @@ Mock.mock('http://47.104.84.17/res/program/all', function(optins){
     });
 });
 // 文字语音
-Mock.mock('http://47.104.84.17/res/textAudio/all', function(optins){
+Mock.mock('http://47.104.84.17:8080/res/textAudio/all', function(optins){
     return Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -667,7 +667,7 @@ Mock.mock('http://47.104.84.17/res/textAudio/all', function(optins){
     });
 });
 // 任务消息
-Mock.mock('http://47.104.84.17/practice/all', function(optins){
+Mock.mock('http://47.104.84.17:8080/practice/all', function(optins){
     return Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -723,7 +723,7 @@ Mock.mock('http://47.104.84.17/practice/all', function(optins){
 
 // 消息接入
 var msgTable;
-Mock.mock('http://47.104.84.17/msg/Platform/all', function(optins){
+Mock.mock('http://47.104.84.17:8080/msg/Platform/all', function(optins){
     msgTable=Mock.mock({
         'body|1000':[{
             "id|+1": 0,
@@ -767,19 +767,19 @@ Mock.mock('http://47.104.84.17/msg/Platform/all', function(optins){
     return msgTable
 });
 // 消息接入协议
-Mock.mock('http://47.104.84.17/protocol', function(optins){
+Mock.mock('http://47.104.84.17:8080/protocol', function(optins){
     return Mock.mock({
         'body':['协议1','协议2','协议3']
     });
 });
 // 消息接入地区
-Mock.mock('http://47.104.84.17/area', function(optins){
+Mock.mock('http://47.104.84.17:8080/area', function(optins){
     return Mock.mock({
         'body':['地区1','地区2','地区3']
     });
 });
 // 获取消息接入
-Mock.mock('http://47.104.84.17/msg/Platform/get', function(optins){
+Mock.mock('http://47.104.84.17:8080/msg/Platform/get', function(optins){
     return Mock.mock({
         'body':{
             "name":'@word()',
@@ -793,7 +793,7 @@ Mock.mock('http://47.104.84.17/msg/Platform/get', function(optins){
     });
 });
 // 文字转音频
-Mock.mock('http://47.104.84.17/convertText', function(optins){
+Mock.mock('http://47.104.84.17:8080/convertText', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{
@@ -803,7 +803,7 @@ Mock.mock('http://47.104.84.17/convertText', function(optins){
 });
 
 // 文件转音频
-Mock.mock('http://47.104.84.17/convertFile', function(optins){
+Mock.mock('http://47.104.84.17:8080/convertFile', function(optins){
     console.log(optins)
     return Mock.mock({
         'body':{
@@ -851,7 +851,7 @@ Mock.mock('http://47.104.84.17/convertFile', function(optins){
 
 
 // 效果评估-事件发布
-Mock.mock('http://47.104.84.17/incidentChart', {
+Mock.mock('http://47.104.84.17:8080/incidentChart', {
     'body':[{
         "value|10-30": 0,
         "name":'气象局',
@@ -887,7 +887,7 @@ Mock.mock('http://47.104.84.17/incidentChart', {
     }]
 });
 // 事件级别发布
-Mock.mock('http://47.104.84.17/incidentRankChart', {
+Mock.mock('http://47.104.84.17:8080/incidentRankChart', {
     'body':[
         {
             value: 20,
@@ -933,7 +933,7 @@ Mock.mock('http://47.104.84.17/incidentRankChart', {
     ]
 });
 // 任务数量
-Mock.mock('http://47.104.84.17/taskNumChart', {
+Mock.mock('http://47.104.84.17:8080/taskNumChart', {
     'body':[
         {
             value: 20,
@@ -967,142 +967,35 @@ Mock.mock('http://47.104.84.17/taskNumChart', {
     ]
 });
 // 事件类型统计数据
-Mock.mock('http://47.104.84.17/incidentTypeChart', {
-    'body': {
-        incidentTypeData: [{
-            value: 20,
-            itemStyle: {
-                normal: {
-                    color: "#949eff"
-                }
-            },
-        }, {
-            value: 230,
-            itemStyle: {
-                normal: {
-                    color: "#9b7fe2"
-                }
-            },
-        }, {
-            value: 90,
-            itemStyle: {
-                normal: {
-                    color: "#6b65df"
-                }
-            },
-        }, {
-            value: 20,
-            itemStyle: {
-                normal: {
-                    color: "#949eff"
-                }
-            },
-        }, {
-            value: 45,
-            itemStyle: {
-                normal: {
-                    color: "#9b7fe2"
-                }
-            },
-        }, {
-            value: 70,
-            itemStyle: {
-                normal: {
-                    color: "#6b65df"
-                }
-            },
-        }, {
-            value: 80,
-            itemStyle: {
-                normal: {
-                    color: "#949eff"
-                }
-            },
-        }, {
-            value: 90,
-            itemStyle: {
-                normal: {
-                    color: "#9b7fe2"
-                }
-            },
-        }, {
-            value: 90,
-            itemStyle: {
-                normal: {
-                    color: "#6b65df"
-                }
-            },
-        }, {
-            value: 80,
-            itemStyle: {
-                normal: {
-                    color: "#949eff"
-                }
-            },
-        }, {
-            value: 90,
-            itemStyle: {
-                normal: {
-                    color: "#9b7fe2"
-                }
-            },
-        }, {
-            value: 90,
-            itemStyle: {
-                normal: {
-                    color: "#6b65df"
-                }
-            },
-        }, {
-            value: 80,
-            itemStyle: {
-                normal: {
-                    color: "#949eff"
-                }
-            },
-        }, {
-            value: 90,
-            itemStyle: {
-                normal: {
-                    color: "#9b7fe2"
-                }
-            },
-        }, {
-            value: 90,
-            itemStyle: {
-                normal: {
-                    color: "#6b65df"
-                }
-            },
-        }, {
-            value: 80,
-            itemStyle: {
-                normal: {
-                    color: "#949eff"
-                }
-            },
-        }, {
-            value: 90,
-            itemStyle: {
-                normal: {
-                    color: "#9b7fe2"
-                }
-            },
-        }, {
-            value: 90,
-            itemStyle: {
-                normal: {
-                    color: "#6b65df"
-                }
-            },
-        }],
-        incidentTypexAxis: [
-            "金属与非金属矿金属与非金属矿1", "金属与非金属矿金属与非金属矿2", "金属与非金属矿金属与非金属矿3", "金属与非金属矿金属与非金属矿4", "金属与非金属矿金属与非金属矿5", "金属与非金属矿金属与非金属矿6", "金属与非金属矿金属与非金属矿7", "金属与非金属矿金属与非金属矿8", "金属与非金属矿金属与非金属矿9", "金属与非金属矿金属与非金属矿10", "金属与非金属矿金属与非金属矿11", "金属与非金属矿金属与非金属矿12", "金属与非金属矿金属与非金属矿13", "金属与非金属矿金属与非金属矿14"
-        ]
-    }
+Mock.mock('http://47.104.84.17:8080/incidentTypeChart', {
+    'body': [{
+        type:'金属与非金属矿金属与非金属矿1',
+        value: 20,
+    },{
+        type:'金属与非金属矿金属与非金属矿1',
+        value: 20,
+    },{
+        type:'金属与非金属矿金属与非金属矿1',
+        value: 20,
+    },{
+        type:'金属与非金属矿金属与非金属矿1',
+        value: 20,
+    },{
+        type:'金属与非金属矿金属与非金属矿1',
+        value: 20,
+    },{
+        type:'金属与非金属矿金属与非金属矿1',
+        value: 20,
+    },{
+        type:'金属与非金属矿金属与非金属矿1',
+        value: 20,
+    },{
+        type:'金属与非金属矿金属与非金属矿1',
+        value: 20,
+    }],
 });
 // 全部事件-地图
-Mock.mock('http://47.104.84.17/mapAllChart', {
+Mock.mock('http://47.104.84.17:8080/mapAllChart', {
     'body': {
         out:'杭州',//出发点
         center:[120.166085,30.279006],//地图中心
@@ -1193,7 +1086,7 @@ Mock.mock('http://47.104.84.17/mapAllChart', {
     }
 });
 // 全部事件-表格
-Mock.mock('http://47.104.84.17/allEvents', function(optins){
+Mock.mock('http://47.104.84.17:8080/allEvents', function(optins){
     msgTable=Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -1222,7 +1115,7 @@ Mock.mock('http://47.104.84.17/allEvents', function(optins){
     return msgTable
 });
 //覆盖人口
-Mock.mock('http://47.104.84.17/populationChart', {
+Mock.mock('http://47.104.84.17:8080/populationChart', {
     'body':{
         xAxis:['0', '5:00', '5:20', '5:40', '6:00', '6:20', '6:40', '6:45', '6:50', '6:55', '7:40', '8:40'],
         data:[
@@ -1242,7 +1135,7 @@ Mock.mock('http://47.104.84.17/populationChart', {
     }
 });
 //覆盖区域
-Mock.mock('http://47.104.84.17/districtChart', {
+Mock.mock('http://47.104.84.17:8080/districtChart', {
     'body':{
         xAxis:['0', '5:00', '5:20', '5:40', '6:00', '6:20', '6:40', '6:45', '6:50', '6:55', '7:40', '8:40'],
         data:[
@@ -1262,7 +1155,7 @@ Mock.mock('http://47.104.84.17/districtChart', {
     }
 });
 // 单一事件-地图
-Mock.mock('http://47.104.84.17/mapUnityChart', {
+Mock.mock('http://47.104.84.17:8080/mapUnityChart', {
     'body': {
         center:[120.166085,30.279006],//地图中心
         divideMap:[
@@ -1298,7 +1191,7 @@ Mock.mock('http://47.104.84.17/mapUnityChart', {
     }
 });
 // 单一事件-表格
-Mock.mock('http://47.104.84.17/unityMonitoring', function(optins){
+Mock.mock('http://47.104.84.17:8080/unityMonitoring', function(optins){
     msgTable=Mock.mock({
         'body|100':[{
             "id|+1": 0,
@@ -1320,7 +1213,7 @@ Mock.mock('http://47.104.84.17/unityMonitoring', function(optins){
     return msgTable
 });
 // 单一事件-表格
-Mock.mock('http://47.104.84.17/unityMessage', function(optins){
+Mock.mock('http://47.104.84.17:8080/unityMessage', function(optins){
     msgTable=Mock.mock({
         'body|100':[{
             "id|+1": 0,
