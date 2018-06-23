@@ -149,7 +149,7 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 .popclose:hover,.viewclose:hover{color:#555;}
 .prevcont,.uncont,.fillcnt{width:100%;padding:0px 20px 20px;zoom:1;}
 .prevcont:after,.revbtn:after,.uncont:after{content:'';display: block;height:0;clear: both;visibility: hidden;}
-.prevlist{width:100%;}
+.prevlist{width:100%;height: 320px;overflow-x:auto; }
 .prevlist li{width:100%;padding:20px 0px;border-bottom:1px dashed #e5e5e5;}
 .prevword{height:57px;overflow: hidden;margin-bottom:10px;line-height:20px;}
 .prevideo{display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin-bottom:10px;}

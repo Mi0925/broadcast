@@ -96,7 +96,7 @@
 		<span class="popclose"><i class="iconfont icon-guanbi"></i></span>
 		<div class="prevcont">
 			<ul class="prevlist">
-				<li>
+				<!-- <li>
 					<p class="prevword">文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息文本信息...</p>
 					<input type="button" value="预览" class="tosee" />
 				</li>
@@ -107,9 +107,12 @@
 				<li>
 					<p class="prevideo">文本.txt</p>
 					<input type="button" value="预览" class="tosee" />
-				</li>
+				</li> -->
 			</ul>
-			<input type="button" value="全部预览" class="seeall" />
+			<!-- <button class="seeall">
+				<a href="#/editCyclePlan" url="components/editCyclePlan.html" class="add_tab" name="编辑周期性计划">全部预览</a>
+			</button> -->
+			<input type="button" value="立即发布" class="seeall" style="margin-right: 10px;" />
 		</div>
 	</div>
 	</div>
@@ -243,8 +246,12 @@
                 		data.body[i].name="<a href='#/viewManualExerProg' url='components/viewManualExerProg.html' class='view-cont add_tab' name='查看手动计划'>"+d.name+"</a>";
                 	}
                 	
-
-                	data.body[i].yulan="<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>";
+                	if(d.type=='CYCLE'){
+                		data.body[i].yulan="<span class='operbtn operbtnCYCLE'><i class='iconfont icon-yulan'></i>预览</span>";
+                	}else{
+                		data.body[i].yulan="<span class='operbtn operbtnMANNUAL'><i class='iconfont icon-yulan'></i>预览</span>";
+                	}
+                	
 
                 	if(d.type=='CYCLE'){
                 		data.body[i].edit="<a href='#/editCyclePlan' url='components/editCyclePlan.html' class='editbtn add_tab' name='编辑周期性计划'><i class='iconfont icon-bianji'></i>编辑</a>";

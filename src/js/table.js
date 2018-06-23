@@ -204,10 +204,128 @@ function tr_del(table) {//表格删除
 
 
 /*popwindow*/
-$(document).on('click','.operbtn',function(){
+$(document).on('click','.operbtnTask',function(){
     $('.popwindow').show();
     $('.preview').show();
-})
+    sessionStorage.setItem('editTableItem',$(this).parents('tr').find('.checkone').find('input').attr('id'));
+    $(".prevlist").html('');
+    $.ajax({
+        url: portsrc+'/msg/getMsg',
+        type: 'post',
+        dataType: 'json',
+        data:{
+            token:token,
+            type:'task',//task为任务消息，alert为预警消息
+            id:sessionStorage.getItem('editTableItem'),
+        },
+        success: function(data) {
+            var schedulePlanId=data.schedulePlanId;
+            $.ajax({
+                url: portsrc+'/schedule/getItem',
+                type: 'post',
+                dataType: 'json',
+                data:{
+                    token:token,
+                    id:0,
+                },
+                success: function(data) {
+                    console.log(data)
+                    // $(".prevword").text(data.body.message);
+                    for (var i = 0; i < data.body.listMP3.length; i++) {
+                        var html='<li>'+
+                                    '<p class="prevideo">'+data.body.listMP3[i]+'</p>'+
+                                    '<button class="tosee">'+
+                                    '   <a href="#/editCyclePlan" url="components/editCyclePlan.html" class="add_tab" name="编辑周期性计划">预览</a>'+
+                                    '</button>'
+                                '</li>  ';
+                        $(".prevlist").append(html)
+                    }
+                }
+            });
+        }
+    });
+});
+$(document).on('click','.operbtnCYCLE',function(){
+    $('.popwindow').show();
+    $('.preview').show();
+    sessionStorage.setItem('editTableItem',$(this).parents('tr').find('.checkone').find('input').attr('id'));
+    $(".prevlist").html('');
+    $.ajax({
+        url: portsrc+'/practice/get/CyclePractice',
+        type: 'post',
+        dataType: 'json',
+        data:{
+            token:token,
+            id:sessionStorage.getItem('editTableItem'),
+        },
+        success: function(data) {
+            var schedulePlanId=data.schedulePlanId;
+            $.ajax({
+                url: portsrc+'/schedule/getItem',
+                type: 'post',
+                dataType: 'json',
+                data:{
+                    token:token,
+                    id:0,
+                },
+                success: function(data) {
+                    console.log(data)
+                    // $(".prevword").text(data.body.message);
+                    for (var i = 0; i < data.body.listMP3.length; i++) {
+                        var html='<li>'+
+                                    '<p class="prevideo">'+data.body.listMP3[i]+'</p>'+
+                                    '<button class="tosee">'+
+                                    '   <a href="#/editCyclePlan" url="components/editCyclePlan.html" class="add_tab" name="编辑周期性计划">预览</a>'+
+                                    '</button>'
+                                '</li>  ';
+                        $(".prevlist").append(html)
+                    }
+                }
+            });
+        }
+    });
+});
+$(document).on('click','.operbtnMANNUAL',function(){
+    $('.popwindow').show();
+    $('.preview').show();
+    sessionStorage.setItem('editTableItem',$(this).parents('tr').find('.checkone').find('input').attr('id'));
+    $(".prevlist").html('');
+    $.ajax({
+        url: portsrc+'/practice/get/ManualPractice',
+        type: 'post',
+        dataType: 'json',
+        data:{
+            token:token,
+            id:sessionStorage.getItem('editTableItem'),
+        },
+        success: function(data) {
+            var schedulePlanId=data.schedulePlanId;
+            $.ajax({
+                url: portsrc+'/schedule/getItem',
+                type: 'post',
+                dataType: 'json',
+                data:{
+                    token:token,
+                    id:0,
+                },
+                success: function(data) {
+                    console.log(data)
+                    // $(".prevword").text(data.body.message);
+                    for (var i = 0; i < data.body.listMP3.length; i++) {
+                        var html='<li>'+
+                                    '<p class="prevideo">'+data.body.listMP3[i]+'</p>'+
+                                    '<button class="tosee">'+
+                                    '   <a href="#/editManualExerProg" url="components/editManualExerProg.html" class="add_tab" name="编辑手动演练计划">预览</a>'+
+                                    '</button>'
+                                '</li>  ';
+                        $(".prevlist").append(html)
+                    }
+                }
+            });
+        }
+    });
+});
+
 
 $(document).on('click','.audit',function(){
     $('.popwindow').show();
