@@ -687,7 +687,47 @@ function addIncident() {
 		    	console.log(data)
 		    	legendData=[];
 		    	for (var i = 0; i < data.body.length; i++) {
-		    		legendData.push(data.body[i].name)
+		    		if(data.body[i].name=='RED'){
+		    			legendData.push('红色事件');
+		    			data.body[i].name='红色事件';
+		    			data.body[i].itemStyle={
+		    				normal: {
+			                    color: "#f75c53"
+			                }
+		    			};
+		    		}else if(data.body[i].name=='BLUE'){
+		    			legendData.push('蓝色事件');
+		    			data.body[i].name='蓝色事件';
+		    			data.body[i].itemStyle={
+		    				normal: {
+			                    color: "#4579d8"
+			                }
+		    			};
+		    		}else if(data.body[i].name=='GREEN'){
+		    			legendData.push('绿色事件');
+		    			data.body[i].name='绿色事件';
+		    			data.body[i].itemStyle={
+		    				normal: {
+			                    color: "#14ae8f"
+			                }
+		    			};
+		    		}else if(data.body[i].name=='ORANGE'){
+		    			legendData.push('橙色事件');
+		    			data.body[i].name='橙色事件';
+		    			data.body[i].itemStyle={
+		    				normal: {
+			                    color: "#fea41e"
+			                }
+		    			};
+		    		}else if(data.body[i].name=='YELLOW'){
+		    			legendData.push('黄色事件');
+		    			data.body[i].name='黄色事件';
+		    			data.body[i].itemStyle={
+		    				normal: {
+			                    color: "#fada00"
+			                }
+		    			};
+		    		}
 		    	}
 				incidentRankOption = {
 				    title: {
@@ -891,7 +931,15 @@ function addIncident() {
 				        },
 				        {
 				            type: 'bar',
-				            data: taskNumData
+				            data: taskNumData,
+				            itemStyle:{
+				            	normal:{
+				            		color:function(params) {
+				            			var colorList=['#41cefb','#00aaff','#1ba5dd','#4579d8'];
+				            			return colorList[params.dataIndex%4];
+				            		}
+				            	}
+				            }
 				        }
 				    ]
 				};
@@ -914,7 +962,7 @@ function addIncident() {
 			    var incidentTypexAxis=[];
 			    for (var i = 0; i < data.body.length; i++) {
 			    	incidentTypexAxis.push(data.body[i].type);
-			    	yMaxTwo.push(data.body[i].value)
+			    	yMaxTwo.push(data.body[i].value);
 			    }
 			    // 对x轴数据换行处理，4个字换行
 				var incidentTypexAxisData=[];
@@ -1060,7 +1108,15 @@ function addIncident() {
 				        },
 				        {
 				            type: 'bar',
-				            data: incidentTypeData
+				            data: incidentTypeData,
+				            itemStyle:{
+				            	normal:{
+				            		color:function(params) {
+				            			var colorList=['#949eff','#9b7fe2','#6b65df'];
+				            			return colorList[params.dataIndex%3];
+				            		}
+				            	}
+				            }
 				        }
 				    ]
 				};
@@ -1609,6 +1665,7 @@ $(function () {
         }
 	});
 
+	// 全事件表格
 	var table3 = $('#table-main3 table').DataTable({
 		"scrollY": "calc(100% - 50px)",
 	    "scrollX": true,
@@ -1624,7 +1681,7 @@ $(function () {
 		"Info": true, //页脚信息
 		"oLanguage": oLanguage, //国际语言转化
         "ajax": {
-            url: portsrc+'/allEvents',
+            url: portsrc+'/schedule/allItem',
 			type: 'post',
 			data:{
             	token:token,
