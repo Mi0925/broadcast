@@ -196,6 +196,33 @@
                 	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
                 	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
+                	switch(d.status){
+                		case 'CREATING':
+                			data.body[i].status='已创建';
+                			break;
+                		case 'AUDITING':
+                			data.body[i].status='已审核';
+                			break;
+                		case 'PUBLISHIING':
+                			data.body[i].status='发布中';
+                			break;
+                		case 'RECEIPT':
+                			data.body[i].status='收到回执';
+                			break;
+                		case 'FEEDBACK':
+                			data.body[i].status='收到反馈';
+                			break;
+                		case 'FINISH':
+                			data.body[i].status='发布结束';
+                			break;
+                		case 'CANCLE':
+                			data.body[i].status='已取消';
+                			break;
+                		case 'SUSPEND':
+                			data.body[i].status='暂停';
+                			break;
+                	}
+
                 	var level="";
 					if(d.level=="RED"){
 						level="<img src='src/images/rank-red.png'/>";

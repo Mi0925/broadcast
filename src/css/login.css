@@ -12,7 +12,7 @@
 .icone,.ictwo,.icthr{display:inline-block;width:58px;height:100%;float:left;position:relative;z-index: 1}
 .icone i,.ictwo i,.icthr i{font-size:22px;position:absolute;top:50%;left:50%;margin-top:-11px;margin-left:-12px;color:#4579d8;}
 .icone:after,.ictwo:after,.icthr:after{content:'';width:1px;height:10px;background:#d9e0e3;position:absolute;top:50%;right:0;margin-top:-5px;}
-.fraone input,.fratwo input,.fracode input{color:#ccc;position:absolute;width:100%;height:100%;top:0;left:0;padding-left:78px;font-size:14px;line-height:42px;border:1px solid #d8d8d8;border-radius:6px;}
+.fraone input,.fratwo input,.fracode input{position:absolute;width:100%;height:100%;top:0;left:0;padding-left:78px;font-size:14px;line-height:42px;border:1px solid #d8d8d8;border-radius:6px;}
 #pwd{/* display: none; */color:#333;border:1px solid #999;}
 .iconfont.itok,.iconfont.itwarn{display:inline-block;font-size:16px;color:#14ae8f;position:absolute;right:-24px;top:50%;margin-top:-8px;}
 .iconfont.itwarn{color:#ff5b57;font-size:15px;}
@@ -20,8 +20,8 @@
 .frathr{width:100%;zoom:1;}
 .frathr:after{content:'';display: block;height:0;clear:both;visibility: hidden;}
 .fracode{width:200px;height:44px;float:left;position:relative;overflow: hidden;}
-.codeimg{display: inline-block;float:right;cursor: pointer;width:120px;height:44px;border:1px solid #999;border-radius:6px;position:relative;}
-.codeimg img{display: block;height:72%;width: 80%;position:absolute;top:14%;left:10%;}
+.codeimg{display: inline-block;float:right;cursor: pointer;width:120px;height:44px;border:1px solid #999;border-radius:6px;position:relative;overflow: hidden;}
+.codeimg img{display: block;height:100%;width: 100%;position:absolute;top:0%;left:0%;}
 .disablebtn{cursor:default;display:inline-block;width:100%;height:44px;line-height:44px;text-align:center;color:#fff;background:#bbb;border-radius:6px;margin-top:30px;border:0;font-size:16px;letter-spacing: 10px;padding-left:10px;}
 .disablebtn:hover{color:#fff;}
 .loginbtn{background:#3d6abe;cursor:pointer;}

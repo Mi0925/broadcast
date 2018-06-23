@@ -33,22 +33,22 @@
 				<div class="fracent">
 					<div class="fraone">
 						<span class="icone"><i class="iconfont icon-yonghu"></i></span>
-						<input type="text" value="用户名" class="j-name" onfocus="if(this.value==defaultValue){this.value = '';this.style.borderColor='#999';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}this.style.borderColor='#d8d8d8';"/>
+						<input type="text" placeholder="用户名" class="j-name"/>
 						<!-- <span class="iconfont icon-11 itok "></span> -->
 						<!-- <span class=" iconfont icon-iconfontjinggao itwarn"></span> -->
 					</div>
 					<div class="fratwo">
 						<span class="ictwo"><i class="iconfont icon-mima"></i></span>
-						<input type="text" value="密码" class="j-pwd" onfocus="if(this.value==defaultValue){this.value = '';this.type='password';this.style.color='#333';this.style.borderColor='#999';}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';this.type='text';}this.style.borderColor='#d8d8d8';"/>
+						<input type="password" class="j-pwd" placeholder="密码" />
 						<!-- <span class="iconfont icon-11 itok "></span> -->
 						<!-- <span class=" iconfont icon-iconfontjinggao itwarn"></span> -->
 					</div>
 					<div class="frathr">
 						<div class="fracode">
 							<span class="icthr"><i class="iconfont icon-yanzheng"></i></span>
-							<input type="text" value="验证码" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333';this.style.borderColor='#999';}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}this.style.borderColor='#d8d8d8';"/>
+							<input type="text" id="code" placeholder="验证码" />
 						</div>
-						<span class="codeimg"><img src="src/images/authcode.png" alt="" /></span>
+						<span class="codeimg j-codeimg"><img alt="" /></span>
 					</div>
 					<input type="button" value="登录" class="disablebtn " disabled="disabled" /><!-- loginbtn -->
 					<a href="forget.html" class=" forget"><i class="iconfont icon-wenhao"></i>忘记密码</a>
@@ -95,24 +95,54 @@
 				$('.disablebtn').removeClass('loginbtn');
 				$('.disablebtn').attr('disabled',true);
 			}
-		})
+		});
+		    
+		$(".j-codeimg").find('img').attr({
+			src: portsrc+'/captcha'
+		});
+		$(".j-codeimg").click(function(event) {
+			$(this).find('img').attr({
+				src: portsrc+'/captcha'
+			});
+		});
 		$(document).on('click','.loginbtn',function(){
-			// 模拟数据
+			// 验证码
 			$.ajax({
-			    url: portsrc+'/login/user',
-			    type: 'post',
+			    url: portsrc+'/verify',
+			    type: 'get',
 				dataType: 'json',
-				data: {
-					userName: $(".j-name").val(),
-					pwd: $(".j-pwd").val()
+				data:{
+					checkCode:$('#code').val()
 				},
 			    success: function(data) {
-			    	console.log(data.body);
-					// sessionStorage.setItem('name',data.body.name);
-					sessionStorage.setItem('name',$(".j-name").val());
-					sessionStorage.setItem('token',data.body);
-					document.location.href="index.html#/index";
-			    }
+			    	console.log(data)
+			    	if (data.body) {
+			    		// 模拟数据
+						$.ajax({
+						    url: portsrc+'/login/user',
+						    type: 'post',
+							dataType: 'json',
+							data: {
+								userName: $(".j-name").val(),
+								pwd: $(".j-pwd").val()
+
+							},
+						    success: function(data) {
+						    	console.log(data);
+						    	if(data.status==200){
+									// sessionStorage.setItem('name',data.body.name);
+									sessionStorage.setItem('name',$(".j-name").val());
+									sessionStorage.setItem('token',data.body);
+									document.location.href="index.html#/index";
+						    	}else{
+						    		alert(data.msg)
+						    	}
+						    }
+						});
+			    	}else{
+			    		alert(data.msg)
+			    	}
+				}
 			});
 		})
 	})

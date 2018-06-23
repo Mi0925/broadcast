@@ -22,7 +22,7 @@
 				<div class="oneitem-cont">
 					<div class="locupload">
 						<div class="touploading">
-							<input type="file" class="fileup" accept="text/*" data-type="loading" id="fileup"/>
+							<input type="file" class="fileup" accept="audio/*" data-type="loading" id="fileup"/>
 							<input type="button" value="本地上传" class="uplbtn" />
 						</div>
 						<span class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>音频大小不超过5M</span>
@@ -314,7 +314,7 @@
 				$this.addClass(DISABLED);
 				formData.append('file', e.target.files[0]);
 				$.ajax({
-				    url: portsrc+'/convertFile',
+				    url: portsrc+'/upload',
 				    type: 'post',
 				    cache: false,
 				    data:formData,

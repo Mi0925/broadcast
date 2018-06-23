@@ -199,6 +199,33 @@
 					}
                 	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
 
+                	switch(d.status){
+                		case 'CREATING':
+                			data.body[i].status='已创建';
+                			break;
+                		case 'AUDITING':
+                			data.body[i].status='已审核';
+                			break;
+                		case 'PUBLISHIING':
+                			data.body[i].status='发布中';
+                			break;
+                		case 'RECEIPT':
+                			data.body[i].status='收到回执';
+                			break;
+                		case 'FEEDBACK':
+                			data.body[i].status='收到反馈';
+                			break;
+                		case 'FINISH':
+                			data.body[i].status='发布结束';
+                			break;
+                		case 'CANCLE':
+                			data.body[i].status='已取消';
+                			break;
+                		case 'SUSPEND':
+                			data.body[i].status='暂停';
+                			break;
+                	}
+
                 	data.body[i].name="<a href='#/viewTaskMsg' url='components/viewTaskMsg.html' class='view-cont add_tab' name='查看任务消息'>"+d.name+"</a>";
                 	data.body[i].yulan="<span class='operbtn'><i class='iconfont icon-yulan'></i>预览</span>";
                 	data.body[i].edit="<a href='#/newTaskMsgEdit' url='components/newTaskMsgEdit.html' class='editbtn add_tab' name='编辑任务消息'><i class='iconfont icon-bianji'></i>编辑</a>";
