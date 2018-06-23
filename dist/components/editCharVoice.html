@@ -195,8 +195,10 @@
 	    		id:sessionStorage.getItem('editTableItem'),
 		    },
 		    success: function(data) {
-				for (var i = 0; i < data.body.name.length; i++) {
-					audio_add_html(data.body.name[i]);
+		    	if(data.body!=null){
+					for (var i = 0; i < data.body.name.length; i++) {
+						audio_add_html(data.body.name[i]);
+					}
 				}
 		    }
 		});
