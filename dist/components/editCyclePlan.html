@@ -238,7 +238,7 @@
 	    success: function(data) {
 	    	console.log(data)
 	    	$("#impcontent").val(data.body.name);
-		    $("#cycle").val(data.cycle);
+		    $("#cycle").val(data.body.cycle);
 	    	var schedule_id=data.body.schedulePlanId;
 	    	$.ajax({
 			    url: portsrc+'/schedule/allItem',
