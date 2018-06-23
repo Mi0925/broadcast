@@ -119,7 +119,7 @@ layui.use(['element'], function(){
 			        othis.removeClass(DISABLED);
 			        $('.uncont .tomat').hide();
 			        $('.uncont .succmat').show();
-					var names=name.split(".")[0]+'.mp3';
+					var names=name.split(".")[0]+'.wav';
 			        audio_add_html(names);//添加一条音频数据
 					$('.file_text').after($('.file_text').clone().val(""));   
 					$('.file_text').eq(0).remove();

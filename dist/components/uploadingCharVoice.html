@@ -9,7 +9,7 @@
 				<div class="oneitem-cont">
 					<p class="oneitem-tit">文本</p>
 					<div class="oneimp">
-						<textarea id="imparea" name="message" class="imparea" maxlength="3000"></textarea>
+						<textarea id="imparea" class="imparea" maxlength="3000"></textarea>
 						<span class="area-count"><span class="countnew">0</span>/3000</span>
 					</div>
 					<input type="button" value="转成音频" class="toswitch" />
@@ -37,9 +37,9 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="tocreat">
-				<input type="button" value="保存" class="tocreatbtn" />
-			</div> -->
+			<div class="tocreat">
+				<input type="button" value="保存" class="tocreatbtn" lay-submit lay-filter="*" />
+			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 		</div>
 		<div class="popwindow"></div>
@@ -66,42 +66,42 @@
 							<li>
 								<span class="matype">格式一</span>
 								<div class="matcheck">
-									<input type="radio" name="matcho" id="matone" checked="checked" />
+									<input type="radio" id="matone" checked="checked" />
 									<label for="matone"></label>
 								</div>
 							</li>
 							<li>
 								<span class="matype">格式二</span>
 								<div class="matcheck">
-									<input type="radio" name="matcho" id="matwo" />
+									<input type="radio" id="matwo" />
 									<label for="matwo"></label>
 								</div>
 							</li>
 							<li>
 								<span class="matype">格式三</span>
 								<div class="matcheck">
-									<input type="radio" name="matcho" id="mathr" />
+									<input type="radio" id="mathr" />
 									<label for="mathr"></label>
 								</div>
 							</li>
 							<li>
 								<span class="matype">格式四</span>
 								<div class="matcheck">
-									<input type="radio" name="matcho" id="matfou" />
+									<input type="radio" id="matfou" />
 									<label for="matfou"></label>
 								</div>
 							</li>
 							<li>
 								<span class="matype">格式五</span>
 								<div class="matcheck">
-									<input type="radio" name="matcho" id="matfiv" />
+									<input type="radio" id="matfiv" />
 									<label for="matfiv"></label>
 								</div>
 							</li>
 							<li>
 								<span class="matype">格式六</span>
 								<div class="matcheck">
-									<input type="radio" name="matcho" id="matsix" />
+									<input type="radio" id="matsix" />
 									<label for="matsix"></label>
 								</div>
 							</li>
@@ -238,10 +238,6 @@
 			$('.matlist li ').eq(0).find('input').prop('checked',true);
 			$('.uncont .succmat').hide();
 		})
-		
-		
-
-
 		layui.use(['form', 'element'], function(){
 			var element = layui.element //Tab的切换功能，切换事件监听等，需要依赖element模块
 			,form = layui.form;
@@ -286,8 +282,6 @@
 			      $('.wordconv-btn').addClass(DISABLED);
 			    }
 			};
-		  	
-
 			$('.site-demo-active').on('click', function(){
 				$('.uncont .tomat').show();
 				$('.uncont .succmat').hide();
@@ -305,7 +299,6 @@
 					var othis = $(this), type = $(this).data('type');
 					active[type] ? active[type].call(this, othis) : '';
 				}
-				
 			});
 			$('.fileup').change(function(e){
 				console.log(e.target.files[0]);
@@ -333,7 +326,32 @@
 						active[type] ? active[type].call(this, $this,70,e.target.files[0].name) : '';
 				    }
 				});
-			})
+			});
+			form.on('submit(*)', function(data){
+				data.field.resourceType=0;
+				data.field.name=[];
+				$(".filelist li").each(function(){
+					data.field.name.push($(this).find(".thename").text())
+				});
+				console.log(data)
+				$.ajax({
+				    url: portsrc+"/res/audio/add",
+				    type: 'post',
+				    dataType: 'json',
+				    data:{
+				    	token:token,
+				    	audioResource:JSON.stringify(data.field)
+				    },
+				    success: function(data) {
+						layer.open({
+				            title: '提示',
+			        		shadeClose:true,
+				            content: '编辑成功'
+				        });
+				    }
+				});
+				return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+			});
 		});
 	})
 	
