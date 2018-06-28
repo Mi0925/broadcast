@@ -107,6 +107,7 @@
 			<div class="treediv">
 				<div class="gb-tree scroll" id="treea">
 					<ul id="gb_tree_resource1" class="ztree ztree-resource"></ul>
+					<button class="layui-btn add-watch-ok layui-btn-sm bg4579d8" onclick="addResourceClick()">添加地区</button>
 				</div>
 			</div>
 		</div>
@@ -134,7 +135,106 @@
 		<span class="triangle"><em></em></span>
 	</div>
 </div>
-
+<div class="gb-dialog gb-dialog-add-area" style="display: none;">
+	<form class="layui-form" action="">
+		<div class="gb-dialog-main i">
+			<h3 class="gb-dialog-title">
+				<i class="iconfont icon-guanbi j-close-dialog"></i>
+			</h3>
+			<div style="width: 500px;height: 500px; padding: 0 15px;">
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>上级单位</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" readonly id="region" name="region" class="imptxt" id="citySel" lay-verify="required" onclick="showMenu();"/>
+						<div id="menuContent" class="gb-tree scroll" style="display:none;bottom: auto!important;">
+							<ul id="treeDemo" class="ztree"></ul>
+						</div>
+					</div>
+				</div>
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>地区名</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" id="regionName" name="regionName" class="imptxt" lay-verify="required"/>
+					</div>
+				</div>
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>经度</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" id="lon" name="lon" class="imptxt" lay-verify="required"/>
+					</div>
+				</div>
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>纬度</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" id="lat" name="lat" class="imptxt" lay-verify="required"/>
+					</div>
+				</div>
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>人口数</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" id="pop" name="pop" class="imptxt" lay-verify="required"/>
+					</div>
+				</div>
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>面积</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" id="arer" name="arer" class="imptxt" lay-verify="required"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="gb-dialog gb-dialog-edit-area" style="display: none;">
+	<form class="layui-form" action="">
+		<div class="gb-dialog-main i">
+			<h3 class="gb-dialog-title">
+				<i class="iconfont icon-guanbi j-close-dialog"></i>
+			</h3>
+			<div style="width: 500px;height: 500px; padding: 0 15px;">
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>上级单位</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" readonly id="region" name="region" class="imptxt" id="citySel" lay-verify="required" onclick="showMenu();"/>
+						<div id="menuContent" class="gb-tree scroll" style="display:none;bottom: auto!important;">
+							<ul id="treeDemo" class="ztree"></ul>
+						</div>
+					</div>
+				</div>
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>地区名</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" id="regionName" name="regionName" class="imptxt" lay-verify="required"/>
+					</div>
+				</div>
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>经度</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" id="lon" name="lon" class="imptxt" lay-verify="required"/>
+					</div>
+				</div>
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>纬度</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" id="lat" name="lat" class="imptxt" lay-verify="required"/>
+					</div>
+				</div>
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>人口数</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" id="pop" name="pop" class="imptxt" lay-verify="required"/>
+					</div>
+				</div>
+				<div class="settingone" style="margin-bottom: 0;">
+					<p class="oneitem-tit"><small>*</small>面积</p>
+					<div class="oneimp" style="width: 100%">
+						<input type="text" id="arer" name="arer" class="imptxt" lay-verify="required"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
 
 <script type="text/javascript">
 	portVar={
@@ -142,8 +242,12 @@
 		type:'',
 	};
 	
-	layui.use('element', function(){
-		var element = layui.element;
+	layui.use(['form','element'], function(){
+		var element = layui.element,form = layui.form;
+		form.render();
+		var itbtn = $('<span class="itbtn"></span>');
+		$('.layui-select-title').append(itbtn);
+		$('.gb-form .layui-form-radio').remove();
 		//触发事件
 		var active = {
 		    loading: function(othis){
@@ -202,20 +306,23 @@
 			},
             dataSrc: function ( data ) {
             	console.log(data)
-                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
-                	var d=data.body[i];
-                	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
-                	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
+            	if(data.body!=null){
+	                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+	                	var d=data.body[i];
+	                	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
+	                	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
-                	data.body[i].state='<span class="statecol">'+d.state+'</span>';
-                	
-                	data.body[i].time="无";
-                	data.body[i].platformName="<a href='#/viewPlatResoInfo' url='components/viewPlatResoInfo.html' class='view-cont add_tab' name='查看平台资源信息'>"+d.platformName+"</a>";
-                	data.body[i].edit="<a href='#/editPlatResoInfo' url='components/editPlatResoInfo.html' class='editbtn add_tab' name='编辑平台资源信息'><i class='iconfont icon-bianji'></i>编辑</a>"
-                	data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+	                	data.body[i].state='<span class="statecol">'+d.state+'</span>';
+	                	
+	                	data.body[i].time="无";
+	                	data.body[i].platformName="<a href='#/viewPlatResoInfo' url='components/viewPlatResoInfo.html' class='view-cont add_tab' name='查看平台资源信息'>"+d.platformName+"</a>";
+	                	data.body[i].edit="<a href='#/editPlatResoInfo' url='components/editPlatResoInfo.html' class='editbtn add_tab' name='编辑平台资源信息'><i class='iconfont icon-bianji'></i>编辑</a>"
+	                	data.body[i].delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
+	                }
+                	return data.body;
+                }else{
+                	return [];
                 }
-                
-                return data.body;
             }
         },
 		"columns": [
@@ -258,10 +365,82 @@
 		view:{
 			showLine:false,//去掉连接线
 			addDiyDom:resourceDom
-		}/*,
+		},
 		callback: {
-			onCheck: zTreeOnCheck
-		}*/
+			onClick: editResourceClick
+		}
+	};
+	function addResourceClick(e,treeId, treeNode) {
+		layui.use(['form','element'], function(){
+			var element = layui.element,form = layui.form;
+			layer.open({
+				type: 1, 
+				title:false,
+				shadeClose:true,
+				closeBtn: 0,
+				content: $(".gb-dialog-add-area"),
+				btn: ['确定','取消'],
+				yes: function(index, layero){
+					var data={};
+					data.region=$('#region').val();
+					data.regionName=$('#regionName').val();
+					data.lon=$('#lon').val();
+					data.lat=$('#lat').val();
+					data.pop=$('#pop').val();
+					data.arer=$('#arer').val();
+					// $.ajax({
+					//     url: portsrc+"/msg/Platform/add",
+					//     type: 'post',
+					//     dataType: 'json',
+					//     data:{
+					//     	token:token,
+					//     },
+					//     success: function(data) {
+					//     }
+					// });
+					layer.closeAll();
+				},
+				success: function(layero, index){
+					
+				}
+			});
+		});
+	};
+	function editResourceClick(e,treeId, treeNode) {
+		layui.use(['form','element'], function(){
+			var element = layui.element,form = layui.form;
+			layer.open({
+				type: 1, 
+				title:false,
+				shadeClose:true,
+				closeBtn: 0,
+				content: $(".gb-dialog-edit-area"),
+				btn: ['修改','取消','删除'],
+				yes: function(index, layero){
+					var data={};
+					data.region=$('#region').val();
+					data.regionName=$('#regionName').val();
+					data.lon=$('#lon').val();
+					data.lat=$('#lat').val();
+					data.pop=$('#pop').val();
+					data.arer=$('#arer').val();
+					// $.ajax({
+					//     url: portsrc+"/msg/Platform/add",
+					//     type: 'post',
+					//     dataType: 'json',
+					//     data:{
+					//     	token:token,
+					//     },
+					//     success: function(data) {
+					//     }
+					// });
+					layer.closeAll();
+				},
+				success: function(layero, index){
+					
+				}
+			});
+		});
 	};
 	var treeadd = 'newPlatResoInfo',treedit = 'editPlatResoInfo',resourceData;
 	creatTree(treeadd);
@@ -270,58 +449,12 @@
 		resourceData=[{
 		    name: "浙江省",
 		    open: true,
-		    addIcon:true,
 		    children: [{
 		        name: "杭州市",
-		    	addIcon:true,
-		    	treeadd:treeadd,
-		    	treedit:treedit,
 		        children: [{
 			        name: "上城区",
-		    		addIcon:true,
-		    		removeIcon:true,
-		    		editIcon:true,
-		    		treeadd:treeadd,
-		    		treedit:treedit,
 			        children: [{
-		    			addIcon:true,
 				        name: "湖滨街道",
-				        treeadd:treeadd,
-				        treedit:treedit
-				    }]
-			    }]
-		    },{
-		        name: "宁波市",
-		        treeadd:treeadd,
-		        treedit:treedit,
-		    	addIcon:true,
-		        children: [{
-			        name: "上城区",
-			        treeadd:treeadd,
-			        treedit:treedit,
-		    		addIcon:true,
-			        children: [{
-		    			addIcon:true,
-		    			treeadd:treeadd,
-		    			treedit:treedit,
-				        name: "湖滨街道"
-				    }]
-			    }]
-		    },{
-		        name: "温州市",
-		        treeadd:treeadd,
-		        treedit:treedit,
-		    	addIcon:true,
-		        children: [{
-			        name: "上城区",
-			        treeadd:treeadd,
-			        treedit:treedit,
-		    		addIcon:true,
-			        children: [{
-			        	addIcon:true,
-			        	treeadd:treeadd,
-			        	treedit:treedit,
-				        name: "湖滨街道"
 				    }]
 			    }]
 		    }]
@@ -332,10 +465,5 @@
 			$.fn.zTree.init($(this), resourceSetting, resourceData);
 		});
 	}
-
-	//初始化的树
-	$(".ztree-resource").each(function() {
-		$.fn.zTree.init($(this), resourceSetting, resourceData);
-	});
 
 </script>

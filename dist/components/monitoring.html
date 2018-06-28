@@ -25,8 +25,8 @@
 				<a href="all-screen.html" target="_blank" class="layui-btn layui-btn-normal gb-projection-btn cur incident-btn">投屏全事件</a>
 				<div class="gb-chart-box">
 					<div class="gb-incident-count">
-						<button class="layui-btn layui-btn-danger">事件总数：<em>6</em></button>
-						<button class="layui-btn layui-btn-warm">发布总数：<em>6</em></button>
+						<button class="layui-btn layui-btn-danger">事件总数：<em class="j-event-num">6</em></button>
+						<button class="layui-btn layui-btn-warm">发布总数：<em class="j-release-num">6</em></button>
 					</div>
 					<div class="gb-chart-incident-pie">
 						<div class="gb-chart-item">
@@ -256,7 +256,6 @@ function unityIncident() {
 		    type: 'GET',
 		    dataType: 'json',
 		    success: function(data) {
-		    	console.log(data)
 			    populationChart = echarts.init(document.getElementById('line-population'));
 				populationOption = {
 				    title: {
@@ -410,7 +409,6 @@ function unityIncident() {
 		    type: 'GET',
 		    dataType: 'json',
 		    success: function(data) {
-		    	console.log(data)
 				districtChart = echarts.init(document.getElementById('line-district'));
 				districtOption = {
 				    title: {
@@ -565,7 +563,6 @@ function unityIncident() {
 		    type: 'GET',
 		    dataType: 'json',
 		    success: function(data) {
-		    	console.log(data)
 				unitybmap = new BMap.Map("unity-map"); // 创建地图实例，禁止点击地图底图
 				unitybmap.centerAndZoom(new BMap.Point(data.body.center[0],data.body.center[1]), 8);
 				unitybmap.enableScrollWheelZoom(true);
@@ -605,345 +602,354 @@ function addIncident() {
 		// 事件发布 
 		$.ajax({
 		    url: portsrc+'/incidentChart',
-		    token:token,
 		    type: 'GET',
 		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    },
 		    success: function(data) {
-		    	console.log(data)
-			    incidentOption = {
-		 		    title: {
-				        text: '事件发布',
-				        bottom: '0',
-				        left:'center',
-				        textStyle: { 
-				            color: '#585c65'
-				        }
-				    },
-				    tooltip : {
-				        formatter: "{b} : {c} ({d}%)"
-				    },
-				    legend: {
-				        // orient: 'vertical',
-				        x: 'center',
-				        bottom: '10%',
-				        itemWidth:'10',
-				        itemHeight:'10',
-				        data:['气象局','水利','国家应急广播平台','应急办'],
-				        align:"right"
-				    },
-				    series : [
-				        {
-				            type:'pie',
-				            radius : '60%',
-				            center: ['50%', '43%'],
-				            data:data.body.sort(function (a, b) { return a.value - b.value; }),
-				            roseType: 'radius',
-				            label: {
-				                normal: {
-				                    textStyle: {
-				                        color: '#7c8491'
-				                    }
-				                }
-				            },
-				            labelLine: {
-				                normal: {
-				                    lineStyle: {
-				                        color: '#d8d8d8'
-				                    },
-				                    smooth: 0.2,
-				                    length: 0,
-				                    length2: 20
-				                }
-				            },
-				            itemStyle: {
-					             normal: {
-					                shadowBlur: 15,
-					                shadowColor: 'rgba(0, 0, 0, 0.4)',
-					                label:{
-					                	formatter:'{d}%',
-							        },
-					             }
-					         },
+		    	if(data.body!=null){
+				    incidentOption = {
+			 		    title: {
+					        text: '事件发布',
+					        bottom: '0',
+					        left:'center',
+					        textStyle: { 
+					            color: '#585c65'
+					        }
+					    },
+					    tooltip : {
+					        formatter: "{b} : {c} ({d}%)"
+					    },
+					    legend: {
+					        // orient: 'vertical',
+					        x: 'center',
+					        bottom: '10%',
+					        itemWidth:'10',
+					        itemHeight:'10',
+					        data:['气象局','水利','国家应急广播平台','应急办'],
+					        align:"right"
+					    },
+					    series : [
+					        {
+					            type:'pie',
+					            radius : '60%',
+					            center: ['50%', '43%'],
+					            data:data.body.sort(function (a, b) { return a.value - b.value; }),
+					            roseType: 'radius',
+					            label: {
+					                normal: {
+					                    textStyle: {
+					                        color: '#7c8491'
+					                    }
+					                }
+					            },
+					            labelLine: {
+					                normal: {
+					                    lineStyle: {
+					                        color: '#d8d8d8'
+					                    },
+					                    smooth: 0.2,
+					                    length: 0,
+					                    length2: 20
+					                }
+					            },
+					            itemStyle: {
+						             normal: {
+						                shadowBlur: 15,
+						                shadowColor: 'rgba(0, 0, 0, 0.4)',
+						                label:{
+						                	formatter:'{d}%',
+								        },
+						             }
+						         },
 
-				            animationType: 'scale',
-				            animationEasing: 'elasticOut',
-				            animationDelay: function (idx) {
-				                return Math.random() * 200;
-				            }
-				        }
-				    ]
-				};
-				incidentChart.setOption(incidentOption);
+					            animationType: 'scale',
+					            animationEasing: 'elasticOut',
+					            animationDelay: function (idx) {
+					                return Math.random() * 200;
+					            }
+					        }
+					    ]
+					};
+					incidentChart.setOption(incidentOption);
+				}
 		    }
 		});
 
 		// 事件级别发布 
 		$.ajax({
 		    url: portsrc+'/incidentRankChart',
-		    token:token,
 		    type: 'GET',
 		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    },
 		    success: function(data) {
-		    	console.log(data)
-		    	legendData=[];
-		    	for (var i = 0; i < data.body.length; i++) {
-		    		if(data.body[i].name=='RED'){
-		    			legendData.push('红色事件');
-		    			data.body[i].name='红色事件';
-		    			data.body[i].itemStyle={
-		    				normal: {
-			                    color: "#f75c53"
-			                }
-		    			};
-		    		}else if(data.body[i].name=='BLUE'){
-		    			legendData.push('蓝色事件');
-		    			data.body[i].name='蓝色事件';
-		    			data.body[i].itemStyle={
-		    				normal: {
-			                    color: "#4579d8"
-			                }
-		    			};
-		    		}else if(data.body[i].name=='GREEN'){
-		    			legendData.push('绿色事件');
-		    			data.body[i].name='绿色事件';
-		    			data.body[i].itemStyle={
-		    				normal: {
-			                    color: "#14ae8f"
-			                }
-		    			};
-		    		}else if(data.body[i].name=='ORANGE'){
-		    			legendData.push('橙色事件');
-		    			data.body[i].name='橙色事件';
-		    			data.body[i].itemStyle={
-		    				normal: {
-			                    color: "#fea41e"
-			                }
-		    			};
-		    		}else if(data.body[i].name=='YELLOW'){
-		    			legendData.push('黄色事件');
-		    			data.body[i].name='黄色事件';
-		    			data.body[i].itemStyle={
-		    				normal: {
-			                    color: "#fada00"
-			                }
-		    			};
-		    		}
-		    	}
-				incidentRankOption = {
-				    title: {
-				        text: '事件级别发布',
-				        bottom: '0',
-				        left:'center',
-				        textStyle: { 
-				            color: '#585c65'
-				        }
-				    },
-				    tooltip : {
-				        formatter: "{b} : {c} ({d}%)"
-				    },
-				    legend: {
-				        // orient: 'vertical',
-				        x: 'center',
-				        bottom: '10%',
-				        itemWidth:'10',
-				        itemHeight:'10',
-				        data:legendData,
-				        align:"right"
-				    },
-				    series : [
-				        {
-				            type:'pie',
-				            radius : '60%',
-				            center: ['50%', '43%'],
-				            data:data.body.sort(function (a, b) { return a.value - b.value; }),
-				            roseType: 'radius',
-				            label: {
-				                normal: {
-				                    textStyle: {
-				                        color: '#7c8491'
-				                    }
+		    	if(data.body!=null){
+			    	legendData=[];
+			    	for (var i = 0; i < data.body.length; i++) {
+			    		if(data.body[i].name=='RED'){
+			    			legendData.push('红色事件');
+			    			data.body[i].name='红色事件';
+			    			data.body[i].itemStyle={
+			    				normal: {
+				                    color: "#f75c53"
 				                }
-				            },
-				            labelLine: {
-				                normal: {
-				                    lineStyle: {
-				                        color: '#d8d8d8'
-				                    },
-				                    smooth: 0.2,
-				                    length: 10,
-				                    length2: 20
+			    			};
+			    		}else if(data.body[i].name=='BLUE'){
+			    			legendData.push('蓝色事件');
+			    			data.body[i].name='蓝色事件';
+			    			data.body[i].itemStyle={
+			    				normal: {
+				                    color: "#4579d8"
 				                }
-				            },
-				            itemStyle: {
-					             normal: {
-					                shadowBlur: 15,
-					                shadowColor: 'rgba(0, 0, 0, 0.4)',
-					                label:{
-					                	formatter:'{d}%',
-							        },
-					             }
-					         },
-					        markLine:{
-					        	symbolSize:1000
-					        },
-				            animationType: 'scale',
-				            animationEasing: 'elasticOut',
-				            animationDelay: function (idx) {
-				                return Math.random() * 200;
-				            }
-				        }
-				    ]
-				};
-				incidentRankChart.setOption(incidentRankOption);
+			    			};
+			    		}else if(data.body[i].name=='GREEN'){
+			    			legendData.push('绿色事件');
+			    			data.body[i].name='绿色事件';
+			    			data.body[i].itemStyle={
+			    				normal: {
+				                    color: "#14ae8f"
+				                }
+			    			};
+			    		}else if(data.body[i].name=='ORANGE'){
+			    			legendData.push('橙色事件');
+			    			data.body[i].name='橙色事件';
+			    			data.body[i].itemStyle={
+			    				normal: {
+				                    color: "#fea41e"
+				                }
+			    			};
+			    		}else if(data.body[i].name=='YELLOW'){
+			    			legendData.push('黄色事件');
+			    			data.body[i].name='黄色事件';
+			    			data.body[i].itemStyle={
+			    				normal: {
+				                    color: "#fada00"
+				                }
+			    			};
+			    		}
+			    	}
+					incidentRankOption = {
+					    title: {
+					        text: '事件级别发布',
+					        bottom: '0',
+					        left:'center',
+					        textStyle: { 
+					            color: '#585c65'
+					        }
+					    },
+					    tooltip : {
+					        formatter: "{b} : {c} ({d}%)"
+					    },
+					    legend: {
+					        // orient: 'vertical',
+					        x: 'center',
+					        bottom: '10%',
+					        itemWidth:'10',
+					        itemHeight:'10',
+					        data:legendData,
+					        align:"right"
+					    },
+					    series : [
+					        {
+					            type:'pie',
+					            radius : '60%',
+					            center: ['50%', '43%'],
+					            data:data.body.sort(function (a, b) { return a.value - b.value; }),
+					            roseType: 'radius',
+					            label: {
+					                normal: {
+					                    textStyle: {
+					                        color: '#7c8491'
+					                    }
+					                }
+					            },
+					            labelLine: {
+					                normal: {
+					                    lineStyle: {
+					                        color: '#d8d8d8'
+					                    },
+					                    smooth: 0.2,
+					                    length: 10,
+					                    length2: 20
+					                }
+					            },
+					            itemStyle: {
+						             normal: {
+						                shadowBlur: 15,
+						                shadowColor: 'rgba(0, 0, 0, 0.4)',
+						                label:{
+						                	formatter:'{d}%',
+								        },
+						             }
+						         },
+						        markLine:{
+						        	symbolSize:1000
+						        },
+					            animationType: 'scale',
+					            animationEasing: 'elasticOut',
+					            animationDelay: function (idx) {
+					                return Math.random() * 200;
+					            }
+					        }
+					    ]
+					};
+					incidentRankChart.setOption(incidentRankOption);
+				}
 		    }
 		});
 
 		// 任务数量
 		$.ajax({
 		    url: portsrc+'/taskNumChart',
-		    token:token,
 		    type: 'GET',
 		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    },
 		    success: function(data) {
-		    	console.log(data)
-				var taskNumData =data.body;
-				var yMax = [];
-				var dataShadow = [];
-				var xAxisData=[];
-				for (var i = 0; i < taskNumData.length; i++) {
-					xAxisData.push(taskNumData[i].type);
-					yMax.push(taskNumData[i].value);
+		    	if(data.body!=null){
+					var taskNumData =data.body;
+					var yMax = [];
+					var dataShadow = [];
+					var xAxisData=[];
+					for (var i = 0; i < taskNumData.length; i++) {
+						xAxisData.push(taskNumData[i].type);
+						yMax.push(taskNumData[i].value);
+					}
+					for (var i = 0; i < taskNumData.length; i++) {
+					    dataShadow.push(yMax.sort()[yMax.length-1]);
+					}
+					taskNumOption = {
+					    title: {
+					        text: '任务数量',
+					        bottom: '0',
+					        left:'center',
+					        textStyle: { 
+					            color: '#585c65'
+					        }
+					    },
+					    tooltip : {
+					    	// formatter:"{b}<br />{c}个",
+					    	formatter: '<div class="gb-bar-formatter">{b}<br /><em>{c}</em></div>',
+					  //   	position: function (point, params, dom, rect, size) {
+							//     // 固定在顶部
+							//     return {left: rect.x-($(dom).width()-rect.width)/1.5, top: rect.y-$(dom).height()-10};
+							// },
+			            	position: "top",
+					        backgroundColor: 'rgba(255,255,255,0)',
+					        // borderColor:"#d8d8d8",
+					        // borderWidth:1,
+					        // textStyle:{
+					        // 	color:"#000"
+					        // },
+					    },
+					    grid: {
+					        left: '8%',
+					        containLabel: true
+					    },
+					    xAxis: {
+					        // data: ['等待审核', '等待发布', '正在发布', '发布完成'],
+					        data: xAxisData,
+					        //刻度横线
+					        axisTick: {
+					            show: false
+					        },
+					        //刻度字样式
+					        axisLabel: {
+					            textStyle: {
+					                color: '#7c8491',
+					                fontSize:'14',
+					                align: 'center'
+					            },
+					            interval:0,
+				         		// margin: 30,
+								// rotate:-20,
+					        },
+					        //刻度线
+					        axisLine: {
+					            lineStyle: {
+					                color:"#e5e5e5"
+					            }
+					        },
+					        z: 10
+					    },
+					    yAxis: [{
+					        //坐标轴名称
+				        	name: '单位：个',
+					        nameGap: 40,
+					        // nameRotate:0,
+					        nameLocation: "middle",
+					        nameTextStyle:{
+					        	color:"#7c8491",
+					        },
+					        //刻度横线
+					        axisTick: {
+					            show: false
+					        },
+					        //刻度字样式
+					        axisLabel: {
+					            textStyle: {
+					                color: '#7c8491',
+					                fontSize:'14'
+					            }
+					        },
+					        //刻度线
+					        axisLine: {
+					            lineStyle: {
+					                color:"#e5e5e5"//刻度线颜色
+					            }
+					        },
+					        //网格线
+					        splitLine:{
+								lineStyle:{
+									color: '#e5e5e5'//网格线颜色
+								}
+							},
+					    },{
+				            'type': 'value',
+				            'max': 200,
+					        axisLine: {
+					            lineStyle: {
+					                color:"#e5e5e5"
+					            }
+					        }
+				        }],
+					    dataZoom: [
+					        {
+					            type: 'inside'
+					        }
+					    ],
+					    series: [
+					        { // For shadow
+					            type: 'bar',
+					            itemStyle: {
+					                normal: {color: '#f7f8fa'}
+					            },
+				        		silent: true,
+					            barGap:'-100%',
+					            barCategoryGap:'40%',
+					            data: dataShadow,
+					            animation: false
+					        },
+					        {
+					            type: 'bar',
+					            data: taskNumData,
+					            itemStyle:{
+					            	normal:{
+					            		color:function(params) {
+					            			var colorList=['#41cefb','#00aaff','#1ba5dd','#4579d8'];
+					            			return colorList[params.dataIndex%4];
+					            		}
+					            	}
+					            }
+					        }
+					    ]
+					};
+					taskNumChart.setOption(taskNumOption);
 				}
-				for (var i = 0; i < taskNumData.length; i++) {
-				    dataShadow.push(yMax.sort()[yMax.length-1]);
-				}
-				taskNumOption = {
-				    title: {
-				        text: '任务数量',
-				        bottom: '0',
-				        left:'center',
-				        textStyle: { 
-				            color: '#585c65'
-				        }
-				    },
-				    tooltip : {
-				    	// formatter:"{b}<br />{c}个",
-				    	formatter: '<div class="gb-bar-formatter">{b}<br /><em>{c}</em></div>',
-				  //   	position: function (point, params, dom, rect, size) {
-						//     // 固定在顶部
-						//     return {left: rect.x-($(dom).width()-rect.width)/1.5, top: rect.y-$(dom).height()-10};
-						// },
-		            	position: "top",
-				        backgroundColor: 'rgba(255,255,255,0)',
-				        // borderColor:"#d8d8d8",
-				        // borderWidth:1,
-				        // textStyle:{
-				        // 	color:"#000"
-				        // },
-				    },
-				    grid: {
-				        left: '8%',
-				        containLabel: true
-				    },
-				    xAxis: {
-				        // data: ['等待审核', '等待发布', '正在发布', '发布完成'],
-				        data: xAxisData,
-				        //刻度横线
-				        axisTick: {
-				            show: false
-				        },
-				        //刻度字样式
-				        axisLabel: {
-				            textStyle: {
-				                color: '#7c8491',
-				                fontSize:'14',
-				                align: 'center'
-				            },
-				            interval:0,
-			         		// margin: 30,
-							// rotate:-20,
-				        },
-				        //刻度线
-				        axisLine: {
-				            lineStyle: {
-				                color:"#e5e5e5"
-				            }
-				        },
-				        z: 10
-				    },
-				    yAxis: [{
-				        //坐标轴名称
-			        	name: '单位：个',
-				        nameGap: 40,
-				        // nameRotate:0,
-				        nameLocation: "middle",
-				        nameTextStyle:{
-				        	color:"#7c8491",
-				        },
-				        //刻度横线
-				        axisTick: {
-				            show: false
-				        },
-				        //刻度字样式
-				        axisLabel: {
-				            textStyle: {
-				                color: '#7c8491',
-				                fontSize:'14'
-				            }
-				        },
-				        //刻度线
-				        axisLine: {
-				            lineStyle: {
-				                color:"#e5e5e5"//刻度线颜色
-				            }
-				        },
-				        //网格线
-				        splitLine:{
-							lineStyle:{
-								color: '#e5e5e5'//网格线颜色
-							}
-						},
-				    },{
-			            'type': 'value',
-			            'max': 200,
-				        axisLine: {
-				            lineStyle: {
-				                color:"#e5e5e5"
-				            }
-				        }
-			        }],
-				    dataZoom: [
-				        {
-				            type: 'inside'
-				        }
-				    ],
-				    series: [
-				        { // For shadow
-				            type: 'bar',
-				            itemStyle: {
-				                normal: {color: '#f7f8fa'}
-				            },
-			        		silent: true,
-				            barGap:'-100%',
-				            barCategoryGap:'40%',
-				            data: dataShadow,
-				            animation: false
-				        },
-				        {
-				            type: 'bar',
-				            data: taskNumData,
-				            itemStyle:{
-				            	normal:{
-				            		color:function(params) {
-				            			var colorList=['#41cefb','#00aaff','#1ba5dd','#4579d8'];
-				            			return colorList[params.dataIndex%4];
-				            		}
-				            	}
-				            }
-				        }
-				    ]
-				};
-				taskNumChart.setOption(taskNumOption);
 		    }
 		});
 
@@ -951,176 +957,179 @@ function addIncident() {
 		// 事件类型统计数据
 		$.ajax({
 		    url: portsrc+'/incidentTypeChart',
-		    token:token,
 		    type: 'GET',
 		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    },
 		    success: function(data) {
-		    	console.log(data)
-				var incidentTypeData =data.body;
-				var yMaxTwo = [];
-			    // x轴数据
-			    var incidentTypexAxis=[];
-			    for (var i = 0; i < data.body.length; i++) {
-			    	incidentTypexAxis.push(data.body[i].type);
-			    	yMaxTwo.push(data.body[i].value);
-			    }
-			    // 对x轴数据换行处理，4个字换行
-				var incidentTypexAxisData=[];
-			    for (var i = 0; i < incidentTypexAxis.length; i++) {
-			    	var strs = incidentTypexAxis[i].split(''); //字符串数组
-			        var str = ''
-			        for (var j = 0, s; s = strs[j++];) { //遍历字符串数组
-			            str += s;
-			            if (!(j % 5)) str += '\n';
-			        }
-			        incidentTypexAxisData.push(str)
-			    }
-				var dataShadowTwo = [];
-				for (var i = 0; i < incidentTypeData.length; i++) {
-				    dataShadowTwo.push(yMaxTwo.sort()[yMaxTwo.length-1]);
-				}
-				incidentTypeOption = {
-				    title: {
-				        text: '事件类型统计数据',
-				        bottom: '3%',
-				        left:'center',
-				        textStyle: { 
-				            color: '#585c65'
+		    	if(data.body!=null){
+					var incidentTypeData =data.body;
+					var yMaxTwo = [];
+				    // x轴数据
+				    var incidentTypexAxis=[];
+				    for (var i = 0; i < data.body.length; i++) {
+				    	incidentTypexAxis.push(data.body[i].type);
+				    	yMaxTwo.push(data.body[i].value);
+				    }
+				    // 对x轴数据换行处理，4个字换行
+					var incidentTypexAxisData=[];
+				    for (var i = 0; i < incidentTypexAxis.length; i++) {
+				    	var strs = incidentTypexAxis[i].split(''); //字符串数组
+				        var str = ''
+				        for (var j = 0, s; s = strs[j++];) { //遍历字符串数组
+				            str += s;
+				            if (!(j % 5)) str += '\n';
 				        }
-				    },
-				    // 区域缩放
-				    dataZoom: [
-				        {
-				            start: 30,
-				            end: 70,
-				        	bottom: '12%',
-				            backgroundColor:"#d0daeb",
-				            fillerColor:"#6e6fe6",
-				            handleIcon: handleIcon,
-			        		handleSize: '60%',
-			        		handleStyle: {
-					            color: '#fff',
+				        incidentTypexAxisData.push(str)
+				    }
+					var dataShadowTwo = [];
+					for (var i = 0; i < incidentTypeData.length; i++) {
+					    dataShadowTwo.push(yMaxTwo.sort()[yMaxTwo.length-1]);
+					}
+					incidentTypeOption = {
+					    title: {
+					        text: '事件类型统计数据',
+					        bottom: '3%',
+					        left:'center',
+					        textStyle: { 
+					            color: '#585c65'
+					        }
+					    },
+					    // 区域缩放
+					    dataZoom: [
+					        {
+					            start: 30,
+					            end: 70,
+					        	bottom: '12%',
+					            backgroundColor:"#d0daeb",
+					            fillerColor:"#6e6fe6",
+					            handleIcon: handleIcon,
+				        		handleSize: '60%',
+				        		handleStyle: {
+						            color: '#fff',
+						        },
+								showDataShadow:false,
 					        },
-							showDataShadow:false,
-				        },
-				        {
-				            type: 'inside',
-				        }
-				    ],
-				    tooltip : {
-				    	formatter: '<div class="gb-bar-formatter">{b}<br /><em>{c}</em></div>',
-						position: "top",
-				        backgroundColor: 'rgba(255,255,255,0)',
-				    },
-				    grid: {
-				        containLabel: true,
-				        top:'5%',
-				        left:'5%',
-				        right:'3%',
-				        bottom: '23%',
-				    },
-				    xAxis: {
-				        data:incidentTypexAxisData,
-				        //刻度横线
-				        axisTick: {
-				            show: false
-				        },
-				        //刻度字样式
-				        axisLabel: {
-				            textStyle: {
-				                color: '#7c8491',
-				                fontSize:'14',
-				                align: 'center'
-				            },
-				            // interval:0,//x轴是否自动调整显示数量
-				            // formatter:function(val){
-				            // 	var strs = val.split(''); //字符串数组
-			             //        var str = ''
-			             //        for (var i = 0, s; s = strs[i++];) { //遍历字符串数组
-			             //            str += s;
-			             //            if (!(i % 4)) str += '\n';
-			             //        }
-			             //        return str
-				            // }
-			         		// margin: 30,
-							// rotate:-20,
-				        },
-				        //刻度线
-				        axisLine: {
-				            lineStyle: {
-				                color:"#e5e5e5"
-				            }
-				        },
-				        z: 10
-				    },
-				    yAxis: [{
-				        //坐标轴名称
-			        	name: '单位：个',
-				        nameGap: 40,
-				        // nameRotate:0,
-				        nameLocation: "middle",
-				        nameTextStyle:{
-				        	color:"#7c8491",
-				        },
-				        //刻度横线
-				        axisTick: {
-				            show: false
-				        },
-				        //刻度字样式
-				        axisLabel: {
-				            textStyle: {
-				                color: '#7c8491',
-				                fontSize:'14'
-				            }
-				        },
-				        //刻度线
-				        axisLine: {
-				            lineStyle: {
-				                color:"#e5e5e5"//刻度线颜色
-				            }
-				        },
-				        //网格线
-				        splitLine:{
-							lineStyle:{
-								color: '#e5e5e5'//网格线颜色
-							}
-						},
-				    },{
-			            'type': 'value',
-			            'max': 200,
-				        axisLine: {
-				            lineStyle: {
-				                color:"#e5e5e5"
-				            }
-				        }
-			        }],
-				    series: [
-				        { // For shadow
-				            type: 'bar',
-				            itemStyle: {
-				                normal: {color: '#f7f8fa'}
-				            },
-			        		silent: true,
-				            barGap:'-100%',
-				            barCategoryGap:'40%',
-				            data: dataShadowTwo,
-				            animation: false
-				        },
-				        {
-				            type: 'bar',
-				            data: incidentTypeData,
-				            itemStyle:{
-				            	normal:{
-				            		color:function(params) {
-				            			var colorList=['#949eff','#9b7fe2','#6b65df'];
-				            			return colorList[params.dataIndex%3];
-				            		}
-				            	}
-				            }
-				        }
-				    ]
-				};
-				incidentTypeChart.setOption(incidentTypeOption);
+					        {
+					            type: 'inside',
+					        }
+					    ],
+					    tooltip : {
+					    	formatter: '<div class="gb-bar-formatter">{b}<br /><em>{c}</em></div>',
+							position: "top",
+					        backgroundColor: 'rgba(255,255,255,0)',
+					    },
+					    grid: {
+					        containLabel: true,
+					        top:'5%',
+					        left:'5%',
+					        right:'3%',
+					        bottom: '23%',
+					    },
+					    xAxis: {
+					        data:incidentTypexAxisData,
+					        //刻度横线
+					        axisTick: {
+					            show: false
+					        },
+					        //刻度字样式
+					        axisLabel: {
+					            textStyle: {
+					                color: '#7c8491',
+					                fontSize:'14',
+					                align: 'center'
+					            },
+					            // interval:0,//x轴是否自动调整显示数量
+					            // formatter:function(val){
+					            // 	var strs = val.split(''); //字符串数组
+				             //        var str = ''
+				             //        for (var i = 0, s; s = strs[i++];) { //遍历字符串数组
+				             //            str += s;
+				             //            if (!(i % 4)) str += '\n';
+				             //        }
+				             //        return str
+					            // }
+				         		// margin: 30,
+								// rotate:-20,
+					        },
+					        //刻度线
+					        axisLine: {
+					            lineStyle: {
+					                color:"#e5e5e5"
+					            }
+					        },
+					        z: 10
+					    },
+					    yAxis: [{
+					        //坐标轴名称
+				        	name: '单位：个',
+					        nameGap: 40,
+					        // nameRotate:0,
+					        nameLocation: "middle",
+					        nameTextStyle:{
+					        	color:"#7c8491",
+					        },
+					        //刻度横线
+					        axisTick: {
+					            show: false
+					        },
+					        //刻度字样式
+					        axisLabel: {
+					            textStyle: {
+					                color: '#7c8491',
+					                fontSize:'14'
+					            }
+					        },
+					        //刻度线
+					        axisLine: {
+					            lineStyle: {
+					                color:"#e5e5e5"//刻度线颜色
+					            }
+					        },
+					        //网格线
+					        splitLine:{
+								lineStyle:{
+									color: '#e5e5e5'//网格线颜色
+								}
+							},
+					    },{
+				            'type': 'value',
+				            'max': 200,
+					        axisLine: {
+					            lineStyle: {
+					                color:"#e5e5e5"
+					            }
+					        }
+				        }],
+					    series: [
+					        { // For shadow
+					            type: 'bar',
+					            itemStyle: {
+					                normal: {color: '#f7f8fa'}
+					            },
+				        		silent: true,
+					            barGap:'-100%',
+					            barCategoryGap:'40%',
+					            data: dataShadowTwo,
+					            animation: false
+					        },
+					        {
+					            type: 'bar',
+					            data: incidentTypeData,
+					            itemStyle:{
+					            	normal:{
+					            		color:function(params) {
+					            			var colorList=['#949eff','#9b7fe2','#6b65df'];
+					            			return colorList[params.dataIndex%3];
+					            		}
+					            	}
+					            }
+					        }
+					    ]
+					};
+					incidentTypeChart.setOption(incidentTypeOption);
+				}
 		    }
 		});
 
@@ -1129,367 +1138,382 @@ function addIncident() {
 		// bmap.clearOverlays();
 		$.ajax({
 		    url: portsrc+'/mapAllChart',
-		    token:token,
 		    type: 'GET',
 		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    },
 		    success: function(data) {
-		    	console.log(data)
-				allMapChart = echarts.init(document.getElementById('all-map'));
-				var geoCoordMap = data.body.geoCoordMap;//地点坐标
-				var BJData = data.body.BJData;//迁徙数据
-				var startData=data.body.startData;//迁徙起点数据
+		    	if(data.body!=null){
+					allMapChart = echarts.init(document.getElementById('all-map'));
+					var geoCoordMap = data.body.geoCoordMap;//地点坐标
+					var BJData = data.body.BJData;//迁徙数据
+					var startData=data.body.startData;//迁徙起点数据
 
-				var convertData = function(data) {
-				    var res = [];
-				    for (var i = 0; i < data.length; i++) {
-				        var dataItem = data[i];
-				        var fromCoord = geoCoordMap[dataItem[0].name];
-				        var toCoord = geoCoordMap[dataItem[1].name];
-				        if (fromCoord && toCoord) {
-				            res.push({
-				                fromName: dataItem[0].name,
-				                toName: dataItem[1].name,
-				                coords: [fromCoord, toCoord]
-				            });
-				        }
-				    }
-				    return res;
-				};
-				var mapSeries = [];
-				[
-				    [data.body.out, BJData],
-				].forEach(function(item, i) {
-				    mapSeries.push(
-					    {//出发圆点
-					        type: 'effectScatter',
-					        coordinateSystem: 'bmap',
-					        zlevel: 2,
-					        symbolSize: 15,
-					        itemStyle: {
-					            normal: {
-					                color: "red",
-					                shadowColor: 'red',
-									shadowBlur: 40,
-									shadowOffsetX:5,
-									shadowOffsetY:5
-					            }
-					        },
-					        data: [{
-					            name: item[0],
-					            value: geoCoordMap[item[0]].concat([50]),
-						        incident_data:startData
+					var convertData = function(data) {
+					    var res = [];
+					    for (var i = 0; i < data.length; i++) {
+					        var dataItem = data[i];
+					        var fromCoord = geoCoordMap[dataItem[0].name];
+					        var toCoord = geoCoordMap[dataItem[1].name];
+					        if (fromCoord && toCoord) {
+					            res.push({
+					                fromName: dataItem[0].name,
+					                toName: dataItem[1].name,
+					                coords: [fromCoord, toCoord]
+					            });
+					        }
+					    }
+					    return res;
+					};
+					var mapSeries = [];
+					[
+					    [data.body.out, BJData],
+					].forEach(function(item, i) {
+					    mapSeries.push(
+						    {//出发圆点
+						        type: 'effectScatter',
+						        coordinateSystem: 'bmap',
+						        zlevel: 2,
+						        symbolSize: 15,
+						        itemStyle: {
+						            normal: {
+						                color: "red",
+						                shadowColor: 'red',
+										shadowBlur: 40,
+										shadowOffsetX:5,
+										shadowOffsetY:5
+						            }
+						        },
+						        data: [{
+						            name: item[0],
+						            value: geoCoordMap[item[0]].concat([50]),
+							        incident_data:startData
 
-					        }]
-					    },{//线、飞机
-					        type: 'lines',
-					        coordinateSystem: 'bmap',
-					        zlevel: 2,
-				    		// symbol:"rect",
-					        effect: {
-					            show: true,
-					            period: 6,
-					            trailLength: 0,
-					            symbol: planePath,
-					            symbolSize: 35
-					        },
-					        lineStyle: {
-					            normal: {
-					                color: "red",
-					                width: 2,
-					                curveness: 0.2,
-			                		type: 'dotted'
-					            }
-					        },
-					        data: convertData(item[1])
-					    }, {//省份圆点红色事件
-					    	name:"红色事件",
-					        type: 'effectScatter',
-					        coordinateSystem: 'bmap',
-					        zlevel: 2,
-					        symbolSize: 20,
-				    		// symbol:"rect",//正方形
-					        rippleEffect: {
-					            brushType: 'stroke'
-					        },
-					        itemStyle: {
-					            normal: {
-					                color: function(params) {//省份圆点颜色设置
-					     //    			console.log(params)
-										// var tmp = params.data.incident;
-										// if (tmp == 'orange') {
-										// 	return '#ff9700';//橙色事件
-										// } else if (tmp == 'green') {
-										// 	return '#00e1b4';//绿色事件
-										// } else if (tmp == 'blue') {
-										// 	return '#518fff';//蓝色事件
-										// } else if (tmp == 'red') {
-											return '#ff3833';//红色事件
-										// } else {
-										// 	return '#fada00';//黄色事件
-										// }
-									},
-					                shadowColor: '#ff3833',
-									shadowBlur: 25,
-									shadowOffsetX:5,
-									shadowOffsetY:5,
-					            }
-					        },
-					        data: item[1].map(function(dataItem) {
-					        	if(dataItem[1].incident=="red"){
-						            return {
-						                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
-						                incident:dataItem[1].incident,
-						                incident_data:dataItem[1].incident_data
-						            };
-						        }
-					        })
-					    }, {//省份圆点橙色事件
-					    	name:"橙色事件",
-					        type: 'effectScatter',
-					        coordinateSystem: 'bmap',
-					        zlevel: 2,
-					        symbolSize: 20,
-				    		// symbol:"rect",//正方形
-					        rippleEffect: {
-					            brushType: 'stroke'
-					        },
-					        itemStyle: {
-					            normal: {
-					                color: function(params) {//省份圆点颜色设置
-					     //    			console.log(params)
-										// var tmp = params.data.incident;
-										// if (tmp == 'orange') {
-											return '#ff9700';//橙色事件
-										// } else if (tmp == 'green') {
-										// 	return '#00e1b4';//绿色事件
-										// } else if (tmp == 'blue') {
-										// 	return '#518fff';//蓝色事件
-										// } else if (tmp == 'red') {
-											// return '#ff3833';//红色事件
-										// } else {
-										// 	return '#fada00';//黄色事件
-										// }
-									},
-					                shadowColor: '#ff9700',
-									shadowBlur: 40,
-									shadowOffsetX:5,
-									shadowOffsetY:5,
-					            }
-					        },
-					        data: item[1].map(function(dataItem) {
-					        	if(dataItem[1].incident=="orange"){
-						            return {
-						                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
-						                incident:dataItem[1].incident,
-						                incident_data:dataItem[1].incident_data
-						            };
-						        }
-					        })
-					    }, {//省份圆点黄色事件
-					    	name:"黄色事件",
-					        type: 'effectScatter',
-					        coordinateSystem: 'bmap',
-					        zlevel: 2,
-					        symbolSize: 20,
-				    		// symbol:"rect",//正方形
-					        rippleEffect: {
-					            brushType: 'stroke'
-					        },
-					        itemStyle: {
-					            normal: {
-					                color: function(params) {//省份圆点颜色设置
-					     //    			console.log(params)
-										// var tmp = params.data.incident;
-										// if (tmp == 'orange') {
-											// return '#ff9700';//橙色事件
-										// } else if (tmp == 'green') {
-										// 	return '#00e1b4';//绿色事件
-										// } else if (tmp == 'blue') {
-										// 	return '#518fff';//蓝色事件
-										// } else if (tmp == 'red') {
-											// return '#ff3833';//红色事件
-										// } else {
-											return '#fada00';//黄色事件
-										// }
-									},
-					                shadowColor: '#fada00',
-									shadowBlur: 40,
-									shadowOffsetX:5,
-									shadowOffsetY:5,
-					            }
-					        },
-					        data: item[1].map(function(dataItem) {
-					        	if(dataItem[1].incident=="yellow"){
-						            return {
-						                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
-						                incident:dataItem[1].incident,
-						                incident_data:dataItem[1].incident_data
-						            };
-						        }
-					        })
-					    }, {//省份圆点蓝色事件
-					    	name:"蓝色事件",
-					        type: 'effectScatter',
-					        coordinateSystem: 'bmap',
-					        zlevel: 2,
-					        symbolSize: 20,
-				    		// symbol:"rect",//正方形
-					        rippleEffect: {
-					            brushType: 'stroke'
-					        },
-					        itemStyle: {
-					            normal: {
-					                color: function(params) {//省份圆点颜色设置
-					     //    			console.log(params)
-										// var tmp = params.data.incident;
-										// if (tmp == 'orange') {
-											// return '#ff9700';//橙色事件
-										// } else if (tmp == 'green') {
-										// 	return '#00e1b4';//绿色事件
-										// } else if (tmp == 'blue') {
-											return '#518fff';//蓝色事件
-										// } else if (tmp == 'red') {
-											// return '#ff3833';//红色事件
-										// } else {
-											// return '#fada00';//黄色事件
-										// }
-									},
-					                shadowColor: '#518fff',
-									shadowBlur: 40,
-									shadowOffsetX:5,
-									shadowOffsetY:5,
-					            }
-					        },
-					        data: item[1].map(function(dataItem) {
-					        	if(dataItem[1].incident=="blue"){
-						            return {
-						                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
-						                incident:dataItem[1].incident,
-						                incident_data:dataItem[1].incident_data
-						            };
-						        }
-					        })
-					    }, {//省份圆点绿色事件
-					    	name:"绿色事件",
-					        type: 'effectScatter',
-					        coordinateSystem: 'bmap',
-					        zlevel: 2,
-					        symbolSize: 20,
-				    		// symbol:"rect",//正方形
-					        rippleEffect: {
-					            brushType: 'stroke'
-					        },
-					        itemStyle: {
-					            normal: {
-					                color: function(params) {//省份圆点颜色设置
-					     //    			console.log(params)
-										// var tmp = params.data.incident;
-										// if (tmp == 'orange') {
-											// return '#ff9700';//橙色事件
-										// } else if (tmp == 'green') {
-											return '#00e1b4';//绿色事件
-										// } else if (tmp == 'blue') {
-											// return '#518fff';//蓝色事件
-										// } else if (tmp == 'red') {
-											// return '#ff3833';//红色事件
-										// } else {
-											// return '#fada00';//黄色事件
-										// }
-									},
-					                shadowColor: '#00e1b4',
-									shadowBlur: 40,
-									shadowOffsetX:5,
-									shadowOffsetY:5,
-					            }
-					        },
-					        data: item[1].map(function(dataItem) {
-					        	if(dataItem[1].incident=="green"){
-						            return {
-						                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
-						                incident:dataItem[1].incident,
-						                incident_data:dataItem[1].incident_data
-						            };
-						        }
-					        })
-					    });
-				});
+						        }]
+						    },{//线、飞机
+						        type: 'lines',
+						        coordinateSystem: 'bmap',
+						        zlevel: 2,
+					    		// symbol:"rect",
+						        effect: {
+						            show: true,
+						            period: 6,
+						            trailLength: 0,
+						            symbol: planePath,
+						            symbolSize: 35
+						        },
+						        lineStyle: {
+						            normal: {
+						                color: "red",
+						                width: 2,
+						                curveness: 0.2,
+				                		type: 'dotted'
+						            }
+						        },
+						        data: convertData(item[1])
+						    }, {//省份圆点红色事件
+						    	name:"红色事件",
+						        type: 'effectScatter',
+						        coordinateSystem: 'bmap',
+						        zlevel: 2,
+						        symbolSize: 20,
+					    		// symbol:"rect",//正方形
+						        rippleEffect: {
+						            brushType: 'stroke'
+						        },
+						        itemStyle: {
+						            normal: {
+						                color: function(params) {//省份圆点颜色设置
+						     //    			console.log(params)
+											// var tmp = params.data.incident;
+											// if (tmp == 'orange') {
+											// 	return '#ff9700';//橙色事件
+											// } else if (tmp == 'green') {
+											// 	return '#00e1b4';//绿色事件
+											// } else if (tmp == 'blue') {
+											// 	return '#518fff';//蓝色事件
+											// } else if (tmp == 'red') {
+												return '#ff3833';//红色事件
+											// } else {
+											// 	return '#fada00';//黄色事件
+											// }
+										},
+						                shadowColor: '#ff3833',
+										shadowBlur: 25,
+										shadowOffsetX:5,
+										shadowOffsetY:5,
+						            }
+						        },
+						        data: item[1].map(function(dataItem) {
+						        	if(dataItem[1].incident=="red"){
+							            return {
+							                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
+							                incident:dataItem[1].incident,
+							                incident_data:dataItem[1].incident_data
+							            };
+							        }
+						        })
+						    }, {//省份圆点橙色事件
+						    	name:"橙色事件",
+						        type: 'effectScatter',
+						        coordinateSystem: 'bmap',
+						        zlevel: 2,
+						        symbolSize: 20,
+					    		// symbol:"rect",//正方形
+						        rippleEffect: {
+						            brushType: 'stroke'
+						        },
+						        itemStyle: {
+						            normal: {
+						                color: function(params) {//省份圆点颜色设置
+						     //    			console.log(params)
+											// var tmp = params.data.incident;
+											// if (tmp == 'orange') {
+												return '#ff9700';//橙色事件
+											// } else if (tmp == 'green') {
+											// 	return '#00e1b4';//绿色事件
+											// } else if (tmp == 'blue') {
+											// 	return '#518fff';//蓝色事件
+											// } else if (tmp == 'red') {
+												// return '#ff3833';//红色事件
+											// } else {
+											// 	return '#fada00';//黄色事件
+											// }
+										},
+						                shadowColor: '#ff9700',
+										shadowBlur: 40,
+										shadowOffsetX:5,
+										shadowOffsetY:5,
+						            }
+						        },
+						        data: item[1].map(function(dataItem) {
+						        	if(dataItem[1].incident=="orange"){
+							            return {
+							                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
+							                incident:dataItem[1].incident,
+							                incident_data:dataItem[1].incident_data
+							            };
+							        }
+						        })
+						    }, {//省份圆点黄色事件
+						    	name:"黄色事件",
+						        type: 'effectScatter',
+						        coordinateSystem: 'bmap',
+						        zlevel: 2,
+						        symbolSize: 20,
+					    		// symbol:"rect",//正方形
+						        rippleEffect: {
+						            brushType: 'stroke'
+						        },
+						        itemStyle: {
+						            normal: {
+						                color: function(params) {//省份圆点颜色设置
+						     //    			console.log(params)
+											// var tmp = params.data.incident;
+											// if (tmp == 'orange') {
+												// return '#ff9700';//橙色事件
+											// } else if (tmp == 'green') {
+											// 	return '#00e1b4';//绿色事件
+											// } else if (tmp == 'blue') {
+											// 	return '#518fff';//蓝色事件
+											// } else if (tmp == 'red') {
+												// return '#ff3833';//红色事件
+											// } else {
+												return '#fada00';//黄色事件
+											// }
+										},
+						                shadowColor: '#fada00',
+										shadowBlur: 40,
+										shadowOffsetX:5,
+										shadowOffsetY:5,
+						            }
+						        },
+						        data: item[1].map(function(dataItem) {
+						        	if(dataItem[1].incident=="yellow"){
+							            return {
+							                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
+							                incident:dataItem[1].incident,
+							                incident_data:dataItem[1].incident_data
+							            };
+							        }
+						        })
+						    }, {//省份圆点蓝色事件
+						    	name:"蓝色事件",
+						        type: 'effectScatter',
+						        coordinateSystem: 'bmap',
+						        zlevel: 2,
+						        symbolSize: 20,
+					    		// symbol:"rect",//正方形
+						        rippleEffect: {
+						            brushType: 'stroke'
+						        },
+						        itemStyle: {
+						            normal: {
+						                color: function(params) {//省份圆点颜色设置
+						     //    			console.log(params)
+											// var tmp = params.data.incident;
+											// if (tmp == 'orange') {
+												// return '#ff9700';//橙色事件
+											// } else if (tmp == 'green') {
+											// 	return '#00e1b4';//绿色事件
+											// } else if (tmp == 'blue') {
+												return '#518fff';//蓝色事件
+											// } else if (tmp == 'red') {
+												// return '#ff3833';//红色事件
+											// } else {
+												// return '#fada00';//黄色事件
+											// }
+										},
+						                shadowColor: '#518fff',
+										shadowBlur: 40,
+										shadowOffsetX:5,
+										shadowOffsetY:5,
+						            }
+						        },
+						        data: item[1].map(function(dataItem) {
+						        	if(dataItem[1].incident=="blue"){
+							            return {
+							                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
+							                incident:dataItem[1].incident,
+							                incident_data:dataItem[1].incident_data
+							            };
+							        }
+						        })
+						    }, {//省份圆点绿色事件
+						    	name:"绿色事件",
+						        type: 'effectScatter',
+						        coordinateSystem: 'bmap',
+						        zlevel: 2,
+						        symbolSize: 20,
+					    		// symbol:"rect",//正方形
+						        rippleEffect: {
+						            brushType: 'stroke'
+						        },
+						        itemStyle: {
+						            normal: {
+						                color: function(params) {//省份圆点颜色设置
+						     //    			console.log(params)
+											// var tmp = params.data.incident;
+											// if (tmp == 'orange') {
+												// return '#ff9700';//橙色事件
+											// } else if (tmp == 'green') {
+												return '#00e1b4';//绿色事件
+											// } else if (tmp == 'blue') {
+												// return '#518fff';//蓝色事件
+											// } else if (tmp == 'red') {
+												// return '#ff3833';//红色事件
+											// } else {
+												// return '#fada00';//黄色事件
+											// }
+										},
+						                shadowColor: '#00e1b4',
+										shadowBlur: 40,
+										shadowOffsetX:5,
+										shadowOffsetY:5,
+						            }
+						        },
+						        data: item[1].map(function(dataItem) {
+						        	if(dataItem[1].incident=="green"){
+							            return {
+							                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
+							                incident:dataItem[1].incident,
+							                incident_data:dataItem[1].incident_data
+							            };
+							        }
+						        })
+						    });
+					});
 
-				mapOption = {
-				    bmap: {
-					    center: data.body.center,//地图中心
-					    zoom: 8,
-					    roam: true
-					},
-				    tooltip : {
-				    	formatter: function (params, ticket, callback) {
-						    var incident_data=params.data.incident_data;
-						    var li="";
-						    if(incident_data!=undefined){
-							    for (var i = 0; i < incident_data.length; i++) {
-							    	li=li+'<li><em>'+(i+1)+'</em><i class='+incident_data[i].color+'></i><span>'+incident_data[i].incident_name+'</span></li>'
+					mapOption = {
+					    bmap: {
+						    center: data.body.center,//地图中心
+						    zoom: 8,
+						    roam: true
+						},
+					    tooltip : {
+					    	formatter: function (params, ticket, callback) {
+							    var incident_data=params.data.incident_data;
+							    var li="";
+							    if(incident_data!=undefined){
+								    for (var i = 0; i < incident_data.length; i++) {
+								    	li=li+'<li><em>'+(i+1)+'</em><i class='+incident_data[i].color+'></i><span>'+incident_data[i].incident_name+'</span></li>'
+								    }
+								    var html='<div class="gb-incident-list scroll">'+
+										    	'<ul>'+
+										    		li+
+										    	'</ul>'+
+										    '</div>'
+								    return html;
+							    }else{
+							    	var html='<div class="gb-incident-list scroll">'+
+										    	'<ul>'+
+										    		'<li><span>无</span></li>'
+										    	'</ul>'+
+										    '</div>'
+								    return html;
 							    }
-							    var html='<div class="gb-incident-list scroll">'+
-									    	'<ul>'+
-									    		li+
-									    	'</ul>'+
-									    '</div>'
-							    return html;
-						    }else{
-						    	var html='<div class="gb-incident-list scroll">'+
-									    	'<ul>'+
-									    		'<li><span>无</span></li>'
-									    	'</ul>'+
-									    '</div>'
-							    return html;
-						    }
-						},
-						enterable:true,
-				    	position: function (point, params, dom, rect, size) {
-						    // 固定在顶部
-						    return {left: rect.x-($(dom).width()/2)+(rect.width/2.2), top: rect.y-$(dom).height()-10};
-						},
-				        backgroundColor: 'rgba(255,255,255,0)',
-				    },
-				    legend: {
-				        orient: 'vertical',
-				    	backgroundColor:'rgba(255,255,255,0.8)',
-				        top: '30',
-				        right: '30',
-				        data: ['红色事件','橙色事件','黄色事件','蓝色事件','绿色事件'],
-				        textStyle: {
-				            color: '#7c8491',
-				        	padding:[5,0]
-				        },
-				        align:"left",
-				        padding:[10,25]
-				    },
-				    series: mapSeries
-				};
-				allMapChart.setOption(mapOption);
-			    // 获取百度地图对象
-			    allbmap = allMapChart.getModel().getComponent('bmap').getBMap();
-				allbmap.centerAndZoom(new BMap.Point(120.166085,30.279006), 8);
-			    blist = [];
-			    districtLoading = 0;
-				setTimeout(function () {
-					// 地图划分区域地点
-					for (var i = 0; i < data.body.divideMap.length; i++) {
-				    	addDistrict(data.body.divideMap[i],allbmap);
-					}
-				    // addDistrict("平阳县",allbmap);
-				    // addDistrict("宁波",allbmap);
-				    // addDistrict("嘉兴",allbmap);
-				    // addDistrict("绍兴",allbmap);
-				    // addDistrict("台州",allbmap);
-				    // addDistrict("温州",allbmap);
-				},100)
+							},
+							enterable:true,
+					    	position: function (point, params, dom, rect, size) {
+							    // 固定在顶部
+							    return {left: rect.x-($(dom).width()/2)+(rect.width/2.2), top: rect.y-$(dom).height()-10};
+							},
+					        backgroundColor: 'rgba(255,255,255,0)',
+					    },
+					    legend: {
+					        orient: 'vertical',
+					    	backgroundColor:'rgba(255,255,255,0.8)',
+					        top: '30',
+					        right: '30',
+					        data: ['红色事件','橙色事件','黄色事件','蓝色事件','绿色事件'],
+					        textStyle: {
+					            color: '#7c8491',
+					        	padding:[5,0]
+					        },
+					        align:"left",
+					        padding:[10,25]
+					    },
+					    series: mapSeries
+					};
+					allMapChart.setOption(mapOption);
+				    // 获取百度地图对象
+				    allbmap = allMapChart.getModel().getComponent('bmap').getBMap();
+					allbmap.centerAndZoom(new BMap.Point(120.166085,30.279006), 8);
+				    blist = [];
+				    districtLoading = 0;
+					setTimeout(function () {
+						// 地图划分区域地点
+						for (var i = 0; i < data.body.divideMap.length; i++) {
+					    	addDistrict(data.body.divideMap[i],allbmap);
+						}
+					    // addDistrict("平阳县",allbmap);
+					    // addDistrict("宁波",allbmap);
+					    // addDistrict("嘉兴",allbmap);
+					    // addDistrict("绍兴",allbmap);
+					    // addDistrict("台州",allbmap);
+					    // addDistrict("温州",allbmap);
+					},100)
+				}
 		    }
 		});
 	}
 	boolall=false;
 }
 addIncident();
-
+// 获取事件总数和发布总数
+$.ajax({
+    url: portsrc+'/totalEvents',
+    type: 'post',
+    dataType: 'json',
+    data:{
+    	token:token,
+    },
+    success: function(data) {
+    	$('.j-event-num').html(data.body.split('-')[0]);
+    	$('.j-release-num').html(data.body.split('-')[1]);
+    }
+});
 
 
 
@@ -1556,7 +1580,6 @@ $(function () {
             	token:token,
 			},
             dataSrc: function ( data ) {
-            	console.log(data)
                 for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
                 	var d=data.body[i];
 
@@ -1687,27 +1710,27 @@ $(function () {
             	token:token,
 			},
             dataSrc: function ( data ) {
-            	console.log(data)
-                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
-                	var d=data.body[i];
+            	if(data.body!=null){
+	                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+	                	var d=data.body[i];
 
-                	var level="";
-					if(d.level=="RED"){
-						level="<img src='src/images/rank-red.png'/>";
-					} else if(d.level=="BLUE"){
-						level="<img src='src/images/rank-blue.png'/>";
-					} else if(d.level=="GREEN"){
-						level="<img src='src/images/rank-green.png'/>";
-					} else if(d.level=="ORANGE"){
-						level="<img src='src/images/rank-orange.png'/>";
-					} else if(d.level=="YELLOW"){
-						level="<img src='src/images/rank-yellow.png'/>";
-					}
-                	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
+	                	var level="";
+						if(d.level=="RED"){
+							level="<img src='src/images/rank-red.png'/>";
+						} else if(d.level=="BLUE"){
+							level="<img src='src/images/rank-blue.png'/>";
+						} else if(d.level=="GREEN"){
+							level="<img src='src/images/rank-green.png'/>";
+						} else if(d.level=="ORANGE"){
+							level="<img src='src/images/rank-orange.png'/>";
+						} else if(d.level=="YELLOW"){
+							level="<img src='src/images/rank-yellow.png'/>";
+						}
+	                	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
 
-                	data.body[i].name="<a class='view-cont'>"+d.name+"</a>";
+	                	data.body[i].name="<a class='view-cont'>"+d.name+"</a>";
+	                }
                 }
-                
                 return data.body;
             }
         },

@@ -5,8 +5,12 @@
 .roundlist{width:68%;height:80%;margin:3% auto 0px;}
 .roundlist li{width:28%;cursor:pointer;}
 .roundlist li.roundabout-in-focus{cursor:default;}
-.roundlist li a{display:block;width:100%;}
+.roundlist li a{display:block;width:100%;position: relative;}
 .roundlist li img{width:100%;display: block;}
+.roundlist li i{position: absolute;width: 100%;top: 54%;color: #fff;font-size: 16px;text-align: center;}
 @media screen and (max-width:1365px){
 	.rodtit{width:300px;}
+}
+@media screen and (max-width:1160px){
+	.roundlist li{width:35%;}
 }
