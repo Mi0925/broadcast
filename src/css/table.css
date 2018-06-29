@@ -63,7 +63,7 @@ table.dataTable thead th{height:36px;line-height:36px;padding-top:0;padding-bott
 th span.addselect{display:inline-block;position:absolute;height:36px;margin-left:2px;}
 th .dataTables_sizing{display: none} 
 th .dataTables_sizing .addselect{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"}
-.addselect select{position: absolute;top: 0px;left: 0px;z-index: 1;height:36px;color:#7c8491;line-height:36px;border-radius:5px;cursor: pointer;opacity: 0;display:block;font-size:12px;width:20px;}
+.addselect select,.addselect+select{position: absolute;top: 0px;left: 0px;z-index: 1;height:36px;color:#7c8491;line-height:36px;border-radius:5px;cursor: pointer;opacity: 0;display:block;font-size:12px;width:20px;}
 /*.dataTables_wrapper{overflow-x:auto;overflow-y:hidden;}*/
 /*.dataTables_scrollHeadInner,table.dataTable,.dataTables_scrollBody{width:100%!important;}*/
 .dataTables_scrollHead,.dataTables_scrollBody,.dataTables_scrollHeadInner{width:100%!important;}

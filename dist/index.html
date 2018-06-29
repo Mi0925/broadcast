@@ -292,7 +292,17 @@
 <!-- <script src="data/mock.js"></script>
 <script src="data/list.js"></script> -->
 <script>
-	// 登录判断
+	// 登录判断,token验证过期或者错误
+	$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+		setTimeout(function(argument) {
+			if (jqXHR.responseJSON) {
+				if(jqXHR.responseJSON.status==500){
+					alert(jqXHR.responseJSON.msg);
+					document.location.href="sign.html";
+				}
+			}
+		},500)
+	});
 	if(sessionStorage.getItem('token')=='' || sessionStorage.getItem('token')==null){
 		alert('请先登录');
 		document.location.href="sign.html";

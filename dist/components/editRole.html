@@ -80,62 +80,8 @@
 		// 	$.fn.zTree.init($(this), selSetting, selData);//初始化已选数据的树
 	};
 	// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-	// 全部数据
-	var allData = [{
-	    name: "任务消息管理",
-	    open: true,
-	    checked:true,
-	    children: [{
-	        name: "新建任务消息",
-	    },{
-	        name: "编辑任务消息",
-	    },{
-	        name: "停播任务消息",
-	    },{
-	        name: "取消播放任务消息",
-	    },{
-	        name: "审核任务消息",
-	    },{
-	        name: "查看任务消息",
-	    	checked:true,
-	    },{
-	        name: "重播任务消息",
-	    	checked:true,
-	    },{
-	        name: "删除任务消息",
-	    	checked:true,
-	    }]
-	},{
-	    name: "用户管理",
-	    open: true,
-	    checked:true,
-	    children: [{
-	        name: "新建用户",
-	    },{
-	        name: "停用/启用用户",
-	    },{
-	        name: "编辑用户",
-	    },{
-	        name: "删除用户",
-	    }]
-	},{
-	    name: "资源管理",
-	    open: true,
-	    checked:true,
-	    children: [{
-	        name: "查看资源",
-	    },{
-	        name: "编辑资源",
-	    },{
-	        name: "删除资源",
-	    },{
-	        name: "新增资源",
-	    },{
-	        name: "下载音频资源",
-	    }]
-	}];
 	//带复选框的树
 	$(".ztree-check").each(function() {
-		$.fn.zTree.init($(this), allSetting, allData);
+		$.fn.zTree.init($(this), allSetting, jurisdictionData);
 	});
 </script>
