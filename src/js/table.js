@@ -212,6 +212,7 @@ $(document).on('click','.operbtnTask',function(){
     $.ajax({
         url: portsrc+'/msg/getMsg',
         type: 'post',
+        async:false,
         dataType: 'json',
         data:{
             token:token,
@@ -219,17 +220,16 @@ $(document).on('click','.operbtnTask',function(){
             id:sessionStorage.getItem('editTableItem'),
         },
         success: function(data) {
-            var schedulePlanId=data.schedulePlanId;
+            var schedulePlanId=data.body.schedulePlanId;
             $.ajax({
                 url: portsrc+'/schedule/getItem',
                 type: 'post',
                 dataType: 'json',
                 data:{
                     token:token,
-                    id:0,
+                    id:schedulePlanId,
                 },
                 success: function(data) {
-                    console.log(data)
                     // $(".prevword").text(data.body.message);
                     for (var i = 0; i < data.body.listMP3.length; i++) {
                         var html='<li>'+
@@ -254,22 +254,22 @@ $(document).on('click','.operbtnCYCLE',function(){
         url: portsrc+'/practice/get/CyclePractice',
         type: 'post',
         dataType: 'json',
+        async:false,
         data:{
             token:token,
             id:sessionStorage.getItem('editTableItem'),
         },
         success: function(data) {
-            var schedulePlanId=data.schedulePlanId;
+            var schedulePlanId=data.body.schedulePlanId;
             $.ajax({
                 url: portsrc+'/schedule/getItem',
                 type: 'post',
                 dataType: 'json',
                 data:{
                     token:token,
-                    id:0,
+                    id:schedulePlanId,
                 },
                 success: function(data) {
-                    console.log(data)
                     // $(".prevword").text(data.body.message);
                     for (var i = 0; i < data.body.listMP3.length; i++) {
                         var html='<li>'+
@@ -294,19 +294,21 @@ $(document).on('click','.operbtnMANNUAL',function(){
         url: portsrc+'/practice/get/ManualPractice',
         type: 'post',
         dataType: 'json',
+        async:false,
         data:{
             token:token,
             id:sessionStorage.getItem('editTableItem'),
         },
         success: function(data) {
-            var schedulePlanId=data.schedulePlanId;
+            var schedulePlanId=data.body.schedulePlanId;
+            console.log(schedulePlanId)
             $.ajax({
                 url: portsrc+'/schedule/getItem',
                 type: 'post',
                 dataType: 'json',
                 data:{
                     token:token,
-                    id:0,
+                    id:schedulePlanId,
                 },
                 success: function(data) {
                     console.log(data)

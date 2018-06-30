@@ -139,46 +139,45 @@
 	<form class="layui-form" action="">
 		<div class="gb-dialog-main i">
 			<h3 class="gb-dialog-title">
-				<i class="iconfont icon-guanbi j-close-dialog"></i>
 			</h3>
 			<div style="width: 500px;height: 500px; padding: 0 15px;">
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>上级单位</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" readonly id="region" name="region" class="imptxt" id="citySel" lay-verify="required" onclick="showMenu();"/>
-						<div id="menuContent" class="gb-tree scroll" style="display:none;bottom: auto!important;">
-							<ul id="treeDemo" class="ztree"></ul>
+						<input type="text" readonly id="addAreaRegion" name="addAreaRegion" class="imptxt j-add-tree-area" lay-verify="required" onclick="onAddTreeArea();"/>
+						<div class="menuContent gb-tree scroll" style="display:none;bottom: auto!important;">
+							<ul id="selTree1" class="ztree"></ul>
 						</div>
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>地区名</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="regionName" name="regionName" class="imptxt" lay-verify="required"/>
+						<input type="text" id="addRegionName" name="regionName" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>经度</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="lon" name="lon" class="imptxt" lay-verify="required"/>
+						<input type="text" id="addlon" name="lon" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>纬度</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="lat" name="lat" class="imptxt" lay-verify="required"/>
+						<input type="text" id="addlat" name="lat" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>人口数</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="pop" name="pop" class="imptxt" lay-verify="required"/>
+						<input type="text" id="addpop" name="pop" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>面积</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="arer" name="arer" class="imptxt" lay-verify="required"/>
+						<input type="text" id="addarer" name="arer" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 			</div>
@@ -189,46 +188,45 @@
 	<form class="layui-form" action="">
 		<div class="gb-dialog-main i">
 			<h3 class="gb-dialog-title">
-				<i class="iconfont icon-guanbi j-close-dialog"></i>
 			</h3>
 			<div style="width: 500px;height: 500px; padding: 0 15px;">
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>上级单位</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" readonly id="region" name="region" class="imptxt" id="citySel" lay-verify="required" onclick="showMenu();"/>
-						<div id="menuContent" class="gb-tree scroll" style="display:none;bottom: auto!important;">
-							<ul id="treeDemo" class="ztree"></ul>
+						<input type="text" readonly id="editAreaRegion" name="editAreaRegion" class="imptxt j-add-tree-area" lay-verify="required" onclick="onAddTreeArea();"/>
+						<div class="menuContent gb-tree scroll" style="display:none;bottom: auto!important;">
+							<ul id="selTree2" class="ztree"></ul>
 						</div>
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>地区名</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="regionName" name="regionName" class="imptxt" lay-verify="required"/>
+						<input type="text" id="editRegionName" name="regionName" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>经度</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="lon" name="lon" class="imptxt" lay-verify="required"/>
+						<input type="text" id="editlon" name="lon" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>纬度</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="lat" name="lat" class="imptxt" lay-verify="required"/>
+						<input type="text" id="editlat" name="lat" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>人口数</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="pop" name="pop" class="imptxt" lay-verify="required"/>
+						<input type="text" id="editpop" name="pop" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>面积</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="arer" name="arer" class="imptxt" lay-verify="required"/>
+						<input type="text" id="editarer" name="arer" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 			</div>
@@ -380,22 +378,24 @@
 				btn: ['确定','取消'],
 				yes: function(index, layero){
 					var data={};
-					data.region=$('#region').val();
-					data.regionName=$('#regionName').val();
-					data.lon=$('#lon').val();
-					data.lat=$('#lat').val();
-					data.pop=$('#pop').val();
-					data.arer=$('#arer').val();
-					// $.ajax({
-					//     url: portsrc+"/msg/Platform/add",
-					//     type: 'post',
-					//     dataType: 'json',
-					//     data:{
-					//     	token:token,
-					//     },
-					//     success: function(data) {
-					//     }
-					// });
+					data.name=$('#addRegionName').val();
+					data.longtitude=$('#addlon').val();
+					data.latitude=$('#addlat').val();
+					data.population=$('#addpop').val();
+					data.arer=$('#addarer').val();
+					console.log(data)
+					$.ajax({
+					    url: portsrc+"/addArea",
+					    type: 'post',
+					    dataType: 'json',
+					    data:{
+					    	token:token,
+					    	parent:$('#addAreaRegion').val(),
+					    	areaWithResource:JSON.stringify(data)
+					    },
+					    success: function(data) {
+					    }
+					});
 					layer.closeAll();
 				},
 				success: function(layero, index){
@@ -416,22 +416,24 @@
 				btn: ['修改','取消','删除'],
 				yes: function(index, layero){
 					var data={};
-					data.region=$('#region').val();
-					data.regionName=$('#regionName').val();
-					data.lon=$('#lon').val();
-					data.lat=$('#lat').val();
-					data.pop=$('#pop').val();
-					data.arer=$('#arer').val();
-					// $.ajax({
-					//     url: portsrc+"/msg/Platform/add",
-					//     type: 'post',
-					//     dataType: 'json',
-					//     data:{
-					//     	token:token,
-					//     },
-					//     success: function(data) {
-					//     }
-					// });
+					data.name=$('#editRegionName').val();
+					data.longtitude=$('#editlon').val();
+					data.latitude=$('#editlat').val();
+					data.population=$('#editpop').val();
+					data.arer=$('#editarer').val();
+					console.log(data)
+					$.ajax({
+					    url: portsrc+"/addArea",
+					    type: 'post',
+					    dataType: 'json',
+					    data:{
+					    	token:token,
+					    	parent:$('#editAreaRegion').val(),
+					    	areaWithResource:JSON.stringify(data)
+					    },
+					    success: function(data) {
+					    }
+					});
 					layer.closeAll();
 				},
 				success: function(layero, index){
@@ -463,5 +465,18 @@
 			$.fn.zTree.init($(this), resourceSetting, resourceData);
 		});
 	}
+	$.ajax({
+	    url: portsrc+'/allArea',
+	    type: 'post',
+	    dataType: 'json',
+	    data:{
+	    	token:token,
+	    },
+	    success: function(data) {
+	    	console.log(data)
+			$.fn.zTree.init($("#selTree1"), selectResourceSetting1, data.body);
+			$.fn.zTree.init($("#selTree2"), selectResourceSetting2, data.body);
+	    }
+	});
 
 </script>

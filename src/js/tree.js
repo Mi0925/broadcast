@@ -46,6 +46,44 @@ var selectSetting = {//下拉选择地区的树配置
 		onCheck: onCheck
 	}
 };
+var selectResourceSetting1 = {//资源下拉选择地区的树配置
+	check: {
+		enable: true,
+		chkStyle: "radio",
+		radioType: "all"
+	},
+	view: {
+		showLine: false
+	},
+	data: {
+		simpleData: {
+			enable: true
+		}
+	},
+	callback: {
+		onClick: onClick,
+		onCheck: onResourceCheck1
+	}
+};
+var selectResourceSetting2 = {//资源下拉选择地区的树配置
+	check: {
+		enable: true,
+		chkStyle: "radio",
+		radioType: "all"
+	},
+	view: {
+		showLine: false
+	},
+	data: {
+		simpleData: {
+			enable: true
+		}
+	},
+	callback: {
+		onClick: onClick,
+		onCheck: onResourceCheck2
+	}
+};
 var areaSel=[];//存储选择地区传给后台的省市
 
 
@@ -225,10 +263,35 @@ function onCheck(e, treeId, treeNode) {
 	v = "";
 	for (var i=0, l=nodes.length; i<l; i++) {
 		// v += nodes[i].name + ",";
-		v += $("#"+treeNode.parentTId+">a").text()==""?treeNode.name:$("#"+treeNode.parentTId+">a").text()+'-'+treeNode.name
+		v += $("#"+treeNode.parentTId+">a").text()==""?treeNode.name:$("#"+treeNode.parentTId+">a").text()
 	}
 	// if (v.length > 0 ) v = v.substring(0, v.length-1);
 	var cityObj = $("#citySel");
+	cityObj.attr("value", v);
+}
+
+function onResourceCheck1(e, treeId, treeNode) {
+	var zTree = $.fn.zTree.getZTreeObj("selTree1"),
+	nodes = zTree.getCheckedNodes(true),
+	v = "";
+	for (var i=0, l=nodes.length; i<l; i++) {
+		// v += nodes[i].name + ",";
+		v += $("#"+treeNode.parentTId+">a").text()==""?treeNode.name:$("#"+treeNode.parentTId+">a").text()
+	}
+	// if (v.length > 0 ) v = v.substring(0, v.length-1);
+	var cityObj = $("#addAreaRegion");
+	cityObj.attr("value", v);
+}
+function onResourceCheck2(e, treeId, treeNode) {
+	var zTree = $.fn.zTree.getZTreeObj("selTree2"),
+	nodes = zTree.getCheckedNodes(true),
+	v = "";
+	for (var i=0, l=nodes.length; i<l; i++) {
+		// v += nodes[i].name + ",";
+		v += $("#"+treeNode.parentTId+">a").text()==""?treeNode.name:$("#"+treeNode.parentTId+">a").text()+'-'+treeNode.name
+	}
+	// if (v.length > 0 ) v = v.substring(0, v.length-1);
+	var cityObj = $("#editAreaRegion");
 	cityObj.attr("value", v);
 }
 
@@ -246,5 +309,23 @@ function hideMenu() {
 function onBodyDown(event) {
 	if (!(event.target.id == "menuBtn" || event.target.id == "citySel" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
 		hideMenu();
+	}
+}
+
+
+function onAddTreeArea() {
+	var cityObj = $(".j-add-tree-area");
+	var cityOffset = $(".j-add-tree-area").offset();
+	$(".menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+
+	$("body").bind("mousedown", onBodyArea);
+}
+function hideArea() {
+	$(".menuContent").fadeOut("fast");
+	$("body").unbind("mousedown", onBodyArea);
+}
+function onBodyArea(event) {
+	if (!(event.target.id == "menuBtn" || event.target.id == "citySel" || event.target.id == "menuContent" || $(event.target).parents(".menuContent").length>0)) {
+		hideArea();
 	}
 }

@@ -23,87 +23,99 @@ var handleIcon='M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8
 var jurisdictionData = [{
     name: "任务消息管理",
     open: true,
-    checked:true,
     children: [{
+        key:'newTask',
         name: "新建任务消息",
     },{
+        key:'editTask',
         name: "编辑任务消息（包括停播、取消、重播）",
     },{
+        key:'auditTask',
         name: "审核任务消息（包括停播、取消、重播）",
     },{
+        key:'checkTask',
         name: "查看任务消息",
-    	checked:true,
     },{
+        key:'deleteTask',
         name: "删除任务消息",
-    	checked:true,
     }]
 },{
     name: "效果评估",
     open: true,
-    checked:true,
     children: [{
+        key:'checkPreview',
         name: "查看效果评估",
     }]
 },{
     name: "应急演练",
     open: true,
-    checked:true,
     children: [{
+        key:'checkPracticeResult',
         name: "查看演练效果",
     },{
+        key:'newEditPractice',
         name: "新建演练计划（编辑演练计划）",
     },{
+        key:'deletePractice',
         name: "删除演练计划",
     }]
 },{
     name: "消息接入",
     open: true,
-    checked:true,
     children: [{
+        key:'newEditMsgPlatform',
         name: "新建消息接入（编辑消息接入）",
     },{
+        key:'deleteMsgPlatform',
         name: "删除消息接入",
     }]
 },{
     name: "资源管理",
     open: true,
-    checked:true,
     children: [{
+        key:'checkResource',
         name: "查看资源",
     },{
+        key:'newEditResource',
         name: "新增资源（编辑资源）",
     },{
+        key:'deleteEditResource',
         name: "删除资源（编辑资源）",
     },{
+        key:'downloadResource',
         name: "下载音频资源",
     }]
 },{
     name: "安全证书",
     open: true,
-    checked:true,
     children: [{
+        key:'uploadEditCert',
         name: "上传证书（编辑证书）",
     },{
+        key:'deleteEditCert',
         name: "删除证书（编辑证书）",
     }]
 },{
     name: "日志管理",
     open: true,
-    checked:true,
     children: [{
+        key:'checkLog',
         name: "查看日子管理",
     },{
+        key:'deleteLog',
         name: "删除日志管理",
     }]
 },{
     name: "用户管理",
     open: true,
-    checked:true,
     children: [{
+        key:'newEditUser',
         name: "新建用户（编辑用户）",
     },{
+        key:'activeEditUser',
         name: "停用/启用用户（编辑用户）",
     },{
+        key:'deleteEditUser',
         name: "删除用户（编辑用户）",
     }]
 }];

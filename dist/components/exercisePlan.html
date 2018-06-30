@@ -224,6 +224,8 @@
                 		case 'SUSPEND':
                 			data.body[i].status='暂停';
                 			break;
+                		default:
+                			data.body[i].status='无状态';
                 	}
 
                 	var level="";
@@ -305,10 +307,6 @@
                 		data.body[i].type='手动';
                 	}else{
                 		data.body[i].type='周期';
-                	}
-
-                	if(d.status==null){
-                		data.body[i].status='无状态'
                 	}
 
                 	data.body[i].department="无";
