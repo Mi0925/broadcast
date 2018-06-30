@@ -10,15 +10,14 @@
 					<div class="progtype">
 						<p class="oneitem-tit"><small>*</small>角色名称</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt"/>
-							<p class="itemexp" style="color: red;">！角色名称重复</p>
+							<input type="text" name="name" class="imptxt" lay-verify="required"/>
 						</div>
 					</div>
 					<div class="progtype">
 						<div class="msgcont">
 							<p class="oneitem-tit"><small>*</small>角色说明</p>
 							<div class="txtimp">
-								<textarea id="imparea" class="imparea" maxlength="200" onfocus="if(this.value == defaultValue){this.value = '';this.style.color = '#333'}" onblur="if(!value){this.value = defaultValue;this.style.color = '#ccc'}">请输入说明</textarea>
+								<textarea id="imparea" name="content" class="imparea" maxlength="200" lay-verify="required"></textarea>
 								<span class="area-count"><span class="countnew">0</span>/200</span>
 							</div>
 						</div>
@@ -33,18 +32,10 @@
 			</div>
 			<div class="tocreat">
 				<div class="progcreat">
-					<input type="button" value="确定新建" class="tocreatbtn" />
+					<input type="button" value="确定新建" class="tocreatbtn" lay-submit lay-filter="*" />
 				</div>
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
-		</div>
-		<div class="choose">
-			<p class="choword">确定删除此任务消息吗？</p>
-			<div class="chobtn">
-				<input type="button" value="删除" class="chopri cho-delete" />
-				<input type="button" value="取消" class="cho-cancel" />
-			</div>
-			<span class="triangle"><em></em></span>
 		</div>
 	</form>
 </div>
@@ -55,6 +46,30 @@
 
 <script type="text/javascript">
 	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+	var role={
+		"deleteTask": false,
+		"newTask": false,
+		"editTask": false,
+		"auditTask": false,
+		"checkTask": false,
+		"checkPreview": false,
+		"checkPracticeResult": false,
+		"newEditPractice": false,
+		"deletePractice": false,
+		"newEditMsgPlatform": false,
+		"deleteMsgPlatform": false,
+		"checkResource": false,
+		"newEditResource": false,
+		"deleteEditResource": false,
+		"downloadResource": false,
+		"uploadEditCert": false,
+		"deleteEditCert": false,
+		"checkLog": false,
+		"deleteLog": false,
+		"newEditUser": false,
+		"activeEditUser": false,
+		"deleteEditUser": false
+	}
 	var allSetting = {
 		view:{
 			showLine:false,//去掉连接线
@@ -68,12 +83,41 @@
 	};
 	function zTreeOnCheck(event, treeId, treeNode) {
 		// 勾选复选框将触发这个方法，在这里调用ajax获取已选数据
-		treeObj = $.fn.zTree.getZTreeObj("gb_tree_all1");//获取全部数据的树的对象
-	    console.log(treeObj.getCheckedNodes(true).concat(treeObj.getCheckedNodes(false)))
+		var treeObj = $.fn.zTree.getZTreeObj("gb_tree_all1");//获取全部数据的树的对象
+		var treeData=treeObj.getCheckedNodes(true).concat(treeObj.getCheckedNodes(false));
+	    for (var i = 0; i < treeData.length; i++) {
+	    	if(treeData[i].key!=undefined){
+	    		role[treeData[i].key]=treeData[i].checked
+	    	}
+	    }
 	};
 	// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解
 	//带复选框的树
 	$(".ztree-check").each(function() {
 		$.fn.zTree.init($(this), allSetting, jurisdictionData);
+	});
+
+	layui.use(['form'], function(){
+		var form = layui.form;
+		form.on('submit(*)', function(data){
+			data.field.role=role;
+			$.ajax({
+			    url: portsrc+"/role/add",
+			    type: 'post',
+			    dataType: 'json',
+			    data:{
+			    	token:token,
+			    	role:JSON.stringify(data.field)
+			    },
+			    success: function(data) {
+					layer.open({
+			            title: '提示',
+		        		shadeClose:true,
+			            content: '新建成功'
+			        });
+			    }
+			});
+			return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+		});
 	});
 </script>
