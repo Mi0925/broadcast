@@ -53,11 +53,19 @@
 						</div>
 					</div>
 					<div class="settingone">
-						<p class="oneitem-tit"><small>*</small>密钥</p>
-						<div class="oneimp">
+						<p class="oneitem-tit"><small>*</small>证书</p>
+						<div class="layui-input-inline">
+							<select name="privateKey" lay-search="" lay-verify="required">
+								<option value="">请选择协议</option>
+								<option value="0">证书1</option>
+								<option value="1">证书2</option>
+								<option value="2">证书3</option>
+							</select>
+						</div>
+						<!-- <div class="oneimp">
 							<input type="text" name="privateKey" id="secretkey" class="imptxt" maxlength="20" lay-verify="required"/>
 							<span class="oneimp-count"><span class="countser">0</span>/20</span>
-						</div>
+						</div> -->
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>所属地区</p>
