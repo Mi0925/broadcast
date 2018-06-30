@@ -25,8 +25,8 @@
 				<a href="all-screen.html" target="_blank" class="layui-btn layui-btn-normal gb-projection-btn cur incident-btn">投屏全事件</a>
 				<div class="gb-chart-box">
 					<div class="gb-incident-count">
-						<button class="layui-btn layui-btn-danger">事件总数：<em class="j-event-num">6</em></button>
-						<button class="layui-btn layui-btn-warm">发布总数：<em class="j-release-num">6</em></button>
+						<button class="layui-btn layui-btn-danger">事件总数：<em class="j-event-num">0</em></button>
+						<button class="layui-btn layui-btn-warm">发布总数：<em class="j-release-num">0</em></button>
 					</div>
 					<div class="gb-chart-incident-pie">
 						<div class="gb-chart-item">
@@ -55,6 +55,7 @@
 									            <th>状态监测</th>
 									            <th>消息等级</th>
 									            <th>事件名称</th>
+									            <th>消息类别</th>
 									            <th>覆盖区域</th>
 									            <th>覆盖人口</th>
 									            <th>部门</th>
@@ -64,6 +65,7 @@
 								        </thead>
 								        <tfoot>
 									        <tr>
+									            <th></th>
 									            <th></th>
 									            <th></th>
 									            <th></th>
@@ -229,7 +231,9 @@
 			<p class="unword">杭州市西湖区应急广播中心</p>
 			<p class="oneitem-tit">负责人</p>
 			<p class="unword">橙子</p>
-			<p class="oneitem-tit">创建时间</p>
+			<p class="oneitem-tit">事件类别</p>
+			<p class="unword">2017-11-09 12:00</p>
+			<p class="oneitem-tit">发布时间</p>
 			<p class="unword">2017-11-09 12:00</p>
 		</div>
 	</div>
@@ -1727,6 +1731,7 @@ $(function () {
 							level="<img src='src/images/rank-yellow.png'/>";
 						}
 	                	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
+	                	data.body[i].type='类别';
 
 	                	data.body[i].name="<a class='view-cont'>"+d.name+"</a>";
 	                }
@@ -1738,6 +1743,7 @@ $(function () {
 		    { "data": "state" },
 		    { "data": "level" },
 		    { "data": "name" },
+		    { "data": "type" },
 		    { "data": "area" },
 		    { "data": "population" },
 		    { "data": "department" },
@@ -1747,7 +1753,7 @@ $(function () {
 		"columnDefs": [
 			{
 				orderable: false,
-				targets: [0,1,2,5,6]//设置某列禁止排序
+				targets: [0,1,2,3,5,6]//设置某列禁止排序
 			}, {
 				"sType": "html-percent",
 				"aTargets": [1] //指定列号使用自定义排序

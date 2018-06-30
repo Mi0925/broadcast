@@ -32,7 +32,7 @@
 						<span class="text">
 							<em>
 								<i class="iconfont icon-zhuye"></i>
-								<strong>首页11</strong>
+								<strong>首页</strong>
 							</em>
 						</span>
 					</a>
@@ -293,21 +293,21 @@
 <script src="data/list.js"></script> -->
 <script>
 	// 登录判断,token验证过期或者错误
-	$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-		setTimeout(function(argument) {
-			if (jqXHR.responseJSON) {
-				if(jqXHR.responseJSON.status==500){
-					alert(jqXHR.responseJSON.msg);
-					// document.location.href="sign.html";
-				}
-			}
-		},500)
-	});
+	// $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+	// 	setTimeout(function(argument) {
+	// 		if (jqXHR.responseJSON) {
+	// 			if(jqXHR.responseJSON.status==500){
+	// 				alert(jqXHR.responseJSON.msg);
+	// 				// document.location.href="sign.html";
+	// 			}
+	// 		}
+	// 	},500)
+	// });
 	if(sessionStorage.getItem('token')=='' || sessionStorage.getItem('token')==null){
 		alert('请先登录');
 		document.location.href="sign.html";
 	}else{
-		$(".gb-header-operation .name").html(user_name+"，欢迎您");
+		$(".gb-header-operation #name").html(user_name+"，欢迎您");
 		if(sessionStorage.getItem('tab_default_name')=='' || sessionStorage.getItem('tab_default_name')==null){
 			sessionStorage.setItem('tab_default_name','首页');
 			sessionStorage.setItem('tab_default_url','components/index.html');
@@ -327,6 +327,7 @@
 
 	/* 倒计时 */
 	var worksetInterval=null;
+	var timeNum=1800;
 	function timer(intDiff) {
 		worksetInterval=window.setInterval(function() {
 			var day = 0,
@@ -350,14 +351,14 @@
 	}
 	$(".j-ok-work").click(function() {
 		clearInterval(worksetInterval);
-		timer(parseInt(1000));
+		timer(parseInt(timeNum));
 	})
 	layui.use(['layer','laydate','form'], function() {
 		var layer = layui.layer,laydate = layui.laydate,form = layui.form;
 	    $("body").on('click','.j-work',function() {
 			if($(this).attr("attr")=="上班"){
 				clearInterval(worksetInterval);
-				timer(parseInt(1000));//倒计时总秒数量
+				timer(parseInt(timeNum));//倒计时总秒数量
 				$(this).attr("attr","下班");
 				$(this).html("下 班");
 				$(".gb-dialog-word p").html("上班前请填写交接班记录");
