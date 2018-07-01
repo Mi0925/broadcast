@@ -255,11 +255,15 @@ function unityIncident() {
 	if(boolunity){
 		// 覆盖人口
 		$.ajax({
-		    url: portsrc+'/populationChart',
-		    token:token,
+		    url: portsrc+'/peopleAffect',
 		    type: 'GET',
 		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    	id:0
+		    },
 		    success: function(data) {
+		    	console.log(data)
 			    populationChart = echarts.init(document.getElementById('line-population'));
 				populationOption = {
 				    title: {
@@ -574,9 +578,9 @@ function unityIncident() {
 				districtLoading = 0;
 				setTimeout(function () {
 				    // 地图划分区域地点
-				    for (var i = 0; i < data.body.divideMap.length; i++) {
+				    for (var i = 0; i < data.body.addDistrict.length; i++) {
 				    	
-					    addDistrict(data.body.divideMap[i].name,unitybmap,data.body.divideMap[i].color);
+					    addDistrict(data.body.addDistrict[i].name,unitybmap,data.body.addDistrict[i].color);
 					    // addDistrict("龙游县",unitybmap,"#ff5b57");
 					    // addDistrict("宁波",unitybmap,"#ff5b57");
 					    // addDistrict("嘉兴",unitybmap,"#fada00");
@@ -1150,9 +1154,50 @@ function addIncident() {
 		    success: function(data) {
 		    	if(data.body!=null){
 					allMapChart = echarts.init(document.getElementById('all-map'));
-					var geoCoordMap = data.body.geoCoordMap;//地点坐标
-					var BJData = data.body.BJData;//迁徙数据
-					var startData=data.body.startData;//迁徙起点数据
+					var geoCoordMap = {};//地点坐标\
+					var BJData =[];//迁徙数据
+					// data.body.bjData=[{
+					// 	"from": "杭州", //出发点
+					// 	"incident_data": [{
+					// 		"orange": "暴雨事件"
+					// 	}, {
+					// 		"red": "暴风事件"
+					// 	}, {
+					// 		"blue": "龙卷风事件"
+					// 	}],
+					// 	"to": "宁波" //到达点
+					// }]
+			        for (var i = 0; i < data.body.bjData.length; i++) {
+			        	var incident_data=[];
+			        	for(var j = 0; j < data.body.bjData[i].incident_data.length; j++){
+							for(var g in data.body.bjData[i].incident_data[j]){
+								incident_data.push({
+			                        color: g,
+			                        incident_name: data.body.bjData[i].incident_data[j][g]
+			                    })
+							}
+						};
+			        	
+			        	BJData.push([
+				            {
+				                name: data.body.bjData[i].from //出发点
+				            },
+				            {
+				                name: data.body.bjData[i].to, //到达点
+				                incident: data.body.bjData[i].incident, //事件颜色
+				                incident_data: incident_data //具体事件
+				            }
+			            ])
+			        }
+					var startData=[];//迁徙起点数据
+					for(var j = 0; j < data.body.startData.length; j++){
+						for(var g in data.body.startData[j]){
+							startData.push({
+		                        color: g,
+		                        incident_name: data.body.startData[j][g]
+		                    })
+						}
+					};
 
 					var convertData = function(data) {
 					    var res = [];
@@ -1191,7 +1236,7 @@ function addIncident() {
 						        },
 						        data: [{
 						            name: item[0],
-						            value: geoCoordMap[item[0]].concat([50]),
+						            value:geoCoordMap[item[0]]!=undefined?geoCoordMap[item[0]].concat([50]):[],
 							        incident_data:startData
 
 						        }]
@@ -1229,7 +1274,7 @@ function addIncident() {
 						        itemStyle: {
 						            normal: {
 						                color: function(params) {//省份圆点颜色设置
-						     //    			console.log(params)
+						    				//console.log(params)
 											// var tmp = params.data.incident;
 											// if (tmp == 'orange') {
 											// 	return '#ff9700';//橙色事件
@@ -1252,7 +1297,7 @@ function addIncident() {
 						        data: item[1].map(function(dataItem) {
 						        	if(dataItem[1].incident=="red"){
 							            return {
-							                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
+							                value: geoCoordMap[dataItem[1].name]!=undefined?geoCoordMap[dataItem[1].name].concat([dataItem[1].value]):[],
 							                incident:dataItem[1].incident,
 							                incident_data:dataItem[1].incident_data
 							            };
@@ -1271,7 +1316,7 @@ function addIncident() {
 						        itemStyle: {
 						            normal: {
 						                color: function(params) {//省份圆点颜色设置
-						     //    			console.log(params)
+						    				// console.log(params)
 											// var tmp = params.data.incident;
 											// if (tmp == 'orange') {
 												return '#ff9700';//橙色事件
@@ -1294,7 +1339,7 @@ function addIncident() {
 						        data: item[1].map(function(dataItem) {
 						        	if(dataItem[1].incident=="orange"){
 							            return {
-							                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
+							                value: geoCoordMap[dataItem[1].name]!=undefined?geoCoordMap[dataItem[1].name].concat([dataItem[1].value]):[],
 							                incident:dataItem[1].incident,
 							                incident_data:dataItem[1].incident_data
 							            };
@@ -1313,7 +1358,6 @@ function addIncident() {
 						        itemStyle: {
 						            normal: {
 						                color: function(params) {//省份圆点颜色设置
-						     //    			console.log(params)
 											// var tmp = params.data.incident;
 											// if (tmp == 'orange') {
 												// return '#ff9700';//橙色事件
@@ -1336,7 +1380,7 @@ function addIncident() {
 						        data: item[1].map(function(dataItem) {
 						        	if(dataItem[1].incident=="yellow"){
 							            return {
-							                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
+							                value: geoCoordMap[dataItem[1].name]!=undefined?geoCoordMap[dataItem[1].name].concat([dataItem[1].value]):[],
 							                incident:dataItem[1].incident,
 							                incident_data:dataItem[1].incident_data
 							            };
@@ -1378,7 +1422,7 @@ function addIncident() {
 						        data: item[1].map(function(dataItem) {
 						        	if(dataItem[1].incident=="blue"){
 							            return {
-							                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
+							                value: geoCoordMap[dataItem[1].name]!=undefined?geoCoordMap[dataItem[1].name].concat([dataItem[1].value]):[],
 							                incident:dataItem[1].incident,
 							                incident_data:dataItem[1].incident_data
 							            };
@@ -1420,7 +1464,7 @@ function addIncident() {
 						        data: item[1].map(function(dataItem) {
 						        	if(dataItem[1].incident=="green"){
 							            return {
-							                value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value]),
+							                value: geoCoordMap[dataItem[1].name]!=undefined?geoCoordMap[dataItem[1].name].concat([dataItem[1].value]):[],
 							                incident:dataItem[1].incident,
 							                incident_data:dataItem[1].incident_data
 							            };
@@ -1488,8 +1532,8 @@ function addIncident() {
 				    districtLoading = 0;
 					setTimeout(function () {
 						// 地图划分区域地点
-						for (var i = 0; i < data.body.divideMap.length; i++) {
-					    	addDistrict(data.body.divideMap[i],allbmap);
+						for (var i = 0; i < data.body.addDistrict.length; i++) {
+					    	addDistrict(data.body.addDistrict[i],allbmap);
 						}
 					    // addDistrict("平阳县",allbmap);
 					    // addDistrict("宁波",allbmap);

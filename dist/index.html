@@ -43,15 +43,15 @@
 							<em>
 								<i class="iconfont icon-paichediaodu"></i>
 								<strong>调度控制</strong>
-								<span class="layui-badge">9</span>
+								<span class="layui-badge j-schedulingSum">0</span>
 							</em>
 							<i class="iconfont icon-arrow-right arrow"></i>
 						</span>
 					</a>
 					<div class="left-sub-nav">
-						<a href="#/schedulingPlan" class="nav-router add_tab" url="components/schedulingPlan.html" name="调度方案"><em><strong>调度方案</strong><span class="layui-badge">11</span></em></a>
-						<a href="#/taskMsg" class="nav-router add_tab" url="components/taskMsg.html" name="任务消息"><em><strong>任务消息</strong></em></a>
-						<a href="#/warningMessage" class="nav-router add_tab" url="components/warningMessage.html" name="预警消息"><em><strong>预警消息</strong></em></a>
+						<a href="#/schedulingPlan" class="nav-router add_tab" url="components/schedulingPlan.html" name="调度方案"><em><strong>调度方案</strong><span class="layui-badge j-schedulingTag">0</span></em></a>
+						<a href="#/taskMsg" class="nav-router add_tab" url="components/taskMsg.html" name="任务消息"><em><strong>任务消息</strong><span class="layui-badge j-taskTag">0</span></em></a>
+						<a href="#/warningMessage" class="nav-router add_tab" url="components/warningMessage.html" name="预警消息"><em><strong>预警消息</strong><span class="layui-badge j-warningMsgTag">0</span></em></a>
 						<a href="#/exportAReport" class="nav-router add_tab" url="components/exportAReport.html" name="报表导出"><em><strong>报表导出</strong></em></a>
 					</div>
 				</li>
@@ -86,7 +86,7 @@
 							<em>
 								<i class="iconfont icon-jieshouyoujian"></i>
 								<strong>消息接入</strong>
-								<span class="layui-badge">99+</span>
+								<span class="layui-badge j-interfaceTag">99+</span>
 							</em>
 						</span>
 					</a>
@@ -509,7 +509,22 @@
 		}
 	});
 
-
+	$.ajax({
+	    url: portsrc+'/allUnhandle',
+	    type: 'post',
+	    dataType: 'json',
+	    data:{
+	    	token:token,
+	    },
+	    success: function(data) {
+	    	// 演练计划-任务消息-预警消息-消息接入
+	    	$(".j-schedulingSum").text(parseInt(data.body.split('-')[0])+parseInt(data.body.split('-')[1])+parseInt(data.body.split('-')[2]))
+	    	$(".j-schedulingTag").text(data.body.split('-')[0])
+	    	$(".j-taskTag").text(data.body.split('-')[1])
+	    	$(".j-warningMsgTag").text(data.body.split('-')[2])
+	    	$(".j-interfaceTag").text(data.body.split('-')[3])
+	    }
+	});
 
 	// 默认打开指定页面
 	add_tab(sessionStorage.getItem('tab_default_name'),sessionStorage.getItem('tab_default_url'));

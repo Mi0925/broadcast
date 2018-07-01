@@ -177,7 +177,7 @@
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>面积</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="addarer" name="arer" class="imptxt" lay-verify="required"/>
+						<input type="text" id="addarea" name="area" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 			</div>
@@ -226,7 +226,7 @@
 				<div class="settingone" style="margin-bottom: 0;">
 					<p class="oneitem-tit"><small>*</small>面积</p>
 					<div class="oneimp" style="width: 100%">
-						<input type="text" id="editarer" name="arer" class="imptxt" lay-verify="required"/>
+						<input type="text" id="editarea" name="area" class="imptxt" lay-verify="required"/>
 					</div>
 				</div>
 			</div>
@@ -382,7 +382,7 @@
 					data.longtitude=$('#addlon').val();
 					data.latitude=$('#addlat').val();
 					data.population=$('#addpop').val();
-					data.arer=$('#addarer').val();
+					data.area=$('#addarea').val();
 					console.log(data)
 					$.ajax({
 					    url: portsrc+"/addArea",
@@ -394,17 +394,33 @@
 					    	areaWithResource:JSON.stringify(data)
 					    },
 					    success: function(data) {
+							$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+							layer.open({
+					            title: '提示',
+				        		shadeClose:true,
+					            content: '添加成功'
+					        });
 					    }
 					});
 					layer.closeAll();
 				},
 				success: function(layero, index){
-					
 				}
 			});
 		});
 	};
 	function editResourceClick(e,treeId, treeNode) {
+		console.log(treeNode)
+		if($("#"+treeNode.parentTId+">a").text()!=''){
+			$("#editAreaRegion").val($("#"+treeNode.parentTId+">a").text())
+		}else{
+			$("#editAreaRegion").val(treeNode.name)
+		}
+		$('#editRegionName').val(treeNode.name);
+		$('#editlon').val(treeNode.longtitude);
+		$('#editlat').val(treeNode.latitude);
+		$('#editpop').val(treeNode.population);
+		$('#editarea').val(treeNode.area);
 		layui.use(['form','element'], function(){
 			var element = layui.element,form = layui.form;
 			layer.open({
@@ -420,7 +436,7 @@
 					data.longtitude=$('#editlon').val();
 					data.latitude=$('#editlat').val();
 					data.population=$('#editpop').val();
-					data.arer=$('#editarer').val();
+					data.area=$('#editarea').val();
 					console.log(data)
 					$.ajax({
 					    url: portsrc+"/addArea",
@@ -432,9 +448,41 @@
 					    	areaWithResource:JSON.stringify(data)
 					    },
 					    success: function(data) {
+							$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+							layer.open({
+					            title: '提示',
+				        		shadeClose:true,
+					            content: '编辑成功'
+					        });
 					    }
 					});
 					layer.closeAll();
+				},
+				btn3: function(index, layero){
+					var areaName='';
+					if($("#editAreaRegion").val()!=$("#editRegionName").val()){
+						areaName=$("#editAreaRegion").val()+'-'+$("#editRegionName").val()
+					}else{
+						areaName=$("#editAreaRegion").val()
+					}
+					console.log(areaName)
+					$.ajax({
+					    url: portsrc+'/deleteArea',
+					    type: 'post',
+					    dataType: 'json',
+					    data:{
+					    	token:token,
+					    	areaName:areaName,
+					    },
+					    success: function(data) {
+							$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+							layer.open({
+					            title: '提示',
+				        		shadeClose:true,
+					            content: '删除成功'
+					        });
+					    }
+					});
 				},
 				success: function(layero, index){
 					
@@ -446,23 +494,16 @@
 	creatTree(treeadd);
 	function creatTree(treeadd){
 		// 树数据
-		resourceData=[{
-		    name: "浙江省",
-		    open: true,
-		    children: [{
-		        name: "杭州市",
-		        children: [{
-			        name: "上城区",
-			        children: [{
-				        name: "湖滨街道",
-				    }]
-			    }]
-		    }]
-		}];
-
-		//初始化的树
-		$(".ztree-resource").each(function() {
-			$.fn.zTree.init($(this), resourceSetting, resourceData);
+		$.ajax({
+		    url: portsrc+'/allArea',
+		    type: 'post',
+		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    },
+		    success: function(data) {
+				$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+		    }
 		});
 	}
 	$.ajax({
