@@ -1883,9 +1883,7 @@ var table3 = $('#table-main3 table').DataTable({
 		var api = this.api();
 		api.columns().indexes().flatten().each(function(i) {
 			var column = api.column(i);
-            if (i == 0 || i==5 || i==6) { //对第i列进行筛选
-				rowScreen(column);
-            }else if (i==1) { //对第i列进行筛选
+            if (i==1) { //对第i列进行筛选
 				rowLevScreen(column);
             }
 		});
