@@ -303,7 +303,6 @@
             	status:0,//可以0-全部，1-正常，2-异常
 			},
             dataSrc: function ( data ) {
-            	console.log(data)
             	if(data.body!=null){
 	                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
 	                	var d=data.body[i];
@@ -383,7 +382,6 @@
 					data.latitude=$('#addlat').val();
 					data.population=$('#addpop').val();
 					data.area=$('#addarea').val();
-					console.log(data)
 					$.ajax({
 					    url: portsrc+"/addArea",
 					    type: 'post',
@@ -437,7 +435,6 @@
 					data.latitude=$('#editlat').val();
 					data.population=$('#editpop').val();
 					data.area=$('#editarea').val();
-					console.log(data)
 					$.ajax({
 					    url: portsrc+"/addArea",
 					    type: 'post',
@@ -502,6 +499,15 @@
 		    	token:token,
 		    },
 		    success: function(data) {
+		    	console.log(data)
+		    	for (var i = 0; i < data.body.length; i++) {
+		    		data.body[i].addIcon=true;
+		    		data.body[i].treeadd=treeadd;
+		    		for (var j = 0; j < data.body[i].children.length; j++) {
+		    			data.body[i].children[j].addIcon=true;
+		    			data.body[i].children[j].treeadd=treeadd;
+		    		}
+		    	}
 				$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
 		    }
 		});
@@ -514,7 +520,6 @@
 	    	token:token,
 	    },
 	    success: function(data) {
-	    	console.log(data)
 			$.fn.zTree.init($("#selTree1"), selectResourceSetting1, data.body);
 			$.fn.zTree.init($("#selTree2"), selectResourceSetting2, data.body);
 	    }
