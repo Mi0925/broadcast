@@ -408,84 +408,85 @@
 		});
 	};
 	function editResourceClick(e,treeId, treeNode) {
-		console.log(treeNode)
-		if($("#"+treeNode.parentTId+">a").text()!=''){
-			$("#editAreaRegion").val($("#"+treeNode.parentTId+">a").text())
-		}else{
-			$("#editAreaRegion").val(treeNode.name)
-		}
-		$('#editRegionName').val(treeNode.name);
-		$('#editlon').val(treeNode.longtitude);
-		$('#editlat').val(treeNode.latitude);
-		$('#editpop').val(treeNode.population);
-		$('#editarea').val(treeNode.area);
-		layui.use(['form','element'], function(){
-			var element = layui.element,form = layui.form;
-			layer.open({
-				type: 1, 
-				title:false,
-				shadeClose:true,
-				closeBtn: 0,
-				content: $(".gb-dialog-edit-area"),
-				btn: ['修改','取消','删除'],
-				yes: function(index, layero){
-					var data={};
-					data.name=$('#editRegionName').val();
-					data.longtitude=$('#editlon').val();
-					data.latitude=$('#editlat').val();
-					data.population=$('#editpop').val();
-					data.area=$('#editarea').val();
-					$.ajax({
-					    url: portsrc+"/addArea",
-					    type: 'post',
-					    dataType: 'json',
-					    data:{
-					    	token:token,
-					    	parent:$('#editAreaRegion').val(),
-					    	areaWithResource:JSON.stringify(data)
-					    },
-					    success: function(data) {
-							$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
-							layer.open({
-					            title: '提示',
-				        		shadeClose:true,
-					            content: '编辑成功'
-					        });
-					    }
-					});
-					layer.closeAll();
-				},
-				btn3: function(index, layero){
-					var areaName='';
-					if($("#editAreaRegion").val()!=$("#editRegionName").val()){
-						areaName=$("#editAreaRegion").val()+'-'+$("#editRegionName").val()
-					}else{
-						areaName=$("#editAreaRegion").val()
+		if($(e.target).hasClass("node_name")){
+			if($("#"+treeNode.parentTId+">a").text()!=''){
+				$("#editAreaRegion").val($("#"+treeNode.parentTId+">a").attr('title'))
+			}else{
+				$("#editAreaRegion").val(treeNode.name)
+			}
+			$('#editRegionName').val(treeNode.name);
+			$('#editlon').val(treeNode.longtitude);
+			$('#editlat').val(treeNode.latitude);
+			$('#editpop').val(treeNode.population);
+			$('#editarea').val(treeNode.area);
+			layui.use(['form','element'], function(){
+				var element = layui.element,form = layui.form;
+				layer.open({
+					type: 1, 
+					title:false,
+					shadeClose:true,
+					closeBtn: 0,
+					content: $(".gb-dialog-edit-area"),
+					btn: ['修改','取消','删除'],
+					yes: function(index, layero){
+						var data={};
+						data.name=$('#editRegionName').val();
+						data.longtitude=$('#editlon').val();
+						data.latitude=$('#editlat').val();
+						data.population=$('#editpop').val();
+						data.area=$('#editarea').val();
+						$.ajax({
+						    url: portsrc+"/addArea",
+						    type: 'post',
+						    dataType: 'json',
+						    data:{
+						    	token:token,
+						    	parent:$('#editAreaRegion').val(),
+						    	areaWithResource:JSON.stringify(data)
+						    },
+						    success: function(data) {
+								$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+								layer.open({
+						            title: '提示',
+					        		shadeClose:true,
+						            content: '编辑成功'
+						        });
+						    }
+						});
+						layer.closeAll();
+					},
+					btn3: function(index, layero){
+						var areaName='';
+						if($("#editAreaRegion").val()!=$("#editRegionName").val()){
+							areaName=$("#editAreaRegion").val()+'-'+$("#editRegionName").val()
+						}else{
+							areaName=$("#editAreaRegion").val()
+						}
+						console.log(areaName)
+						$.ajax({
+						    url: portsrc+'/deleteArea',
+						    type: 'post',
+						    dataType: 'json',
+						    data:{
+						    	token:token,
+						    	areaName:areaName,
+						    },
+						    success: function(data) {
+								$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+								layer.open({
+						            title: '提示',
+					        		shadeClose:true,
+						            content: '删除成功'
+						        });
+						    }
+						});
+					},
+					success: function(layero, index){
+						
 					}
-					console.log(areaName)
-					$.ajax({
-					    url: portsrc+'/deleteArea',
-					    type: 'post',
-					    dataType: 'json',
-					    data:{
-					    	token:token,
-					    	areaName:areaName,
-					    },
-					    success: function(data) {
-							$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
-							layer.open({
-					            title: '提示',
-				        		shadeClose:true,
-					            content: '删除成功'
-					        });
-					    }
-					});
-				},
-				success: function(layero, index){
-					
-				}
+				});
 			});
-		});
+		}
 	};
 	var treeadd = 'newPlatResoInfo',treedit = 'editPlatResoInfo',resourceData;
 	creatTree(treeadd);
@@ -503,9 +504,15 @@
 		    	for (var i = 0; i < data.body.length; i++) {
 		    		data.body[i].addIcon=true;
 		    		data.body[i].treeadd=treeadd;
+			    	data.body[i].editIcon=true;
+		    		data.body[i].treedit=treedit;
+		    		data.body[i].removeIcon=true;
 		    		for (var j = 0; j < data.body[i].children.length; j++) {
 		    			data.body[i].children[j].addIcon=true;
 		    			data.body[i].children[j].treeadd=treeadd;
+				    	data.body[i].children[j].editIcon=true;
+			    		data.body[i].children[j].treedit=treedit;
+			    		data.body[i].children[j].removeIcon=true;
 		    		}
 		    	}
 				$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
