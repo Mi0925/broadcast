@@ -263,8 +263,9 @@ function onCheck(e, treeId, treeNode) {
 	v = "";
 	for (var i=0, l=nodes.length; i<l; i++) {
 		// v += nodes[i].name + ",";
-		v += $("#"+treeNode.parentTId+">a").text()==""?treeNode.name:$("#"+treeNode.parentTId+">a").text()
-	}
+		v += $("#"+treeNode.parentTId+">a").text()==""?treeNode.name:$("#"+treeNode.parentTId+">a").text()+'-'+treeNode.name
+	}       
+
 	// if (v.length > 0 ) v = v.substring(0, v.length-1);
 	var cityObj = $("#citySel");
 	cityObj.attr("value", v);
