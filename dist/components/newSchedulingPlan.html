@@ -303,7 +303,6 @@
 				$('.layui-select-title').append(itbtn);
 				$('.gb-form .layui-form-radio').remove();
 				form.on('submit(*)', function(data){
-					console.log()
 					schedulingForm(data);
 					$.ajax({
 					    url: portsrc+"/schedule/addItem",

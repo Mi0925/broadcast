@@ -356,13 +356,13 @@
 	userDef(table);//table配置--显示数量 搜索 全选 删除 
 
     // 树配置
-	var resourceSetting = {
+	var resourceSet = {
 		view:{
 			showLine:false,//去掉连接线
 			addDiyDom:resourceDom
 		},
 		callback: {
-			onClick: editResourceClick
+			onClick: onEditResourceClick
 		}
 	};
 	function addResourceClick(e,treeId, treeNode) {
@@ -395,7 +395,7 @@
 						    	areaWithResource:JSON.stringify(data)
 						    },
 						    success: function(data) {
-								$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+								$.fn.zTree.init($('.ztree-resource'), resourceSet, data.body);
 								layer.open({
 						            title: '提示',
 					        		shadeClose:true,
@@ -411,7 +411,8 @@
 			});
 		});
 	};
-	function editResourceClick(e,treeId, treeNode) {
+	function onEditResourceClick(e,treeId, treeNode) {
+		alert(1)
 		if($(e.target).hasClass("node_name")){
 			if($("#"+treeNode.parentTId+">a").text()!=''){
 				$("#editAreaRegion").val($("#"+treeNode.parentTId+">a").attr('title'))
@@ -449,7 +450,7 @@
 						    	areaWithResource:JSON.stringify(data)
 						    },
 						    success: function(data) {
-								$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+								$.fn.zTree.init($('.ztree-resource'), resourceSet, data.body);
 								layer.open({
 						            title: '提示',
 					        		shadeClose:true,
@@ -476,7 +477,7 @@
 						    	areaName:areaName,
 						    },
 						    success: function(data) {
-								$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+								$.fn.zTree.init($('.ztree-resource'), resourceSet, data.body);
 								layer.open({
 						            title: '提示',
 					        		shadeClose:true,
@@ -519,7 +520,7 @@
 			    		data.body[i].children[j].removeIcon=true;
 		    		}
 		    	}
-				$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+				$.fn.zTree.init($('.ztree-resource'), resourceSet, data.body);
 		    }
 		});
 	}
