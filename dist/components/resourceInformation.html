@@ -376,31 +376,35 @@
 				content: $(".gb-dialog-add-area"),
 				btn: ['确定','取消'],
 				yes: function(index, layero){
-					var data={};
-					data.name=$('#addRegionName').val();
-					data.longtitude=$('#addlon').val();
-					data.latitude=$('#addlat').val();
-					data.population=$('#addpop').val();
-					data.area=$('#addarea').val();
-					$.ajax({
-					    url: portsrc+"/addArea",
-					    type: 'post',
-					    dataType: 'json',
-					    data:{
-					    	token:token,
-					    	parent:$('#addAreaRegion').val(),
-					    	areaWithResource:JSON.stringify(data)
-					    },
-					    success: function(data) {
-							$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
-							layer.open({
-					            title: '提示',
-				        		shadeClose:true,
-					            content: '添加成功'
-					        });
-					    }
-					});
-					layer.closeAll();
+					if($('#addRegionName').val()==""){
+						alert('请输入地区名')
+					}else{
+						var data={};
+						data.name=$('#addRegionName').val();
+						data.longtitude=$('#addlon').val();
+						data.latitude=$('#addlat').val();
+						data.population=$('#addpop').val();
+						data.area=$('#addarea').val();
+						$.ajax({
+						    url: portsrc+"/addArea",
+						    type: 'post',
+						    dataType: 'json',
+						    data:{
+						    	token:token,
+						    	parent:$('#addAreaRegion').val(),
+						    	areaWithResource:JSON.stringify(data)
+						    },
+						    success: function(data) {
+								$.fn.zTree.init($('.ztree-resource'), resourceSetting, data.body);
+								layer.open({
+						            title: '提示',
+					        		shadeClose:true,
+						            content: '添加成功'
+						        });
+								layer.closeAll();
+						    }
+						});
+					}
 				},
 				success: function(layero, index){
 				}
