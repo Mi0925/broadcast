@@ -48,8 +48,8 @@ var oLanguage={ //国际语言转化
     "sZeroRecords": "对不起，查询不到任何相关数据",
     "sEmptyTable": "未有相关数据",
     "sLoadingRecords": "正在加载数据-请等待...",
-    "sInfo": "共 _TOTAL_ 条 ", //当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。
-    "sInfoEmpty": "当前显示0到0条，共0条记录",
+    "sInfo": "共 _TOTAL_ 条 | 每页", //当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。
+    "sInfoEmpty": "当前显示0到0条，共0条记录 | 每页",
     "sInfoFiltered": "（数据库中共为 _MAX_ 条记录）",
     "sProcessing": "正在加载数据...",
     "sSearch": "模糊查询：",

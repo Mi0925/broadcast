@@ -318,7 +318,11 @@
 							layer.open({
 					            title: '提示',
 				        		shadeClose:true,
-					            content: '新建成功'
+					            content: '新建成功',
+								yes: function(index, layero){
+									window.location.href='#/schedulingPlan';
+									layer.closeAll();
+								}
 					        });
 					    }
 					});
