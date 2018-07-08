@@ -11,14 +11,15 @@
 				<div class="tklay tkclear">
 					<span class="talay-word"><i class="iconfont icon-rili"></i>操作时间</span>
 					<div class="layui-input-inline">
-				        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
-				        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
-			    	</div>
+						<input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
+						<span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
+					</div>
+					<div class="tksearch">
+					<input type="text" value="请输入任务消息名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
+					<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
 				</div>
-				<div class="tksearch">
-								<input type="text" value="请输入任务消息名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
-								<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
-							</div>
+				</div>
+
 				<ul class="msgrank">
 					<li>
 						<input type="checkbox" name="checkmsg" id="radone" />
@@ -41,50 +42,49 @@
 				<p class="oneitem-tit">单一事件数据</p>
 				<div class="gb-table">
 					<div class="taskmsg" id="table-mainfiv">
-						<div class="tkrange">
+						<!-- <div class="tkrange">
 							<div class="tklay">
 								<span class="talay-word"><i class="iconfont icon-rili"></i>操作时间</span>
 								<div class="layui-input-inline">
-							        <input type="text" class="layui-input" id="soledate" placeholder="选择时间范围">
-							        <span class="tocho iconfont icon-shijian" id="solebtn"></span> 
-						    	</div>
+									<input type="text" class="layui-input" id="soledate" placeholder="选择时间范围">
+									<span class="tocho iconfont icon-shijian" id="solebtn"></span> 
+								</div>
 							</div>
-							
-						</div>
-						<div class="thetab">
+						</div> -->
+						<div class="thetab" style="padding-top: 10px;">
 							<div class="tablecont">
-							    <table class="table-main display" cellspacing="0" width="100%">
-							        <thead>
-								        <tr>
-								        	<th></th>
-								            <th>序号</th>
-								            <th>消息等级</th>
-								            <th>任务消息名称</th>
-								            <th>发布部门</th>
-								            <th>负责人</th>
-								            <th>发布时间</th>
-								            <th>数据</th>
-								            <th></th>
-								            <th></th>
-								        </tr>
-							        </thead>
-							        <tfoot>
-								        <tr>
+								<table class="table-main display" cellspacing="0" width="100%">
+									<thead>
+										<tr>
 											<th></th>
-								            <th></th>
-								            <th></th>
-								            <th></th>
-								            <th></th>
-								            <th></th>
-								            <th></th>
-								            <th></th>
-								            <th></th>
-								            <th></th>
-								        </tr>
-							        </tfoot>
-							         <tbody>
-							        </tbody>
-							    </table>
+											<th>序号</th>
+											<th>消息等级</th>
+											<th>任务消息名称</th>
+											<th>发布部门</th>
+											<th>负责人</th>
+											<th>发布时间</th>
+											<th>数据</th>
+											<th></th>
+											<th></th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+										</tr>
+									</tfoot>
+									<tbody>
+									</tbody>
+								</table>
 							</div>
 							<div class="theche">
 								<div class="tocheck">
@@ -122,7 +122,7 @@
 		</div>
 	</div>
 </div>
-	
+
 
 
 
@@ -131,18 +131,18 @@
 	layui.use('laydate', function(){
 		var laydate = layui.laydate;
 		laydate.render({
-		    elem: '#soledate',
-		    eventElem: '#solebtn',
-		    trigger: 'click',
-		    type:'datetime',
-		    range: true
+			elem: '#soledate',
+			eventElem: '#solebtn',
+			trigger: 'click',
+			type:'datetime',
+			range: true
 		});
 	});
 
 	/*table*/
-    var table = $('#table-mainfiv table').DataTable({
-   	   "scrollY": "calc(100% - 50px)",
-	   "scrollX": true,
+	var table = $('#table-mainfiv table').DataTable({
+		"scrollY": "calc(100% - 50px)",
+		"scrollX": true,
        "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
        "dom": 'tiprl',//自定义显示项
        "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
@@ -153,32 +153,32 @@
        "order": [ 1, "asc" ],//desc降序
        "Info": true,//页脚信息
        "oLanguage": oLanguage,
-        "ajax": {
-		    url: portsrc+'/msg/allMsg',
-		    type: 'post',
-		    data:{
-		    	token:token,
-		    	defaulrValue:0,
+       "ajax": {
+       	url: portsrc+'/msg/allMsg',
+       	type: 'post',
+       	data:{
+       		token:token,
+       		defaulrValue:0,
 		    	type:'task'//task为任务消息，alert为预警消息
 		    },
-            dataSrc: function ( data ) {
-                for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
-                	var d=data.body[i];
+		    dataSrc: function ( data ) {
+		    	for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+		    		var d=data.body[i];
                 	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
                 	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
 
                 	var level="";
-					if(d.level=="RED"){
-						level="<img src='src/images/rank-red.png'/>";
-					} else if(d.level=="BLUE"){
-						level="<img src='src/images/rank-blue.png'/>";
-					} else if(d.level=="GREEN"){
-						level="<img src='src/images/rank-green.png'/>";
-					} else if(d.level=="ORANGE"){
-						level="<img src='src/images/rank-orange.png'/>";
-					} else if(d.level=="YELLOW"){
-						level="<img src='src/images/rank-yellow.png'/>";
-					}
+                	if(d.level=="RED"){
+                		level="<img src='src/images/rank-red.png'/>";
+                	} else if(d.level=="BLUE"){
+                		level="<img src='src/images/rank-blue.png'/>";
+                	} else if(d.level=="GREEN"){
+                		level="<img src='src/images/rank-green.png'/>";
+                	} else if(d.level=="ORANGE"){
+                		level="<img src='src/images/rank-orange.png'/>";
+                	} else if(d.level=="YELLOW"){
+                		level="<img src='src/images/rank-yellow.png'/>";
+                	}
                 	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
 
                 	data.body[i].name="<a href='#/viewTaskMsg' url='components/viewTaskMsg.html' class='view-cont add_tab' name='查看任务消息'>"+d.name+"</a>";
@@ -190,77 +190,77 @@
                 return data.body;
             }
         },
-		"columns": [
-		    { "data": "checkbox" },
-		    { "data": "tabnumb" },
-		    { "data": "level" },
-		    { "data": "name" },
-		    { "data": "department" },
-		    { "data": "dutyPerson" },
-		    { "data": "time" },
-		    { "data": "coverpop" },
-		    { "data": "areacrea" },
-		    { "data": "areaname" }
-		],
-       "columnDefs": [
-       		{
-               orderable: false,
+        "columns": [
+        { "data": "checkbox" },
+        { "data": "tabnumb" },
+        { "data": "level" },
+        { "data": "name" },
+        { "data": "department" },
+        { "data": "dutyPerson" },
+        { "data": "time" },
+        { "data": "coverpop" },
+        { "data": "areacrea" },
+        { "data": "areaname" }
+        ],
+        "columnDefs": [
+        {
+        	orderable: false,
                targets: [0,2,3,4,5,7,8,9] //禁止排序
            },{ 
-            	"sType": "html-percent", 
+           	"sType": "html-percent", 
                "aTargets": [2]  //指定列号使用自定义排序
-           	}  
-       ],
-       fnDrawCallback: function(table) {  
-       		jumpPage($("#table-mainfiv"))
-       },
+           }  
+           ],
+           fnDrawCallback: function(table) {  
+           	jumpPage($("#table-mainfiv"))
+           },
        initComplete: function () {//列筛选
-           var api = this.api();
-           api.columns().indexes().flatten().each(function (i) {
-               var column = api.column(i);
+       	var api = this.api();
+       	api.columns().indexes().flatten().each(function (i) {
+       		var column = api.column(i);
                 if (i == 4 || i == 5) { //对第i列进行筛选
-						rowScreen(column);
+                	rowScreen(column);
                 }else if (i == 2) { //对第i列进行筛选
-						rowLevScreen(column);
+                	rowLevScreen(column);
                 }
-           });
+            });
        }
-	})
+   })
 	
 	
 	$(".gb-packUp-leftNav").click(function(){
-        setTimeout(function(){
-            table.draw();
-        },500)
+		setTimeout(function(){
+			table.draw();
+		},500)
     });//重绘
 
 	//自定义显示数量
 	$('.taskmsg').each(function(){
-    	tabot($(this))
-    })
+		tabot($(this))
+	})
 
 	//自定义搜索
 	$('.dsearch').on('keyup click', function () {
-	   var tsval = $(".dsearch").val()
-	   table.search(tsval, false, false).draw();
+		var tsval = $(".dsearch").val()
+		table.search(tsval, false, false).draw();
 	});
 
 	//checkbox全选
 	$("#checkAll").on("click", function () {
-	   if ($(this).prop("checked") === true) {
-	   		$('#invert').attr('checked',false);
-	       $('.dataTables_wrapper tbody tr').find("input").prop("checked", $(this).prop("checked"));
-	       $('.dataTables_wrapper tbody tr').addClass('selected');
-	   } else {
-	       $('.dataTables_wrapper tbody tr').find("input").prop("checked", false);
-	       $('.dataTables_wrapper tbody tr').removeClass('selected');
-	   }    
+		if ($(this).prop("checked") === true) {
+			$('#invert').attr('checked',false);
+			$('.dataTables_wrapper tbody tr').find("input").prop("checked", $(this).prop("checked"));
+			$('.dataTables_wrapper tbody tr').addClass('selected');
+		} else {
+			$('.dataTables_wrapper tbody tr').find("input").prop("checked", false);
+			$('.dataTables_wrapper tbody tr').removeClass('selected');
+		}    
 	});
 
 	//反选
 	$('#invert').on("click", function () {
-		   var $tmp = $('[name=checkone]:checkbox');
-		   /*$('#checkAll').prop('checked', );*/
+		var $tmp = $('[name=checkone]:checkbox');
+		/*$('#checkAll').prop('checked', );*/
 		   //console.log($tmp.length);
 		   //console.log($tmp.filter(':checked').length);
 		   if($tmp.filter(':checked').length == 0){
@@ -269,54 +269,54 @@
 		   	$('#checkAll').prop('checked', false);
 		   }
 		   $('.dataTables_wrapper tbody tr').each(function(){
-		   		if($(this).hasClass('selected')){
-		   			if($(this).find("input[name='coverpop']").prop("checked") === true && $(this).find("input[name='areacrea']").prop("checked") === true && $(this).find("input[name='areaname']").prop("checked") === true){
-					$(this).removeClass('selected');
-	   	   			$(this).find("input").prop("checked", false);
-		   			}else{
-		   				$(this).find("input").not("input[name='checkone']").each(function(){
-		   					if($(this).prop("checked") === true){
-		   						$(this).prop("checked", false);
-		   					}else{
-		   						$(this).prop("checked", true);
-		   					}
-		   				})
-		   			}
+		   	if($(this).hasClass('selected')){
+		   		if($(this).find("input[name='coverpop']").prop("checked") === true && $(this).find("input[name='areacrea']").prop("checked") === true && $(this).find("input[name='areaname']").prop("checked") === true){
+		   			$(this).removeClass('selected');
+		   			$(this).find("input").prop("checked", false);
 		   		}else{
-		   			$(this).addClass('selected');
-		   			$(this).find("input").prop("checked", true);
+		   			$(this).find("input").not("input[name='checkone']").each(function(){
+		   				if($(this).prop("checked") === true){
+		   					$(this).prop("checked", false);
+		   				}else{
+		   					$(this).prop("checked", true);
+		   				}
+		   			})
 		   		}
+		   	}else{
+		   		$(this).addClass('selected');
+		   		$(this).find("input").prop("checked", true);
+		   	}
 		   })
-	});
+		});
 
 	//删除选中行
 	$('.dataTables_wrapper tbody').on('click', 'tr input[name="checkone"]', function () {
-	   var $tr = $(this).parents('tr');
-	   $tr.toggleClass('selected');
-	   var $tmp = $('[name=checkone]:checkbox');
-	   $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
-	   if($tr.hasClass('selected')){
-	   		$tr.find("input").prop("checked", $(this).prop("checked"));
-	   }else{
-	   		$tr.find("input").prop("checked", false);
-	   }
-			$('#invert').attr('checked',false);
+		var $tr = $(this).parents('tr');
+		$tr.toggleClass('selected');
+		var $tmp = $('[name=checkone]:checkbox');
+		$('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
+		if($tr.hasClass('selected')){
+			$tr.find("input").prop("checked", $(this).prop("checked"));
+		}else{
+			$tr.find("input").prop("checked", false);
+		}
+		$('#invert').attr('checked',false);
 	});
-		
+
 		//选择数据
-	$('.dataTables_wrapper tbody').find("input").not("input[name='checkone']"). on('click', function () {
-	   var $tr = $(this).parents('tr');
-	   if($tr.find("input[name='coverpop']").prop("checked") === false && $tr.find("input[name='areacrea']").prop("checked") === false && $tr.find("input[name='areaname']").prop("checked") === false){
-			$tr.removeClass('selected');
-	   			$tr.find("input[name='checkone']").prop("checked", false);
-				}else{
-					$tr.addClass('selected');
-	   			$tr.find("input[name='checkone']").prop("checked", true);
-				}
-	   var $tmp = $('.dataTables_wrapper tbody').find("input:checkbox").not("input[name='checkone']");
-	   $('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
+		$('.dataTables_wrapper tbody').find("input").not("input[name='checkone']"). on('click', function () {
+			var $tr = $(this).parents('tr');
+			if($tr.find("input[name='coverpop']").prop("checked") === false && $tr.find("input[name='areacrea']").prop("checked") === false && $tr.find("input[name='areaname']").prop("checked") === false){
+				$tr.removeClass('selected');
+				$tr.find("input[name='checkone']").prop("checked", false);
+			}else{
+				$tr.addClass('selected');
+				$tr.find("input[name='checkone']").prop("checked", true);
+			}
+			var $tmp = $('.dataTables_wrapper tbody').find("input:checkbox").not("input[name='checkone']");
+			$('#checkAll').prop('checked', $tmp.length == $tmp.filter(':checked').length);
 	   //console.log($tmp);
-		   $('#invert').attr('checked',false);
+	   $('#invert').attr('checked',false);
 	});
 
 </script>

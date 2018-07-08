@@ -34,7 +34,7 @@
 .tocho{text-align:center;width:24px;height:24px;display: inline-block;border:1px solid #d8d8d8;border-radius:3px;position:absolute;top:50%;margin-top:-12px;right:20px;cursor: pointer;box-shadow:0px -10px 10px #f4f4f4 inset;font-size:14px;color:#585d66;line-height:24px;}
 .newtk-btn{text-align:center;width:160px;height:40px;line-height:40px;color:#fff;font-size:14px;background:#4579d8;border-radius:5px;border:0;cursor: pointer;display: inline-block;}
 .newtk-btn:hover{background:#3c6dc7;color:#fff;}
-.tksearch{width:450px;float:right;zoom:1;border:1px solid #d8d8d8;border-radius:5px;overflow: hidden;position:relative; margin-bottom: 20px;}
+.tksearch{width:450px;float:right;zoom:1;border:1px solid #d8d8d8;border-radius:5px;overflow: hidden;position:relative;}
 .tksearch input{width:100%;height:40px;line-height:40px;padding-left:15px;padding-right:80px;font-size:14px;color:#ccc;border:0;}
 .tksrh-btn{position:absolute;top:0;right:0;width:60px;height:40px;border-left:1px solid #d8d8d8;background:#fff;box-shadow:0px -20px 10px #f4f4f4 inset;padding:9px 20px;cursor: pointer;}
 .tksrh-btn i{font-size:18px;color:#585d66;}
@@ -235,9 +235,7 @@ table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.orde
 .oneitem-cont .tkrange{padding:0;top:20px;}
 .oneitem-cont .tklay .layui-input-inline{width:402px;}
 .oneitem-cont #table-mainfiv .thetab{padding-top:80px;}
-/*.msgrank{margin-top: 20px;}*/
-/**/
-.oneitem-cont .tkclear{margin-bottom:20px;}
+/**/.oneitem-cont .tkclear{width:100%;margin-bottom:20px;}
 .secheck{margin-left:30px;}
 @media screen and (max-width:1365px){
 	.oneitem-cont #table-mainfiv .thetab{padding-top:130px;}
