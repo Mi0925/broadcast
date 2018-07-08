@@ -175,9 +175,9 @@
 				</div>
 				<div class="oneitem-cont">
 					<div class="layui-input-inline">
-			        <input type="text" class="layui-input" name="time" id="datergs" placeholder="选择时间范围" lay-verify="required">
-			        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
-		    	</div>
+						<input type="text" class="layui-input" name="time" id="datergs" placeholder="选择时间范围" lay-verify="required">
+						<span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
+					</div>
 				</div>
 			</div>
 			<div class="tocreat">
@@ -205,7 +205,7 @@
 				<input type="file" accept="text/*" class="file_text" />
 				<div class="tomat">
 					<div class="layui-progress layui-progress-big" lay-filter="demo"><!--  lay-showpercent="true" -->
-					  <div class="layui-progress-bar" lay-percent="0%"></div><!--   layui-bg-red -->
+						<div class="layui-progress-bar" lay-percent="0%"></div><!--   layui-bg-red -->
 					</div>
 					<p class="forword">转换中...</p>
 				</div>
@@ -216,37 +216,37 @@
 	</form>
 </div>
 
-	
+
 
 
 
 <script type="text/javascript">
 	// 获取编辑数据
 	$.ajax({
-	    url: portsrc+'/eventType',
-	    type: 'post',
-	    dataType: 'json',
-	    data:{
-	    	token:token,
-	    },
-	    success: function(data) {
-	    	var data=data.body;
-	    	console.log(data)
-	    	for (var i = 0; i < data.length; i++) {
-	    		var name=data[i].code+data[i].name;
-	    		$(".layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
-	    	};
+		url: portsrc+'/eventType',
+		type: 'post',
+		dataType: 'json',
+		data:{
+			token:token,
+		},
+		success: function(data) {
+			var data=data.body;
+			console.log(data)
+			for (var i = 0; i < data.length; i++) {
+				var name=data[i].code+data[i].name;
+				$(".layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
+			};
 			$.ajax({
-			    url: portsrc+'/schedule/getItem',
-			    type: 'post',
-			    dataType: 'json',
-			    data:{
-			    	token:token,
-			    	id:sessionStorage.getItem('editTableItem'),
-			    },
-			    success: function(data) {
-			    	console.log(data)
-			    	var data=data.body;
+				url: portsrc+'/schedule/getItem',
+				type: 'post',
+				dataType: 'json',
+				data:{
+					token:token,
+					id:sessionStorage.getItem('editTableItem'),
+				},
+				success: function(data) {
+					console.log(data)
+					var data=data.body;
 			    	$(".layui-input-inline select").val(data.type);//默认类别
 			    	$("#impcontent").val(data.name);//默认事件名
 			    	$(".lev-radio li").each(function(index, el) {
@@ -271,49 +271,53 @@
 			    			$('#chetwo').attr('checked','checked')
 			    		}
 			    	});//默认是否发布
-					layui.use(['form', 'element'], function(){
-						var element = layui.element,form = layui.form,laydate = layui.laydate;
-						form.render();
-						var itbtn = $('<span class="itbtn"></span>');
-						$('.layui-select-title').append(itbtn);
-						$('.gb-form .layui-form-radio').remove();
-						laydate.render({ 
-							elem: '#datergs',
-			                eventElem: '#tochobtn',
-			                trigger: 'click',
-			                type:'datetime',
-			                range: true,
-							value: data.startTime+" - "+data.endTime
-						});
-						form.on('submit(*)', function(data){
-							schedulingForm(data);
-							console.log(data)
-							$.ajax({
-							    url: portsrc+"/schedule/addItem",
-							    type: 'post',
-							    dataType: 'json',
-							    data:{
-							    	token:token,
-							    	id:sessionStorage.getItem('editTableItem'),
-							    	planSchedule:JSON.stringify(data.field)
-							    },
-							    success: function(data) {
-									layer.open({
-							            title: '提示',
-						        		shadeClose:true,
-							            content: '编辑成功'
-							        });
-							    }
-							});
+			    	layui.use(['form', 'element'], function(){
+			    		var element = layui.element,form = layui.form,laydate = layui.laydate;
+			    		form.render();
+			    		var itbtn = $('<span class="itbtn"></span>');
+			    		$('.layui-select-title').append(itbtn);
+			    		$('.gb-form .layui-form-radio').remove();
+			    		laydate.render({ 
+			    			elem: '#datergs',
+			    			eventElem: '#tochobtn',
+			    			trigger: 'click',
+			    			type:'datetime',
+			    			range: true,
+			    			value: data.startTime+" - "+data.endTime
+			    		});
+			    		form.on('submit(*)', function(data){
+			    			schedulingForm(data);
+			    			console.log(data)
+			    			$.ajax({
+			    				url: portsrc+"/schedule/addItem",
+			    				type: 'post',
+			    				dataType: 'json',
+			    				data:{
+			    					token:token,
+			    					id:sessionStorage.getItem('editTableItem'),
+			    					planSchedule:JSON.stringify(data.field)
+			    				},
+			    				success: function(data) {
+			    					layer.open({
+			    						title: '提示',
+			    						shadeClose:false,
+			    						content: '编辑成功',
+			    						yes: function(index, layero){
+			    							window.location.href='#/schedulingPlan';
+			    							layer.closeAll();
+			    						}
+			    					});
+			    				}
+			    			});
 							return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 						});
-					});
-					$.fn.zTree.init($('#gb_tree_area'), areaSetting, data.allArea);
-					$.fn.zTree.init($('#gb_tree_resource'), resourceSetting, data.allSystemResource);
-					$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.coverArea);
-					$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.systemResource);
+			    	});
+			    	$.fn.zTree.init($('#gb_tree_area'), areaSetting, data.allArea);
+			    	$.fn.zTree.init($('#gb_tree_resource'), resourceSetting, data.allSystemResource);
+			    	$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.coverArea);
+			    	$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.systemResource);
 			    }
 			});
-	    }
+		}
 	});
 </script>

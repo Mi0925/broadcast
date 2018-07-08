@@ -9,7 +9,7 @@
 				<div class="oneitem-cont">
 					<p class="oneitem-tit"><small>*</small>节目名称</p>
 					<div class="tnoneimp">
-						<input type="text" class="imptxt" name="name" />
+						<input type="text" class="imptxt" name="name" lay-verify="required"/>
 					</div>
 					<p class="oneitem-tit"><small>*</small>节目类型</p>
 					<div class="progtype">
@@ -180,14 +180,10 @@
 									<p class="oneitem-tit"><small>*</small>极化方式</p>
 									<div class="layui-input-inline">
 										<select name="polarity" lay-search="">
-											<option value="">请选择频率</option>
-											<option value="中波电台">中波电台</option>
-											<option value="调频电台">调频电台</option>
-											<option value="有线电视">有线电视</option>
-											<option value="无线地面数字电视">无线地面数字电视</option>
-											<option value="卫星电视">卫星电视</option>
-											<option value="网络在线直播">网络在线直播</option>
-											<option value="网络在线媒体">网络在线媒体</option>
+											<option value="">请选择极化方式</option>
+											<option value="垂直极化">垂直极化</option>
+											<option value="水平极化">水平极化</option>
+											<option value="45度极化">45度极化</option>
 										</select>
 									</div>
 								</div>
@@ -211,15 +207,16 @@
 								<p class="oneitem-tit">网络在线媒体</p>
 								<div class="prtop">
 									<p class="oneitem-tit"><small>*</small>在线媒体列表</p>
-									<div class="layui-input-inline">
-										<select name="media" lay-search="">
+									<div class="tnoneimp">
+										<input type="text" name="media" class="imptxt"/>
+										<!-- <select name="media" lay-search="">
 											<option value="">请选择在线媒体列表</option>
 											<option value="在线媒体一">在线媒体一</option>
 											<option value="在线媒体二">在线媒体二</option>
 											<option value="在线媒体三">在线媒体三</option>
 											<option value="在线媒体四">在线媒体四</option>
 											<option value="在线媒体五">在线媒体五</option>
-										</select>
+										</select> -->
 									</div>
 								</div>
 							</div>
@@ -253,7 +250,7 @@
 	</form>
 </div>
 
-	
+
 
 
 
@@ -281,16 +278,16 @@
 
 		// 获取地区
 		$.ajax({
-		    url: portsrc+'/allArea',
-		    type: 'post',
-		    dataType: 'json',
-		    data:{
-		    	token:token,
-		    },
-		    success: function(data) {
-		    	console.log(data)
+			url: portsrc+'/allArea',
+			type: 'post',
+			dataType: 'json',
+			data:{
+				token:token,
+			},
+			success: function(data) {
+				console.log(data)
 				$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
-		    }
+			}
 		});
 		layui.use('form', function(){
 			var form = layui.form;
@@ -337,22 +334,26 @@
 						media:data.field.media,
 					};
 				}
-
+				console.log(datas);
 				$.ajax({
-				    url: portsrc+"/res/program/add",
-				    type: 'post',
-				    dataType: 'json',
-				    data:{
-				    	token:token,
-				    	program:JSON.stringify(datas)
-				    },
-				    success: function(data) {
+					url: portsrc+"/res/program/add",
+					type: 'post',
+					dataType: 'json',
+					data:{
+						token:token,
+						program:JSON.stringify(datas)
+					},
+					success: function(data) {
 						layer.open({
-				            title: '提示',
-			        		shadeClose:true,
-				            content: '新建成功'
-				        });
-				    }
+							title: '提示',
+							shadeClose:false,
+							content: '新建成功',
+							yes: function(index, layero){
+								window.location.href='#/programResources';
+								layer.closeAll();
+							}
+						});
+					}
 				});
 				return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 			});

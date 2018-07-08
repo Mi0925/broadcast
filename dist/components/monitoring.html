@@ -245,6 +245,7 @@ var districtChart=null;//单一事件-覆盖区域图表
 
 /************************** 执行效果（单一事件） *******************************************/
 function unityIncident(taskId) {
+	// console.log(taskId);
 	if(boolunity){
 		// 覆盖人口
 		$.ajax({
@@ -253,7 +254,8 @@ function unityIncident(taskId) {
 		    dataType: 'json',
 		    data:{
 		    	token:token,
-		    	id:taskId
+		    	id:taskId,
+		    	type: 'task'
 		    },
 		    success: function(data) {
 			    populationChart = echarts.init(document.getElementById('line-population'));
@@ -416,7 +418,8 @@ function unityIncident(taskId) {
 		    dataType: 'json',
 		    data:{
 		    	token:token,
-		    	id:taskId
+		    	id:taskId,
+		    	type: 'task'
 		    },
 		    success: function(data) {
 				districtChart = echarts.init(document.getElementById('line-district'));
@@ -580,10 +583,11 @@ function unityIncident(taskId) {
 		    dataType: 'json',
 		    data:{
 		    	token:token,
-		    	id:taskId
+		    	id:taskId,
+		    	type: 'task'
 		    },
 		    success: function(data) {
-		    	console.log(data)
+		    	
 				unitybmap = new BMap.Map("unity-map"); // 创建地图实例，禁止点击地图底图
 				unitybmap.centerAndZoom(new BMap.Point(data.body.center[0],data.body.center[1]), 8);
 				unitybmap.enableScrollWheelZoom(true);
@@ -609,6 +613,7 @@ function unityIncident(taskId) {
 		var param={
             token:token,
             id:taskId,
+            type:'task'
         };
 	    table2.settings()[0].ajax.data = param;
 	    table2.ajax.reload();
@@ -634,6 +639,7 @@ function addIncident() {
 		    dataType: 'json',
 		    data:{
 		    	token:token,
+		    	type: 'task'
 		    },
 		    success: function(data) {
 		    	if(data.body!=null){
@@ -712,6 +718,7 @@ function addIncident() {
 		    dataType: 'json',
 		    data:{
 		    	token:token,
+		    	type: 'task'
 		    },
 		    success: function(data) {
 		    	if(data.body!=null){
@@ -836,6 +843,7 @@ function addIncident() {
 		    dataType: 'json',
 		    data:{
 		    	token:token,
+		    	type: 'task'
 		    },
 		    success: function(data) {
 		    	if(data.body!=null){
@@ -989,8 +997,10 @@ function addIncident() {
 		    dataType: 'json',
 		    data:{
 		    	token:token,
+		    	type: 'task'
 		    },
 		    success: function(data) {
+		    	console.log(data);
 		    	if(data.body!=null){
 					var incidentTypeData =data.body;
 					var yMaxTwo = [];
@@ -1170,6 +1180,7 @@ function addIncident() {
 		    dataType: 'json',
 		    data:{
 		    	token:token,
+		    	type: 'task'
 		    },
 		    success: function(data) {
 		    	if(data.body!=null){
@@ -1564,6 +1575,7 @@ function addIncident() {
 	boolall=false;
 }
 addIncident();
+
 // 获取事件总数和发布总数
 $.ajax({
     url: portsrc+'/totalEvents',
@@ -1571,6 +1583,7 @@ $.ajax({
     dataType: 'json',
     data:{
     	token:token,
+    	type: 'task'
     },
     success: function(data) {
     	$('.j-event-num').html(data.body.split('-')[0]);
@@ -1671,7 +1684,6 @@ var table1 = $('#table-main1 table').DataTable({
 					level="<img src='src/images/rank-yellow.png'/>";
 				}
             	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
-
             	data.body[i].name="<a class='view-cont'>"+d.name+"</a>";
             	data.body[i].tomonitoring='<input type="button" id='+d.id+' value="监控" class="tomonitoring j-tomonitoring" />';
             }
@@ -1733,9 +1745,10 @@ var table2 = $('#table-main2 table').DataTable({
 		data:{
         	token:token,
         	id:0,
+        	type:'task'
 		},
         dataSrc: function ( data ) {
-        	console.log(data)
+        	
             return data.body;
         }
     },
@@ -1787,9 +1800,10 @@ var table3 = $('#table-main3 table').DataTable({
 		type: 'post',
 		data:{
         	token:token,
+        	type:'task'
 		},
         dataSrc: function ( data ) {
-        	console.log(data)
+        	
         	if(data.body!=null){
                 for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
                 	var d=data.body[i];

@@ -10,18 +10,18 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>运维日志名称</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="运维日志名称" readonly="readonly"/>
+							<input type="text" class="imptxt opsName" value="运维日志名称" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>运维操作时间</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="2018-01-18 04:01:02 - 2018-02-13 11:03:04" readonly="readonly"/>
+							<input type="text" class="imptxt time" value="2018-01-18 04:01:02 - 2018-02-13 11:03:04" readonly="readonly"/>
 						</div>
 					</div>
 					<p class="oneitem-tit"><small>*</small>运维内容</p>
 					<div class="msgcont">
-					<textarea class="imparea" readonly="readonly">运维内容运维内容运维内容运维内容运维内容运维内容运维内容运维内容运维内容</textarea>
+					<textarea class="imparea opsContent" readonly="readonly"></textarea>
 				</div>
 				</div>
 			</div>
@@ -29,3 +29,21 @@
 		</div>
 	</form>
 </div>
+<script type="text/javascript">
+	
+	$.ajax({
+        		url: portsrc + '/getSysOpsLog',
+        		type: 'post',
+        		dataType: 'json',
+        		data: {
+                    token: token,
+                    id: Number(sessionStorage.getItem('viewOperLogID')),
+                },
+                success:function (data) {
+                	console.log(data);
+                	$('.opsName').val(data.body.opsName)
+                	$('.time').val(data.body.time)
+                	$('.opsContent').html(data.body.opsContent)
+                }
+        	})
+</script>

@@ -107,7 +107,7 @@
 	</form>
 </div>
 
-	
+
 
 
 
@@ -116,37 +116,37 @@
 	$(document).ready(function(){
     	// 获取地区
     	$.ajax({
-		    url: portsrc+'/allArea',
-		    type: 'post',
-		    dataType: 'json',
-		    data:{
-		    	token:token,
-		    },
-		    success: function(data) {
-				$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
-		    }
-		});
+    		url: portsrc+'/allArea',
+    		type: 'post',
+    		dataType: 'json',
+    		data:{
+    			token:token,
+    		},
+    		success: function(data) {
+    			$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
+    		}
+    	});
 		// 获取编辑数据
 		$.ajax({
-		    url: portsrc+'/res/sub/get',
-		    type: 'get',
-		    dataType: 'json',
-		    data:{
-		    	token:token,
-		    	id:sessionStorage.getItem('editTableItem')
-		    },
-		    success: function(data) {
-		    	console.log(data)
-		    	$("#resourceCode").val(data.body.resourceCode);
-		    	$("#macAddress").val(data.body.macAddress);
-		    	$("#ipAddress").val(data.body.ipAddress);
-		    	$("#deviceType").val(data.body.deviceType);
-		    	$("#version").val(data.body.version);
-		    	$("#manufacturer").val(data.body.manufacturer);
-		    	$("#hardwareVersion").val(data.body.hardwareVersion);
-		    	$("#power").val(data.body.power);
-		    	$("#amplifier").val(data.body.amplifier);
-		    	$("#standardLevel").val(data.body.standardLevel);
+			url: portsrc+'/res/sub/get',
+			type: 'get',
+			dataType: 'json',
+			data:{
+				token:token,
+				id:sessionStorage.getItem('editTableItem')
+			},
+			success: function(data) {
+				console.log(data)
+				$("#resourceCode").val(data.body.resourceCode);
+				$("#macAddress").val(data.body.macAddress);
+				$("#ipAddress").val(data.body.ipAddress);
+				$("#deviceType").val(data.body.deviceType);
+				$("#version").val(data.body.version);
+				$("#manufacturer").val(data.body.manufacturer);
+				$("#hardwareVersion").val(data.body.hardwareVersion);
+				$("#power").val(data.body.power);
+				$("#amplifier").val(data.body.amplifier);
+				$("#standardLevel").val(data.body.standardLevel);
 				layui.use('form', function(){
 					var form = layui.form;
 					form.render();
@@ -155,26 +155,30 @@
 					$('.gb-form .layui-form-radio').remove();
 					form.on('submit(*)', function(data){
 						$.ajax({
-						    url: portsrc+"/res/sub/add",
-						    type: 'post',
-						    dataType: 'json',
-						    data:{
-						    	token:token,
-		    					id:sessionStorage.getItem('editTableItem'),
-						    	sub:JSON.stringify(data.field)
-						    },
-						    success: function(data) {
+							url: portsrc+"/res/sub/add",
+							type: 'post',
+							dataType: 'json',
+							data:{
+								token:token,
+								id:sessionStorage.getItem('editTableItem'),
+								sub:JSON.stringify(data.field)
+							},
+							success: function(data) {
 								layer.open({
-						            title: '提示',
-					        		shadeClose:true,
-						            content: '编辑成功'
-						        });
-						    }
+									title: '提示',
+									shadeClose:false,
+									content: '编辑成功',
+									yes: function(index, layero){
+										window.location.href='#/resourceInformation';
+										layer.closeAll();
+									}
+								});
+							}
 						});
 						return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 					});
 				});
-		    }
+			}
 		});
 	})
 </script>

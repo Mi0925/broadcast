@@ -77,73 +77,77 @@
 	</form>
 </div>
 
-	
+
 
 
 
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#privateKey').on('keyup', function() { 
-		    $('.oneimp-count .countser').html($('#privateKey').val().length);  
+			$('.oneimp-count .countser').html($('#privateKey').val().length);  
 		});
 
 		// 获取地区
 		$.ajax({
-		    url: portsrc+'/allArea',
-		    type: 'post',
-		    dataType: 'json',
-		    data:{
-		    	token:token,
-		    },
-		    success: function(data) {
+			url: portsrc+'/allArea',
+			type: 'post',
+			dataType: 'json',
+			data:{
+				token:token,
+			},
+			success: function(data) {
 		    	// 获取接口数据
-				$.ajax({
-				    url: portsrc+'/msg/Platform/get',
-				    type: 'post',
-				    dataType: 'json',
-				    data:{
-				    	token:token,
+		    	$.ajax({
+		    		url: portsrc+'/msg/Platform/get',
+		    		type: 'post',
+		    		dataType: 'json',
+		    		data:{
+		    			token:token,
 		    			id:sessionStorage.getItem('editTableItem')
-				    },
-				    success: function(data) {
-				    	console.log(data);
-				    	var data=data.body;
-				    	$("#impcontent").val(data.name);
-				    	$("#type").val(data.type);
-				    	$("#localPort").val(data.localPort);
-				    	$("#peerPort").val(data.peerPort);
-				    	$("#protocol").val(data.protocol);
-				    	$("#privateKey").val(data.privateKey);
-				    	layui.use('form', function(){
-							var form = layui.form;
-							form.render();
-							var itbtn = $('<span class="itbtn"></span>');
-							$('.layui-select-title').append(itbtn);
-							$('.gb-form .layui-form-radio').remove();
-							form.on('submit(*)', function(data){
-								$.ajax({
-								    url: portsrc+"/msg/Platform/add",
-								    type: 'get',
-								    dataType: 'json',
-								    data:{
-								    	token:token,
-								    	msgPlatform:JSON.stringify(data.field),
+		    		},
+		    		success: function(data) {
+		    			console.log(data);
+		    			var data=data.body;
+		    			$("#impcontent").val(data.name);
+		    			$("#type").val(data.type);
+		    			$("#localPort").val(data.localPort);
+		    			$("#peerPort").val(data.peerPort);
+		    			$("#protocol").val(data.protocol);
+		    			$("#privateKey").val(data.privateKey);
+		    			layui.use('form', function(){
+		    				var form = layui.form;
+		    				form.render();
+		    				var itbtn = $('<span class="itbtn"></span>');
+		    				$('.layui-select-title').append(itbtn);
+		    				$('.gb-form .layui-form-radio').remove();
+		    				form.on('submit(*)', function(data){
+		    					$.ajax({
+		    						url: portsrc+"/msg/Platform/add",
+		    						type: 'get',
+		    						dataType: 'json',
+		    						data:{
+		    							token:token,
+		    							msgPlatform:JSON.stringify(data.field),
 		    							id:sessionStorage.getItem('editTableItem')
-								    },
-								    success: function(data) {
-										layer.open({
-								            title: '提示',
-							        		shadeClose:true,
-								            content: '编辑成功'
-								        });
-								    }
-								});
+		    						},
+		    						success: function(data) {
+		    							layer.open({
+		    								title: '提示',
+		    								shadeClose:false,
+		    								content: '编辑成功',
+		    								yes: function(index, layero){
+		    									window.location.href='#/interfaceList';
+		    									layer.closeAll();
+		    								}
+		    							});
+		    						}
+		    					});
 								return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 							});
-						});
-				    }
-				});
-				$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
+		    			});
+		    		}
+		    	});
+		    	$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
 		    }
 		});
 	})

@@ -346,7 +346,11 @@
 						layer.open({
 				            title: '提示',
 			        		shadeClose:true,
-				            content: '编辑成功'
+				            content: '编辑成功',
+							yes: function(index, layero){
+								window.location.href='#/characterVoice';
+								layer.closeAll();
+							}
 				        });
 				    }
 				});

@@ -9,7 +9,7 @@
 				<div class="oneitem-cont">
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>资源编码</p>
-						<div class="tnoneimp">
+						<div class="oneimp">
 							<input type="text" class="imptxt" name="resourceCode" id="resourceCode" />
 						</div>
 					</div>
@@ -44,7 +44,7 @@
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>服务器地址</p>
-						<div class="tnoneimp">
+						<div class="oneimp">
 							<input type="text" name="ipAddress" id="ipAddress" class="imptxt" />
 						</div>
 					</div>
@@ -81,74 +81,81 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.ajax({
-	    	url: portsrc+'/msg/Platform/all',
-		    type: 'post',
-		    dataType: 'json',
-		    data:{
-		    	token:token,
-		    },
-	    	success: function(data) {
-		    	console.log(data)
-		    	for (var i = 0; i < data.body.length; i++) {
-		    		$(".j-msgPlatform-sel select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
-		    	}
+			url: portsrc+'/msg/Platform/all',
+			type: 'post',
+			dataType: 'json',
+			data:{
+				token:token,
+			},
+			success: function(data) {
+				console.log(data)
+				for (var i = 0; i < data.body.length; i++) {
+					$(".j-msgPlatform-sel select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
+				}
 		    	// 获取地区
 		    	$.ajax({
-				    url: portsrc+'/allArea',
-				    type: 'post',
-				    dataType: 'json',
-				    data:{
-				    	token:token,
-				    },
-				    success: function(data) {
-						$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
-				    }
-				});
+		    		url: portsrc+'/allArea',
+		    		type: 'post',
+		    		dataType: 'json',
+		    		data:{
+		    			token:token,
+		    		},
+		    		success: function(data) {
+		    			$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
+		    		}
+		    	});
+
 				// 获取编辑数据
 				$.ajax({
-				    url: portsrc+'/res/platform/get',
-				    type: 'get',
-				    dataType: 'json',
-				    data:{
-				    	token:token,
-				    	id:sessionStorage.getItem('editTableItem')
-				    },
-				    success: function(data) {
-				    	$("#resourceCode").val(data.body.resourceCode);
-				    	$("#platformName").val(data.body.platformName);
-				    	$("#platformType").val(data.body.platformType);
-				    	$("#systemType").val(data.body.systemType);
-				    	$("#ipAddress").val(data.body.ipAddress);
-				    	$("#msgPlatform").val(data.body.msgPlatform);
+					url: portsrc+'/res/platform/get',
+					type: 'get',
+					dataType: 'json',
+					data:{
+						token:token,
+						id:sessionStorage.getItem('editTableItem')
+					},
+					success: function(data) {
+
+						$("#resourceCode").val(data.body.resourceCode);
+						$("#platformName").val(data.body.platformName);
+						$("#platformType").val(data.body.platformType);
+						$("#systemType").val(data.body.systemType);
+						$("#ipAddress").val(data.body.ipAddress);
+						$("#msgPlatform").val(data.body.msgPlatform);
 				    	// $("#citySel").val(data.body.areaStruct);
-						layui.use('form', function(){
-							var form = layui.form;
-							form.render();
-							var itbtn = $('<span class="itbtn"></span>');
-							$('.layui-select-title').append(itbtn);
-							$('.gb-form .layui-form-radio').remove();
-							form.on('submit(*)', function(data){
-								data.field.msgPlatform=parseInt(data.field.msgPlatform);
-								$.ajax({
-								    url: portsrc+"/res/platform/add",
-								    type: 'post',
-								    dataType: 'json',
-								    data:{
-								    	token:token,
-								    	platform:JSON.stringify(data.field),
-		    							id:sessionStorage.getItem('editTableItem')
-								    },
-								    success: function(data) {
-										layer.open({
-								            title: '提示',
-							        		shadeClose:true,
-								            content: '编辑成功'
-								        });
-								    }
-								});
+				    	
+				    	layui.use('form', function(){
+				    		var form = layui.form;
+				    		form.render();
+				    		var itbtn = $('<span class="itbtn"></span>');
+				    		$('.layui-select-title').append(itbtn);
+				    		$('.gb-form .layui-form-radio').remove();
+				    		form.on('submit(*)', function(data){
+				    			data.field.msgPlatform=parseInt(data.field.msgPlatform);
+				    			$.ajax({
+				    				url: portsrc+"/res/platform/add",
+				    				type: 'post',
+				    				dataType: 'json',
+				    				data:{
+				    					token:token,
+				    					platform:JSON.stringify(data.field),
+				    					id:sessionStorage.getItem('editTableItem')
+				    				},
+				    				success: function(data) {
+				    					layer.open({
+				    						title: '提示',
+				    						shadeClose:false,
+				    						content: '编辑成功',
+				    						yes: function(index, layero){
+				    							window.location.href='#/resourceInformation';
+				    							layer.closeAll();
+				    						}
+				    					});
+				    				}
+				    			});
 								return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 							});
-						});
+				    	});
 				    }
 				});
 			}

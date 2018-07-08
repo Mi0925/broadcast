@@ -9,36 +9,36 @@
 				<div class="oneitem-cont">
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>用户姓名</p>
-						<div class="tnoneimp">
-							<input type="text" class="imptxt" />
+						<div class="oneimp">
+							<input type="text"  name='userName' class="imptxt j-userName" lay-verify="required"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>密码</p>
-						<div class="tnoneimp">
-							<input type="password" class="imptxt" />
+						<div class="oneimp">
+							<input type="password" name='pwd' class="imptxt j-pwd" lay-verify="required"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>手机号</p>
-						<div class="tnoneimp">
-							<input type="text" class="imptxt"  onkeyup="value=value.replace(/[^\d]/g,'')" ng-pattern="/[^a-zA-Z]/" />
+						<div class="oneimp">
+							<input type="text" class="imptxt j-cellPhone"  onkeyup="value=value.replace(/[^\d]/g,'')" ng-pattern="/[^a-zA-Z]/" lay-verify="required"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>用户所属部分</p>
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+							<select name="roleName" class="j-roleName" lay-search="">
 								<option value="">请选择用户所属部门</option>
-								<option value="1">部门1</option>
-								<option value="2">部门2</option>
+								<option value="部门1">部门1</option>
+								<option value="部门2">部门2</option>
 							</select>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>数字证书可下载次数</p>
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+							<select name="certDownload" class="j-certDownload" lay-search="">
 								<option value="">请选择可下载次数</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -59,7 +59,7 @@
 									<li>
 										<em class="i">自定义权限</em>
 										<div class="matcheck">
-											<input type="radio" name="permission" id="custom" lay-ignore>
+											<input type="radio" name="roleId" id="custom" lay-ignore>
 											<label for="custom"></label>
 										</div>
 									</li>
@@ -69,7 +69,7 @@
 									<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
 								</div>
 								<ul class="gb-watch-list-ul scroll">
-									<li>
+									<!-- <li>
 										<em class="i">橙子</em>
 										<div class="matcheck">
 											<input type="radio" name="permission" id="matone1" checked="checked" lay-ignore>
@@ -82,7 +82,7 @@
 											<input type="radio" name="permission" id="matone2" lay-ignore>
 											<label for="matone2"></label>
 										</div>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 							<div class="gb-user-permission">
@@ -97,7 +97,7 @@
 			</div>
 			<div class="tocreat">
 				<div class="progcreat">
-					<input type="button" value="确定新建" class="tocreatbtn" />
+					<input type="button" value="确定新建" class="tocreatbtn"  lay-submit lay-filter="*"/>
 				</div>
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
@@ -105,22 +105,118 @@
 	</form>
 </div>
 
-	
+
 
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		layui.use('form', function(){
-			var form = layui.form;
-			form.render();
+	$.ajax({
+		url: portsrc+"/role/all",
+		type: 'post',
+		data:{
+			token:token,
+		},
+		success: function(data) {
+			var str='';
+			for (var k in data.body) {
+				str +=
+				'<li>'+
+				'<em class="i">'+data.body[k].name+'</em>'+
+				'<div class="matcheck">'+
+				'<input type="radio" value="'+data.body[k].id+'" name="roleId"  id="matone'+data.body[k].id+'" lay-ignore>'+
+				'<label for="matone'+data.body[k].id+'"></label>'+
+				'</div>'+
+				'</li>';
 
-			var itbtn = $('<span class="itbtn"></span>');
-			$('.layui-select-title').append(itbtn);
-			$('.gb-form .layui-form-radio').remove();
-			
-		});
+			}
+			$('.gb-watch-list-ul').append(str);
+			$.ajax({
+				url: portsrc+"/users/get",
+				type: 'post',
+				dataType: 'json',
+				data:{
+					token:token,
+					userName:sessionStorage.getItem('editTableItem'),
+				},
+				success: function(data) {
+					var d = data.body;
+					console.log(data);
+					$('.j-userName').val(d.userName);
+					$('.j-pwd').val(d.pwd);
+					$('.j-cellPhone').val(d.cellPhone);
+					$(".j-roleName option[value='"+d.roleName+"']").attr("selected","selected");
+					$(".j-certDownload option[value='"+d.certDownload+"']").attr("selected","selected");
+					console.log($(".gb-watch-list-ul li input[value='"+d.roleId+"']"));
+					$(".gb-watch-list-ul li input[value='"+d.roleId+"']").attr('checked',"checked");
+					layui.use('form', function(){
+						// 获取当前当班状态
+						var work = null;
+						$.ajax({
+							url: portsrc+"/getworkStatus",
+							type: 'get',
+							dataType: 'json',
+							data:{
+								token:token,
+							},
+							success: function(data) {
+								work = data.body
+							}
+						});
+
+						var form = layui.form;
+						form.render();
+						form.on('submit(*)', function(data){
+							data.field.certDownload = Number(data.field.certDownload);
+							data.field.creater = '';
+							data.field.work = work;
+							data.field.active = true;
+							data.field.roleId = $('.gb-watch-list-ul input[name="roleId"]:checked').val();
+							data.field.createTime = '';
+							data.field.cellPhone =$('.j-cellPhone').val();
+
+							console.log(data.field);
+							$.ajax({
+								url: portsrc+"/users/add",
+								type: 'post',
+								dataType: 'json',
+								data:{
+									token:token,
+									userInfo:JSON.stringify(data.field)
+								},
+								success: function(data) {
+									if (data.body = false) {
+										layer.open({
+											title: '提示',
+											shadeClose:true,
+											content: data.msg,
+											yes: function(index, layero){
+												layer.closeAll();
+											}
+										});
+									}
+									layer.open({
+										title: '提示',
+										shadeClose:false,
+										content: '新建成功',
+										yes: function(index, layero){
+											window.location.href='#/userManage';
+											layer.closeAll();
+										}
+									});
+								}
+							});
+							return false; 
+						})
+						var itbtn = $('<span class="itbtn"></span>');
+						$('.layui-select-title').append(itbtn);
+						$('.gb-form .layui-form-radio').remove();
+
+					});
+				}
+			})
+		}
 	})
+
 
 	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 	var allSetting = {
@@ -136,7 +232,7 @@
 	};
 	function zTreeOnCheck(event, treeId, treeNode) {
 		// 勾选复选框将触发这个方法，在这里调用ajax获取已选数据
-	    console.log(treeNode)
+		console.log(treeNode)
 		// 	selData=treeNode;//ajax获取的数据赋值给已选数据
 	 //    if(treeNode.checked){
 		//  //    var treeObj = $.fn.zTree.getZTreeObj("gb_tree_all1");//获取全部数据的树的对象

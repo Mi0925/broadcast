@@ -7,7 +7,7 @@
 					<p class="oneitem-tit">编辑台站资源信息</p>
 				</div>
 				<div class="oneitem-cont">
-				<div class="settingone">
+					<div class="settingone">
 						<p class="oneitem-tit">台站名称</p>
 						<div class="tnoneimp">
 							<input type="text" name="name" id="stationname" class="imptxt" />
@@ -93,43 +93,43 @@
 	</form>
 </div>
 
-	
+
 
 
 
 <script type="text/javascript">
 	$(document).ready(function(){
 		// 获取地区
-    	$.ajax({
-		    url: portsrc+'/allArea',
-		    type: 'post',
-		    dataType: 'json',
-		    data:{
-		    	token:token,
-		    },
-		    success: function(data) {
+		$.ajax({
+			url: portsrc+'/allArea',
+			type: 'post',
+			dataType: 'json',
+			data:{
+				token:token,
+			},
+			success: function(data) {
 				$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
-		    }
+			}
 		});
 		// 获取编辑数据
 		$.ajax({
-		    url: portsrc+'/res/station/get',
-		    type: 'get',
-		    dataType: 'json',
-		    data:{
-		    	token:token,
-		    	id:sessionStorage.getItem('editTableItem')
-		    },
-		    success: function(data) {
-		    	console.log(data)
-		    	$("#stationname").val(data.body.name);
-		    	$("#resourceCode").val(data.body.resourceCode);
-		    	$("#macNo").val(data.body.macNo);
-		    	$("#logicNo").val(data.body.logicNo);
-		    	$("#ipAddress").val(data.body.ipAddress);
-		    	$("#collectMethod").val(data.body.collectMethod);
-		    	$("#useStatus").val(data.body.useStatus);
-		    	$("#heartbeatRate").val(data.body.heartbeatRate);
+			url: portsrc+'/res/station/get',
+			type: 'get',
+			dataType: 'json',
+			data:{
+				token:token,
+				id:sessionStorage.getItem('editTableItem')
+			},
+			success: function(data) {
+				console.log(data)
+				$("#stationname").val(data.body.name);
+				$("#resourceCode").val(data.body.resourceCode);
+				$("#macNo").val(data.body.macNo);
+				$("#logicNo").val(data.body.logicNo);
+				$("#ipAddress").val(data.body.ipAddress);
+				$("#collectMethod").val(data.body.collectMethod);
+				$("#useStatus").val(data.body.useStatus);
+				$("#heartbeatRate").val(data.body.heartbeatRate);
 				layui.use('form', function(){
 					var form = layui.form;
 					form.render();
@@ -138,26 +138,30 @@
 					$('.gb-form .layui-form-radio').remove();
 					form.on('submit(*)', function(data){
 						$.ajax({
-						    url: portsrc+"/res/station/add",
-						    type: 'post',
-						    dataType: 'json',
-						    data:{
-						    	token:token,
-		    					id:sessionStorage.getItem('editTableItem'),
-						    	station:JSON.stringify(data.field)
-						    },
-						    success: function(data) {
+							url: portsrc+"/res/station/add",
+							type: 'post',
+							dataType: 'json',
+							data:{
+								token:token,
+								id:sessionStorage.getItem('editTableItem'),
+								station:JSON.stringify(data.field)
+							},
+							success: function(data) {
 								layer.open({
-						            title: '提示',
-					        		shadeClose:true,
-						            content: '编辑成功'
-						        });
-						    }
+									title: '提示',
+									shadeClose:false,
+									content: '编辑成功',
+									yes: function(index, layero){
+										window.location.href='#/resourceInformation';
+										layer.closeAll();
+									}
+								});
+							}
 						});
 						return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 					});
 				});
-		    }
+			}
 		});
 	})
 </script>

@@ -250,7 +250,7 @@ $(document).ready(function() {
 							},
 							yes: function(index, layero){
 								$.ajax({
-							        url: portsrc+'peopleArrange/add',
+							        url: portsrc+'/peopleArrange/add',
 							        type: 'post',
 							        dataType: 'json',
 							        data: {
@@ -401,7 +401,17 @@ $(document).ready(function() {
 			});
 	    }
 	});
-
+  //   $.ajax({
+  //   	 url: portsrc+'/peopleArrange/all',
+	 //    type: 'GET',
+	 //    dataType: 'json',
+	 //    data:{
+		//     token:token,
+		// },
+		// success: function(data) {
+		// 	console.log(data);
+		// }
+  //   })
 
 	// 点击添加值班人员按钮切换按钮
 	$(".add-watch-btn").click(function(argument) {

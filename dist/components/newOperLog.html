@@ -9,16 +9,16 @@
 				<div class="oneitem-cont">
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>运维日志名称</p>
-						<div class="tnoneimp">
-							<input type="text" class="imptxt"/>
+						<div class="oneimp">
+							<input type="text" class="imptxt j-opsName" lay-verify="required"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>运维操作时间</p>
 						<div class="layui-input-inline">
-					        <input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
-					        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
-				    	</div>
+							<input type="text" class="layui-input" id="daterg" placeholder="选择时间范围" lay-verify="required">
+							<span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
+						</div>
 					</div>
 					<p class="oneitem-tit"><small>*</small>运维内容</p>
 					<div class="theditor">
@@ -29,39 +29,75 @@
 			<div class="tocreat">
 				<div class="progcreat">
 					<input type="button" value="清空" class="toemptybtn" />
-					<input type="button" value="确定" class="tocreatbtn" />
+					<input type="button" value="确定" class="tocreatbtn"  lay-submit lay-filter="*" />
 				</div>
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 		</div>
 	</form>
 </div>
-
-	
-
-
-
 <script type="text/javascript">
 	$(document).ready(function(){
-		/*layui.use('form', function(){
+		layui.use('form', function(){
 			var form = layui.form;
 			form.render();
 
 			var itbtn = $('<span class="itbtn"></span>');
 			$('.layui-select-title').append(itbtn);
 			$('.gb-form .layui-form-radio').remove();
+			form.on('submit(*)', function(data){
+				data.field.userName = sessionStorage.getItem('name');
+				delete data.field.editorValue;
+				// data.field.ip = 1;
+				data.field.time = $('#daterg').val();
+				data.field.opsName = $('.j-opsName').val();
+				data.field.opsContent = editor_a.getContentTxt();
+				console.log(data.field);
+				$.ajax({
+					url: portsrc + '/add/sysOpsLog',
+					type: 'post',
+					dataType: 'json',
+					data: {
+						token: token,
+						sysOpsLog:JSON.stringify(data.field)
+					},
+					success: function(data) {
+						layer.open({
+							title: '提示',
+							shadeClose:false,
+							content: '新建成功',
+							yes: function(index, layero){
+								window.location.href='#/systemOperLog';
+								layer.closeAll();
+							}
+						});
+					}
+				});
+			})
 			
-		});*/
+		});
 
 		var editorOption = {
-	        scaleEnabled:true
-	    };
-	    var editor_a = new baidu.editor.ui.Editor(editorOption);
-	    editor_a.render('myEditor');
-		
+			scaleEnabled:true
+		};
+		var editor_a = new baidu.editor.ui.Editor(editorOption);
+		editor_a.render('myEditor');
+
 
 		$(document).on('click','.toemptybtn',function(){
 			UE.getEditor('myEditor').execCommand('cleardoc');
 		})
+		// $('.tocreatbtn').on('click',function () {
+		// 	var data = [$('.j-opsName').val(),$('#daterg').val(),editor_a.getPlainTxt()]
+		// 	$.ajax({
+		// 		url: portsrc + '/add/sysOpsLog',
+  //       		type: 'post',
+  //       		dataType: 'json',
+  //       		data: {
+  //                   token: token,
+  //                   sysOpsLog:JSON.stringify(data)
+  //               }
+		// 	});
+		// })
 	})
 </script>

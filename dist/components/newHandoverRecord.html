@@ -10,10 +10,10 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>交接班</p>
 						<div class="layui-input-inline">
-							<select name="dispatch" lay-search="">
+							<select name="active" lay-search="">
 								<option value="">请选择交班或者接班</option>
-								<option value="1">交班</option>
-								<option value="2">接班</option>
+								<option value="false">交班</option>
+								<option value="true">接班</option>
 							</select>
 						</div>
 					</div>
@@ -27,7 +27,7 @@
 			<div class="tocreat">
 				<div class="progcreat">
 					<input type="button" value="清空" class="toemptybtn" />
-					<input type="button" value="确定" class="tocreatbtn" />
+					<input type="button" value="确定" class="tocreatbtn" lay-submit lay-filter="*" />
 				</div>
 			</div>
 			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
@@ -44,11 +44,49 @@
 		layui.use('form', function(){
 			var form = layui.form;
 			form.render();
-
 			var itbtn = $('<span class="itbtn"></span>');
 			$('.layui-select-title').append(itbtn);
 			$('.gb-form .layui-form-radio').remove();
-			
+			form.on('submit(*)', function(data){
+				if (data.field.active == 'true') {
+					data.field.active=true
+				}else if (data.field.active == 'false') {
+					data.field.active=false
+				}
+				console.log(editor_a.getContentTxt());
+				delete data.field.editorValue;
+				data.field.name = sessionStorage.getItem('name');
+				data.field.content = editor_a.getContentTxt();
+				data.field.time = '';
+				data.field.id = null;
+				if (data.field.active) {
+					workUrl = '/workon'
+				}else if(!data.field.active){
+					workUrl = '//workoff'
+				}
+				$.ajax({
+					url: portsrc + workUrl,
+					type: 'post',
+					dataType: 'json',
+					data: {
+						token: token,
+						content:editor_a.getContentTxt()
+					},
+					success: function(data) {
+						console.log();
+						layer.open({
+							title: '提示',
+							shadeClose:false,
+							content: '新建成功',
+							yes: function(index, layero){
+								window.location.href='#/recordOfSuccession';
+								layer.closeAll();
+							}
+						});
+					}
+				})
+				// console.log(data.field);
+			})
 		});
 
 		var editorOption = {

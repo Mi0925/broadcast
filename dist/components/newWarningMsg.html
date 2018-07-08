@@ -101,7 +101,7 @@
 				<input type="file" accept="text/*" class="file_text" />
 				<div class="tomat">
 					<div class="layui-progress layui-progress-big" lay-filter="demo">
-					  <div class="layui-progress-bar" lay-percent="0%"></div>
+						<div class="layui-progress-bar" lay-percent="0%"></div>
 					</div>
 					<p class="forword">转换中...</p>
 				</div>
@@ -127,20 +127,24 @@
 				warnMsgForm(data);
 				console.log(data.field);
 				$.ajax({
-				    url: portsrc+"/msg/addMsg",
-				    type: 'get',
-				    dataType: 'json',
-				    data:{
-				    	token:token,
+					url: portsrc+"/msg/addMsg",
+					type: 'get',
+					dataType: 'json',
+					data:{
+						token:token,
 				    	type:'alert',//task为任务消息，alert为预警消息
 				    	newMsg:JSON.stringify(data.field)
 				    },
 				    success: function(data) {
-						layer.open({
-				            title: '提示',
-			        		shadeClose:true,
-				            content: '新建成功'
-				        });
+				    	layer.open({
+				    		title: '提示',
+				    		shadeClose:false,
+				    		content: '新建成功',
+				    		yes: function(index, layero){
+				    			window.location.href='#/warningMessage';
+				    			layer.closeAll();
+				    		}
+				    	});
 				    }
 				});
 				return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。

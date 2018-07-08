@@ -9,17 +9,39 @@
 				<div class="settingone">
 					<p class="oneitem-tit"><small>*</small>交接班</p>
 					<div class="tnoneimp">
-						<input type="text" class="imptxt" value="交班" readonly="readonly"/>
+						<input type="text" class="imptxt workInput" value="交班" readonly="readonly"/>
 					</div>
 				</div>
 				
 				<p class="oneitem-tit"><small>*</small>交接班记录（交接时现场设备状况等）</p>
 				<div class="msgcont">
-					<textarea class="imparea" readonly="readonly">交班人备注交班人备注交班人备注交班人备注</textarea>
+					<textarea class="imparea" readonly="readonly"></textarea>
 				</div>
 			</div>
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 	</div>
 </div>
-
+<script type="text/javascript">
+	$.ajax({
+		url: portsrc + '/getSingleWorkLog',
+		type: 'post',
+		dataType: 'json',
+		data: {
+			token: token,
+			id:sessionStorage.getItem('viewTableItem')
+		},
+		success: function(data) {
+			console.log(data);
+			if (data.body.active) {
+				$('.workInput').val('接班')
+			}else if (!data.body.active) {
+				$('.workInput').val('交班')
+			}
+			$('.imparea').html(data.body.content);
+			
+			
+		}
+		
+	})
+</script>

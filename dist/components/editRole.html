@@ -40,7 +40,7 @@
 	</form>
 </div>
 
-	
+
 
 
 
@@ -77,177 +77,213 @@
 		check:{//添加复选框
 			enable:true,
 		},
-		callback: {
-			onCheck: zTreeOnCheck
-		}
+		// callback: {
+		// 	onCheck: zTreeOnCheck
+		// }
 	};
-	function zTreeOnCheck(event, treeId, treeNode) {
-	    var treeObj = $.fn.zTree.getZTreeObj("gb_tree_all1");//获取全部数据的树的对象
-		var treeData=treeObj.getCheckedNodes(true).concat(treeObj.getCheckedNodes(false));
-	    for (var i = 0; i < treeData.length; i++) {
-	    	if(treeData[i].key!=undefined){
-	    		role[treeData[i].key]=treeData[i].checked
-	    	}
-	    }
-	    console.log(role)
-	};
+	// function zTreeOnCheck(event, treeId, treeNode) {
+	//     var treeObj = $.fn.zTree.getZTreeObj("gb_tree_all1");//获取全部数据的树的对象
+	// 	var treeData=treeObj.getCheckedNodes(true).concat(treeObj.getCheckedNodes(false));
+	//     for (var i = 0; i < treeData.length; i++) {
+	//     	if(treeData[i].key){
+	//     		console.log(role[treeData[i].key]);
+	//     		role[treeData[i].key]=treeData[i].checked
+	//     	}
+	//     }
+	//     console.log(role)
+	// };
 	// zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
 	$.ajax({
-	    url: portsrc+"/role/get",
-	    type: 'post',
-	    dataType: 'json',
-	    data:{
-	    	token:token,
+		url: portsrc+"/role/get",
+		type: 'post',
+		dataType: 'json',
+		data:{
+			token:token,
 			id:sessionStorage.getItem('editTableItem'),
-	    },
-	    success: function(data) {
+		},
+		success: function(data) {
+			console.log(data);
 			$(".j-name").val(data.body.name);
 			$(".j-content").val(data.body.content);
-			role=data.body.role;
+			// console.log(data.body);
+			// role=data.body.role;
+			// console.log(role);
+			var d = data.body
 			var ztreeRole = [{
-			    name: "任务消息管理",
-			    open: true,
-			    children: [{
-			        key:'newTask',
-			        checked:role.newTask,
-			        name: "新建任务消息",
-			    },{
-			        key:'editTask',
-			        checked:role.editTask,
-			        name: "编辑任务消息（包括停播、取消、重播）",
-			    },{
-			        key:'auditTask',
-			        checked:role.auditTask,
-			        name: "审核任务消息（包括停播、取消、重播）",
-			    },{
-			        key:'checkTask',
-			        checked:role.checkTask,
-			        name: "查看任务消息",
-			    },{
-			        key:'deleteTask',
-			        checked:role.deleteTask,
-			        name: "删除任务消息",
-			    }]
+				name: "任务消息管理",
+				checked:d.newTask||d.editTask||d.auditTask||d.checkTask||d.deleteTask,
+				open: true,
+				children: [{
+					key:'newTask',
+					checked:d.newTask,
+					name: "新建任务消息",
+				},{
+					key:'editTask',
+					checked:d.editTask,
+					name: "编辑任务消息（包括停播、取消、重播）",
+				},{
+					key:'auditTask',
+					checked:d.auditTask,
+					name: "审核任务消息（包括停播、取消、重播）",
+				},{
+					key:'checkTask',
+					checked:d.checkTask,
+					name: "查看任务消息",
+				},{
+					key:'deleteTask',
+					checked:d.deleteTask,
+					name: "删除任务消息",
+				}]
 			},{
-			    name: "效果评估",
-			    open: true,
-			    children: [{
-			        key:'checkPreview',
-			        checked:role.checkPreview,
-			        name: "查看效果评估",
-			    }]
+				name: "效果评估",
+				checked:d.checkPreview,
+				open: true,
+				children: [{
+					key:'checkPreview',
+					checked:d.checkPreview,
+					name: "查看效果评估",
+				}]
 			},{
-			    name: "应急演练",
-			    open: true,
-			    children: [{
-			        key:'checkPracticeResult',
-			        checked:role.checkPracticeResult,
-			        name: "查看演练效果",
-			    },{
-			        key:'newEditPractice',
-			        checked:role.newEditPractice,
-			        name: "新建演练计划（编辑演练计划）",
-			    },{
-			        key:'deletePractice',
-			        checked:role.deletePractice,
-			        name: "删除演练计划",
-			    }]
+				name: "应急演练",
+				checked:d.checkPracticeResult||d.newEditPractice||d.deletePractice,
+				open: true,
+				children: [{
+					key:'checkPracticeResult',
+					checked:d.checkPracticeResult,
+					name: "查看演练效果",
+				},{
+					key:'newEditPractice',
+					checked:d.newEditPractice,
+					name: "新建演练计划（编辑演练计划）",
+				},{
+					key:'deletePractice',
+					checked:d.deletePractice,
+					name: "删除演练计划",
+				}]
 			},{
-			    name: "消息接入",
-			    open: true,
-			    children: [{
-			        key:'newEditMsgPlatform',
-			        checked:role.newEditMsgPlatform,
-			        name: "新建消息接入（编辑消息接入）",
-			    },{
-			        key:'deleteMsgPlatform',
-			        checked:role.deleteMsgPlatform,
-			        name: "删除消息接入",
-			    }]
+				name: "消息接入",
+				checked:d.newEditMsgPlatform||d.deleteMsgPlatform,
+				open: true,
+				children: [{
+					key:'newEditMsgPlatform',
+					checked:d.newEditMsgPlatform,
+					name: "新建消息接入（编辑消息接入）",
+				},{
+					key:'deleteMsgPlatform',
+					checked:d.deleteMsgPlatform,
+					name: "删除消息接入",
+				}]
 			},{
-			    name: "资源管理",
-			    open: true,
-			    children: [{
-			        key:'checkResource',
-			        checked:role.checkResource,
-			        name: "查看资源",
-			    },{
-			        key:'newEditResource',
-			        checked:role.newEditResource,
-			        name: "新增资源（编辑资源）",
-			    },{
-			        key:'deleteEditResource',
-			        checked:role.deleteEditResource,
-			        name: "删除资源（编辑资源）",
-			    },{
-			        key:'downloadResource',
-			        checked:role.downloadResource,
-			        name: "下载音频资源",
-			    }]
+				name: "资源管理",
+				checked:d.checkResource||d.newEditResource||d.deleteEditResource||d.downloadResource,
+				open: true,
+				children: [{
+					key:'checkResource',
+					checked:d.checkResource,
+					name: "查看资源",
+				},{
+					key:'newEditResource',
+					checked:d.newEditResource,
+					name: "新增资源（编辑资源）",
+				},{
+					key:'deleteEditResource',
+					checked:d.deleteEditResource,
+					name: "删除资源（编辑资源）",
+				},{
+					key:'downloadResource',
+					checked:d.downloadResource,
+					name: "下载音频资源",
+				}]
 			},{
-			    name: "安全证书",
-			    open: true,
-			    children: [{
-			        key:'uploadEditCert',
-			        checked:role.uploadEditCert,
-			        name: "上传证书（编辑证书）",
-			    },{
-			        key:'deleteEditCert',
-			        checked:role.deleteEditCert,
-			        name: "删除证书（编辑证书）",
-			    }]
+				name: "安全证书",
+				checked:d.uploadEditCert||d.deleteEditCert,
+				open: true,
+				children: [{
+					key:'uploadEditCert',
+					checked:d.uploadEditCert,
+					name: "上传证书（编辑证书）",
+				},{
+					key:'deleteEditCert',
+					checked:d.deleteEditCert,
+					name: "删除证书（编辑证书）",
+				}]
 			},{
-			    name: "日志管理",
-			    open: true,
-			    children: [{
-			        key:'checkLog',
-			        checked:role.checkLog,
-			        name: "查看日子管理",
-			    },{
-			        key:'deleteLog',
-			        checked:role.deleteLog,
-			        name: "删除日志管理",
-			    }]
+				name: "日志管理",
+				checked:d.checkLog||d.deleteLog,
+				open: true,
+				children: [{
+					key:'checkLog',
+					checked:d.checkLog,
+					name: "查看日子管理",
+				},{
+					key:'deleteLog',
+					checked:d.deleteLog,
+					name: "删除日志管理",
+				}]
 			},{
-			    name: "用户管理",
-			    open: true,
-			    children: [{
-			        key:'newEditUser',
-			        checked:role.newEditUser,
-			        name: "新建用户（编辑用户）",
-			    },{
-			        key:'activeEditUser',
-			        checked:role.activeEditUser,
-			        name: "停用/启用用户（编辑用户）",
-			    },{
-			        key:'deleteEditUser',
-			        checked:role.deleteEditUser,
-			        name: "删除用户（编辑用户）",
-			    }]
+				name: "用户管理",
+				checked:d.newEditUser||d.activeEditUser||d.deleteEditUser,
+				open: true,
+				children: [{
+					key:'newEditUser',
+					checked:d.newEditUser,
+					name: "新建用户（编辑用户）",
+				},{
+					key:'activeEditUser',
+					checked:d.activeEditUser,
+					name: "停用/启用用户（编辑用户）",
+				},{
+					key:'deleteEditUser',
+					checked:d.deleteEditUser,
+					name: "删除用户（编辑用户）",
+				}]
 			}];
-
+			// console.log(ztreeRole);
 			$.fn.zTree.init($('.ztree-check'), allSetting, ztreeRole);
-	    }
+		}
 	});
 	layui.use(['form'], function(){
 		var form = layui.form;
+		form.render();
 		form.on('submit(*)', function(data){
-			data.field.role=role;
+			
+			var treeObj = $.fn.zTree.getZTreeObj("gb_tree_all1");
+			for (var k in treeObj.getCheckedNodes(true)) {
+				if (treeObj.getCheckedNodes(true)[k].key) {
+					role[treeObj.getCheckedNodes(true)[k].key]=true;
+				}
+			}
+			data.active = true;
+			console.log(role);
+			// var treeObj = $.fn.zTree.getZTreeObj("gb_tree_all1");
+			// for (var k in treeObj.getCheckedNodes(true)) {
+			// 	if (treeObj.getCheckedNodes(true)[k].key) {
+			// 		role[treeObj.getCheckedNodes(true)[k].key]=true;
+			// 	}
+			// }
+			// data.field.role= role;
+			$.extend(data.field,role)
+			
 			$.ajax({
-			    url: portsrc+"/role/add",
-			    type: 'post',
-			    dataType: 'json',
-			    data:{
-			    	token:token,
-			    	role:JSON.stringify(data.field)
-			    },
-			    success: function(data) {
+				url: portsrc+"/role/add",
+				type: 'post',
+				dataType: 'json',
+				data:{
+					token:token,
+					id: sessionStorage.getItem('editTableItem'),
+					role:JSON.stringify(data.field)
+				},
+				success: function(data) {
 					layer.open({
-			            title: '提示',
-		        		shadeClose:true,
-			            content: '编辑成功'
-			        });
-			    }
+						title: '提示',
+						shadeClose:false,
+						content: '编辑成功',
+						yes: function(index, layero){
+							window.location.href='#/roleManage';
+							layer.closeAll();
+						}
+					});
+				}
 			});
 			return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 		});

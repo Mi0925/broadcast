@@ -123,8 +123,13 @@
 							    success: function(data) {
 									layer.open({
 							            title: '提示',
-						        		shadeClose:true,
-							            content: '新建成功'
+						        		shadeClose:false,
+							            content: '新建成功',
+			    						yes: function(index, layero){
+			    							window.location.href='#/resourceInformation';
+			    							layer.closeAll();
+			    						}
+							            
 							        });
 							    }
 							});

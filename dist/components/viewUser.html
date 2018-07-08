@@ -10,31 +10,31 @@
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>用户姓名</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="用户姓名" readonly="readonly"/>
+							<input type="text" class="imptxt j-userName" value="用户姓名" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>密码</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="密码" readonly="readonly"/>
+							<input type="text" class="imptxt j-pwd" value="密码" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>手机号</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="手机号" readonly="readonly"/>
+							<input type="text" class="imptxt j-cellPhone" value="手机号" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>用户所属部分</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="部门1" readonly="readonly"/>
+							<input type="text" class="imptxt j-roleName" value="" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
 						<p class="oneitem-tit"><small>*</small>数字证书可下载次数</p>
 						<div class="tnoneimp">
-							<input type="text" class="imptxt" value="3" readonly="readonly"/>
+							<input type="text" class="imptxt j-certDownload" value="3" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="settingone">
@@ -57,6 +57,34 @@
 
 
 <script type="text/javascript">
+	$.ajax({
+		url: portsrc+"/users/get",
+		type: 'post',
+		dataType: 'json',
+		data:{
+			token:token,
+			userName:sessionStorage.getItem('editTableItem'),
+		},
+		success: function(data) {
+			var d = data.body;
+			console.log(data);
+			$('.j-userName').val(d.userName);
+			$('.j-pwd').val(d.pwd);
+			$('.j-cellPhone').val(d.cellPhone);
+			$(".j-certDownload").val(d.certDownload);
+			$('.j-roleName').val(d.roleName);
+			layui.use('form', function(){
+				var form = layui.form;
+				// form.render('select');
+				form.render();
+
+				var itbtn = $('<span class="itbtn"></span>');
+				$('.layui-select-title').append(itbtn);
+				$('.gb-form .layui-form-radio').remove();
+
+			});
+		}
+	})
 	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 	var allSetting = {
 		view:{

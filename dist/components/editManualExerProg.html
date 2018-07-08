@@ -21,13 +21,13 @@
 				<div class="oneitem-cont">
 					<p class="oneitem-tit">选择调度方案</p>
 					
-						<div class="layui-input-inline j-scheduling-sel">
-							<select name="schedulePlanId" lay-search="" lay-filter="scheduling_sel" lay-verify="required">
-								<option value="">请选择调度方案</option>
-							</select>
-						</div>
-			    	<!-- </form> -->
-			    	<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>选择调度方案后，后面的信息将自动匹配为预设的事件信息并且不能修改</p>
+					<div class="layui-input-inline j-scheduling-sel">
+						<select name="schedulePlanId" lay-search="" lay-filter="scheduling_sel" lay-verify="required">
+							<option value="">请选择调度方案</option>
+						</select>
+					</div>
+					<!-- </form> -->
+					<p class="itemexp"><i class="iconfont icon-iconfontjinggao"></i>选择调度方案后，后面的信息将自动匹配为预设的事件信息并且不能修改</p>
 				</div>
 			</div>
 			<div class="form-oneitem-box">
@@ -135,40 +135,40 @@
 	</form>
 </div>
 
-	
+
 
 
 
 <script type="text/javascript">
 	$.ajax({
-	    url: portsrc+'/practice/get/ManualPractice',
-	    type: 'get',
-	    dataType: 'json',
-	    data:{
-	    	token:token,
-	    	id:sessionStorage.getItem('editTableItem'),
-	    },
-	    success: function(data) {
-	    	$("#impcontent").val(data.body.name);
-	    	var schedule_id=data.body.schedulePlanId;
-	    	$.ajax({
-			    url: portsrc+'/schedule/allItem',
-			    type: 'post',
-			    dataType: 'json',
-			    data:{
-			    	token:token,
-			    },
-			    success: function(data) {
-			    	console.log(data)
-			    	var data=data.body;
-			    	for (var i = 0; i < data.length; i++) {
-			    		if(schedule_id==data[i].id){
-			    			$(".j-scheduling-sel select").append('<option value='+data[i].id+' selected>'+data[i].name+'</option>');
-			    		}else{
-			    			$(".j-scheduling-sel select").append('<option value='+data[i].id+'>'+data[i].name+'</option>');
-			    		}
-			    	};
-			    	layui.use(['form', 'element'], function(){
+		url: portsrc+'/practice/get/ManualPractice',
+		type: 'get',
+		dataType: 'json',
+		data:{
+			token:token,
+			id:sessionStorage.getItem('editTableItem'),
+		},
+		success: function(data) {
+			$("#impcontent").val(data.body.name);
+			var schedule_id=data.body.schedulePlanId;
+			$.ajax({
+				url: portsrc+'/schedule/allItem',
+				type: 'post',
+				dataType: 'json',
+				data:{
+					token:token,
+				},
+				success: function(data) {
+					console.log(data)
+					var data=data.body;
+					for (var i = 0; i < data.length; i++) {
+						if(schedule_id==data[i].id){
+							$(".j-scheduling-sel select").append('<option value='+data[i].id+' selected>'+data[i].name+'</option>');
+						}else{
+							$(".j-scheduling-sel select").append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+						}
+					};
+					layui.use(['form', 'element'], function(){
 						var element = layui.element,form = layui.form,laydate = layui.laydate;
 						form.render();
 						var itbtn = $('<span class="itbtn"></span>');
@@ -177,16 +177,16 @@
 
 						// 默认值
 						$.ajax({
-						    url: portsrc+'/schedule/getItem',
-						    type: 'post',
-						    dataType: 'json',
-						    data:{
-						    	token:token,
-						    	id:schedule_id,
-						    },
-						    success: function(data) {
-						    	console.log(data)
-						    	var data=data.body;
+							url: portsrc+'/schedule/getItem',
+							type: 'post',
+							dataType: 'json',
+							data:{
+								token:token,
+								id:schedule_id,
+							},
+							success: function(data) {
+								console.log(data)
+								var data=data.body;
 						    	$(".j-type").val(data.type);//默认事件类别
 						    	$(".j-name").val(data.name);//默认事件名
 						    	$(".j-level").val(data.level);//默认级别
@@ -200,16 +200,16 @@
 						    	$(".j-department").text(data.department);//部门
 						    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
 						    	
-								laydate.render({ 
-									elem: '#datergs',
-					                eventElem: '#tochobtn',
-					                trigger: 'click',
-					                type:'datetime',
-					                range: true,
-									value: data.time
-								});
-								$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.coverArea);
-								$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.systemResource);
+						    	laydate.render({ 
+						    		elem: '#datergs',
+						    		eventElem: '#tochobtn',
+						    		trigger: 'click',
+						    		type:'datetime',
+						    		range: true,
+						    		value: data.time
+						    	});
+						    	$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.coverArea);
+						    	$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.systemResource);
 						    }
 						});
 						// 选择调度方案
@@ -218,16 +218,16 @@
 								$(".form-oneitem-box").show();
 								// 获取编辑数据
 								$.ajax({
-								    url: portsrc+'/schedule/getItem',
-								    type: 'post',
-								    dataType: 'json',
-								    data:{
-								    	token:token,
-								    	id:data.value,
-								    },
-								    success: function(data) {
-								    	console.log(data)
-								    	var data=data.body;
+									url: portsrc+'/schedule/getItem',
+									type: 'post',
+									dataType: 'json',
+									data:{
+										token:token,
+										id:data.value,
+									},
+									success: function(data) {
+										console.log(data)
+										var data=data.body;
 						    			$(".j-type").val(data.type);//默认事件类别
 								    	$(".j-name").val(data.name);//默认事件名
 								    	$(".j-level").val(data.level);//默认事件名
@@ -241,16 +241,16 @@
 								    	$(".j-department").text(data.department);//部门
 								    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
 								    	
-										laydate.render({ 
-											elem: '#datergs',
-							                eventElem: '#tochobtn',
-							                trigger: 'click',
-							                type:'datetime',
-							                range: true,
-											value: data.time
-										});
-										$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.coverArea);
-										$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.systemResource);
+								    	laydate.render({ 
+								    		elem: '#datergs',
+								    		eventElem: '#tochobtn',
+								    		trigger: 'click',
+								    		type:'datetime',
+								    		range: true,
+								    		value: data.time
+								    	});
+								    	$.fn.zTree.init($('#gb_tree_areaSel'), selSetting, data.coverArea);
+								    	$.fn.zTree.init($('#gb_tree_resourceSel'), selSetting, data.systemResource);
 								    }
 								});
 							}else{
@@ -261,27 +261,32 @@
 						form.on('submit(*)', function(data){
 							console.log(data.field)
 							$.ajax({
-							    url: portsrc+"/practice/add/ManualPractice",
-							    type: 'get',
-							    dataType: 'json',
-							    data:{
-							    	token:token,
-							    	id:sessionStorage.getItem('editTableItem'),
-							    	manualPractice:JSON.stringify(data.field)
-							    },
-							    success: function(data) {
+								url: portsrc+"/practice/add/ManualPractice",
+								type: 'get',
+								dataType: 'json',
+								data:{
+									token:token,
+									id:sessionStorage.getItem('editTableItem'),
+									manualPractice:JSON.stringify(data.field)
+								},
+								success: function(data) {
 									layer.open({
-							            title: '提示',
-						        		shadeClose:true,
-							            content: '编辑成功'
-							        });
-							    }
+										title: '提示',
+										shadeClose:false,
+										content: '编辑成功',
+										yes: function(index, layero){
+											window.location.href='#/exercisePlan';
+											layer.closeAll();
+										}
+										
+									});
+								}
 							});
 							return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 						});
 					});
-			    }
+				}
 			});
-	    }
-	});
+}
+});
 </script>

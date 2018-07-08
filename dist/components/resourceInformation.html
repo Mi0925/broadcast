@@ -175,7 +175,7 @@
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
-					<p class="oneitem-tit"><small>*</small>面积(平方公理)</p>
+					<p class="oneitem-tit"><small>*</small>面积(平方公里)</p>
 					<div class="oneimp" style="width: 100%">
 						<input type="text" id="addarea" name="area" class="imptxt" lay-verify="required"/>
 					</div>
@@ -224,7 +224,7 @@
 					</div>
 				</div>
 				<div class="settingone" style="margin-bottom: 0;">
-					<p class="oneitem-tit"><small>*</small>面积(平方公理)</p>
+					<p class="oneitem-tit"><small>*</small>面积(平方公里)</p>
 					<div class="oneimp" style="width: 100%">
 						<input type="text" id="editarea" name="area" class="imptxt" lay-verify="required"/>
 					</div>
@@ -412,12 +412,15 @@
 		});
 	};
 	function onEditResourceClick(e,treeId, treeNode) {
-		alert(1)
+		console.log(onResourceCheck2);
+		// console.log(treeNode.name);
+		// console.log(treeNode.parentTId);
 		if($(e.target).hasClass("node_name")){
 			if($("#"+treeNode.parentTId+">a").text()!=''){
-				$("#editAreaRegion").val($("#"+treeNode.parentTId+">a").attr('title'))
+				$("#editAreaRegion").val($("#"+treeNode.parentTId+">a").attr('title'));
 			}else{
-				$("#editAreaRegion").val(treeNode.name)
+				// $("#editAreaRegion").val(treeNode.name);
+				$("#editAreaRegion").attr("value", treeNode.name);
 			}
 			$('#editRegionName').val(treeNode.name);
 			$('#editlon').val(treeNode.longtitude);
@@ -505,7 +508,7 @@
 		    	token:token,
 		    },
 		    success: function(data) {
-		    	console.log(data)
+		    	// console.log(data)
 		    	for (var i = 0; i < data.body.length; i++) {
 		    		data.body[i].addIcon=true;
 		    		data.body[i].treeadd=treeadd;

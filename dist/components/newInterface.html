@@ -88,26 +88,26 @@
 	</form>
 </div>
 
-	
+
 
 
 
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#secretkey').on('keyup', function() { 
-		    $('.oneimp-count .countser').html($('#secretkey').val().length);  
+			$('.oneimp-count .countser').html($('#secretkey').val().length);  
 		});
 		// 获取地区
 		$.ajax({
-		    url: portsrc+'/allArea',
-		    type: 'post',
-		    dataType: 'json',
-		    data:{
-		    	token:token,
-		    },
-		    success: function(data) {
-		    	console.log(data)
-		    	layui.use('form', function(){
+			url: portsrc+'/allArea',
+			type: 'post',
+			dataType: 'json',
+			data:{
+				token:token,
+			},
+			success: function(data) {
+				console.log(data)
+				layui.use('form', function(){
 					var form = layui.form;
 					form.render();
 
@@ -117,26 +117,30 @@
 					form.on('submit(*)', function(data){
 						data.field.type=parseInt(data.field.type)
 						$.ajax({
-						    url: portsrc+"/msg/Platform/add",
-						    type: 'post',
-						    dataType: 'json',
-						    data:{
-						    	token:token,
-						    	msgPlatform:JSON.stringify(data.field)
-						    },
-						    success: function(data) {
+							url: portsrc+"/msg/Platform/add",
+							type: 'post',
+							dataType: 'json',
+							data:{
+								token:token,
+								msgPlatform:JSON.stringify(data.field)
+							},
+							success: function(data) {
 								layer.open({
-						            title: '提示',
-					        		shadeClose:true,
-						            content: '新建成功'
-						        });
-						    }
+									title: '提示',
+									shadeClose:false,
+									content: '新建成功',
+									yes: function(index, layero){
+										window.location.href='#/interfaceList';
+										layer.closeAll();
+									}
+								});
+							}
 						});
 						return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 					});
 				});
 				$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
-		    }
+			}
 		});
 	});
 

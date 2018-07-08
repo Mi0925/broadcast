@@ -90,14 +90,14 @@ function jumpPage($this) {
 function rowScreen(column){
     var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
     var select = $('<select><option value="">全部</option></select>')
-        .appendTo($(column.header()))
-        .on('click', function(evt) {
-            evt.stopPropagation();
-            var val = $.fn.dataTable.util.escapeRegex(
-                $(this).val()
+    .appendTo($(column.header()))
+    .on('click', function(evt) {
+        evt.stopPropagation();
+        var val = $.fn.dataTable.util.escapeRegex(
+            $(this).val()
             );
-            column.search(val ? '^' + val + '$' : '', true, false).draw();
-        });
+        column.search(val ? '^' + val + '$' : '', true, false).draw();
+    });
     column.data().unique().sort().each(function(d, j) {
         function delHtmlTag(str) {
             return str.replace(/<[^>]+>/g, ""); //去掉html标签
@@ -112,14 +112,14 @@ function rowScreen(column){
 function rowLevScreen(column){
     var $span = $('<span class="addselect"><i class="iconfont icon-arrow-bottom"></i></span>').appendTo($(column.header()))
     var select = $('<select><option value="">全部</option></select>')
-        .appendTo($(column.header()))
-        .on('click', function(evt) {
-            evt.stopPropagation();
-            var val = $.fn.dataTable.util.escapeRegex(
-                $(this).val()
+    .appendTo($(column.header()))
+    .on('click', function(evt) {
+        evt.stopPropagation();
+        var val = $.fn.dataTable.util.escapeRegex(
+            $(this).val()
             );
-            column.search(val ? val : '', true, false).draw();
-        });
+        column.search(val ? val : '', true, false).draw();
+    });
     column.data().unique().sort().each(function(d, j) {
         function delHtmlTag(str) {
             return str.replace(/<[^>]+>/g, ""); //去掉html标签
@@ -142,25 +142,25 @@ function userDef(table){
     $('.taskmsg').each(function(){
         tabot($(this))
     })
-     $('.gb-ctab').each(function(){
+    $('.gb-ctab').each(function(){
         tabot($(this))
     })
     //自定义显示搜索
     $('.dsearch').on('keyup click', function () {
        var tsval = $(".dsearch").val()
        table.search(tsval, false, false).draw();
-    });
+   });
 
     //checkbox全选
     $("#checkAll").on("click", function () {
         if ($(this).prop("checked") === true) {
            $("input[name='checkone']").prop("checked", $(this).prop("checked"));
            $('.dataTables_wrapper tbody tr').addClass('selected');
-        } else {
+       } else {
            $("input[name='checkone']").prop("checked", false);
            $('.dataTables_wrapper tbody tr').removeClass('selected');
-        }
-    });
+       }
+   });
 
 
    //删除选中行
@@ -172,20 +172,21 @@ function userDef(table){
    });
 
 
-    $('.dataTables_wrapper').on('scroll',function(){
-        if($('.choose').is(':visible')){
-            $(".choose").hide();
-            $('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
-        }
-    })
-    $(window).resize(function(){
-        if($('.choose').is(':visible')){
-            $(".choose").hide();
-            $('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
-        }
-    })
+   $('.dataTables_wrapper').on('scroll',function(){
+    if($('.choose').is(':visible')){
+        $(".choose").hide();
+        $('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
+    }
+})
+   $(window).resize(function(){
+    if($('.choose').is(':visible')){
+        $(".choose").hide();
+        $('table.dataTable tbody tr').removeClass('trstop trcont traga trdel');
+    }
+})
 };
 function tr_del(table) {//表格删除
+    console.log($(this).parents('.choose'));
     table.rows('tr.selected').remove().draw(false);
     $('#checkAll').attr('checked',false);
     $(this).parents('.choose').hide();
@@ -199,8 +200,23 @@ function tr_del(table) {//表格删除
    //      $(this).parents('.choose').hide();
    // });
 }
-
-
+function tr_stop(table) {//表格停用
+ 
+    
+    $('.trstop .isstop').addClass('isactive').removeClass('isstop').html('<i class="iconfont icon-qiyong"></i>启用');
+    // .addClass('isactive').removeClass('isstop').find('.iconfont').removeClass('icon-zanting').addClass('icon-qiyong');
+    layer.open({
+        title: '提示',
+        content: '停用成功'
+    });
+}
+function tr_active(table) {//表格启用
+    $('.tractive .isactive').addClass('isstop').removeClass('isactive').html('<i class="iconfont icon-zanting"></i>停用');
+    layer.open({
+        title: '提示',
+        content: '启用成功'
+    });
+}
 
 
 /*popwindow*/
@@ -233,11 +249,11 @@ $(document).on('click','.operbtnTask',function(){
                     // $(".prevword").text(data.body.message);
                     for (var i = 0; i < data.body.listMP3.length; i++) {
                         var html='<li>'+
-                                    '<p class="prevideo">'+data.body.listMP3[i]+'</p>'+
-                                    '<button class="tosee">'+
-                                    '   <a href="#/editCyclePlan" url="components/editCyclePlan.html" class="add_tab" name="编辑周期性计划">预览</a>'+
-                                    '</button>'
-                                '</li>  ';
+                        '<p class="prevideo">'+data.body.listMP3[i]+'</p>'+
+                        '<button class="tosee">'+
+                        '   <a href="#/editCyclePlan" url="components/editCyclePlan.html" class="add_tab" name="编辑周期性计划">预览</a>'+
+                        '</button>'
+                        '</li>  ';
                         $(".prevlist").append(html)
                     }
                 }
@@ -273,11 +289,11 @@ $(document).on('click','.operbtnCYCLE',function(){
                     // $(".prevword").text(data.body.message);
                     for (var i = 0; i < data.body.listMP3.length; i++) {
                         var html='<li>'+
-                                    '<p class="prevideo">'+data.body.listMP3[i]+'</p>'+
-                                    '<button class="tosee">'+
-                                    '   <a href="#/editCyclePlan" url="components/editCyclePlan.html" class="add_tab" name="编辑周期性计划">预览</a>'+
-                                    '</button>'
-                                '</li>  ';
+                        '<p class="prevideo">'+data.body.listMP3[i]+'</p>'+
+                        '<button class="tosee">'+
+                        '   <a href="#/editCyclePlan" url="components/editCyclePlan.html" class="add_tab" name="编辑周期性计划">预览</a>'+
+                        '</button>'
+                        '</li>  ';
                         $(".prevlist").append(html)
                     }
                 }
@@ -315,11 +331,11 @@ $(document).on('click','.operbtnMANNUAL',function(){
                     // $(".prevword").text(data.body.message);
                     for (var i = 0; i < data.body.listMP3.length; i++) {
                         var html='<li>'+
-                                    '<p class="prevideo">'+data.body.listMP3[i]+'</p>'+
-                                    '<button class="tosee">'+
-                                    '   <a href="#/editManualExerProg" url="components/editManualExerProg.html" class="add_tab" name="编辑手动演练计划">预览</a>'+
-                                    '</button>'
-                                '</li>  ';
+                        '<p class="prevideo">'+data.body.listMP3[i]+'</p>'+
+                        '<button class="tosee">'+
+                        '   <a href="#/editManualExerProg" url="components/editManualExerProg.html" class="add_tab" name="编辑手动演练计划">预览</a>'+
+                        '</button>'
+                        '</li>  ';
                         $(".prevlist").append(html)
                     }
                 }
@@ -386,8 +402,9 @@ $(document).on('click','.un-confirm',function(){
 })
 
 
-//停发、续发、重发、删除、注销
+//停发、续发、重发、删除、注销、启用
 $(function() {
+
     $(document).on('click','.isstop',function(event) {
         showDiv();
         $('.choword').html('确定停发此任务消息吗？');
@@ -395,10 +412,23 @@ $(function() {
         $('.chopri').removeClass('j-del-tr cho-again cho-continue').addClass('cho-stop');
         $(this).parents('tr').addClass('trstop');
         $(document).one("click",
-        function() { 
-            $(".choose").hide();
-            $('table.dataTable tbody tr').removeClass('trstop');
-        });
+            function() { 
+                $(".choose").hide();
+                // $('table.dataTable tbody tr').removeClass('trstop');
+            });
+        event.stopPropagation(); 
+    });
+    $(document).on('click','.isactive',function(event) {
+        showDiv();
+        $('.choword').html('确定启用此任务消息吗？');
+        $('.chopri').val('启用');
+        $('.chopri').removeClass('j-del-tr cho-again cho-continue cho-stop').addClass('cho-active');
+        $(this).parents('tr').addClass('tractive');
+        $(document).one("click",
+            function() { 
+                $(".choose").hide();
+                // $('table.dataTable tbody tr').removeClass('tractive');
+            });
         event.stopPropagation(); 
     });
     $(document).on('click','.iscont',function(event) {
@@ -408,10 +438,10 @@ $(function() {
         $('.chopri').removeClass('j-del-tr cho-again cho-stop').addClass('cho-continue');
         $(this).parents('tr').addClass('trcont');
         $(document).one("click",
-        function() { 
-            $(".choose").hide();
-            $('table.dataTable tbody tr').removeClass('trcont');
-        });
+            function() { 
+                $(".choose").hide();
+                $('table.dataTable tbody tr').removeClass('trcont');
+            });
         event.stopPropagation();
     });
     $(document).on('click','.chretry',function(event) {
@@ -434,7 +464,7 @@ $(function() {
         $('.chopri').removeClass('cho-again cho-continue cho-stop').addClass('j-del-tr');
         // $(this).parents('tr').addClass('trdel');
         $(this).parents('tr').addClass('selected');
-        //$(myDiv).toggle();
+        //$(myDiv).toggle();fv
         // $(document).one("click",function() {
         //     alert(1)
         //     $(".choose").hide();
@@ -450,10 +480,10 @@ $(function() {
         $(this).parents('tr').addClass('trlogout');
         //$(myDiv).toggle();
         $(document).one("click",
-        function() { 
-            $(".choose").hide();
-            $('table.dataTable tbody tr').removeClass('trlogout');
-        });
+            function() { 
+                $(".choose").hide();
+                $('table.dataTable tbody tr').removeClass('trlogout');
+            });
         event.stopPropagation();
     });
     $(".choose").click(function(event) {
@@ -468,7 +498,7 @@ function showDiv() {
 
 $('.cho-stop').click(function(){
     $(this).parents('.choose').hide();
-    $('tr').removeClass('trstop');
+    // $('tr').removeClass('trstop');
 })
 
 $('.cho-continue').click(function(){
@@ -518,13 +548,13 @@ $(function() {
             'margin-right':'0'
         },500);
         $(document).one("click",
-        function() { 
-            $('.detadiv').animate({
-                'margin-right':'-516px'
-            },500,function(){
-                $('.viewdetail').css({'height':'0','padding-top':'0'});
+            function() { 
+                $('.detadiv').animate({
+                    'margin-right':'-516px'
+                },500,function(){
+                    $('.viewdetail').css({'height':'0','padding-top':'0'});
+                });
             });
-        });
         event.stopPropagation(); 
     }) 
     $(".viewdetail").click(function(event) {
@@ -541,7 +571,27 @@ $(function() {
 
 // 表格删除
 $('body').on('click','.j-del-tr',function() {
-    if(!$(this).hasClass("j-exercise")){
+    if($(this).hasClass('j-uses')) {
+        var userName = [];
+        $('tr.selected').each(function() {
+            userName.push($(this).find('.checkone').find('input').attr('id'));
+        });
+        $.ajax({
+            url: portVar.ajaxUrlDelete,
+            type: 'get',
+            dataType: 'json',
+            data: {
+                token:token,
+                userName:JSON.stringify(userName.sort()),
+                type:portVar.type
+            },
+            success: function(data) {
+               
+                tr_del(table);
+                userName=[];
+            }
+        });
+    }else if(!$(this).hasClass("j-exercise")){
         var deleteId=[];//存放删除id
         $('tr.selected').each(function() {
             deleteId.push($(this).find('.checkone').find('input').attr('id'))
@@ -605,6 +655,72 @@ $('body').on('click','.j-del-tr',function() {
         });
     }
 });
+// 停用
+$('body').on('click','.cho-stop',function (event) {
+    // portVar.userName
+    if ($(this).hasClass('userStop')) {
+        $.ajax({
+            url: portVar.ajaxUrlstop,
+            type: 'get',
+            dataType: 'json',
+            data:{
+                token:token,
+                userName: $('.trstop').find('.checkone').find('input').attr('id')
+            },
+            success:function (data) {
+                tr_stop(table);
+            }
+        })
+    }else{
+        // console.log($('.trstop').find('.checkone').find('input').attr('id'));
+        $.ajax({
+            url: portVar.ajaxUrlstop,
+            type: 'get',
+            dataType: 'json',
+            data:{
+                token:token,
+                id: $('.trstop').find('.checkone').find('input').attr('id')
+            },
+            success:function (data) {
+
+                tr_stop(table);
+            }
+        })
+    }
+    // event.stopPropagation(); 
+})
+// 启用
+$('body').on('click','.cho-active',function () {
+    // portVar.userName
+    // console.log();
+    if ($(this).hasClass('userActive')) {
+        $.ajax({
+            url: portVar.ajaxUrlActive,
+            type: 'get',
+            dataType: 'json',
+            data:{
+                token:token,
+                userName: $('.tractive').find('.checkone').find('input').attr('id')
+            },
+            success:function (data) {
+                tr_active(table);
+            }
+        })
+    }else{
+        $.ajax({
+            url: portVar.ajaxUrlActive,
+            type: 'get',
+            dataType: 'json',
+            data:{
+                token:token,
+                id: $('.tractive').find('.checkone').find('input').attr('id')
+            },
+            success:function (data) {
+                tr_active(table);
+            }
+        })
+    }
+})
 
 
 // 已查阅,未查阅，新编辑
@@ -620,13 +736,13 @@ $('body').on('click','.msgtype li',function() {
         defaulrValue=2;
     }
     var param={
-            token:token,
-            defaulrValue:defaulrValue,
+        token:token,
+        defaulrValue:defaulrValue,
             type:portVar.type,//task为任务消息，alert为预警消息
         };
-    table.settings()[0].ajax.data = param;
-    table.ajax.reload();
-});
+        table.settings()[0].ajax.data = param;
+        table.ajax.reload();
+    });
 
 // 重播
 $('body').on('click','.j-resend-manual',function() {
@@ -779,40 +895,40 @@ $('body').on('click','.j-platform',function(){
         type:'',
     };
     var html='<table class="table-main display" cellspacing="0" width="100%">'+
-        '   <thead>'+
-        '       <tr>'+
-        '           <th></th>'+
-        '           <th>序号</th>'+
-        '           <th>编码</th>'+
-        '           <th>工作状态</th>'+
-        '           <th>平台类别</th>'+
-        '           <th>系统类别</th>'+
-        '           <th>平台名称</th>'+
-        '           <th>服务器地址</th>'+
-        '           <th>所属地区</th>'+
-        '           <th>创建时间</th>'+
-        '           <th>操作</th>'+
-        '           <th></th>'+
-        '       </tr>'+
-        '   </thead>'+
-        '   <tfoot>'+
-        '       <tr>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '       </tr>'+
-        '   </tfoot>'+
-        '   <tbody></tbody>'+
-        '</table>';
+    '   <thead>'+
+    '       <tr>'+
+    '           <th></th>'+
+    '           <th>序号</th>'+
+    '           <th>编码</th>'+
+    '           <th>工作状态</th>'+
+    '           <th>平台类别</th>'+
+    '           <th>系统类别</th>'+
+    '           <th>平台名称</th>'+
+    '           <th>服务器地址</th>'+
+    '           <th>所属地区</th>'+
+    '           <th>创建时间</th>'+
+    '           <th>操作</th>'+
+    '           <th></th>'+
+    '       </tr>'+
+    '   </thead>'+
+    '   <tfoot>'+
+    '       <tr>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '       </tr>'+
+    '   </tfoot>'+
+    '   <tbody></tbody>'+
+    '</table>';
     $("#table-main .tablecont").html(html);
     table = $('#table-main table').DataTable({
         "scrollY": "calc(100% - 50px)",
@@ -854,34 +970,34 @@ $('body').on('click','.j-platform',function(){
             }
         },
         "columns": [
-            { "data": "checkbox" },
-            { "data": "tabnumb" },
-            { "data": "resourceCode" },
-            { "data": "status" },
-            { "data": "platformType" },
-            { "data": "systemType" },
-            { "data": "platformName" },
-            { "data": "ipAddress" },
-            { "data": "areaStruct" },
-            { "data": "time" },
-            { "data": "edit" },
-            { "data": "delete" }
+        { "data": "checkbox" },
+        { "data": "tabnumb" },
+        { "data": "resourceCode" },
+        { "data": "status" },
+        { "data": "platformType" },
+        { "data": "systemType" },
+        { "data": "platformName" },
+        { "data": "ipAddress" },
+        { "data": "areaStruct" },
+        { "data": "time" },
+        { "data": "edit" },
+        { "data": "delete" }
         ],
         "columnDefs": [
-                {
-                orderable: false,
+        {
+            orderable: false,
                 targets: [0,2,3,4,5,6,7,8,10,11] //禁止排序
             }
-        ],
-        fnDrawCallback: function(table) {  
-            jumpPage($("#table-main"))
-        },
+            ],
+            fnDrawCallback: function(table) {  
+                jumpPage($("#table-main"))
+            },
         initComplete: function () {//列筛选
             var api = this.api();
             api.columns().indexes().flatten().each(function (i) {
                 if (i == 3 || i == 4 || i == 5 || i == 8) { // 对第i列进行筛选
                     var column = api.column(i);
-                        rowScreen(column);
+                    rowScreen(column);
                 }
             });
         }
@@ -895,40 +1011,40 @@ $('body').on('click','.j-sub',function(){
         type:'',
     };
     var html='<table class="table-main display" cellspacing="0" width="100%">'+
-        '   <thead>'+
-        '       <tr>'+
-        '           <th></th>'+
-        '           <th>序号</th>'+
-        '           <th>编码</th>'+
-        '           <th>工作状态</th>'+
-        '           <th>设备类型名称</th>'+
-        '           <th>型号</th>'+
-        '           <th>终端物理地址</th>'+
-        '           <th>IP地址</th>'+
-        '           <th>所属地区</th>'+
-        '           <th>在线信息</th>'+
-        '           <th>操作</th>'+
-        '           <th></th>'+
-        '       </tr>'+
-        '   </thead>'+
-        '   <tfoot>'+
-        '       <tr>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '       </tr>'+
-        '   </tfoot>'+
-        '   <tbody></tbody>'+
-        '</table>';
+    '   <thead>'+
+    '       <tr>'+
+    '           <th></th>'+
+    '           <th>序号</th>'+
+    '           <th>编码</th>'+
+    '           <th>工作状态</th>'+
+    '           <th>设备类型名称</th>'+
+    '           <th>型号</th>'+
+    '           <th>终端物理地址</th>'+
+    '           <th>IP地址</th>'+
+    '           <th>所属地区</th>'+
+    '           <th>在线信息</th>'+
+    '           <th>操作</th>'+
+    '           <th></th>'+
+    '       </tr>'+
+    '   </thead>'+
+    '   <tfoot>'+
+    '       <tr>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '       </tr>'+
+    '   </tfoot>'+
+    '   <tbody></tbody>'+
+    '</table>';
     $("#table-main .tablecont").html(html);
     table = $('#table-main table').DataTable({
         "scrollY": "calc(100% - 50px)",
@@ -984,34 +1100,34 @@ $('body').on('click','.j-sub',function(){
             }
         },
         "columns": [
-            { "data": "checkbox" },
-            { "data": "tabnumb" },
-            { "data": "resourceCode" },
-            { "data": "status" },
-            { "data": "deviceType" },
-            { "data": "version" },
-            { "data": "macAddress" },
-            { "data": "ipAddress" },
-            { "data": "areaStruct" },
-            { "data": "msg" },
-            { "data": "edit" },
-            { "data": "delete" }
+        { "data": "checkbox" },
+        { "data": "tabnumb" },
+        { "data": "resourceCode" },
+        { "data": "status" },
+        { "data": "deviceType" },
+        { "data": "version" },
+        { "data": "macAddress" },
+        { "data": "ipAddress" },
+        { "data": "areaStruct" },
+        { "data": "msg" },
+        { "data": "edit" },
+        { "data": "delete" }
         ],
         "columnDefs": [
-            {
-                orderable: false,
+        {
+            orderable: false,
                 targets: [0,2,3,4,5,6,7,8,9,10,11] //禁止排序
             }
-        ],
-        fnDrawCallback: function(table) {  
-            jumpPage($("#table-main"))
-        },
+            ],
+            fnDrawCallback: function(table) {  
+                jumpPage($("#table-main"))
+            },
         initComplete: function () {//列筛选
             var api = this.api();
             api.columns().indexes().flatten().each(function (i) {
                 if (i == 3 || i == 4 || i == 5 || i == 8) { // 对第i列进行筛选
                     var column = api.column(i);
-                        rowScreen(column);
+                    rowScreen(column);
                 }
             });
         }
@@ -1025,38 +1141,38 @@ $('body').on('click','.j-station',function(){
         type:'',
     };
     var html='<table class="table-main display" cellspacing="0" width="100%">'+
-        '   <thead>'+
-        '       <tr>'+
-        '           <th></th>'+
-        '           <th>序号</th>'+
-        '           <th>编码</th>'+
-        '           <th>工作状态</th>'+
-        '           <th>发射台名称</th>'+
-        '           <th>物理地址</th>'+
-        '           <th>IP地址</th>'+
-        '           <th>所属地区</th>'+
-        '           <th>在线信息</th>'+
-        '           <th>操作</th>'+
-        '           <th></th>'+
-        '       </tr>'+
-        '   </thead>'+
-        '   <tfoot>'+
-        '       <tr>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '           <th></th>'+
-        '       </tr>'+
-        '   </tfoot>'+
-        '   <tbody></tbody>'+
-        '</table>';
+    '   <thead>'+
+    '       <tr>'+
+    '           <th></th>'+
+    '           <th>序号</th>'+
+    '           <th>编码</th>'+
+    '           <th>工作状态</th>'+
+    '           <th>发射台名称</th>'+
+    '           <th>物理地址</th>'+
+    '           <th>IP地址</th>'+
+    '           <th>所属地区</th>'+
+    '           <th>在线信息</th>'+
+    '           <th>操作</th>'+
+    '           <th></th>'+
+    '       </tr>'+
+    '   </thead>'+
+    '   <tfoot>'+
+    '       <tr>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '           <th></th>'+
+    '       </tr>'+
+    '   </tfoot>'+
+    '   <tbody></tbody>'+
+    '</table>';
     $("#table-main .tablecont").html(html);
     table = $('#table-main table').DataTable({
         "scrollY": "calc(100% - 50px)",
@@ -1097,33 +1213,33 @@ $('body').on('click','.j-station',function(){
             }
         },
         "columns": [
-            { "data": "checkbox" },
-            { "data": "tabnumb" },
-            { "data": "resourceCode" },
-            { "data": "status" },
-            { "data": "name" },
-            { "data": "macNo" },
-            { "data": "ipAddress" },
-            { "data": "areaStruct" },
-            { "data": "msg" },
-            { "data": "edit" },
-            { "data": "delete" }
+        { "data": "checkbox" },
+        { "data": "tabnumb" },
+        { "data": "resourceCode" },
+        { "data": "status" },
+        { "data": "name" },
+        { "data": "macNo" },
+        { "data": "ipAddress" },
+        { "data": "areaStruct" },
+        { "data": "msg" },
+        { "data": "edit" },
+        { "data": "delete" }
         ],
         "columnDefs": [
-            {
-                orderable: false,
+        {
+            orderable: false,
                 targets: [0,2,3,4,5,6,7,8,9,10] //禁止排序
             }
-        ],
-        fnDrawCallback: function(table) {  
-            jumpPage($("#table-main"))
-        },
+            ],
+            fnDrawCallback: function(table) {  
+                jumpPage($("#table-main"))
+            },
         initComplete: function () {//列筛选
             var api = this.api();
             api.columns().indexes().flatten().each(function (i) {
                 if (i == 3 || i == 4 || i == 5 || i == 8) { // 对第i列进行筛选
                     var column = api.column(i);
-                        rowScreen(column);
+                    rowScreen(column);
                 }
             });
         }

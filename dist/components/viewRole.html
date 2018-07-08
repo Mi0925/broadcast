@@ -86,36 +86,37 @@
 			id:sessionStorage.getItem('editTableItem'),
 	    },
 	    success: function(data) {
+	    	console.log(data);
 			$(".j-name").val(data.body.name);
 			$(".j-content").val(data.body.content);
-			role=data.body.role;
+			// data.body=data.body.data.body;
 			var ztreeRole = [{
 			    name: "任务消息管理",
 			    open: true,
 			    doCheck:false,
 			    children: [{
 			        key:'newTask',
-			        checked:role.newTask,
+			        checked:data.body.newTask,
 			        doCheck:false,
 			        name: "新建任务消息",
 			    },{
 			        key:'editTask',
-			        checked:role.editTask,
+			        checked:data.body.editTask,
 			        doCheck:false,
 			        name: "编辑任务消息（包括停播、取消、重播）",
 			    },{
 			        key:'auditTask',
-			        checked:role.auditTask,
+			        checked:data.body.auditTask,
 			        doCheck:false,
 			        name: "审核任务消息（包括停播、取消、重播）",
 			    },{
 			        key:'checkTask',
-			        checked:role.checkTask,
+			        checked:data.body.checkTask,
 			        doCheck:false,
 			        name: "查看任务消息",
 			    },{
 			        key:'deleteTask',
-			        checked:role.deleteTask,
+			        checked:data.body.deleteTask,
 			        doCheck:false,
 			        name: "删除任务消息",
 			    }]
@@ -125,7 +126,7 @@
 			    doCheck:false,
 			    children: [{
 			        key:'checkPreview',
-			        checked:role.checkPreview,
+			        checked:data.body.checkPreview,
 			        doCheck:false,
 			        name: "查看效果评估",
 			    }]
@@ -135,17 +136,17 @@
 			    doCheck:false,
 			    children: [{
 			        key:'checkPracticeResult',
-			        checked:role.checkPracticeResult,
+			        checked:data.body.checkPracticeResult,
 			        doCheck:false,
 			        name: "查看演练效果",
 			    },{
 			        key:'newEditPractice',
-			        checked:role.newEditPractice,
+			        checked:data.body.newEditPractice,
 			        doCheck:false,
 			        name: "新建演练计划（编辑演练计划）",
 			    },{
 			        key:'deletePractice',
-			        checked:role.deletePractice,
+			        checked:data.body.deletePractice,
 			        doCheck:false,
 			        name: "删除演练计划",
 			    }]
@@ -155,12 +156,12 @@
 			    doCheck:false,
 			    children: [{
 			        key:'newEditMsgPlatform',
-			        checked:role.newEditMsgPlatform,
+			        checked:data.body.newEditMsgPlatform,
 			        doCheck:false,
 			        name: "新建消息接入（编辑消息接入）",
 			    },{
 			        key:'deleteMsgPlatform',
-			        checked:role.deleteMsgPlatform,
+			        checked:data.body.deleteMsgPlatform,
 			        doCheck:false,
 			        name: "删除消息接入",
 			    }]
@@ -170,22 +171,22 @@
 			    doCheck:false,
 			    children: [{
 			        key:'checkResource',
-			        checked:role.checkResource,
+			        checked:data.body.checkResource,
 			        doCheck:false,
 			        name: "查看资源",
 			    },{
 			        key:'newEditResource',
-			        checked:role.newEditResource,
+			        checked:data.body.newEditResource,
 			        doCheck:false,
 			        name: "新增资源（编辑资源）",
 			    },{
 			        key:'deleteEditResource',
-			        checked:role.deleteEditResource,
+			        checked:data.body.deleteEditResource,
 			        doCheck:false,
 			        name: "删除资源（编辑资源）",
 			    },{
 			        key:'downloadResource',
-			        checked:role.downloadResource,
+			        checked:data.body.downloadResource,
 			        doCheck:false,
 			        name: "下载音频资源",
 			    }]
@@ -195,12 +196,12 @@
 			    doCheck:false,
 			    children: [{
 			        key:'uploadEditCert',
-			        checked:role.uploadEditCert,
+			        checked:data.body.uploadEditCert,
 			        doCheck:false,
 			        name: "上传证书（编辑证书）",
 			    },{
 			        key:'deleteEditCert',
-			        checked:role.deleteEditCert,
+			        checked:data.body.deleteEditCert,
 			        doCheck:false,
 			        name: "删除证书（编辑证书）",
 			    }]
@@ -210,12 +211,12 @@
 			    doCheck:false,
 			    children: [{
 			        key:'checkLog',
-			        checked:role.checkLog,
+			        checked:data.body.checkLog,
 			        doCheck:false,
 			        name: "查看日子管理",
 			    },{
 			        key:'deleteLog',
-			        checked:role.deleteLog,
+			        checked:data.body.deleteLog,
 			        doCheck:false,
 			        name: "删除日志管理",
 			    }]
@@ -225,17 +226,17 @@
 			    doCheck:false,
 			    children: [{
 			        key:'newEditUser',
-			        checked:role.newEditUser,
+			        checked:data.body.newEditUser,
 			        doCheck:false,
 			        name: "新建用户（编辑用户）",
 			    },{
 			        key:'activeEditUser',
-			        checked:role.activeEditUser,
+			        checked:data.body.activeEditUser,
 			        doCheck:false,
 			        name: "停用/启用用户（编辑用户）",
 			    },{
 			        key:'deleteEditUser',
-			        checked:role.deleteEditUser,
+			        checked:data.body.deleteEditUser,
 			        doCheck:false,
 			        name: "删除用户（编辑用户）",
 			    }]

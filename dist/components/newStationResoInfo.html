@@ -7,7 +7,7 @@
 					<p class="oneitem-tit">新建台站资源信息</p>
 				</div>
 				<div class="oneitem-cont">
-				<div class="settingone">
+					<div class="settingone">
 						<p class="oneitem-tit">台站名称</p>
 						<div class="tnoneimp">
 							<input type="text" name="name" class="imptxt" />
@@ -93,22 +93,22 @@
 	</form>
 </div>
 
-	
+
 
 
 
 <script type="text/javascript">
 	// 获取地区
 	$.ajax({
-	    url: portsrc+'/allArea',
-	    type: 'post',
-	    dataType: 'json',
-	    data:{
-	    	token:token,
-	    },
-	    success: function(data) {
-	    	console.log(data)
-	    	layui.use('form', function(){
+		url: portsrc+'/allArea',
+		type: 'post',
+		dataType: 'json',
+		data:{
+			token:token,
+		},
+		success: function(data) {
+			console.log(data)
+			layui.use('form', function(){
 				var form = layui.form;
 				form.render();
 
@@ -117,26 +117,30 @@
 				$('.gb-form .layui-form-radio').remove();
 				form.on('submit(*)', function(data){
 					$.ajax({
-					    url: portsrc+"/res/station/add",
-					    type: 'post',
-					    dataType: 'json',
-					    data:{
-					    	token:token,
-					    	station:JSON.stringify(data.field)
-					    },
-					    success: function(data) {
+						url: portsrc+"/res/station/add",
+						type: 'post',
+						dataType: 'json',
+						data:{
+							token:token,
+							station:JSON.stringify(data.field)
+						},
+						success: function(data) {
 							layer.open({
-					            title: '提示',
-				        		shadeClose:true,
-					            content: '新建成功'
-					        });
-					    }
+								title: '提示',
+								shadeClose:false,
+								content: '新建成功',
+								yes: function(index, layero){
+									window.location.href='#/resourceInformation';
+									layer.closeAll();
+								}
+							});
+						}
 					});
 					return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 				});
 			});
-				
+			
 			$.fn.zTree.init($("#treeDemo"), selectSetting, data.body);
-	    }
+		}
 	});
 </script>
