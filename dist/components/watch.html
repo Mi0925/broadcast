@@ -6,7 +6,7 @@
 				<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
 			</div>
 			<ul class="gb-watch-list-ul scroll">
-				<li class="all">
+				<li class="all" >
 					<i class="gb-watch-logo i" style="background-image: url(./src/images/watch-logo-all.png);"></i>
 					<em class="i">所有人员</em>
 					<div class="matcheck">
@@ -20,7 +20,7 @@
 					<button class="layui-btn add-watch-btn bg4579d8">添加值班人员</button>
 				</div>
 				<div class="add-watch-ok-no" style="display: none;">
-					<button class="layui-btn add-watch-no layui-btn-sm layui-btn-primary">取消</button>
+					<!-- <button class="layui-btn add-watch-no layui-btn-sm layui-btn-primary">取消</button> -->
 					<button class="layui-btn add-watch-ok layui-btn-sm bg4579d8">确认</button>
 				</div>
 			</div>
@@ -181,6 +181,7 @@
 					'</div>'+
 					'</li>';
 					$('.gb-watch-list-ul').append(str);
+					$('.gb-watch-list-ul li:not(.all)').hide();
 				}
 			}
 		})
@@ -199,10 +200,11 @@
 			var startDate ="";//起始日期
 			var endDate ="";//结束日期
 			var allDay=false;//全天.
-
-			layui.use(['layer','laydate','form'], function() {
-				var layer = layui.layer,laydate = layui.laydate,form = layui.form;
-				console.log(eventsData);
+// eventsData[0].end
+// asd=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
+layui.use(['layer','laydate','form'], function() {
+	var layer = layui.layer,laydate = layui.laydate,form = layui.form;
+	console.log(eventsData);
 			    // 页面加载完毕，初始化Canlendar
 			    $('.gb-calendar').fullCalendar({
 			    	header: {
@@ -253,39 +255,36 @@
 									done: function(value, startD, endD){
 										startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
 										endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
+										// console.log(startDate,endDate);
+										// var abc = {
+										// 	title: 'people',
+										// 	start:startDate,
+										// 	end: endDate
+										// };
+										// console.log(abc);
+										// $('.gb-calendar').fullCalendar('renderEvent', abc, true);
 									}
 								});
 								form.render('select');
 							},
 							yes: function(index, layero){
-								
-								console.log($('#daterg').val());
-								var data = {
-									title: JSON.stringify('admin'),
-									start: '2018-07-10T:06:03:01',
-									end: '2018-07-11T:09:03:01',
-									content: 'ceshi'
+								// console.log(layero);
+								// var data = {
+								// 	title: JSON.stringify('ceshi'),
+								// 	start: 'Wed Jul 11 2018 07:30:00 GMT+0800 (中国标准时间)',
+								// 	end: 'Tue Jul 10 2018 08:00:00 GMT+0800 (中国标准时间)',
+								// 	content: 'ceshi'
+								// }.
+								var eventData,people="";
+								$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
+									people=people+$(this).text()+"、";
+								})
+								//去掉最后一个、(如果不需要去掉，就不用写)
+								if (people.length > 0) {
+									people = people.substr(0, people.length - 1);
+								}else if(people==""){
+									people="无";
 								}
-								$.ajax({
-									url: portsrc+'/peopleArrange/add',
-									type: 'post',
-									dataType: 'json',
-									data: {
-										token:token,
-										peopleArrange:JSON.stringify(data),
-									},
-									success: function(data) {
-										console.log(data)
-										var eventData,people="";
-										$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
-											people=people+$(this).text()+"、";
-										})
-										//去掉最后一个、(如果不需要去掉，就不用写)
-										if (people.length > 0) {
-											people = people.substr(0, people.length - 1);
-										}else if(people==""){
-											people="无";
-										}
 										if(allDay){//点击全天设置全天
 											endDate=null;
 										}
@@ -293,15 +292,26 @@
 											allDay:allDay,
 											title: people,
 											start:startDate,
-											end: endDate
+											end: endDate,
 										};
-										console.log(eventData)
-										$('.gb-calendar').fullCalendar('renderEvent', eventData, true); // 渲染一个新的日程到日程表上
-										layer.closeAll();
+										console.log(eventData);
+								// 		$.ajax({
+								// 			url: portsrc+'/peopleArrange/add',
+								// 			type: 'post',
+								// 			dataType: 'json',
+								// 			data: {
+								// 				token:token,
+								// 				peopleArrange:JSON.stringify(eventData),
+								// 			},
+								// 			success: function(data) {
+								// 				console.log(eventData)
+								// 				$('.gb-calendar').fullCalendar('renderEvent', eventData, true); 
+								// 		// 渲染一个新的日程到日程表上
+								// 		layer.closeAll();
+								// 	}
+								// });
 									}
 								});
-							}
-						});
 						$(".gb-people-list li").remove();
 						// $(".gb-dialog").show();
 					},
@@ -410,13 +420,9 @@
 						}); 
 		                return false;  //return false可以阻止点击后续事件发生（比如event中的url跳转事件）  
 		            }
-
-					// 必须遵循下述格式：
+		            // 必须遵循下述格式：
 					// M月d日 HH:mm - M月d日 HH:mm
 				});
-eventsData = [];
-				$('.gb-calendar').fullCalendar('renderEvent', eventsData, true);
-
 			    // 弹出框关闭
 			    $("body").on('click','.j-close-dialog',function() {
 			    	layer.closeAll();
@@ -431,13 +437,20 @@ eventsData = [];
 	$(".add-watch-btn").click(function(argument) {
 		$(".add-watch").hide();
 		$(".add-watch-ok-no").show();
-
+		$('.gb-watch-list-ul li').show();
 	});
 	// 点击取消按钮切换按钮
 	$(".add-watch-no").click(function(argument) {
 		$(".add-watch").show();
 		$(".add-watch-ok-no").hide();
+		
 	});
+	$('body').on('click','.add-watch-ok',function () {
+		$('.gb-watch-list-ul li:not(.all)').hide();
+		$('.gb-watch-list-ul input[name="userChoose"]:checked').parents('li').show();
+		$(".add-watch").show();
+		$(".add-watch-ok-no").hide();
+	})
 	// 点击全天禁用时间范围选择
 	$("body").on('change','#day',function(argument) {
 		if($("#day").is(':checked')==true){
