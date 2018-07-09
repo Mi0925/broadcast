@@ -72,6 +72,8 @@
 									            <th></th>
 									            <th></th>
 									            <th></th>
+									            <th></th>
+									            <th></th>
 									        </tr>
 								        </tfoot>
 								        <tbody>
@@ -100,7 +102,7 @@
 			</div>
 			<!-- 执行效果（单一事件） -->
 			<div class="item gb-unity-incident-item" style="display: none;">
-				<a href="unity-screen.html" target="_blank" class="layui-btn layui-btn-normal gb-projection-btn cur incident-btn">投屏单一事件</a>
+				<a href="unity-screen.html" target="_blank" class="layui-btn layui-btn-normal gb-projection-btn cur incident-btn j-addTaskId">投屏单一事件</a>
 				<div class="gb-chart-box">
 					<div class="gb-ctab" id="table-main1">
 						<div class="tksearch">
@@ -1866,12 +1868,22 @@ userDef(table1);//table配置--显示数量 搜索 全选 删除
 $(".gb-main-item").on("click",".gb-unity-incident",function(){
 	setTimeout(function(){
 		table1.draw();
+		$('#table-main1 tbody tr').eq(0).find('.j-tomonitoring').trigger('click');
     },10)
 });
 $("body").on("click",".j-table-chart-tab em",function(event) {
-	incidentTypeChart.resize();
+	if (incidentTypeChart) {
+		incidentTypeChart.resize();
+	}
+	if (populationChart) {
+		populationChart.resize();
+	}
+	if (districtChart) {
+		districtChart.resize();
+	}
     if($(this).hasClass("list")){
         setTimeout(function(){
+        	table1.draw();
 			table2.draw();
 			table3.draw();
 	    },10)
@@ -1889,6 +1901,15 @@ $(document).on('click','.tomonitoring',function(){
 	console.log($(this).attr('id'));
 	boolunity=true;
 	unityIncident($(this).attr('id'));
+	sessionStorage.setItem('editTableItem',$(this).attr('id'))
 });
+$('.j-addTaskId').on('click',function () {
+	sessionStorage.setItem('TaskId',$('#table-main1 tbody .tomact').attr('id'));
+})
+
+// setTimeout(function () {
+// 	console.log($('#table-main1 tbody tr').eq(0));
+// 	$('#table-main1 tbody tr').eq(0).find('.j-tomonitoring').trigger('click');
+// },1000)
 
 </script>

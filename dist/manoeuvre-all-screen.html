@@ -73,6 +73,7 @@
 									            <th>状态监测</th>
 									            <th>消息等级</th>
 									            <th>事件名称</th>
+									            <th>消息类别</th>
 									            <th>覆盖区域</th>
 									            <th>覆盖人口</th>
 									            <th>部门</th>
@@ -88,10 +89,13 @@
 									            <th></th>
 									            <th></th>
 									            <th></th>
+									            <th></th>
+									            <th></th>
+									            <th></th>
 									        </tr>
 								        </tfoot>
 								        <tbody>
-								        	<tr>
+								        	<!-- <tr>
 								        		<td>发布中</td>
 								        		<td><span class='rankimg' vel='红色'><img src='src/images/rank-red.png'/></span></td>
 								        		<td><a class='view-cont'>杭州西湖区雷暴红色警报消息</a></td>
@@ -170,7 +174,7 @@
 								        		<td>杭州市西湖区应急广播中心</td>
 								        		<td>橙子</td>
 								        		<td>2017-11-09 12:0:0</td>
-								        	</tr>
+								        	</tr> -->
 								        </tbody>
 								    </table>
 								</div>
@@ -1314,7 +1318,7 @@ var districtChart=null;//单一事件-覆盖区域图表
 		"scrollX": true,
     "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
 	"dom": 'tiprl', //自定义显示项
-	"lengthMenu": [20,30,40,50], //每页显示条数设置
+	"lengthMenu": [10,30,40,50], //每页显示条数设置
 	"lengthChange": true, //是否允许用户自定义显示数量
 	"bPaginate": true, //翻页功能
 	"bFilter": true, //列筛序功能
@@ -1328,6 +1332,7 @@ var districtChart=null;//单一事件-覆盖区域图表
 		type: 'post',
 		data:{
 			token:token,
+			type:'practice'
 		},
 		dataSrc: function ( data ) {
 			console.log(data)
