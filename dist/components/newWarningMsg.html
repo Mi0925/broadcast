@@ -67,12 +67,24 @@
 				</div>
 				<div class="oneitem-cont">
 					<div class="predictone">
-						<p class="oneitem-tit">发布部门</p>
-						<p class="precount j-department"></p>
+						<div class="oneitem-cont j-inpSel j-department">
+							<p class="oneitem-tit">发布部门</p>
+							<div class="layui-input-inline">
+								<select name="department" > 
+									<option value="">发布部门</option>
+								</select>
+							</div>
+						</div>
 					</div>
 					<div class="predictwo">
-						<p class="oneitem-tit">负责人</p>
-						<p class="precount j-dutyPerson"></p>
+						<div class="oneitem-cont j-inpSel j-dutyPerson">
+							<p class="oneitem-tit">负责人</p>
+							<div class="layui-input-inline">
+								<select name="dutyPerson" > 
+									<option value="">负责人</option>
+								</select>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -115,23 +127,47 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		layui.use(['form', 'element'], function(){
-			var element = layui.element,form = layui.form;
-			form.render();
-
-			var itbtn = $('<span class="itbtn"></span>');
-			$('.layui-select-title').append(itbtn);
-			$('.gb-form .layui-form-radio').remove();
-
-			form.on('submit(*)', function(data){
-				warnMsgForm(data);
-				console.log(data.field);
+		$.ajax({
+			url: portsrc + '/users/all',
+			type: 'get',
+			data: {
+				token: token,
+			},
+			success:function (data) {
+				var data=data.body;
+				for (var i = 0; i < data.length; i++) {
+					var name=data[i].userName;
+					$(".j-dutyPerson .layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
+				};
 				$.ajax({
-					url: portsrc+"/msg/addMsg",
-					type: 'get',
-					dataType: 'json',
-					data:{
-						token:token,
+			url: portsrc+"/all/dep",
+			type: 'post',
+			data:{
+				token:token,
+			},
+			success: function(data) {
+				for (var i = 0; i < data.body.length; i++) {
+				$(".j-department select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
+			};
+				layui.use(['form', 'element'], function(){
+					var element = layui.element,form = layui.form;
+					form.render();
+
+					var itbtn = $('<span class="itbtn"></span>');
+					$('.layui-select-title').append(itbtn);
+					$('.gb-form .layui-form-radio').remove();
+
+					form.on('submit(*)', function(data){
+						warnMsgForm(data);
+						console.log(data.field);
+						data.field.department = $('.j-department .layui-input').val();
+						data.field.dutyPerson = $('.j-dutyPerson .layui-input').val();
+						$.ajax({
+							url: portsrc+"/msg/addMsg",
+							type: 'get',
+							dataType: 'json',
+							data:{
+								token:token,
 				    	type:'alert',//task为任务消息，alert为预警消息
 				    	newMsg:JSON.stringify(data.field)
 				    },
@@ -149,6 +185,21 @@
 				});
 				return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 			});
+					$('.j-inpSel .layui-input').removeAttr("readonly");
+						$('.j-inpSel .layui-input').on('keyup',function () {
+							var val = $(this).val();
+							var dd = $(this).parents('.layui-select-title').siblings('.layui-anim-upbit').find('dd');
+							dd.show();
+							dd.each(function () {
+								if ($(this).text().indexOf(val)<0) {
+									$(this).hide()
+								}
+							})
+						})
+				});
+			}
+		});
+			}
 		});
 	});
 	

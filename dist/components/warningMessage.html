@@ -110,6 +110,7 @@
 		    	type:'alert'//task为任务消息，alert为预警消息
 		    },
             dataSrc: function ( data ) {
+            	console.log(data);
                 for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
                 	var d=data.body[i];
                 	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
@@ -145,7 +146,7 @@
 		    { "data": "name" },
 		    { "data": "department" },
 		    { "data": "dutyPerson" },
-		    { "data": "time" },
+		    { "data": "pubTime" },
 		    { "data": "transbtn" },
 		    { "data": "edit" },
 		    { "data": "delete" }

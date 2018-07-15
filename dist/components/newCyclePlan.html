@@ -350,6 +350,9 @@
 						}
 					});
 					form.on('submit(*)', function(data){
+						
+						data.field.department = $('.j-department').text();
+						data.field.dutyPerson = $('.j-dutyPerson').text();
 						console.log(data.field)
 						$.ajax({
 							url: portsrc+"/practice/add/CyclePractice",
@@ -360,6 +363,7 @@
 								cyclePractice:JSON.stringify(data.field)
 							},
 							success: function(data) {
+						
 								layer.open({
 									title: '提示',
 									shadeClose:false,

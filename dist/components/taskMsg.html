@@ -184,6 +184,7 @@
 		    	type:'task'//task为任务消息，alert为预警消息
 		    },
             dataSrc: function ( data ) {
+            	console.log(data);
                 for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
                 	var d=data.body[i];
                 	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
@@ -229,7 +230,17 @@
                 			data.body[i].status='暂停';
                 			break;
                 	}
-
+                	if (d.department == ''|| !d.department) {
+                		data.body[i].department='无';
+                	}else{
+                		data.body[i].department=d.department;
+                	}
+                	if (d.dutyPerson == ''|| !d.dutyPerson) {
+                		data.body[i].dutyPerson='无';
+                	}else{
+                		data.body[i].dutyPerson=d.dutyPerson;
+                	}
+                	
                 	data.body[i].name="<a href='#/viewTaskMsg' url='components/viewTaskMsg.html' class='view-cont add_tab' name='查看任务消息'>"+d.name+"</a>";
                 	data.body[i].yulan="<span class='operbtn operbtnTask'><i class='iconfont icon-yulan'></i>预览</span>";
                 	data.body[i].edit="<a href='#/newTaskMsgEdit' url='components/newTaskMsgEdit.html' class='editbtn add_tab' name='编辑任务消息'><i class='iconfont icon-bianji'></i>编辑</a>";

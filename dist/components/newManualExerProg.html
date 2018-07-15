@@ -152,6 +152,19 @@
 			for (var i = 0; i < data.length; i++) {
 				$(".j-scheduling-sel select").append('<option value='+data[i].id+'>'+data[i].name+'</option>');
 			};
+			$.ajax({
+			url: portsrc+"/all/dep",
+			type: 'post',
+			data:{
+				token:token,
+			},
+			success: function(data) {
+				for (var i = 0; i < data.body.length; i++) {
+				$(".j-department select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
+			};
+
+
+
 			layui.use(['form', 'element'], function(){
 				var element = layui.element,form = layui.form,laydate = layui.laydate;
 				form.render();
@@ -206,6 +219,8 @@
 				});
 				form.on('submit(*)', function(data){
 					console.log(data.field)
+					data.field.department  = $(".j-department").text();
+					data.field.dutyPerson  = $(".j-dutyPerson").text();
 					$.ajax({
 						url: portsrc+"/practice/add/ManualPractice",
 						type: 'get',
@@ -229,6 +244,8 @@
 					return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 				});
 			});
+		}
+	});
 		}
 	});
 </script>

@@ -6,7 +6,7 @@
 				<div class="fortit">
 					<p class="oneitem-tit"><span class="onenumb">01</span><small>*</small>事件类别</p>
 				</div>
-				<div class="oneitem-cont">
+				<div class="oneitem-cont j-event">
 					<p class="oneitem-tit"><small>*</small>选择事件类别</p>
 					<div class="layui-input-inline">
 						<select name="type" lay-search="" lay-verify="required"> 
@@ -153,12 +153,24 @@
 				</div>
 				<div class="oneitem-cont">
 					<div class="predictone">
-						<p class="oneitem-tit">发布部门</p>
-						<p class="precount j-department"></p>
+						<div class="oneitem-cont j-inpSel j-department">
+							<p class="oneitem-tit">发布部门</p>
+							<div class="layui-input-inline">
+								<select name="department" > 
+									<option value="">发布部门</option>
+								</select>
+							</div>
+						</div>
 					</div>
 					<div class="predictwo">
-						<p class="oneitem-tit">负责人</p>
-						<p class="precount j-dutyPerson" fzname='cz'></p>
+						<div class="oneitem-cont j-inpSel j-dutyPerson">
+							<p class="oneitem-tit">负责人</p>
+							<div class="layui-input-inline">
+								<select name="dutyPerson" > 
+									<option value="">负责人</option>
+								</select>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -186,9 +198,9 @@
 				</div>
 				<div class="oneitem-cont">
 					<div class="layui-input-inline">
-			        <input type="text" class="layui-input" name="time" id="daterg" placeholder="选择时间范围" lay-verify="required">
-			        <span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
-		    	</div>
+						<input type="text" class="layui-input" name="time" id="daterg" placeholder="选择时间范围" lay-verify="required">
+						<span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
+					</div>
 				</div>
 			</div>
 			<div class="tocreat">
@@ -265,7 +277,7 @@
 				</div> -->
 				<div class="tomat">
 					<div class="layui-progress layui-progress-big" lay-filter="demo"><!--  lay-showpercent="true" -->
-					  <div class="layui-progress-bar" lay-percent="0%"></div><!--   layui-bg-red -->
+						<div class="layui-progress-bar" lay-percent="0%"></div><!--   layui-bg-red -->
 					</div>
 					<p class="forword">转换中...</p>
 				</div>
@@ -276,73 +288,111 @@
 	</form>
 </div>
 
-	
+
 
 
 
 <script type="text/javascript">
 	// 获取事件类别接口
 	$.ajax({
-	    url: portsrc+'/eventType',
-	    type: 'post',
-	    dataType: 'json',
-	    data:{
-	    	token:token,
-	    },
-	    success: function(data) {
-	    	console.log(data)
-	    	var data=data.body;
-	    	for (var i = 0; i < data.length; i++) {
-	    		var name=data[i].code+data[i].name;
-	    		$(".layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
-	    	};
-			layui.use(['form'], function(){
-				var form = layui.form;
-				form.render();
-				var itbtn = $('<span class="itbtn"></span>');
-				$('.layui-select-title').append(itbtn);
-				$('.gb-form .layui-form-radio').remove();
-				form.on('submit(*)', function(data){
-					schedulingForm(data);
+		url: portsrc+'/eventType',
+		type: 'post',
+		dataType: 'json',
+		data:{
+			token:token,
+		},
+		success: function(data) {
+			console.log(data)
+			var data=data.body;
+			for (var i = 0; i < data.length; i++) {
+				var name=data[i].code+data[i].name;
+				$(".j-event .layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
+			};
+			$.ajax({
+				url: portsrc + '/users/all',
+				type: 'get',
+				data: {
+					token: token,
+				},
+				success:function (data) {
+					var data=data.body;
+					for (var i = 0; i < data.length; i++) {
+						var name=data[i].userName;
+						$(".j-dutyPerson .layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
+					};
 					$.ajax({
-					    url: portsrc+"/schedule/addItem",
-					    type: 'post',
-					    dataType: 'json',
-					    data:{
-					    	token:token,
-					    	planSchedule:JSON.stringify(data.field)
-					    	// planSchedule: JSON.stringify({"type":"11A01洪水","name":"xiao_cs","level":'BLUE',"message":"text","direct":true,"startTime":"2018-05-22 00:00:00","endTime": "2018-05-25 00:00:00", "peopleAffect":"0","coverArea":[],"department":"","dutyPerson":"","listMP3":[],"areaSel":[],"resourceSel":[]})
-					    },
-					    success: function(data){
-							layer.open({
-					            title: '提示',
-				        		shadeClose:false,
-					            content: '新建成功',
-								yes: function(index, layero){
-									window.location.href='#/schedulingPlan';
-									layer.closeAll();
-								}
-					        });
-					    }
-					});
-					return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-				});
+						url: portsrc+"/all/dep",
+						type: 'post',
+						data:{
+							token:token,
+						},
+						success: function(data) {
+							for (var i = 0; i < data.body.length; i++) {
+								$(".j-department select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
+							};
+
+							layui.use(['form'], function(){
+								var form = layui.form;
+								form.render();
+								var itbtn = $('<span class="itbtn"></span>');
+								$('.layui-select-title').append(itbtn);
+								$('.gb-form .layui-form-radio').remove();
+								form.on('submit(*)', function(data){
+									schedulingForm(data);
+									data.field.department = $('.j-department .layui-input').val();
+									data.field.dutyPerson = $('.j-dutyPerson .layui-input').val();
+									$.ajax({
+										url: portsrc+"/schedule/addItem",
+										type: 'post',
+										dataType: 'json',
+										data:{
+											token:token,
+											planSchedule:JSON.stringify(data.field)
+										},
+										success: function(data){
+											layer.open({
+												title: '提示',
+												shadeClose:false,
+												content: '新建成功',
+												yes: function(index, layero){
+													window.location.href='#/schedulingPlan';
+													layer.closeAll();
+												}
+											});
+										}
+									});
+									return false; 
+								});
+								$('.j-inpSel .layui-input').removeAttr("readonly");
+								$('.j-inpSel .layui-input').on('keyup',function () {
+									var val = $(this).val();
+									var dd = $(this).parents('.layui-select-title').siblings('.layui-anim-upbit').find('dd');
+									dd.show();
+									dd.each(function () {
+
+										if ($(this).text().indexOf(val)<0) {
+											$(this).hide()
+										}
+									})
+								})
+							});
+						}
+					})
+						}
+					})
+				}
 			});
-	    }
-	});
 	// 获取全部地区
 	$.ajax({
-	    url: portsrc+'/allArea',
-	    type: 'post',
-	    dataType: 'json',
-	    data:{
-	    	token:token,
-	    },
-	    success: function(data) {
-	    	console.log(data)
+		url: portsrc+'/allArea',
+		type: 'post',
+		dataType: 'json',
+		data:{
+			token:token,
+		},
+		success: function(data) {
+			console.log(data)
 			$.fn.zTree.init($('#gb_tree_area'), areaSetting, data.body);
-	    }
+		}
 	});
-
-
 </script>

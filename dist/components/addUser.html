@@ -25,32 +25,38 @@
 							<input type="text" class="imptxt" name='cellPhone' onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/" lay-verify="required"/>
 						</div>
 					</div>
-					<!-- <div class="settingone">
+					<div class="settingone j-inpSel j-department">
 						<p class="oneitem-tit"><small>*</small>用户所属部分</p>
 						<div class="layui-input-inline">
-							<select name="roleName" lay-search="">
+							<select name="" >
 								<option value="">请选择用户所属部门</option>
-								<option value="部门1">部门1</option>
-								<option value="部门2">部门2</option>
-							</select>
-						</div>
-					</div> -->
-					<div class="settingone">
-						<p class="oneitem-tit"><small>*</small>数字证书可下载次数</p>
-						<div class="layui-input-inline">
-							<select name="certDownload" lay-search="">
-								<option value="">请选择可下载次数</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
 							</select>
 						</div>
 					</div>
-					<div class="settingone">
-						<p class="oneitem-tit">选择角色或者权限</p>
-						<div class="gb-permission-list">
-							<div class="gb-watch-list">
+					<!-- <div class="oneitem-cont">
+							<p class="oneitem-tit">发布部门</p>
+							<div class="layui-input-inline">
+								<select name="department" > 
+									<option value="">发布部门</option>
+								</select>
+							</div>
+						</div> -->
+						<div class="settingone">
+							<p class="oneitem-tit"><small>*</small>数字证书可下载次数</p>
+							<div class="layui-input-inline">
+								<select name="certDownload" lay-search="">
+									<option value="">请选择可下载次数</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select>
+							</div>
+						</div>
+						<div class="settingone">
+							<p class="oneitem-tit">选择角色或者权限</p>
+							<div class="gb-permission-list">
+								<div class="gb-watch-list">
 								<!-- <div class="matcheck">
 									<input type="radio" id="matone1" checked="checked" lay-ignore>
 									<label for="matone1"></label>
@@ -148,8 +154,8 @@
 					'<li>'+
 					'<em class="i">'+data.body[k].name+'</em>'+
 					'<div class="matcheck">'+
-					'<input type="radio" value="'+data.body[k].id+'" name="roleId"  id="matone1" lay-ignore>'+
-					'<label for="matone1"></label>'+
+					'<input type="radio" value="'+data.body[k].id+'" name="roleId"  id="matone'+data.body[k].id+'" lay-ignore>'+
+					'<label for="matone'+data.body[k].id+'"></label>'+
 					'</div>'+
 					'</li>';
 					
@@ -157,7 +163,17 @@
 				$('.gb-watch-list-ul').append(str);
 			}
 		})
-		layui.use('form', function(){
+		$.ajax({
+			url: portsrc+"/all/dep",
+			type: 'post',
+			data:{
+				token:token,
+			},
+			success: function(data) {
+				for (var i = 0; i < data.body.length; i++) {
+				$(".j-department select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
+			};
+				layui.use('form', function(){
 			// 获取当前当班状态
 			var work = null;
 			$.ajax({
@@ -185,7 +201,7 @@
 				// data.field.role = role;
 				data.field.roleId = -1;
 				data.field.createTime = '';
-				
+				data.field.department = $('.j-department .layui-input').val();
 				console.log(data.field);
 				$.ajax({
 					url: portsrc+"/users/add",
@@ -222,8 +238,21 @@
 			var itbtn = $('<span class="itbtn"></span>');
 			$('.layui-select-title').append(itbtn);
 			$('.gb-form .layui-form-radio').remove();
+			$('.j-inpSel .layui-input').removeAttr("readonly");
+					$('.j-inpSel .layui-input').on('keyup',function () {
+						var val = $(this).val();
+						var dd = $(this).parents('.layui-select-title').siblings('.layui-anim-upbit').find('dd');
+						dd.show();
+						dd.each(function () {
+							if ($(this).text().indexOf(val)<0) {
+								$(this).hide()
+							}
+						})
+					})
 			
 		});
+			}
+		})
 	})
 	// var treeObj = $.fn.zTree.getZTreeObj("gb_tree_all1");
 				// console.log(treeObj.getCheckedNodes(true));

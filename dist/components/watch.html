@@ -195,16 +195,14 @@
 				token:token,
 			},
 			success: function(data) {
-				console.log(data)
 	    	var eventsData=data.body;//初始日历数据
 			var startDate ="";//起始日期
 			var endDate ="";//结束日期
 			var allDay=false;//全天.
-// eventsData[0].end
-// asd=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
-layui.use(['layer','laydate','form'], function() {
-	var layer = layui.layer,laydate = layui.laydate,form = layui.form;
-	console.log(eventsData);
+
+			layui.use(['layer','laydate','form'], function() {
+				var layer = layui.layer,laydate = layui.laydate,form = layui.form;
+				console.log(eventsData);
 			    // 页面加载完毕，初始化Canlendar
 			    $('.gb-calendar').fullCalendar({
 			    	header: {
@@ -274,7 +272,7 @@ layui.use(['layer','laydate','form'], function() {
 								// 	start: 'Wed Jul 11 2018 07:30:00 GMT+0800 (中国标准时间)',
 								// 	end: 'Tue Jul 10 2018 08:00:00 GMT+0800 (中国标准时间)',
 								// 	content: 'ceshi'
-								// }.
+								// }
 								var eventData,people="";
 								$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
 									people=people+$(this).text()+"、";
@@ -295,27 +293,27 @@ layui.use(['layer','laydate','form'], function() {
 											end: endDate,
 										};
 										console.log(eventData);
-								// 		$.ajax({
-								// 			url: portsrc+'/peopleArrange/add',
-								// 			type: 'post',
-								// 			dataType: 'json',
-								// 			data: {
-								// 				token:token,
-								// 				peopleArrange:JSON.stringify(eventData),
-								// 			},
-								// 			success: function(data) {
-								// 				console.log(eventData)
-								// 				$('.gb-calendar').fullCalendar('renderEvent', eventData, true); 
-								// 		// 渲染一个新的日程到日程表上
-								// 		layer.closeAll();
-								// 	}
-								// });
+										$.ajax({
+											url: portsrc+'/peopleArrange/add',
+											type: 'post',
+											dataType: 'json',
+											data: {
+												token:token,
+												peopleArrange:JSON.stringify(eventData),
+											},
+											success: function(data) {
+												console.log(eventData)
+												$('.gb-calendar').fullCalendar('renderEvent', eventData, true); 
+										// 渲染一个新的日程到日程表上
+										layer.closeAll();
 									}
 								});
+							}
+						});
 						$(".gb-people-list li").remove();
 						// $(".gb-dialog").show();
 					},
-					eventClick: function(calEvent, jsEvent, view) {//日程区块，单击时触发
+					eventClick: function(calEvent,event, jsEvent, view) {//日程区块，单击时触发
 						// event 是 Event Object 对象，包含了日程的信息（例如日期，标题等）
 						// jsEvent 是原生的 javascript 事件，包含“点击坐标”之类的信息。
 						// view 是当前的 View Object 。
@@ -323,6 +321,7 @@ layui.use(['layer','laydate','form'], function() {
 						// console.log(calEvent)
 						var html="";
 						fun_dialog_html();
+						console.log(calEvent);
 						// 弹出框
 						layer.open({
 							type: 1, 
@@ -409,11 +408,46 @@ layui.use(['layer','laydate','form'], function() {
 							    	calEvent.start=startDate;
 							    	calEvent.end=endDate;
 							    }
-								$('.gb-calendar').fullCalendar('updateEvent',calEvent); // 重新渲染编辑过的日程
+							    console.log(calEvent.id);
+							    var peopleArrange = {};
+							    // peopleArrange.allDay = false;
+							    // peopleArrange.start = '2018-07-17:17:44:30';
+							    // peopleArrange.end = '2018-07-18:17:44:30';
+							    // peopleArrange.title = $('gb-people-list li').text();
+							    // peopleArrange.confirm = '00-30';
+							    // peopleArrange.content = 'ceshi';
+							    console.log(typeof JSON.stringify(peopleArrange));
+							  //   $.ajax({
+									// url: portsrc + '/peopleArrange/add',
+									// type: 'post',
+									// data:{
+									// 	token:token,
+									// 	id: calEvent.id,
+									// 	peopleArrange: JSON.stringify(peopleArrange)
+									// },
+									// success: function(data) {
+
+									// 	$('.gb-calendar').fullCalendar('updateEvent',calEvent); // 重新渲染编辑过的日程
+									// }
+									// })
+								
 								layer.closeAll();
 							},
 							btn2: function(index, layero){
-								$('.gb-calendar').fullCalendar('removeEvents',calEvent._id); // 重新渲染编辑过的日程
+								// calEvent
+								console.log(typeof String(calEvent.id));
+								$.ajax({
+									url: portsrc + '/peopleArrange/delete',
+									type: 'post',
+									data:{
+										token:token,
+										id: String(calEvent.id)
+									},
+									success: function(data) {
+										$('.gb-calendar').fullCalendar('removeEvents',calEvent._id); // 重新渲染编辑过的日程
+									}
+									})
+								
 								layer.closeAll();
 							}
 
@@ -571,7 +605,7 @@ layui.use(['layer','laydate','form'], function() {
 		'								小时'+
 		'							</label>'+
 		'							<label class="gb-dialog-sel i">'+
-		'								<select name="">'+
+		'								<select name="min">'+
 		'									<option value="">选择分钟</option>'+
 		'									<option value="1">1</option>'+
 		'									<option value="2">2</option>'+

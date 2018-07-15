@@ -28,7 +28,7 @@
 				        </tr>
 			        </tfoot>
 			         <tbody>
-			        	<tr>
+			        	<!-- <tr>
 			        		<td><div class='checkone'><input type='checkbox' name='checkone' id='check_1' /><label for='check_1'></label></div></td>
 			        		<td><span class='tabnumb'>1</span></td>
 			        		<td>元汐</td>
@@ -55,7 +55,7 @@
 			        		<td>元汐</td>
 			        		<td>交接人备注交接人备注交接人备注交接人备注</td>
 			        		<td>2016-09-08  18:10:20</td>
-			        	</tr>
+			        	</tr> -->
 			        </tbody>
 			    </table>
 			</div>
@@ -91,6 +91,30 @@
                "order": [ 1, "asc" ],//desc降序
                "Info": true,//页脚信息
                "oLanguage": oLanguage,
+                "ajax": {
+               	url: portsrc+'/getWorkLog',
+               	type: 'post',
+               	data:{token:token,},
+               	dataSrc: function ( data ) {
+               		console.log(data)
+               		for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+               			var d=data.body[i];
+               			data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";
+               			data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";
+               			data.body[i].name=d.name;
+               			data.body[i].content=d.content;
+               			data.body[i].time=d.time;
+               		}
+               		return data.body;
+               	}
+               },
+               "columns": [
+               { "data": "checkbox" },
+               { "data": "tabnumb" },
+               { "data": "name" },
+               { "data": "content" },
+               { "data": "time" }
+               ],
                "columnDefs": [
                		{
 					  orderable: false,
