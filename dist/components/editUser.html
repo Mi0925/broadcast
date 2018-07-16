@@ -25,13 +25,13 @@
 							<input type="text" class="imptxt j-cellPhone"  onkeyup="value=value.replace(/[^\d]/g,'')" ng-pattern="/[^a-zA-Z]/" lay-verify="required"/>
 						</div>
 					</div>
-					<div class="settingone">
+					<div class="settingone j-inpSel j-department">
 						<p class="oneitem-tit"><small>*</small>用户所属部分</p>
 						<div class="layui-input-inline">
-							<select name="roleName" class="j-roleName" lay-search="">
+							<select name="roleName" class="" lay-search="">
 								<option value="">请选择用户所属部门</option>
-								<option value="部门1">部门1</option>
-								<option value="部门2">部门2</option>
+								<!-- <option value="部门1">部门1</option>
+								<option value="部门2">部门2</option> -->
 							</select>
 						</div>
 					</div>
@@ -111,44 +111,59 @@
 
 <script type="text/javascript">
 	$.ajax({
-		url: portsrc+"/role/all",
+		url: portsrc+"/all/dep",
 		type: 'post',
 		data:{
 			token:token,
 		},
 		success: function(data) {
-			var str='';
-			for (var k in data.body) {
-				str +=
-				'<li>'+
-				'<em class="i">'+data.body[k].name+'</em>'+
-				'<div class="matcheck">'+
-				'<input type="radio" value="'+data.body[k].id+'" name="roleId"  id="matone'+data.body[k].id+'" lay-ignore>'+
-				'<label for="matone'+data.body[k].id+'"></label>'+
-				'</div>'+
-				'</li>';
-
-			}
-			$('.gb-watch-list-ul').append(str);
-			$.ajax({
-				url: portsrc+"/users/get",
-				type: 'post',
-				dataType: 'json',
-				data:{
-					token:token,
-					userName:sessionStorage.getItem('editTableItem'),
-				},
-				success: function(data) {
-					var d = data.body;
 					console.log(data);
-					$('.j-userName').val(d.userName);
-					$('.j-pwd').val(d.pwd);
-					$('.j-cellPhone').val(d.cellPhone);
-					$(".j-roleName option[value='"+d.roleName+"']").attr("selected","selected");
-					$(".j-certDownload option[value='"+d.certDownload+"']").attr("selected","selected");
-					console.log($(".gb-watch-list-ul li input[value='"+d.roleId+"']"));
-					$(".gb-watch-list-ul li input[value='"+d.roleId+"']").attr('checked',"checked");
-					layui.use('form', function(){
+					if (data.body) {
+						for (var i = 0; i < data.body.length; i++) {
+							$(".j-department select").append('<option value='+data.body[i]+'>'+data.body[i]+'</option>');
+							console.log($(".j-department select"));
+						};
+					}
+					$.ajax({
+						url: portsrc+"/role/all",
+						type: 'post',
+						data:{
+							token:token,
+						},
+						success: function(data) {
+							var str='';
+							for (var k in data.body) {
+								str +=
+								'<li>'+
+								'<em class="i">'+data.body[k].name+'</em>'+
+								'<div class="matcheck">'+
+								'<input type="radio" value="'+data.body[k].id+'" name="roleId"  id="matone'+data.body[k].id+'" lay-ignore>'+
+								'<label for="matone'+data.body[k].id+'"></label>'+
+								'</div>'+
+								'</li>';
+
+							}
+							$('.gb-watch-list-ul').append(str);
+							$.ajax({
+								url: portsrc+"/users/get",
+								type: 'post',
+								dataType: 'json',
+								data:{
+									token:token,
+									userName:sessionStorage.getItem('editTableItem'),
+								},
+								success: function(data) {
+									var d = data.body;
+									console.log(data);
+									$('.j-userName').val(d.userName);
+									$('.j-pwd').val(d.pwd);
+									$('.j-cellPhone').val(d.cellPhone);
+									// $(".j-roleName option[value='"+d.roleName+"']").attr("selected","selected");
+									$(".j-certDownload option[value='"+d.certDownload+"']").attr("selected","selected");
+									// console.log($(".gb-watch-list-ul li input[value='"+d.roleId+"']"));
+									$(".gb-watch-list-ul li input[value='"+d.roleId+"']").attr('checked',"checked");
+									$(".j-department select option[value="+d.department+"]").attr("selected", true);
+									layui.use('form', function(){
 						// 获取当前当班状态
 						var work = null;
 						$.ajax({
@@ -212,11 +227,12 @@
 						$('.gb-form .layui-form-radio').remove();
 
 					});
+								}
+							})
+						}
+					})
 				}
 			})
-		}
-	})
-
 
 	// zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 	var allSetting = {

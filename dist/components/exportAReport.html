@@ -38,19 +38,8 @@
 						<label for="radfou">事件类型分布</label>
 					</li>
 				</ul>
-				<p class="gb-line"></p>
-				<p class="oneitem-tit">单一事件数据</p>
 				<div class="gb-table">
 					<div class="taskmsg" id="table-mainfiv">
-						<!-- <div class="tkrange">
-							<div class="tklay">
-								<span class="talay-word"><i class="iconfont icon-rili"></i>操作时间</span>
-								<div class="layui-input-inline">
-									<input type="text" class="layui-input" id="soledate" placeholder="选择时间范围">
-									<span class="tocho iconfont icon-shijian" id="solebtn"></span> 
-								</div>
-							</div>
-						</div> -->
 						<div class="thetab" style="padding-top: 10px;">
 							<div class="tablecont">
 								<table class="table-main display" cellspacing="0" width="100%">
@@ -99,6 +88,9 @@
 						</div>
 					</div>
 				</div>
+				<p class="gb-line"></p>
+				<p class="oneitem-tit">单一事件数据</p>
+				
 			</div>
 		</div>
 		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
@@ -162,6 +154,7 @@
 		    	type:'task'//task为任务消息，alert为预警消息
 		    },
 		    dataSrc: function ( data ) {
+		    	console.log(data);
 		    	for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
 		    		var d=data.body[i];
                 	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框

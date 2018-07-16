@@ -142,12 +142,24 @@
 				</div>
 				<div class="oneitem-cont">
 					<div class="predictone">
-						<p class="oneitem-tit">发布部门</p>
-						<p class="precount j-department"></p>
+						<div class="oneitem-cont j-inpSel j-department">
+							<p class="oneitem-tit">发布部门</p>
+							<div class="layui-input-inline">
+								<select name="department" > 
+									<option value="">发布部门</option>
+								</select>
+							</div>
+						</div>
 					</div>
 					<div class="predictwo">
-						<p class="oneitem-tit">负责人</p>
-						<p class="precount j-dutyPerson"></p>
+						<div class="oneitem-cont j-inpSel j-dutyPerson">
+							<p class="oneitem-tit">负责人</p>
+							<div class="layui-input-inline">
+								<select name="dutyPerson" > 
+									<option value="">负责人</option>
+								</select>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -221,6 +233,31 @@
 
 
 <script type="text/javascript">
+		$.ajax({
+		url: portsrc + '/users/all',
+		type: 'get',
+		data: {
+			token: token,
+		},
+		success:function (data) {
+			var data=data.body;
+			for (var i = 0; i < data.length; i++) {
+				var name=data[i].userName;
+				$(".j-dutyPerson .layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
+			};
+			$.ajax({
+				url: portsrc+"/all/dep",
+				type: 'post',
+				data:{
+					token:token,
+				},
+				success: function(data) {
+					// console.log(data);
+					if (data.body) {
+						for (var i = 0; i < data.body.length; i++) {
+							$(".j-department select").append('<option value='+data.body[i]+'>'+data.body[i]+'</option>');
+						};
+					}
 	// 获取编辑数据
 	$.ajax({
 		url: portsrc+'/eventType',
@@ -261,9 +298,10 @@
 			    	$(".imparea").val(data.message);//默认消息文本
 			    	$(".j-peopleAffect").text(data.peopleAffect);//覆盖人数
 			    	$(".j-coverArea").text(data.area);//覆盖面积
-			    	$(".j-department").text(data.department);//部门
-			    	$(".j-dutyPerson").text(data.dutyPerson);//责任人
-			    	
+			    	// $(".j-department").text(data.department);
+			    	// $(".j-dutyPerson").text(data.dutyPerson);
+			    	$(".j-department select option[value="+data.department+"]").attr("selected", true);
+			    	$(".j-dutyPerson select option[value="+data.dutyPerson+"]").attr("selected", true);
 			    	$(".release-radio li").each(function(index, el) {
 			    		if($(this).find('input').val()){
 			    			$('#cheone').attr('checked','checked')
@@ -277,6 +315,9 @@
 			    		var itbtn = $('<span class="itbtn"></span>');
 			    		$('.layui-select-title').append(itbtn);
 			    		$('.gb-form .layui-form-radio').remove();
+			    		if ($(".j-dutyPerson select option[value="+data.dutyPerson+"]").length == 0) {
+	    			$('.j-dutyPerson .layui-input').val(data.dutyPerson);
+	    		}
 			    		laydate.render({ 
 			    			elem: '#datergs',
 			    			eventElem: '#tochobtn',
@@ -319,5 +360,9 @@
 			    }
 			});
 		}
+	});
+	}
+	});
+			}
 	});
 </script>

@@ -635,83 +635,84 @@ function addIncident() {
 
 
 		// 事件发布 
-		// $.ajax({
-		//     url: portsrc+'/incidentChart',
-		//     type: 'GET',
-		//     dataType: 'json',
-		//     data:{
-		//     	token:token,
-		//     	type: 'task'
-		//     },
-		//     success: function(data) {
-		//     	if(data.body!=null){
-		// 		    incidentOption = {
-		// 	 		    title: {
-		// 			        text: '事件发布',
-		// 			        bottom: '0',
-		// 			        left:'center',
-		// 			        textStyle: { 
-		// 			            color: '#585c65'
-		// 			        }
-		// 			    },
-		// 			    tooltip : {
-		// 			        formatter: "{b} : {c} ({d}%)"
-		// 			    },
-		// 			    legend: {
-		// 			        // orient: 'vertical',
-		// 			        x: 'center',
-		// 			        bottom: '10%',
-		// 			        itemWidth:'10',
-		// 			        itemHeight:'10',
-		// 			        data:['气象局','水利','国家应急广播平台','应急办'],
-		// 			        align:"right"
-		// 			    },
-		// 			    series : [
-		// 			        {
-		// 			            type:'pie',
-		// 			            radius : '60%',
-		// 			            center: ['50%', '43%'],
-		// 			            data:data.body.sort(function (a, b) { return a.value - b.value; }),
-		// 			            roseType: 'radius',
-		// 			            label: {
-		// 			                normal: {
-		// 			                    textStyle: {
-		// 			                        color: '#7c8491'
-		// 			                    }
-		// 			                }
-		// 			            },
-		// 			            labelLine: {
-		// 			                normal: {
-		// 			                    lineStyle: {
-		// 			                        color: '#d8d8d8'
-		// 			                    },
-		// 			                    smooth: 0.2,
-		// 			                    length: 0,
-		// 			                    length2: 20
-		// 			                }
-		// 			            },
-		// 			            itemStyle: {
-		// 				             normal: {
-		// 				                shadowBlur: 15,
-		// 				                shadowColor: 'rgba(0, 0, 0, 0.4)',
-		// 				                label:{
-		// 				                	formatter:'{d}%',
-		// 						        },
-		// 				             }
-		// 				         },
+		$.ajax({
+		    url: portsrc+'/taskByDepartment',
+		    type: 'GET',
+		    dataType: 'json',
+		    data:{
+		    	token:token,
+		    	type: 'task'
+		    },
+		    success: function(data) {
+		    	console.log(data);
+		    	if(data.body!=null){
+				    incidentOption = {
+			 		    title: {
+					        text: '事件发布',
+					        bottom: '0',
+					        left:'center',
+					        textStyle: { 
+					            color: '#585c65'
+					        }
+					    },
+					    tooltip : {
+					        formatter: "{b} : {c} ({d}%)"
+					    },
+					    legend: {
+					        // orient: 'vertical',
+					        x: 'center',
+					        bottom: '10%',
+					        itemWidth:'10',
+					        itemHeight:'10',
+					        data:['气象局','水利','国家应急广播平台','应急办'],
+					        align:"right"
+					    },
+					    series : [
+					        {
+					            type:'pie',
+					            radius : '60%',
+					            center: ['50%', '43%'],
+					            data:data.body.sort(function (a, b) { return a.value - b.value; }),
+					            roseType: 'radius',
+					            label: {
+					                normal: {
+					                    textStyle: {
+					                        color: '#7c8491'
+					                    }
+					                }
+					            },
+					            labelLine: {
+					                normal: {
+					                    lineStyle: {
+					                        color: '#d8d8d8'
+					                    },
+					                    smooth: 0.2,
+					                    length: 0,
+					                    length2: 20
+					                }
+					            },
+					            itemStyle: {
+						             normal: {
+						                shadowBlur: 15,
+						                shadowColor: 'rgba(0, 0, 0, 0.4)',
+						                label:{
+						                	formatter:'{d}%',
+								        },
+						             }
+						         },
 
-		// 			            animationType: 'scale',
-		// 			            animationEasing: 'elasticOut',
-		// 			            animationDelay: function (idx) {
-		// 			                return Math.random() * 200;
-		// 			            }
-		// 			        }
-		// 			    ]
-		// 			};
-		// 			incidentChart.setOption(incidentOption);
-		// 		}
-		//     }
-		// });
+					            animationType: 'scale',
+					            animationEasing: 'elasticOut',
+					            animationDelay: function (idx) {
+					                return Math.random() * 200;
+					            }
+					        }
+					    ]
+					};
+					incidentChart.setOption(incidentOption);
+				}
+		    }
+		});
 
 		// 事件级别发布 
 		$.ajax({
@@ -723,6 +724,7 @@ function addIncident() {
 		    	type: 'task'
 		    },
 		    success: function(data) {
+		    	console.log(data);
 		    	if(data.body!=null){
 			    	legendData=[];
 			    	for (var i = 0; i < data.body.length; i++) {
@@ -1002,7 +1004,7 @@ function addIncident() {
 		    	type: 'task'
 		    },
 		    success: function(data) {
-		    	console.log(data);
+		    	// console.log(data);
 		    	if(data.body!=null){
 					var incidentTypeData =data.body;
 					var yMaxTwo = [];
@@ -1185,7 +1187,7 @@ function addIncident() {
 		    	type: 'task'
 		    },
 		    success: function(data) {
-		    	console.log(data);
+		    	// console.log(data);
 		    	if(data.body!=null){
 					allMapChart = echarts.init(document.getElementById('all-map'));
 					var geoCoordMap = {};//地点坐标\

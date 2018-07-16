@@ -105,7 +105,7 @@
         		for (var i = 0, ien = data.body.length; i < ien; i++) {
         			var d = data.body[i];
         			d.checkbox="<div class='checkone' ><input type='checkbox' name='checkone' id='"+d.userName+"' /><label for='"+d.userName+"'></label></div>";
-        			d.tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";
+        			d.tabnumb="<span class='tabnumb'>"+(i+1)+"</span>";
         			d.role = d.role;
         			d.userName = "<a href='#/viewUser' url='components/viewUser.html' class='view-cont add_tab' name='查看用户'>"+d.userName+"</a>";
         			d.pwd = d.pwd;
@@ -113,7 +113,7 @@
         			d.createTime = d.createTime;
         			d.edit="<a href='#/editUser' url='components/editUser.html' class='editbtn add_tab' name='编辑调度方案'><i class='iconfont icon-bianji'></i>编辑</a>";
         			d.isstop ="<a href='javascript:void(0);' class='issue isstop'><i class='iconfont icon-zanting'></i>停用</a>";
-        			d.delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";;
+        			d.delete="<span class='del delete'><i class='iconfont icon-shanchu'></i>删除</span>";
         		}
         		// console.log(data.body);
         		return data.body;

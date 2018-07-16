@@ -427,6 +427,7 @@ Mock.mock('http://47.104.84.17:8080/peopleArrange/all', function(optins){
             // "end": '@now',
         }]
     });
+    // console.log(calendarData);
     return calendarData
 });
 // 任务消息

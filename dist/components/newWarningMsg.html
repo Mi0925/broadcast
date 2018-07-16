@@ -140,36 +140,40 @@
 					$(".j-dutyPerson .layui-input-inline select").append('<option value='+name+'>'+name+'</option>');
 				};
 				$.ajax({
-			url: portsrc+"/all/dep",
-			type: 'post',
-			data:{
-				token:token,
-			},
-			success: function(data) {
-				for (var i = 0; i < data.body.length; i++) {
-				$(".j-department select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
-			};
-				layui.use(['form', 'element'], function(){
-					var element = layui.element,form = layui.form;
-					form.render();
+					url: portsrc+"/all/dep",
+					type: 'post',
+					data:{
+						token:token,
+					},
+					success: function(data) {
+						if (data.body) {
+							for (var i = 0; i < data.body.length; i++) {
+								$(".j-department select").append('<option value='+i+'>'+data.body[i]+'</option>');
+							};
+						}
+						layui.use(['form', 'element'], function(){
+							var element = layui.element,form = layui.form;
+							form.render();
 
-					var itbtn = $('<span class="itbtn"></span>');
-					$('.layui-select-title').append(itbtn);
-					$('.gb-form .layui-form-radio').remove();
-
-					form.on('submit(*)', function(data){
-						warnMsgForm(data);
-						console.log(data.field);
-						data.field.department = $('.j-department .layui-input').val();
-						data.field.dutyPerson = $('.j-dutyPerson .layui-input').val();
-						$.ajax({
-							url: portsrc+"/msg/addMsg",
-							type: 'get',
-							dataType: 'json',
-							data:{
-								token:token,
+							var itbtn = $('<span class="itbtn"></span>');
+							$('.layui-select-title').append(itbtn);
+							$('.gb-form .layui-form-radio').remove();
+							
+							form.on('submit(*)', function(data){
+								warnMsgForm(data);
+								console.log(data.field);
+								delete  data.field.department;
+								delete  data.field.dutyPerson
+								data.field.department = $('.j-department .layui-input').val();
+								data.field.dutyPerson = $('.j-dutyPerson .layui-input').val();
+								$.ajax({
+									url: portsrc+"/msg/addMsg",
+									type: 'get',
+									dataType: 'json',
+									data:{
+										token:token,
 				    	type:'alert',//task为任务消息，alert为预警消息
-				    	newMsg:JSON.stringify(data.field)
+				    	newMsg:$.trim(JSON.stringify(data.field))
 				    },
 				    success: function(data) {
 				    	layer.open({
@@ -185,20 +189,20 @@
 				});
 				return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 			});
-					$('.j-inpSel .layui-input').removeAttr("readonly");
-						$('.j-inpSel .layui-input').on('keyup',function () {
-							var val = $(this).val();
-							var dd = $(this).parents('.layui-select-title').siblings('.layui-anim-upbit').find('dd');
-							dd.show();
-							dd.each(function () {
-								if ($(this).text().indexOf(val)<0) {
-									$(this).hide()
-								}
+							$('.j-inpSel .layui-input').removeAttr("readonly");
+							$('.j-inpSel .layui-input').on('keyup',function () {
+								var val = $(this).val();
+								var dd = $(this).parents('.layui-select-title').siblings('.layui-anim-upbit').find('dd');
+								dd.show();
+								dd.each(function () {
+									if ($(this).text().indexOf(val)<0) {
+										$(this).hide()
+									}
+								})
 							})
-						})
+						});
+					}
 				});
-			}
-		});
 			}
 		});
 	});

@@ -159,6 +159,8 @@
 		</div> -->
 	</div>
 </div>
+<script type="text/javascript" src="../data/mock.js"></script>
+<script type="text/javascript" src="../data/list.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$.ajax({
@@ -169,6 +171,7 @@
 				token:token,
 			},
 			success: function(data) {
+				console.log(data);
 				for (var i = 0, ien = data.body.length; i < ien; i++) {
 					var str = '';
 					str = 
@@ -187,6 +190,7 @@
 		})
 		var date = new Date(),d = date.getDate(),m = date.getMonth(),y = date.getFullYear();
 		// 模拟数据
+		var allDay=false;//全天.
 		$.ajax({
 			url: portsrc+'/peopleArrange/all',
 			type: 'GET',
@@ -195,14 +199,15 @@
 				token:token,
 			},
 			success: function(data) {
+				console.log(data);
 	    	var eventsData=data.body;//初始日历数据
 			var startDate ="";//起始日期
 			var endDate ="";//结束日期
-			var allDay=false;//全天.
+			
 
 			layui.use(['layer','laydate','form'], function() {
 				var layer = layui.layer,laydate = layui.laydate,form = layui.form;
-				console.log(eventsData);
+				// console.log(eventsData);
 			    // 页面加载完毕，初始化Canlendar
 			    $('.gb-calendar').fullCalendar({
 			    	header: {
@@ -227,10 +232,11 @@
 					locale:"zh-cn",
 					selectable: true,
 					select: function(start, end) {//点击日期空白格子弹出框
-						startDate =start;
-						endDate =end;
+						startDate =moment(start).format('YYYY-MM-DD HH:mm');
+						endDate =moment(end).format('YYYY-MM-DD HH:mm');
 						fun_dialog_html();
 						allDay=false;
+						console.log($.fullCalendar.formatDate(start,'yyyy-MM-dd HH:mm'),moment(start).format('YYYY-MM-DD HH:mm'));
 						// 弹出框
 						layer.open({
 							type: 1, 
@@ -241,6 +247,7 @@
 							btn: ['确定创建'],
 							skin: 'gb-watch-dialog',
 							success: function(layero, index){
+								console.log();
 								// 时间范围选择
 								laydate.render({
 									elem: '#daterg',
@@ -251,8 +258,25 @@
 									format:"M月d日 HH:mm",
 									value:$.fullCalendar.formatDate(start,'M月D日 HH:mm')+' - '+$.fullCalendar.formatDate(end,'M月D日 HH:mm'),
 									done: function(value, startD, endD){
-										startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
-										endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
+										console.log(startD,endD);
+										startD.month<10?startD.month='0'+startD.month:startD.month;
+										startD.date<10?startD.date='0'+startD.date:startD.date;
+										startD.hours<10?startD.hours='0'+startD.hours:startD.hours;
+										startD.minutes<10?startD.minutes='0'+startD.minutes:startD.minutes;
+										startD.seconds<10?startD.seconds='0'+startD.seconds:startD.seconds;
+
+										endD.month<10?endD.month='0'+endD.month:endD.month;
+										endD.date<10?endD.date='0'+endD.date:endD.date;
+										endD.hours<10?endD.hours='0'+endD.hours:endD.hours;
+										endD.minutes<10?endD.minutes='0'+endD.minutes:endD.minutes;
+										endD.seconds<10?endD.seconds='0'+endD.seconds:endD.seconds;
+										startDate = startD.year+'-'+startD.month+'-'+startD.date+' '+startD.hours+':'+startD.minutes+':'+startD.seconds;
+										endDate = endD.year+'-'+endD.month+'-'+endD.date+' '+endD.hours+':'+endD.minutes+':'+endD.seconds;
+										// console.log(startDate,endDate);
+										// console.log($.fullCalendar.formatDate(startD,'M月D日 HH:mm'));
+										// startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
+										// endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
+										// console.log(startDate,endDate);
 										// console.log(startDate,endDate);
 										// var abc = {
 										// 	title: 'people',
@@ -266,23 +290,22 @@
 								form.render('select');
 							},
 							yes: function(index, layero){
-								// console.log(layero);
-								// var data = {
-								// 	title: JSON.stringify('ceshi'),
-								// 	start: 'Wed Jul 11 2018 07:30:00 GMT+0800 (中国标准时间)',
-								// 	end: 'Tue Jul 10 2018 08:00:00 GMT+0800 (中国标准时间)',
-								// 	content: 'ceshi'
-								// }
-								var eventData,people="";
+								var eventData,people="",content="";
+								content = $('.layui-layer-content textarea').text();
 								$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
 									people=people+$(this).text()+"、";
+
 								})
 								//去掉最后一个、(如果不需要去掉，就不用写)
-								if (people.length > 0) {
-									people = people.substr(0, people.length - 1);
-								}else if(people==""){
+								// if (people.length > 0) {
+									
+								// } 
+								if(people==""){
 									people="无";
+								}else{
+									people = people.substr(0, people.length - 1);
 								}
+
 										if(allDay){//点击全天设置全天
 											endDate=null;
 										}
@@ -291,7 +314,9 @@
 											title: people,
 											start:startDate,
 											end: endDate,
+											content:content
 										};
+										console.log(allDay);
 										console.log(eventData);
 										$.ajax({
 											url: portsrc+'/peopleArrange/add',
@@ -302,14 +327,13 @@
 												peopleArrange:JSON.stringify(eventData),
 											},
 											success: function(data) {
-												console.log(eventData)
 												$('.gb-calendar').fullCalendar('renderEvent', eventData, true); 
 										// 渲染一个新的日程到日程表上
 										layer.closeAll();
 									}
 								});
-							}
-						});
+									}
+								});
 						$(".gb-people-list li").remove();
 						// $(".gb-dialog").show();
 					},
@@ -322,6 +346,10 @@
 						var html="";
 						fun_dialog_html();
 						console.log(calEvent);
+						startDate =moment(calEvent.start).format('YYYY-MM-DD HH:mm');
+						endDate =moment(calEvent.end).format('YYYY-MM-DD HH:mm');
+						console.log(startDate,endDate);
+						// console.log(calEvent);
 						// 弹出框
 						layer.open({
 							type: 1, 
@@ -360,8 +388,25 @@
 										format:"M月d日 HH:mm",
 										value:$.fullCalendar.formatDate(calEvent.start,'M月D日 HH:mm')+' - '+$.fullCalendar.formatDate(calEvent.end,'M月D日 HH:mm'),
 										done: function(value, startD, endD){
-											startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
-											endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
+											console.log(startD,endD);
+											startD.month<10?startD.month='0'+startD.month:startD.month;
+											startD.date<10?startD.date='0'+startD.date:startD.date;
+											startD.hours<10?startD.hours='0'+startD.hours:startD.hours;
+											startD.minutes<10?startD.minutes='0'+startD.minutes:startD.minutes;
+											startD.seconds<10?startD.seconds='0'+startD.seconds:startD.seconds;
+
+											endD.month<10?endD.month='0'+endD.month:endD.month;
+											endD.date<10?endD.date='0'+endD.date:endD.date;
+											endD.hours<10?endD.hours='0'+endD.hours:endD.hours;
+											endD.minutes<10?endD.minutes='0'+endD.minutes:endD.minutes;
+											endD.seconds<10?endD.seconds='0'+endD.seconds:endD.seconds;
+											startDate = startD.year+'-'+startD.month+'-'+startD.date+' '+startD.hours+':'+startD.minutes+':'+startD.seconds;
+											endDate = endD.year+'-'+endD.month+'-'+endD.date+' '+endD.hours+':'+endD.minutes+':'+endD.seconds;
+
+
+											// startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
+											// endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
+
 											calEvent.start=startDate;
 											calEvent.end=endDate;
 										}
@@ -380,8 +425,21 @@
 										format:"M月d日 HH:mm",
 										value:$.fullCalendar.formatDate(calEvent.start,'M月D日 HH:mm')+' - '+$.fullCalendar.formatDate(calEvent.start,'M月D日 23:59'),
 										done: function(value, startD, endD){
-											startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
-											endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
+											startD.month<10?startD.month='0'+startD.month:startD.month;
+											startD.date<10?startD.date='0'+startD.date:startD.date;
+											startD.hours<10?startD.hours='0'+startD.hours:startD.hours;
+											startD.minutes<10?startD.minutes='0'+startD.minutes:startD.minutes;
+											startD.seconds<10?startD.seconds='0'+startD.seconds:startD.seconds;
+
+											endD.month<10?endD.month='0'+endD.month:endD.month;
+											endD.date<10?endD.date='0'+endD.date:endD.date;
+											endD.hours<10?endD.hours='0'+endD.hours:endD.hours;
+											endD.minutes<10?endD.minutes='0'+endD.minutes:endD.minutes;
+											endD.seconds<10?endD.seconds='0'+endD.seconds:endD.seconds;
+											startDate = startD.year+'-'+startD.month+'-'+startD.date+' '+startD.hours+':'+startD.minutes+':'+startD.seconds;
+											endDate = endD.year+'-'+endD.month+'-'+endD.date+' '+endD.hours+':'+endD.minutes+':'+endD.seconds;
+											// startDate=new Date(startD.year,startD.month-1, startD.date, startD.hours,startD.minutes);
+											// endDate=new Date(endD.year,endD.month-1, endD.date, endD.hours,endD.minutes);
 										}
 									});
 								}
@@ -389,15 +447,19 @@
 							},
 							btn: ['保存','删除'],
 							yes: function(index, layero){
-								var eventData,people="";
+								var eventData,people="",content="";
+								content = $('.layui-layer-content textarea').text();
 								$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
 									people=people+$(this).text()+"、";
 								})
 								//去掉最后一个、(如果不需要去掉，就不用写)
-								if (people.length > 0) {
-									people = people.substr(0, people.length - 1);
-								}else if(people==""){
+								// if (people.length > 0) {
+								// 	people = people.substr(0, people.length - 1);
+								// }else 
+								if(people==""){
 									people="无";
+								}else{
+									people = people.substr(0, people.length - 1);
 								}
 								calEvent.title=people;
 							    if(allDay){//点击全天设置全天
@@ -408,45 +470,44 @@
 							    	calEvent.start=startDate;
 							    	calEvent.end=endDate;
 							    }
+							    console.log(calEvent);
 							    console.log(calEvent.id);
 							    var peopleArrange = {};
-							    // peopleArrange.allDay = false;
-							    // peopleArrange.start = '2018-07-17:17:44:30';
-							    // peopleArrange.end = '2018-07-18:17:44:30';
-							    // peopleArrange.title = $('gb-people-list li').text();
-							    // peopleArrange.confirm = '00-30';
-							    // peopleArrange.content = 'ceshi';
-							    console.log(typeof JSON.stringify(peopleArrange));
-							  //   $.ajax({
-									// url: portsrc + '/peopleArrange/add',
-									// type: 'post',
-									// data:{
-									// 	token:token,
-									// 	id: calEvent.id,
-									// 	peopleArrange: JSON.stringify(peopleArrange)
-									// },
-									// success: function(data) {
-
-									// 	$('.gb-calendar').fullCalendar('updateEvent',calEvent); // 重新渲染编辑过的日程
-									// }
-									// })
-								
-								layer.closeAll();
-							},
-							btn2: function(index, layero){
-								// calEvent
-								console.log(typeof String(calEvent.id));
-								$.ajax({
-									url: portsrc + '/peopleArrange/delete',
+							    peopleArrange.allDay = calEvent.allDay;
+							    peopleArrange.title = calEvent.title;
+							    peopleArrange.start = calEvent.start;
+							    peopleArrange.end = calEvent.end;
+							    // console.log(typeof JSON.stringify(peopleArrange));
+							    $.ajax({
+									url: portsrc + '/peopleArrange/add',
 									type: 'post',
 									data:{
 										token:token,
-										id: String(calEvent.id)
+										id: calEvent.id,
+										peopleArrange: JSON.stringify(peopleArrange)
+									},
+									success: function(data) {
+										$('.gb-calendar').fullCalendar('updateEvent',calEvent); // 重新渲染编辑过的日程
+									}
+									})
+
+									layer.closeAll();
+								},
+								btn2: function(index, layero){
+								// calEvent
+								console.log(typeof String(calEvent.id));
+								$.ajax({
+									url: portsrc+'/peopleArrange/delete',
+									type: 'post',
+									data:{
+										// _method:"DELETE",
+										token:token,
+										id: JSON.stringify(calEvent.id)
 									},
 									success: function(data) {
 										$('.gb-calendar').fullCalendar('removeEvents',calEvent._id); // 重新渲染编辑过的日程
 									}
-									})
+								})
 								
 								layer.closeAll();
 							}
@@ -552,8 +613,8 @@
 			checkAdminStr += '<li>'+
 			'									<em class="i">'+$('.gb-watch-list-ul li input[name="userChoose"]:checked').eq(i).parents('.matcheck').siblings('.i').text()+'</em>'+
 			'									<div class="matcheck">'+
-			'										<input type="checkbox" name="橙子" id="matone20" lay-ignore>'+
-			'										<label for="matone20"></label>'+
+			'										<input type="checkbox" name="橙子" id="Lmatone'+i+'" lay-ignore>'+
+			'										<label for="Lmatone'+i+'"></label>'+
 			'									</div>'+
 			'								</li>';
 		}

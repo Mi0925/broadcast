@@ -148,6 +148,7 @@
 				token:token,
 			},
 			success: function(data) {
+				
 				var str='';
 				for (var k in data.body) {
 					str +=
@@ -158,7 +159,7 @@
 					'<label for="matone'+data.body[k].id+'"></label>'+
 					'</div>'+
 					'</li>';
-					
+
 				}
 				$('.gb-watch-list-ul').append(str);
 			}
@@ -170,9 +171,13 @@
 				token:token,
 			},
 			success: function(data) {
-				for (var i = 0; i < data.body.length; i++) {
-				$(".j-department select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
-			};
+				console.log(data);
+				if (data.body) {
+					for (var i = 0; i < data.body.length; i++) {
+						console.log();
+						$(".j-department select").append('<option value='+i+'>'+data.body[i]+'</option>');
+					};
+				}
 				layui.use('form', function(){
 			// 获取当前当班状态
 			var work = null;
@@ -239,20 +244,22 @@
 			$('.layui-select-title').append(itbtn);
 			$('.gb-form .layui-form-radio').remove();
 			$('.j-inpSel .layui-input').removeAttr("readonly");
-					$('.j-inpSel .layui-input').on('keyup',function () {
-						var val = $(this).val();
-						var dd = $(this).parents('.layui-select-title').siblings('.layui-anim-upbit').find('dd');
-						dd.show();
-						dd.each(function () {
-							if ($(this).text().indexOf(val)<0) {
-								$(this).hide()
-							}
-						})
-					})
+			$('.j-inpSel .layui-input').on('keyup',function () {
+				var val = $(this).val();
+				var dd = $(this).parents('.layui-select-title').siblings('.layui-anim-upbit').find('dd');
+				dd.show();
+				dd.each(function () {
+					if ($(this).text().indexOf(val)<0) {
+						$(this).hide()
+					}
+				})
+			})
 			
 		});
+
 			}
 		})
+
 	})
 	// var treeObj = $.fn.zTree.getZTreeObj("gb_tree_all1");
 				// console.log(treeObj.getCheckedNodes(true));

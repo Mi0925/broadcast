@@ -327,10 +327,12 @@
 							token:token,
 						},
 						success: function(data) {
-							for (var i = 0; i < data.body.length; i++) {
-								$(".j-department select").append('<option value='+data.body[i].id+'>'+data.body[i].name+'</option>');
-							};
-
+							console.log(data);
+							if (data.body) {	
+								for (var i = 0; i < data.body.length; i++) {
+									$(".j-department select").append('<option value='+i+'>'+data.body[i]+'</option>');
+								};
+							}
 							layui.use(['form'], function(){
 								var form = layui.form;
 								form.render();
@@ -378,10 +380,10 @@
 							});
 						}
 					})
-						}
-					})
 				}
-			});
+			})
+		}
+	});
 	// 获取全部地区
 	$.ajax({
 		url: portsrc+'/allArea',
