@@ -290,11 +290,11 @@
 								form.render('select');
 							},
 							yes: function(index, layero){
-								var eventData,people="",content="";
+								var eventData,people="",content="",confirm = '';
 								content = $('.layui-layer-content textarea').text();
+								confirm = Number($('.layui-unselect[placeholder="选择小时"]').val())*60*60+Number($('.layui-unselect[placeholder="选择分钟"]').val())*60;
 								$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
 									people=people+$(this).text()+"、";
-
 								})
 								//去掉最后一个、(如果不需要去掉，就不用写)
 								// if (people.length > 0) {
@@ -314,10 +314,9 @@
 											title: people,
 											start:startDate,
 											end: endDate,
-											content:content
+											content:content,
+											confirm:confirm
 										};
-										console.log(allDay);
-										console.log(eventData);
 										$.ajax({
 											url: portsrc+'/peopleArrange/add',
 											type: 'post',
@@ -449,6 +448,7 @@
 							yes: function(index, layero){
 								var eventData,people="",content="";
 								content = $('.layui-layer-content textarea').text();
+								confirm = Number($('.layui-unselect[placeholder="选择小时"]').val())*60*60+Number($('.layui-unselect[placeholder="选择分钟"]').val())*60;
 								$(".gb-dialog-edit-watch .gb-people-list li").each(function() {
 									people=people+$(this).text()+"、";
 								})
@@ -477,6 +477,7 @@
 							    peopleArrange.title = calEvent.title;
 							    peopleArrange.start = calEvent.start;
 							    peopleArrange.end = calEvent.end;
+							    peopleArrange.confirm= confirm;
 							    // console.log(typeof JSON.stringify(peopleArrange));
 							    $.ajax({
 									url: portsrc + '/peopleArrange/add',
@@ -496,13 +497,15 @@
 								btn2: function(index, layero){
 								// calEvent
 								console.log(typeof String(calEvent.id));
+								var dataID=[];
+								// dataID.push(String(calEvent.id));
 								$.ajax({
 									url: portsrc+'/peopleArrange/delete',
 									type: 'post',
 									data:{
 										// _method:"DELETE",
 										token:token,
-										id: JSON.stringify(calEvent.id)
+										id: JSON.stringify(dataID)
 									},
 									success: function(data) {
 										$('.gb-calendar').fullCalendar('removeEvents',calEvent._id); // 重新渲染编辑过的日程
@@ -656,24 +659,24 @@
 		'							<label class="gb-dialog-sel i">'+
 		'								<select name="">'+
 		'									<option value="">选择小时</option>'+
-		'									<option value="1">1</option>'+
-		'									<option value="2">2</option>'+
-		'									<option value="3">3</option>'+
-		'									<option value="4">4</option>'+
-		'									<option value="5">5</option>'+
-		'									<option value="6">6</option>'+
+		'									<option value="1">0</option>'+
+		'									<option value="2">1</option>'+
+		'									<option value="3">2</option>'+
+		'									<option value="4">3</option>'+
+		'									<option value="5">4</option>'+
+		'									<option value="6">5</option>'+
 		'								</select>'+
 		'								小时'+
 		'							</label>'+
 		'							<label class="gb-dialog-sel i">'+
 		'								<select name="min">'+
 		'									<option value="">选择分钟</option>'+
-		'									<option value="1">1</option>'+
-		'									<option value="2">2</option>'+
-		'									<option value="3">3</option>'+
-		'									<option value="4">4</option>'+
-		'									<option value="5">5</option>'+
-		'									<option value="6">6</option>'+
+		'									<option value="1">0</option>'+
+		'									<option value="2">10</option>'+
+		'									<option value="3">20</option>'+
+		'									<option value="4">30</option>'+
+		'									<option value="5">40</option>'+
+		// '									<option value="6">6</option>'+
 		'								</select>'+
 		'								分钟'+
 		'							</label>'+

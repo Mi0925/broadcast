@@ -11,13 +11,13 @@
 				<div class="tklay tkclear">
 					<span class="talay-word"><i class="iconfont icon-rili"></i>操作时间</span>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input" id="daterg" placeholder="选择时间范围">
+						<input type="text" class="layui-input" id="soledate" placeholder="选择时间范围">
 						<span class="tocho iconfont icon-shijian" id="tochobtn"></span> 
 					</div>
 					<div class="tksearch">
-					<input type="text" value="请输入任务消息名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
-					<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
-				</div>
+						<input type="text" value="请输入任务消息名称，发布部门，负责人" onfocus="if(this.value==defaultValue){this.value = '';this.style.color='#333'}" onblur="if(!value){this.value = defaultValue;this.style.color='#ccc';}" class="dsearch" aria-controls="table-main"/>
+						<span class="tksrh-btn"><i class="iconfont icon-sousuo"></i></span>
+					</div>
 				</div>
 
 				<ul class="msgrank">
@@ -38,7 +38,7 @@
 						<label for="radfou">事件类型分布</label>
 					</li>
 				</ul>
-				<div class="gb-table">
+				<div class="gb-table" style="height: 350px;">
 					<div class="taskmsg" id="table-mainfiv">
 						<div class="thetab" style="padding-top: 10px;">
 							<div class="tablecont">
@@ -90,54 +90,127 @@
 				</div>
 				<p class="gb-line"></p>
 				<p class="oneitem-tit">单一事件数据</p>
-				
+				<div class="gb-table" style="height: 350px;">
+					<div class="taskmsg" id="table-mainfivSingle">
+						<div class="thetab" style="padding-top: 10px;">
+							<div class="tablecont">
+								<table class="table-main display" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<th>下级平台名</th>
+											<th>接收回执时间</th>
+											<th>播发反馈情况</th>
+											<th>是否成功</th>
+											<th>覆盖率</th>
+											<th>负责人</th>
+											<th>覆盖区域面积</th>
+											<th>覆盖人口信息</th>
+											<!-- <th></th>
+												<th></th> -->
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+											<!-- <th></th>
+												<th></th> -->
+											</tr>
+										</tfoot>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+								<div class="theche">
+									<div class="tocheck">
+										<input type="checkbox" name="checkall" id="checkAll" />
+										<label for="checkAll">全选</label>
+									</div>
+									<div class="tocheck secheck">
+										<input type="checkbox" name="checkall" id="invert" />
+										<label for="invert">反选</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p class="botword">© 2017-2018 浙江省应急广播平台</p>
+		</div>
+	</div>
+	<div class="viewdetail">
+		<div class="detadiv">
+			<p class="poptit">任务消息详情</p>
+			<span class="viewclose"><i class="iconfont icon-guanbi"></i></span>
+			<div class="uncont">
+				<p class="oneitem-tit">消息等级</p>
+				<p class="unword">红色</p>
+				<p class="oneitem-tit">任务消息名称</p>
+				<p class="unword">杭州西湖区2017年09月09日晚台...</p>
+				<p class="oneitem-tit">发布部门</p>
+				<p class="unword">杭州市西湖区应急广播中心</p>
+				<p class="oneitem-tit">负责人</p>
+				<p class="unword">橙子</p>
+				<p class="oneitem-tit">创建时间</p>
+				<p class="unword">2017-11-09 12:00</p>
 			</div>
 		</div>
-		<p class="botword">© 2017-2018 浙江省应急广播平台</p>
 	</div>
-</div>
-<div class="viewdetail">
-	<div class="detadiv">
-		<p class="poptit">任务消息详情</p>
-		<span class="viewclose"><i class="iconfont icon-guanbi"></i></span>
-		<div class="uncont">
-			<p class="oneitem-tit">消息等级</p>
-			<p class="unword">红色</p>
-			<p class="oneitem-tit">任务消息名称</p>
-			<p class="unword">杭州西湖区2017年09月09日晚台...</p>
-			<p class="oneitem-tit">发布部门</p>
-			<p class="unword">杭州市西湖区应急广播中心</p>
-			<p class="oneitem-tit">负责人</p>
-			<p class="unword">橙子</p>
-			<p class="oneitem-tit">创建时间</p>
-			<p class="unword">2017-11-09 12:00</p>
-		</div>
-	</div>
-</div>
 
 
 
 
-<script type="text/javascript">
-	/*calendar*/
-	layui.use('laydate', function(){
-		var laydate = layui.laydate;
-		laydate.render({
-			elem: '#soledate',
-			eventElem: '#solebtn',
-			trigger: 'click',
-			type:'datetime',
-			range: true
+	<script type="text/javascript">
+		/*calendar*/
+		var starDate='',endTime='';
+		layui.use('laydate', function(){
+			var laydate = layui.laydate;
+			laydate.render({
+				elem: '#soledate',
+				eventElem: '#solebtn',
+				trigger: 'click',
+				type:'datetime',
+				range: true,
+				change: function(value,date,endDate){
+					// console.log(value,date,endDate);
+					date.month < 10 ? '0'+date.month:date.month;
+					endDate.month < 10 ? '0'+endDate.month:endDate.month;
+					date.date < 10 ? '0'+date.date:date.date;
+					endDate.date < 10 ? '0'+endDate.date:endDate.date;
+					date.hours < 10 ? '0'+date.hours:date.hours;
+					endDate.hours < 10 ? '0'+endDate.hours:endDate.hours;
+					date.minutes < 10 ? '0'+date.minutes:date.minutes;
+					endDate.minutes < 10 ? '0'+endDate.minutes:endDate.minutes;
+					date.seconds < 10 ? '0'+date.seconds:date.seconds;
+					endDate.seconds < 10 ? '0'+endDate.seconds:endDate.seconds;
+
+					starDate = date.year + '-' + date.month + '-' + date.date+ ' ' + date.hours+ ':' + date.minutes+ ':' + date.seconds;
+					endTime  = endDate.year + '-' + endDate.month + '-' + endDate.date+ ' ' + endDate.hours+ ':' + endDate.minutes + ':'+ endDate.seconds;
+					// console.log(endDate);
+					// console.log(starDate+"+"+endDate);
+				}
+				,
+				done:function (value,date,endDate) {
+					console.log(endDate);
+					// console.log(value,date);
+				}
+			});
 		});
-	});
 
-	/*table*/
-	var table = $('#table-mainfiv table').DataTable({
-		"scrollY": "calc(100% - 50px)",
-		"scrollX": true,
+		/*table*/
+		var table = $('#table-mainfiv table').DataTable({
+			"scrollY": "calc(100% - 50px)",
+			"scrollX": true,
        "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
        "dom": 'tiprl',//自定义显示项
-       "lengthMenu":[10, 20, 30, 40, 50],//每页显示条数设置
+       "lengthMenu":[5, 10, 20, 30, 40],//每页显示条数设置
        "lengthChange": true,//是否允许用户自定义显示数量
        "bPaginate": true, //翻页功能
        "bFilter": true, //列筛序功能
@@ -219,12 +292,100 @@
             });
        }
    })
-	
-	
-	$(".gb-packUp-leftNav").click(function(){
-		setTimeout(function(){
-			table.draw();
-		},500)
+
+		var table1 = $('#table-mainfivSingle table').DataTable({
+			"scrollY": "calc(100% - 50px)",
+			"scrollX": true,
+       "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+       "dom": 'tiprl',//自定义显示项
+       "lengthMenu":[5, 10, 20, 30, 40],//每页显示条数设置
+       "lengthChange": true,//是否允许用户自定义显示数量
+       "bPaginate": true, //翻页功能
+       "bFilter": true, //列筛序功能
+       "searching": true,//本地搜索
+       "order": [ 1, "asc" ],//desc降序
+       "Info": true,//页脚信息
+       "oLanguage": oLanguage,
+      //  "ajax": {
+      //  	url: portsrc+'/msg/allMsg',
+      //  	type: 'post',
+      //  	data:{
+      //  		token:token,
+      //  		defaulrValue:0,
+		    // 	type:'task'//task为任务消息，alert为预警消息
+		    // },
+		    // dataSrc: function ( data ) {
+		    // 	console.log(data);
+		    // 	for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
+		    // 		var d=data.body[i];
+      //           	data.body[i].checkbox="<div class='checkone'><input type='checkbox' name='checkone' id='"+d.id+"' /><label for='"+d.id+"'></label></div>";//复选框
+      //           	data.body[i].tabnumb="<span class='tabnumb'>"+(d.id+1)+"</span>";//序号
+
+      //           	var level="";
+      //           	if(d.level=="RED"){
+      //           		level="<img src='src/images/rank-red.png'/>";
+      //           	} else if(d.level=="BLUE"){
+      //           		level="<img src='src/images/rank-blue.png'/>";
+      //           	} else if(d.level=="GREEN"){
+      //           		level="<img src='src/images/rank-green.png'/>";
+      //           	} else if(d.level=="ORANGE"){
+      //           		level="<img src='src/images/rank-orange.png'/>";
+      //           	} else if(d.level=="YELLOW"){
+      //           		level="<img src='src/images/rank-yellow.png'/>";
+      //           	}
+      //           	data.body[i].level='<span class="rankimg" vel="'+d.level+'">'+level+'</span>';
+
+      //           	data.body[i].name="<a href='#/viewTaskMsg' url='components/viewTaskMsg.html' class='view-cont add_tab' name='查看任务消息'>"+d.name+"</a>";
+
+      //           	data.body[i].coverpop="<div class='checkone'><input type='checkbox' name='coverpop' id='cover_"+d.id+"' /><label for='cover_"+d.id+"'>覆盖人口</label></div>";
+      //           	data.body[i].areacrea="<div class='checkone'><input type='checkbox' name='areacrea' id='arcrea_"+d.id+"' /><label for='arcrea_"+d.id+"'>覆盖区域面积</label></div>";
+      //           	data.body[i].areaname="<div class='checkone'><input type='checkbox' name='areaname' id='arname_"+d.id+"' /><label for='arname_"+d.id+"'>覆盖区域名称</label></div>";
+      //           }
+      //           return data.body;
+      //       }
+      //   },
+      //   "columns": [
+      //   { "data": "checkbox" },
+      //   { "data": "tabnumb" },
+      //   { "data": "level" },
+      //   { "data": "name" },
+      //   { "data": "department" },
+      //   { "data": "dutyPerson" },
+      //   { "data": "time" },
+      //   { "data": "coverpop" },
+      //   { "data": "areacrea" },
+      //   { "data": "areaname" }
+      //   ],
+      "columnDefs": [
+      {
+      	orderable: false,
+               targets: [0,2,3,4] //禁止排序
+           },{ 
+           	"sType": "html-percent", 
+               "aTargets": [2]  //指定列号使用自定义排序
+           }  
+           ],
+           fnDrawCallback: function(table) {  
+           	jumpPage($("#table-mainfiv"))
+           },
+       initComplete: function () {//列筛选
+       	var api = this.api();
+       	api.columns().indexes().flatten().each(function (i) {
+       		var column = api.column(i);
+                if (i == 4 || i == 5) { //对第i列进行筛选
+                	rowScreen(column);
+                }else if (i == 2) { //对第i列进行筛选
+                	rowLevScreen(column);
+                }
+            });
+       }
+   })
+
+
+		$(".gb-packUp-leftNav").click(function(){
+			setTimeout(function(){
+				table.draw();
+			},500)
     });//重绘
 
 	//自定义显示数量
@@ -240,6 +401,7 @@
 
 	//checkbox全选
 	$("#checkAll").on("click", function () {
+
 		if ($(this).prop("checked") === true) {
 			$('#invert').attr('checked',false);
 			$('.dataTables_wrapper tbody tr').find("input").prop("checked", $(this).prop("checked"));
@@ -298,6 +460,7 @@
 
 		//选择数据
 		$('.dataTables_wrapper tbody').find("input").not("input[name='checkone']"). on('click', function () {
+			console.log('yes');
 			var $tr = $(this).parents('tr');
 			if($tr.find("input[name='coverpop']").prop("checked") === false && $tr.find("input[name='areacrea']").prop("checked") === false && $tr.find("input[name='areaname']").prop("checked") === false){
 				$tr.removeClass('selected');
@@ -312,4 +475,96 @@
 	   $('#invert').attr('checked',false);
 	});
 
+// input
+// setTimeout(function () {
+// console.log($('#table-mainfiv input[name="checkone"]'));
+// },2000)
+var idarr = 0;
+$(document).on('click','#table-mainfiv input[name="checkone"],#table-mainfiv input[name="checkall"],#table-mainfiv input[name="checkall"]',function () {
+	// idarr = []
+	$('#table-mainfiv input[name="checkone"]').each(function () {
+		if ($(this).is(':checked')) {
+			idarr= Number($(this).attr('id'));
+		}
+	})
+	console.log(idarr);
+	// $.ajax({
+	// 	url: portsrc + '',
+	// 	type: 'post',
+	// 	data:{
+	// 		token:token,
+	// 		// info: info,
+	// 	},
+	// 	success: function(data) {
+
+	// 	}
+	// })
+})
+// 下载
+// totalEvent 事件总数
+// totalPub 发布总数
+// eventDistribute 事件发布
+// typeDistribute  事件类型发布
+$('#reltodel').on('click',function () {
+	var totalEvent = $('#radone').is(":checked");
+	var totalPub = $('#radtwo').is(":checked");
+	var eventDistribute = $('#radthr').is(":checked");
+	var typeDistribute = $('#radfou').is(":checked");
+	console.log(endTime);
+	var info = {
+		totalEvent:totalEvent,
+		totalPub:totalPub,
+		eventDistribute:eventDistribute,
+		typeDistribute:typeDistribute,
+		startTime:starDate,
+		endTime:endTime,
+		id:0
+	}
+	console.log(info);
+	$.ajax({
+		url: portsrc + '/msg/report',
+		type: 'post',
+		data:{
+			token:token,
+			info: JSON.stringify(info),
+		},
+		success: function(data) {
+			console.log(data);
+		}
+	})
+})
+// var link = document.createElement('a'); //创建事件对象
+// link.setAttribute('href', 'baidu.com');
+// link.setAttribute('id', 'download');
+// // link.setAttribute("download", filename);
+// // console.log(link.);
+// $(document).on('click','#download',function () {
+// 	alert('a')
+// })
+// setTimeout(function () {
+// 	console.log();
+// 	$('#download').trigger('click')
+// },2000)
+var arrr= [0,1];
+// var info = {
+// 		totalEvent:true,
+// 		totalPub:true,
+// 		eventDistribute:true,
+// 		typeDistribute:true,
+// 		startTime:'2018-07-19 00:00:00',
+// 		endTime:'2018-07-20 00:00:00',
+// 		id: JSON.stringify(arrr)
+// 	}
+// 	$.ajax({
+// 		url: 'http://47.104.84.17/msg/report',
+// 		type: 'post',
+// 		data:{
+// 			token:token,
+// 			info: JSON.stringify(info),
+// 		},
+// 		success: function(data) {
+// 			console.log(data);
+
+// 		}
+// 	})
 </script>

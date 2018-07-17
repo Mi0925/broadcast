@@ -820,7 +820,7 @@ var districtChart=null;//单一事件-覆盖区域图表
 		    success: function(data) {
 		    	if(data.body!=null){
 					allMapChart = echarts.init(document.getElementById('all-map'));
-					var geoCoordMap = {};//地点坐标\
+					var geoCoordMap = data.body.geoCoordMap;//地点坐标\
 					var BJData =[];//迁徙数据
 					// data.body.bjData=[{
 					// 	"from": "杭州", //出发点
